@@ -1,0 +1,134 @@
+hero:
+  name: "郑恪悠"
+  enName: "Keyou Zheng"
+  avatar: "/avatar.png"
+  location: "广东广州"
+  age: "2001-09"
+  # bio: "Slip into the diamond's life."
+  social:
+    github: "https://github.com/Xeraphinite"
+    email: "keyouzheng0915@gmail.com"
+    # website: "https://keyzheng.pages.dev"
+
+
+education:
+  - institution: "广东工业大学"
+    area: "机械工程"
+    degree: "硕士"
+    supervisor: "冷杰武"
+    startDate: "2023.9"
+    endDate: "至今"
+    summary: ""
+    highlights:
+       - "GPA：3.62/4；主修课程中 9 门 90+；"
+       - "研究兴趣：大语言模型、程序驱动的 3D 重建、人机交互"
+
+  - institution: "广东财经大学"
+    area: "计算机科学与技术（实验班）"
+    degree: "本科"
+    startDate: "2019.6"
+    endDate: "2023.6"
+    summary: ""
+    highlights:
+      - "GPA：3.75/5, Rank: Top 5 %; 多门基础课、核心专业课专业第一;"
+      - "毕业论文：基于深度强化学习的马里奥游戏智能体设计与实现"
+
+publications:
+  - title: "AIGC-empowered Smart Manufacturing: Prospects and Challenges" 
+    authors: ["Jiewu Leng", "Keyou Zheng", "Rongjie Li et al."]
+    type: "Journal Article"
+    status: "Under Review, R2"
+    indexing: ["SCI TOP", "SCI I"]
+    impactFactor: 9.1
+    publishedIn: "Robotics and Computer-Integrated Manufacturing (RCIM)"
+    abstract: "This paper presents a comprehensive framework that integrates a GenAI-centered approach with Product Lifecycle Management (PLM), providing an in-depth analysis of the AIGC landscape and systematically exploring its applications in smart manufacturing. "
+
+  - title: "SPADA: A Sequential Parametric CAD Program Agent with Fine-grained Control"
+    authors: ["Keyou Zheng", "Yuanwei Zhong", "Jiewu Leng*"]
+    type: "Preprint"
+    status: "Ongoing"
+    indexing: ["CCF-A"]
+    publishedIn: "Targeting to AAAI'26"
+
+  - title: "Agentic Workflow in Smart Manufacturing: A Fresh Viewpoint"
+    authors: ["Keyou Zheng", "Yuanwei Zhong", "Jiewu Leng*"]
+    type: "Preprint"
+    status: "Ongoing"
+    indexing: ["SCI-II", "JCR-Q1"]
+    impactFactor: 7.2
+    publishedIn: "Targeting to Applied Soft Computing"
+
+  - title: "一种产品制造统一值链中间件技术方法及其数字孪生系统"
+    authors: ["冷杰武", "郑恪悠", "钟元蔚 等"]
+    type: "Patent"
+    publishedIn: "实用新型发明专利"
+    status: "实质审查"
+  
+  - title: "一种基于制造服务互动上下文信息的交互关系提取及需求和制造匹配方法"
+    authors: ["冷杰武", "郑恪悠", "谢俊星 等"]
+    type: "Patent"
+    publishedIn: "实用新型发明专利"
+    status: "实质审查"
+  
+
+experience:
+  - position: "多模态大语言模型辅助的 CAD 代码生成与建模系统"
+    company: "广东工业大学"
+    startDate: "2025.1"
+    endDate: "至今"
+    highlights:
+      - "数据搜集：从多个离散数据源收集大量真实世界数据，并通过构建多模型路由-数据合成-数据评估的流程进行数据增强；"
+      - "算法设计：利用多模态融合、开发基于 Qwen 2.5-VL-7B 的多模态智能体系统，相关成果待投 AAAI'26；"
+      - "原型开发：开发基于 Next.js 和 React-three-fiber 的 Web 应用，实现高性能实时 3D 预览与用户体验友好的代码联动编辑功能"
+
+awards:
+  - name: "学业奖学金"
+    institute: "广东工业大学"
+    date: "2023, 2024"
+
+  - name: "学业奖学金"
+    institute: "广东财经大学"
+    date: "2022, 2021, 2022"
+
+skills:
+  categories:
+    - "Programming"
+    - "Research"
+    - "Communication"
+  
+  skills:
+    - name: "全栈开发"
+      category: "Programming"
+      description: "Next.js, Rust, C++"
+    
+    - name: "深度学习"
+      category: "Programming"
+      description: "PyTorch, vLLM, Transformers, LangChain"
+    
+    - name: "编码习惯"
+      category: "Programming"
+      description: "Git, VSCode, CI/CD"
+    
+    - name: "文献阅读"
+      category: "Research"
+      description: "熟练阅读领域内相关英文文献与书籍"
+    
+    - name: "学术写作"
+      category: "Research"
+      description: "熟练撰写学术论文"
+
+    - name: "English"
+      category: "Communication"
+      description: "CET-6, 考研英语一 70+"
+    
+    - name: "日本語"
+      category: "Communication"
+      description: "JLPT N1, 阅读满分"
+    
+    - name: "粤语"
+      category: "Communication"
+      description: "母语"
+
+    - name: "한국어"
+      category: "Communication"
+      description: "初级"
