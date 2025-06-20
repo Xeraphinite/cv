@@ -1,10 +1,10 @@
-import fs from "fs/promises"
-import path from "path"
+import fs from "node:fs/promises"
+import path from "node:path"
 import yaml from "js-yaml"
 
-export async function getCVData() {
+export async function getCVData(locale = "zh") {
   try {
-    const filePath = path.join(process.cwd(), "data", "cv.yaml")
+    const filePath = path.join(process.cwd(), "data", `cv.${locale}.yaml`);
     const fileContents = await fs.readFile(filePath, "utf8")
     const data = yaml.load(fileContents)
     return data

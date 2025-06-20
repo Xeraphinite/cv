@@ -1,0 +1,35 @@
+{
+  "common": {
+    "language": "语言",
+    "loading": "加载中...",
+    "error": "错误"
+  },
+  "navigation": {
+    "home": "首页",
+    "about": "关于",
+    "contact": "联系"
+  },
+  "section": {
+    "education": "教育经历",
+    "experience": "项目经历",
+    "skills": "技能",
+    "awards": "奖项荣誉",
+    "publications": "学术成果"
+  },
+  "label": {
+    "supervisor": "指导老师",
+    "present": "至今",
+    "duration": "持续时间",
+    "location": "地点",
+    "position": "职位",
+    "company": "公司",
+    "date": "日期",
+    "description": "描述"
+  },
+  "action": {
+    "viewMore": "查看更多",
+    "download": "下载",
+    "print": "打印",
+    "share": "分享"
+  }
+} 

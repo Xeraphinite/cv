@@ -1,0 +1,35 @@
+{
+  "common": {
+    "language": "言語",
+    "loading": "読み込み中...",
+    "error": "エラー"
+  },
+  "navigation": {
+    "home": "ホーム",
+    "about": "概要",
+    "contact": "連絡先"
+  },
+  "section": {
+    "education": "学歴",
+    "experience": "プロジェクト経験",
+    "skills": "スキル",
+    "awards": "受賞歴",
+    "publications": "学術成果"
+  },
+  "label": {
+    "supervisor": "指導教授",
+    "present": "現在",
+    "duration": "期間",
+    "location": "場所",
+    "position": "職位",
+    "company": "会社",
+    "date": "日付",
+    "description": "説明"
+  },
+  "action": {
+    "viewMore": "詳細を見る",
+    "download": "ダウンロード",
+    "print": "印刷",
+    "share": "シェア"
+  }
+} 

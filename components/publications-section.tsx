@@ -1,178 +1,196 @@
-import type React from "react"
-import { BookOpen } from "lucide-react"
+'use client'
+
+import { BookOpen, ExternalLink, Star, Award, FileText, Calendar } from "lucide-react"
+import { useTranslations } from 'next-intl'
+
+// Improved type definitions
+type PublicationStatus = 'Published' | 'Under Review' | 'In Press' | 'Ongoing' | 'Under Review, R2' | '査読中' | '進行中' | '実質審査'
+
+type PublicationType = 'Journal Article' | 'Conference Paper' | 'Preprint' | 'Patent' | 'Workshop Paper' | 'Book Chapter' | '学术论文' | 'プレプリント' | '特許'
+
+type IndexingType = 'SCI TOP' | 'SCI I' | 'SCI II' | 'SCI III' | 'SCI' | 'JCR-Q1' | 'JCR-Q2' | 'JCR-Q3' | 'JCR-Q4' | 'JCR' | 'CCF-A' | 'CCF-B' | 'CCF-C' | 'EI' | 'ESCI'
 
 interface Publication {
   title: string
   authors: string[]
-  type: string
-  status: string
-  highlight: boolean
-  tags?: string[]
-  publishedIn: string  // Renamed from 'journal' to 'publishedIn' to be more generic
-  impactFactor?: number
-  indexing?: string[]
-  abstract?: string
+  type: PublicationType
+  status: PublicationStatus
+  highlight?: boolean
+  involved?: boolean
+  journal?: string
+  publishedIn?: string
   doi?: string
   url?: string
+  indexing?: IndexingType[]
+  impactFactor?: number
+  abstract?: string
+  year?: string
+  pages?: string
+  volume?: string
+  issue?: string
 }
 
 interface PublicationsSectionProps {
   data: Publication[]
-  ownerName: string
+  ownerName?: string
   ownerEnName?: string
 }
 
-// Badge component to reduce repetition
-const Badge = ({ 
-  text, 
-  colorSet = { bg: "bg-gray-50", text: "text-gray-700" } 
-}: { 
-  text: string | number; 
-  colorSet?: { bg: string; text: string } 
-}) => (
-  <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${colorSet.bg} ${colorSet.text}`}>
-    {text}
-  </span>
-)
+// Helper function for badge styling
+const getBadgeStyle = (type: 'type' | 'status' | 'indexing' | 'impact') => {
+  const styles = {
+    type: "bg-primary/10 text-primary print:bg-gray-100 print:text-black",
+    status: "bg-secondary/50 text-secondary-foreground print:bg-gray-50 print:text-black", 
+    indexing: "bg-accent/50 text-accent-foreground print:bg-gray-100 print:text-black",
+    impact: "bg-muted text-muted-foreground print:bg-gray-100 print:text-black"
+  }
+  return styles[type]
+}
 
 export function PublicationsSection({ data, ownerName, ownerEnName }: PublicationsSectionProps) {
-  if (!data?.length) return null
+  const t = useTranslations()
+  
+  if (!data || data.length === 0) return null
 
-  // Function to highlight the owner's name in the author list
   const formatAuthors = (authors: string[]) => {
-    return authors.map((author, i) => {
-      const isOwner = author.includes(ownerName) || (ownerEnName && author.includes(ownerEnName))
-      const authorElement = isOwner ? <strong key={author}>{author}</strong> : author
+    return authors.map((author, index) => {
+      // Check if this author is the owner (either Chinese or English name)
+      const isOwner = author === ownerName || author === ownerEnName || 
+                     (ownerName && author.includes?.(ownerName)) || (ownerEnName && author.includes?.(ownerEnName))
+      
       return (
-        <span key={author} className="text-gray-700">
-          {i > 0 && <span>, </span>} {authorElement}
+        <span key={author} className={isOwner ? "font-semibold text-foreground print:text-black" : "text-muted-foreground print:text-gray-600"}>
+          {author}
+          {index < authors.length - 1 && ", "}
         </span>
       )
     })
   }
 
-  // Consolidated badge color mapping system
-  const badgeColors: Record<string, { bg: string; text: string }> = {
-    // Publication types
-    "Conference Paper": { bg: "bg-blue-50", text: "text-blue-700" },
-    "Journal Article": { bg: "bg-green-50", text: "text-green-700" },
-    "Patent": { bg: "bg-purple-50", text: "text-purple-700" },
-    "Workshop Paper": { bg: "bg-orange-50", text: "text-orange-700" },
-    "Book Chapter": { bg: "bg-indigo-50", text: "text-indigo-700" },
-    "Preprint": { bg: "bg-gray-50", text: "text-gray-700" },
-    
-    // SCI categories
-    "SCI TOP": { bg: "bg-red-50", text: "text-red-700" },
-    "SCI I": { bg: "bg-red-50", text: "text-red-700" },
-    "SCI II": { bg: "bg-orange-50", text: "text-orange-700" },
-    "SCI III": { bg: "bg-yellow-50", text: "text-yellow-700" },
-    "SCI": { bg: "bg-amber-50", text: "text-amber-700" },
-
-    // JCR quartiles
-    "JCR-Q1": { bg: "bg-red-50", text: "text-red-700" },
-    "JCR-Q2": { bg: "bg-orange-50", text: "text-orange-700" },
-    "JCR-Q3": { bg: "bg-yellow-50", text: "text-yellow-700" },
-    "JCR-Q4": { bg: "bg-lime-50", text: "text-lime-700" },
-    "JCR": { bg: "bg-green-50", text: "text-green-700" },
-
-    // CCF categories
-    "CCF-A": { bg: "bg-purple-50", text: "text-purple-700" },
-    "CCF-B": { bg: "bg-indigo-50", text: "text-indigo-700" },
-    "CCF-C": { bg: "bg-blue-50", text: "text-blue-700" },
-
-    // Other indexing
-    "EI": { bg: "bg-green-50", text: "text-green-700" },
-    "ESCI": { bg: "bg-teal-50", text: "text-teal-700" },
-    
-    // Special types
-    "highlight": { bg: "bg-yellow-50", text: "text-yellow-700" },
-  }
-
-  // Function to get impact factor badge with appropriate coloring
-  const getIFBadge = (impactFactor?: number) => {
-    if (!impactFactor) return null
-    
-    const colorSet = impactFactor >= 10 ? { bg: "bg-red-50", text: "text-red-700" } :
-                     impactFactor >= 5 ? { bg: "bg-orange-50", text: "text-orange-700" } :
-                     impactFactor >= 3 ? { bg: "bg-yellow-50", text: "text-yellow-700" } :
-                                        { bg: "bg-gray-50", text: "text-gray-700" }
-    
-    return <Badge text={`IF: ${impactFactor.toFixed(1)}`} colorSet={colorSet} />
+  const formatPublicationMeta = (publication: Publication) => {
+    const parts = []
+    if (publication.year) parts.push(publication.year)
+    if (publication.volume) parts.push(`Vol. ${publication.volume}`)
+    if (publication.issue) parts.push(`No. ${publication.issue}`)
+    if (publication.pages) parts.push(`pp. ${publication.pages}`)
+    return parts.join(', ')
   }
 
   return (
     <section className="print:break-inside-avoid-page">
-      <h2 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
-        <BookOpen className="h-5 w-5" />
-        学术成果
-      </h2>
+      <div className="flex items-center gap-3 mb-5 pb-2 border-b border-border print:border-gray-300">
+        <div className="flex items-center justify-center w-8 h-8 bg-foreground print:bg-black rounded-xl">
+          <BookOpen className="h-4 w-4 text-background print:text-white" />
+        </div>
+        <h2 className="text-xl font-bold text-foreground print:text-black">
+          {t('section.publications')}
+        </h2>
+      </div>
 
-      <div className="space-y-4">
-        {data.map((pub) => (
-          <div key={`${pub.title}-${pub.publishedIn}`} className="print:break-inside-avoid space-y-1">
-            {/* Line 1: Type badge, Title, Highlight badge, Indexing */}
-            <div className="flex items-center gap-2 flex-wrap">
-              <Badge 
-                text={pub.type} 
-                colorSet={badgeColors[pub.type]} 
-              />
-              
-              <h3 className="font-semibold text-gray-900 inline">{pub.title}</h3>
-              
-              {pub.highlight && (
-                <Badge text="Highlight" colorSet={badgeColors.highlight} />
-              )}
-
-              {Array.isArray(pub.indexing) && pub.indexing.length > 0 && (
-                <div className="flex flex-wrap gap-1">
-                  {pub.indexing.map((idx) => (
-                    <Badge key={`${pub.title}-${idx}`} text={idx} colorSet={badgeColors[idx]} />
-                  ))}
-                  {getIFBadge(pub.impactFactor)}
+      <div className="space-y-6">
+        {data.map((publication, index) => (
+          <div key={`${publication.title}-${index}`} className="print:break-inside-avoid">
+            <div className="bg-card print:bg-white border border-border print:border-gray-300 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
+              <div className="space-y-4">
+                {/* Header with title and featured badge */}
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg font-semibold text-foreground print:text-black leading-tight break-words">
+                      {publication.url ? (
+                        <a
+                          href={publication.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline transition-all inline-flex items-start gap-2 group"
+                        >
+                          <span>{publication.title}</span>
+                          <ExternalLink className="h-4 w-4 mt-0.5 opacity-60 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                        </a>
+                      ) : (
+                        publication.title
+                      )}
+                    </h3>
+                  </div>
+                  
+                  {publication.highlight && (
+                    <div className="flex items-center gap-1 px-3 py-1.5 bg-accent print:bg-gray-100 text-accent-foreground print:text-black rounded-full whitespace-nowrap">
+                      <Star className="h-3 w-3" />
+                      <span className="text-xs font-medium">Featured</span>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+                
+                {/* Authors */}
+                <div className="text-sm leading-relaxed break-words">
+                  {formatAuthors(publication.authors)}
+                </div>
+                
+                {/* Publication venue and meta information */}
+                <div className="space-y-2">
+                  {(publication.journal || publication.publishedIn) && (
+                    <div className="flex items-start gap-2 text-sm">
+                      <FileText className="h-4 w-4 mt-0.5 flex-shrink-0 text-muted-foreground print:text-gray-600" />
+                      <div className="text-muted-foreground print:text-gray-600">
+                        <span className="font-medium">Published in: </span>
+                        <span className="italic break-words">{publication.journal || publication.publishedIn}</span>
+                        {formatPublicationMeta(publication) && (
+                          <span className="ml-2 text-xs">({formatPublicationMeta(publication)})</span>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {publication.doi && (
+                    <div className="flex items-start gap-2 text-sm">
+                      <Award className="h-4 w-4 mt-0.5 flex-shrink-0 text-muted-foreground print:text-gray-600" />
+                      <div className="text-muted-foreground print:text-gray-600">
+                        <span className="font-medium">DOI: </span>
+                        <a
+                          href={`https://doi.org/${publication.doi}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline transition-colors break-all"
+                        >
+                          {publication.doi}
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Badges for type, status, indexing, and impact factor */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${getBadgeStyle('type')}`}>
+                    {publication.type}
+                  </span>
+                  
+                  <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${getBadgeStyle('status')}`}>
+                    {publication.status}
+                  </span>
+                  
+                  {publication.indexing?.map((idx) => (
+                    <span key={idx} className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${getBadgeStyle('indexing')}`}>
+                      <Award className="h-3 w-3" />
+                      {idx}
+                    </span>
+                  ))}
+                  
+                  {publication.impactFactor && (
+                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${getBadgeStyle('impact')}`}>
+                      IF: {publication.impactFactor}
+                    </span>
+                  )}
+                </div>
 
-            {/* Line 2: Authors, Journal, Status */}
-            <div className="text-sm text-gray-700 flex flex-wrap items-center">
-              {formatAuthors(pub.authors)}
-              {pub.publishedIn && (
-                <><span className="mx-1">•</span><span className="italic">{pub.publishedIn}</span></>
-              )}
-              <span className="mx-1">•</span>
-              <span className="font-medium">{pub.status}</span>
-            </div>
-
-            {/* Abstract (if available) */}
-            {pub.abstract && (
-              <p className="text-sm text-gray-600 mt-1 py-1">{pub.abstract}</p>
-            )}
-
-            {/* Line 3: DOI, URL */}
-            {(pub.doi || pub.url) && (
-              <div className="flex gap-3">
-                {pub.doi && (
-                  <a
-                    href={`https://doi.org/${pub.doi}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-blue-600 hover:text-blue-800"
-                  >
-                    DOI: {pub.doi}
-                  </a>
-                )}
-                {pub.url && (
-                  <a
-                    href={pub.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-blue-600 hover:text-blue-800"
-                  >
-                    View Publication
-                  </a>
+                {/* Abstract */}
+                {publication.abstract && (
+                  <div className="mt-4 p-4 bg-muted print:bg-gray-50 rounded-2xl border-l-4 border-border print:border-gray-300">
+                    <h4 className="text-xs font-medium text-muted-foreground print:text-gray-600 uppercase tracking-wide mb-2">Abstract</h4>
+                    <p className="text-sm text-foreground print:text-black leading-relaxed break-words">{publication.abstract}</p>
+                  </div>
                 )}
               </div>
-            )}
+            </div>
           </div>
         ))}
       </div>

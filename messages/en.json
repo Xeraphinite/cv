@@ -1,0 +1,35 @@
+{
+  "common": {
+    "language": "Language",
+    "loading": "Loading...",
+    "error": "Error"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "section": {
+    "education": "Education",
+    "experience": "Experience",
+    "skills": "Skills",
+    "awards": "Awards",
+    "publications": "Publications"
+  },
+  "label": {
+    "supervisor": "Supervisor",
+    "present": "Present",
+    "duration": "Duration",
+    "location": "Location",
+    "position": "Position",
+    "company": "Company",
+    "date": "Date",
+    "description": "Description"
+  },
+  "action": {
+    "viewMore": "View More",
+    "download": "Download",
+    "print": "Print",
+    "share": "Share"
+  }
+} 

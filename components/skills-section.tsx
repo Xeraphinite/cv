@@ -1,5 +1,7 @@
-import React from "react"
-import { Lightbulb, Code, BookOpen, MessageSquare, Palette, Heart } from "lucide-react"
+'use client'
+
+import { Zap, Code, Lightbulb, MessageSquare } from "lucide-react"
+import { useTranslations } from 'next-intl'
 
 interface Skill {
   name: string
@@ -7,87 +9,69 @@ interface Skill {
   description: string
 }
 
+interface Skills {
+  categories: string[]
+  skills: Skill[]
+}
+
 interface SkillsSectionProps {
-  data: {
-    categories: string[]
-    skills: Skill[]
-  }
-}
-
-// Fixed categories and their Chinese translations
-const CATEGORY_LABELS: Record<string, { en: string; zh: string }> = {
-  Programming: { en: "Programming", zh: "编程" },
-  Research: { en: "Research", zh: "研究" },
-  Communication: { en: "Communication", zh: "语言" },
-  Design: { en: "Design", zh: "设计" },
-  Hobbies: { en: "Hobbies", zh: "兴趣" },
-}
-
-// Category icons
-const CATEGORY_ICONS: Record<string, React.ReactNode> = {
-  Programming: <Code className="h-4 w-4" />,
-  Research: <BookOpen className="h-4 w-4" />,
-  Communication: <MessageSquare className="h-4 w-4" />,
-  Design: <Palette className="h-4 w-4" />,
-  Hobbies: <Heart className="h-4 w-4" />,
-}
-
-// Category colors
-const CATEGORY_COLORS: Record<string, { bg: string; text: string; border: string }> = {
-  Programming: { bg: "bg-blue-50", text: "text-blue-700", border: "border-blue-200" },
-  Research: { bg: "bg-green-50", text: "text-green-700", border: "border-green-200" },
-  Communication: { bg: "bg-purple-50", text: "text-purple-700", border: "border-purple-200" },
-  Design: { bg: "bg-pink-50", text: "text-pink-700", border: "border-pink-200" },
-  Hobbies: { bg: "bg-yellow-50", text: "text-yellow-700", border: "border-yellow-200" },
+  data: Skills
 }
 
 export function SkillsSection({ data }: SkillsSectionProps) {
+  const t = useTranslations()
+  
   if (!data || !data.skills || data.skills.length === 0) return null
 
-  // Group skills by fixed categories
-  const skillsByCategory: Record<string, Skill[]> = {}
-  Object.keys(CATEGORY_LABELS).forEach(category => {
-    skillsByCategory[category] = []
-  })
-  for (const skill of data.skills) {
-    if (CATEGORY_LABELS[skill.category]) {
-      skillsByCategory[skill.category].push(skill)
+  const getCategoryIcon = (category: string) => {
+    const icons = {
+      'Programming': Code,
+      'Research': Lightbulb,
+      'Communication': MessageSquare,
+      'プログラミング': Code,
+      '研究': Lightbulb,
+      'コミュニケーション': MessageSquare
     }
+    return icons[category as keyof typeof icons] || Code
   }
 
   return (
     <section className="print:break-inside-avoid-page">
-      <h2 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
-        <Lightbulb className="h-5 w-5" />
-        技能
-      </h2>
+      <div className="flex items-center gap-3 mb-5 pb-2 border-b border-border print:border-gray-300">
+        <div className="flex items-center justify-center w-8 h-8 bg-foreground print:bg-black rounded-xl">
+          <Zap className="h-4 w-4 text-background print:text-white" />
+        </div>
+        <h2 className="text-xl font-bold text-foreground print:text-black">
+          {t('section.skills')}
+        </h2>
+      </div>
 
-      <div className="space-y-2">
-        {Object.entries(skillsByCategory).map(([category, skills]) => {
-          if (skills.length === 0) return null
-          const colorSet = CATEGORY_COLORS[category] || {
-            bg: "bg-gray-50",
-            text: "text-gray-700",
-            border: "border-gray-200",
-          }
-          const label = CATEGORY_LABELS[category]
+      <div className="space-y-6">
+        {data.categories.map((category) => {
+          const categorySkills = data.skills.filter((skill) => skill.category === category)
+          if (categorySkills.length === 0) return null
+
+          const IconComponent = getCategoryIcon(category)
 
           return (
             <div key={category} className="print:break-inside-avoid">
-              <div className={`flex items-center gap-1 mb-1 ${colorSet.text}`}>
-                <span className={`flex items-center min-w-4 gap-1 text-sm px-2 py-1 rounded-full font-medium ${colorSet.bg}`}>
-                  {CATEGORY_ICONS[category]}
-                  <span>
-                    {label.zh}
-                  </span>
-                </span>
-                <div className="pl-2 text-sm text-gray-700 leading-relaxed">
-                  {skills.map((skill, index) => (
-                    <React.Fragment key={skill.name}>
-                      <span className="font-medium text-gray-900">{skill.name}</span>
-                      {skill.description && <span className="text-gray-600"> {skill.description}</span>}
-                      {index < skills.length - 1 && <span className="mx-1.5 text-gray-400">•</span>}
-                    </React.Fragment>
+              <div className="bg-card print:bg-white border border-border print:border-gray-300 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-center justify-center w-8 h-8 bg-foreground print:bg-black rounded-xl">
+                    <IconComponent className="h-4 w-4 text-background print:text-white" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground print:text-black">{category}</h3>
+                </div>
+                
+                <div className="space-y-4">
+                  {categorySkills.map((skill) => (
+                    <div key={skill.name} className="p-4 bg-muted/50 print:bg-gray-50 rounded-xl border border-border/50 print:border-gray-200">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="font-medium text-foreground print:text-black break-words flex-1">{skill.name}</span>
+                        <div className="w-2 h-2 bg-foreground print:bg-black rounded-full flex-shrink-0" />
+                      </div>
+                      <p className="text-sm text-muted-foreground print:text-gray-600 leading-relaxed break-words">{skill.description}</p>
+                    </div>
                   ))}
                 </div>
               </div>
