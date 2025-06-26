@@ -6,9 +6,9 @@ import { NextIntlClientProvider } from 'next-intl'
 import "../globals.css"
 import { type Locale, localeLabels, locales } from '@/i18n'
 import { getDirection } from '@/lib/i18n-utils'
-import { CVHeader } from '@/components/cv-header'
+import { CVHeader } from '@/components/layout/cv-header'
 import { ThemeProvider } from "@/components/theme-provider"
-import { LocaleDetector } from '@/components/locale-detector'
+import { LocaleDetector } from '@/components/layout/locale-detector'
 
 const inter = Inter({ subsets: ["latin"] })
 

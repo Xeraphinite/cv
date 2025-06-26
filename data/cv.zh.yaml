@@ -4,11 +4,18 @@ hero:
   avatar: "/avatar.png"
   location: "广东广州"
   age: "2001-09"
-  # bio: "Slip into the diamond's life."
+  bio: "专注于人工智能、机器学习和人机交互领域的研究者和开发者。致力于通过创新研究和实际应用推进技术进步，在学术理论与现实影响之间架起桥梁。"
   social:
     github: "https://github.com/Xeraphinite"
     email: "keyouzheng0915@gmail.com"
-    # website: "https://keyzheng.pages.dev"
+    phone: "+86 138-0000-0000"
+    wechat: "keyou_zheng"
+    linkedin: "https://linkedin.com/in/keyou-zheng"
+    website: "https://keyzheng.pages.dev"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+    googleScholar: "https://scholar.google.com/citations?user=example"
+    researchGate: "https://www.researchgate.net/profile/your-profile"
+    # twitter: "https://twitter.com/keyou_zheng"
 
 
 education:
@@ -16,7 +23,7 @@ education:
     area: "机械工程"
     degree: "硕士"
     supervisor: "冷杰武"
-    startDate: "2023.9"
+    startDate: "2023年9月"
     endDate: "至今"
     summary: ""
     highlights:
@@ -26,55 +33,55 @@ education:
   - institution: "广东财经大学"
     area: "计算机科学与技术（实验班）"
     degree: "本科"
-    startDate: "2019.6"
-    endDate: "2023.6"
+    startDate: "2019年6月"
+    endDate: "2023年6月"
     summary: ""
     highlights:
-      - "GPA：3.75/5, Rank: Top 5 %; 多门基础课、核心专业课专业第一;"
+      - "GPA：3.75/5, 排名：前 5 %；多门基础课、核心专业课专业第一；"
       - "毕业论文：基于深度强化学习的马里奥游戏智能体设计与实现"
 
 publications:
   - title: "AIGC-empowered Smart Manufacturing: Prospects and Challenges" 
     authors: ["Jiewu Leng", "Keyou Zheng", "Rongjie Li et al."]
-    type: "Journal Article"
-    status: "Under Review, R2"
+    type: "期刊论文"
+    status: "审稿中, R2"
     indexing: ["SCI TOP", "SCI I"]
     impactFactor: 9.1
     publishedIn: "Robotics and Computer-Integrated Manufacturing (RCIM)"
-    abstract: "This paper presents a comprehensive framework that integrates a GenAI-centered approach with Product Lifecycle Management (PLM), providing an in-depth analysis of the AIGC landscape and systematically exploring its applications in smart manufacturing. "
+    abstract: "本文提出了一个将GenAI为中心的方法与产品生命周期管理（PLM）相结合的综合框架，对AIGC领域进行了深入分析，并系统地探索了其在智能制造中的应用。"
 
   - title: "SPADA: A Sequential Parametric CAD Program Agent with Fine-grained Control"
     authors: ["Keyou Zheng", "Yuanwei Zhong", "Jiewu Leng*"]
-    type: "Preprint"
-    status: "Ongoing"
+    type: "预印本"
+    status: "进行中"
     indexing: ["CCF-A"]
-    publishedIn: "Targeting to AAAI'26"
+    publishedIn: "拟投AAAI'26"
 
   - title: "Agentic Workflow in Smart Manufacturing: A Fresh Viewpoint"
     authors: ["Keyou Zheng", "Yuanwei Zhong", "Jiewu Leng*"]
-    type: "Preprint"
-    status: "Ongoing"
+    type: "预印本"
+    status: "进行中"
     indexing: ["SCI-II", "JCR-Q1"]
     impactFactor: 7.2
-    publishedIn: "Targeting to Applied Soft Computing"
+    publishedIn: "拟投Applied Soft Computing"
 
   - title: "一种产品制造统一值链中间件技术方法及其数字孪生系统"
     authors: ["冷杰武", "郑恪悠", "钟元蔚 等"]
-    type: "Patent"
+    type: "专利"
     publishedIn: "实用新型发明专利"
-    status: "实质审查"
+    status: "实质审查中"
   
   - title: "一种基于制造服务互动上下文信息的交互关系提取及需求和制造匹配方法"
     authors: ["冷杰武", "郑恪悠", "谢俊星 等"]
-    type: "Patent"
+    type: "专利"
     publishedIn: "实用新型发明专利"
-    status: "实质审查"
+    status: "实质审查中"
   
 
 experience:
   - position: "多模态大语言模型辅助的 CAD 代码生成与建模系统"
     company: "广东工业大学"
-    startDate: "2025.1"
+    startDate: "2025年1月"
     endDate: "至今"
     highlights:
       - "数据搜集：从多个离散数据源收集大量真实世界数据，并通过构建多模型路由-数据合成-数据评估的流程进行数据增强；"
@@ -84,51 +91,51 @@ experience:
 awards:
   - name: "学业奖学金"
     institute: "广东工业大学"
-    date: "2023, 2024"
+    date: "2023年, 2024年"
 
   - name: "学业奖学金"
     institute: "广东财经大学"
-    date: "2022, 2021, 2022"
+    date: "2020年, 2021年, 2022年"
 
 skills:
   categories:
-    - "Programming"
-    - "Research"
-    - "Communication"
+    - "编程"
+    - "研究"
+    - "交流"
   
   skills:
     - name: "全栈开发"
-      category: "Programming"
+      category: "编程"
       description: "Next.js, Rust, C++"
     
     - name: "深度学习"
-      category: "Programming"
+      category: "编程"
       description: "PyTorch, vLLM, Transformers, LangChain"
     
-    - name: "编码习惯"
-      category: "Programming"
+    - name: "开发实践"
+      category: "编程"
       description: "Git, VSCode, CI/CD"
     
     - name: "文献阅读"
-      category: "Research"
+      category: "研究"
       description: "熟练阅读领域内相关英文文献与书籍"
     
     - name: "学术写作"
-      category: "Research"
+      category: "研究"
       description: "熟练撰写学术论文"
 
-    - name: "English"
-      category: "Communication"
+    - name: "英语"
+      category: "交流"
       description: "CET-6, 考研英语一 70+"
     
-    - name: "日本語"
-      category: "Communication"
+    - name: "日语"
+      category: "交流"
       description: "JLPT N1, 阅读满分"
     
     - name: "粤语"
-      category: "Communication"
+      category: "交流"
       description: "母语"
 
-    - name: "한국어"
-      category: "Communication"
+    - name: "韩语"
+      category: "交流"
       description: "初级" 

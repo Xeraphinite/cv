@@ -1,0 +1,9 @@
+export { CV } from './cv';
+export { ProfileSection } from './profile-section';
+export { HeroSection } from './hero-section';
+export { EducationSection } from './education-section';
+export { ExperienceSection } from './experience-section';
+export { PublicationsSection } from './publications-section';
+export { SkillsSection } from './skills-section';
+export { AwardsSection } from './awards-section';
+export { TalksSection } from './talks-section'; 

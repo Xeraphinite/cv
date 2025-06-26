@@ -1,5 +1,6 @@
-import { CV } from "@/components/cv"
+import { CV } from "@/components/sections/cv"
 import { getCVData } from "@/lib/load-cv-data"
+import type { Locale } from "@/lib/types/cv"
 
 export default async function Home({ 
   params
@@ -7,7 +8,7 @@ export default async function Home({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
-  const cvData = await getCVData(locale)
+  const cvData = await getCVData(locale as Locale)
 
   return (
     <main className="min-h-screen bg-background print:bg-white">
