@@ -2,21 +2,28 @@
   "common": {
     "language": "语言",
     "loading": "加载中...",
-    "error": "错误"
+    "error": "错误",
+    "lastUpdated": "最后更新"
   },
   "navigation": {
     "home": "首页",
     "about": "关于",
     "contact": "联系"
   },
-  "section": {
+  "sections": {
     "education": "教育经历",
     "experience": "项目经历",
-    "skills": "技能",
+    "skills": "技能与项目",
     "awards": "奖项荣誉",
-    "publications": "学术成果"
+    "publications": "学术成果",
+    "talks": "学术报告",
+    "profileHighlights": "个人亮点",
+    "biography": "个人简介",
+    "researchInterests": "研究兴趣",
+    "selectedProjects": "精选项目",
+    "technicalSkills": "技术技能"
   },
-  "label": {
+  "labels": {
     "supervisor": "指导老师",
     "present": "至今",
     "duration": "持续时间",
@@ -24,12 +31,37 @@
     "position": "职位",
     "company": "公司",
     "date": "日期",
-    "description": "描述"
+    "description": "描述",
+    "in": "专业",
+    "keyAchievements": "主要成就",
+    "publishedIn": "发表于",
+    "doi": "DOI",
+    "abstract": "摘要",
+    "featured": "精选",
+    "impactFactor": "影响因子",
+    "status": "状态",
+    "type": "类型",
+    "venue": "会议/期刊",
+    "event": "活动",
+    "slides": "幻灯片"
   },
-  "action": {
+  "actions": {
     "viewMore": "查看更多",
     "download": "下载",
     "print": "打印",
-    "share": "分享"
+    "share": "分享",
+    "downloadPDF": "下载PDF",
+    "viewProject": "查看项目",
+    "viewSource": "查看源码",
+    "viewEvent": "查看活动",
+    "viewSlides": "查看幻灯片"
+  },
+  "content": {
+    "contact": "联系方式",
+    "yearsOld": "岁",
+    "publications": "发表论文",
+    "awards": "获奖情况",
+    "projects": "项目数量",
+    "gpa": "GPA"
   }
 } 

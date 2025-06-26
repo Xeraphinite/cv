@@ -1,6 +1,6 @@
 'use client'
 
-import { Zap, Code, Lightbulb, MessageSquare } from "lucide-react"
+import { Zap, Code, Lightbulb, MessageSquare, Wrench, ExternalLink, Github } from "lucide-react"
 import { useTranslations } from 'next-intl'
 
 interface Skill {
@@ -15,13 +15,26 @@ interface Skills {
 }
 
 interface SkillsSectionProps {
-  data: Skills
+  data: {
+    skills?: {
+      [category: string]: string[]
+    }
+    projects?: Array<{
+      name: string
+      description: string
+      tech: string[]
+      url?: string
+      github?: string
+      status?: string
+      year?: number
+    }>
+  }
 }
 
 export function SkillsSection({ data }: SkillsSectionProps) {
   const t = useTranslations()
   
-  if (!data || !data.skills || data.skills.length === 0) return null
+  if (!data || !data.skills || Object.keys(data.skills).length === 0) return null
 
   const getCategoryIcon = (category: string) => {
     const icons = {
@@ -35,49 +48,153 @@ export function SkillsSection({ data }: SkillsSectionProps) {
     return icons[category as keyof typeof icons] || Code
   }
 
+  const getCategoryGradient = (category: string) => {
+    const gradients = {
+      'Programming': 'from-purple-500 to-pink-600',
+      'Research': 'from-amber-500 to-orange-600',
+      'Communication': 'from-green-500 to-emerald-600',
+      'プログラミング': 'from-purple-500 to-pink-600',
+      '研究': 'from-amber-500 to-orange-600',
+      'コミュニケーション': 'from-green-500 to-emerald-600'
+    }
+    return gradients[category as keyof typeof gradients] || 'from-gray-500 to-gray-600'
+  }
+
+  // Default placeholder projects if none provided
+  const defaultProjects = [
+    {
+      name: "AI Research Platform",
+      description: "A comprehensive platform for managing AI research projects with data visualization and model comparison features.",
+      tech: ["Python", "TensorFlow", "React", "PostgreSQL"],
+      url: "https://example.com/ai-platform",
+      github: "https://github.com/username/ai-platform",
+      status: "Active",
+      year: 2024
+    },
+    {
+      name: "Academic Paper Analyzer",
+      description: "Natural language processing tool for analyzing academic papers and extracting key insights and citations.",
+      tech: ["Python", "NLP", "Flask", "MongoDB"],
+      github: "https://github.com/username/paper-analyzer",
+      status: "Completed",
+      year: 2023
+    },
+    {
+      name: "Research Data Visualization",
+      description: "Interactive dashboard for visualizing complex research data with real-time updates and collaborative features.",
+      tech: ["JavaScript", "D3.js", "Node.js", "MySQL"],
+      url: "https://example.com/data-viz",
+      status: "In Progress",
+      year: 2024
+    }
+  ]
+
+  const projects = data.projects && data.projects.length > 0 ? data.projects : defaultProjects
+
   return (
-    <section className="print:break-inside-avoid-page">
-      <div className="flex items-center gap-3 mb-5 pb-2 border-b border-border print:border-gray-300">
-        <div className="flex items-center justify-center w-8 h-8 bg-foreground print:bg-black rounded-xl">
-          <Zap className="h-4 w-4 text-background print:text-white" />
-        </div>
-        <h2 className="text-xl font-bold text-foreground print:text-black">
-          {t('section.skills')}
-        </h2>
-      </div>
+    <section className="paper-section print:break-inside-avoid">
+      <h2 className="paper-section-title print:text-black">
+        <Zap className="h-5 w-5 mr-3 inline-block text-primary" />
+        {t('sections.skills')}
+      </h2>
 
-      <div className="space-y-6">
-        {data.categories.map((category) => {
-          const categorySkills = data.skills.filter((skill) => skill.category === category)
-          if (categorySkills.length === 0) return null
-
-          const IconComponent = getCategoryIcon(category)
-
-          return (
-            <div key={category} className="print:break-inside-avoid">
-              <div className="bg-card print:bg-white border border-border print:border-gray-300 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="flex items-center justify-center w-8 h-8 bg-foreground print:bg-black rounded-xl">
-                    <IconComponent className="h-4 w-4 text-background print:text-white" />
+      <div className="space-y-8">
+        {/* Skills Section */}
+        {data.skills && Object.keys(data.skills).length > 0 && (
+          <div className="paper-card">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6">
+              {Object.entries(data.skills).map(([category, skills]) => (
+                <div key={category} className="space-y-3">
+                  <h4 className="flex items-center text-md font-semibold text-foreground print:text-black">
+                    <div className={`w-2 h-2 rounded-full mr-3 bg-gradient-to-r ${getCategoryGradient(category)}`} />
+                    {category}
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {skills.map((skill) => (
+                      <span key={skill} className="paper-badge text-sm">
+                        {skill}
+                      </span>
+                    ))}
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground print:text-black">{category}</h3>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Projects Section */}
+        <div className="mt-6">
+          <h3 className="paper-section-title !text-lg !border-none !mb-4">
+            <Lightbulb className="h-5 w-5 mr-3 inline-block text-primary" />
+            Selected Projects
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {projects.map((project) => (
+              <div key={project.name} className="paper-card h-full flex flex-col justify-between hover:shadow-lg transition-shadow duration-300">
+                <div className="space-y-3">
+                  {/* Project Header */}
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h4 className="text-base font-semibold text-foreground print:text-black">
+                        {project.name}
+                      </h4>
+                      <div className="flex items-center gap-4 mt-1">
+                        {project.status && (
+                          <span className={`paper-badge ${project.status === 'Active' ? 'bg-primary/20 text-primary' : ''}`}>
+                            {project.status}
+                          </span>
+                        )}
+                        {project.year && (
+                          <span className="text-sm text-muted-foreground">
+                            {project.year}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 ml-4 print:hidden">
+                      {project.url && (
+                        <a
+                          href={project.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-1.5 rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                          title="View Project"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                        </a>
+                      )}
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-1.5 rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                          title="View Source"
+                        >
+                          <Github className="h-4 w-4" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Project Description */}
+                  <p className="paper-body !text-sm leading-relaxed">
+                    {project.description}
+                  </p>
                 </div>
                 
-                <div className="space-y-4">
-                  {categorySkills.map((skill) => (
-                    <div key={skill.name} className="p-4 bg-muted/50 print:bg-gray-50 rounded-xl border border-border/50 print:border-gray-200">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="font-medium text-foreground print:text-black break-words flex-1">{skill.name}</span>
-                        <div className="w-2 h-2 bg-foreground print:bg-black rounded-full flex-shrink-0" />
-                      </div>
-                      <p className="text-sm text-muted-foreground print:text-gray-600 leading-relaxed break-words">{skill.description}</p>
-                    </div>
+                {/* Technologies */}
+                <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-border/60">
+                  {project.tech.map((tech) => (
+                    <span key={tech} className="paper-badge !text-xs">
+                      {tech}
+                    </span>
                   ))}
                 </div>
               </div>
-            </div>
-          )
-        })}
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )

@@ -1,13 +1,14 @@
-import type React from "react"
-import "../globals.css"
 import { Inter } from "next/font/google"
-import { NextIntlClientProvider } from 'next-intl'
-import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import { ThemeProvider } from "@/components/theme-provider"
-import { locales, localeLabels, type Locale } from '@/i18n'
+import { getMessages } from 'next-intl/server'
+import { NextIntlClientProvider } from 'next-intl'
+
+import "../globals.css"
+import { type Locale, localeLabels, locales } from '@/i18n'
 import { getDirection } from '@/lib/i18n-utils'
 import { CVHeader } from '@/components/cv-header'
+import { ThemeProvider } from "@/components/theme-provider"
+import { LocaleDetector } from '@/components/locale-detector'
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -26,8 +27,8 @@ export function generateMetadata({ params }: { params: { locale: string } }) {
     ja: "広東工業大学大学院生。大規模言語モデル、3D再構成、ヒューマンコンピュータインタラクションを専門とし、AI駆動のスマート製造研究に従事。"
   }
   
-  const currentTitle = titles[locale as keyof typeof titles] || titles.en
-  const currentDescription = descriptions[locale as keyof typeof descriptions] || descriptions.en
+  const currentTitle = titles[locale] ?? titles.en
+  const currentDescription = descriptions[locale] ?? descriptions.en
   
   return {
     title: currentTitle,
@@ -86,15 +87,9 @@ export default async function LocaleLayout({
 }) {
   const { locale } = params
   
-  // Validate that the incoming `locale` parameter is valid
-  if (!locales.includes(locale as Locale)) {
-    notFound()
-  }
+  if (!locales.includes(locale as Locale)) notFound()
 
-  // Get messages for the current locale
   const messages = await getMessages({ locale })
-  
-  // Get text direction for the locale
   const direction = getDirection(locale as Locale)
 
   return (
@@ -107,10 +102,15 @@ export default async function LocaleLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="font-noto-sans-sc">
+      <body className={`${inter.className} font-noto-sans-sc`}>
         <NextIntlClientProvider messages={messages}>
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <ThemeProvider 
+            attribute="class" 
+            defaultTheme="light" 
+            enableSystem
+          >
             <CVHeader />
+            <LocaleDetector />
             {children}
           </ThemeProvider>
         </NextIntlClientProvider>

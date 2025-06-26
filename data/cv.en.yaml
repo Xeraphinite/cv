@@ -4,11 +4,18 @@ hero:
   avatar: "/avatar.png"
   location: "Guangzhou, Guangdong"
   age: "2001-09"
-  # bio: "Slip into the diamond's life."
+  bio: "A passionate researcher and developer with expertise in artificial intelligence, machine learning, and human-computer interaction. Dedicated to advancing the field through innovative research and practical applications that bridge the gap between academic theory and real-world impact."
   social:
     github: "https://github.com/Xeraphinite"
     email: "keyouzheng0915@gmail.com"
-    # website: "https://keyzheng.pages.dev"
+    phone: "+86 138-0000-0000"
+    wechat: "keyou_zheng"
+    linkedin: "https://linkedin.com/in/keyou-zheng"
+    website: "https://keyzheng.pages.dev"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+    googleScholar: "https://scholar.google.com/citations?user=example"
+    researchGate: "https://www.researchgate.net/profile/your-profile"
+    # twitter: "https://twitter.com/keyou_zheng"
 
 education:
   - institution: "Guangdong University of Technology"

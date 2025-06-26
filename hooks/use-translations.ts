@@ -12,9 +12,10 @@ export function useTypedTranslations(namespace: string) {
  */
 export const useCommonTranslations = () => useTypedTranslations('common')
 export const useNavigationTranslations = () => useTypedTranslations('navigation')
-export const useSectionTranslations = () => useTypedTranslations('section')
-export const useLabelTranslations = () => useTypedTranslations('label')
-export const useActionTranslations = () => useTypedTranslations('action')
+export const useSectionTranslations = () => useTypedTranslations('sections')
+export const useLabelTranslations = () => useTypedTranslations('labels')
+export const useActionTranslations = () => useTypedTranslations('actions')
+export const useContentTranslations = () => useTypedTranslations('content')
 
 /**
  * General translations hook (fallback to next-intl)

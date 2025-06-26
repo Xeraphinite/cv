@@ -1,12 +1,13 @@
 {
-  "name": "my-v0-project",
-  "version": "0.1.0",
+  "name": "minimal-cv",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "pnpm biome check --apply-unsafe ."
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -65,11 +66,13 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.1",
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "postcss": "^8",
     "tailwindcss": "^3.4.17",
+    "tailwindcss-uikit-colors": "1.0.0-alpha.1",
     "typescript": "^5"
   }
 }

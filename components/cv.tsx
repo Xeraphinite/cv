@@ -1,31 +1,235 @@
-import { HeroSection } from "./hero-section"
-import { EducationSection } from "./education-section"
-import { PublicationsSection } from "./publications-section"
-import { SkillsSection } from "./skills-section"
-import { AwardsSection } from "./awards-section"
-import { ExperienceSection } from "./experience-section"
+import { HeroSection } from './hero-section'
+import { ProfileSection, BioSection, ResearchInterestsSection } from './profile-section'
+import { EducationSection } from './education-section'
+import { ExperienceSection } from './experience-section'
+import { SkillsSection } from './skills-section'
+import { PublicationsSection } from './publications-section'
+import { AwardsSection } from './awards-section'
+import { TalksSection } from './talks-section'
 
-interface CVProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: any
+type PublicationStatus = 'Published' | 'Under Review' | 'In Press' | 'Ongoing' | 'Under Review, R2' | '査読中' | '進行中' | '実質審査'
+
+interface Publication {
+  title: string
+  authors: string[]
+  journal?: string
+  conference?: string
+  year: number
+  volume?: string
+  pages?: string
+  doi?: string
+  url?: string
+  abstract?: string
+  status: PublicationStatus
+  venue: string
+  type: string
 }
 
-export function CV({ data }: CVProps) {
+interface Hero {
+  name: string
+  enName: string
+  bio?: string
+  avatar: string
+  location: string
+  age: number
+  social: {
+    github?: string
+    email?: string
+    linkedin?: string
+    website?: string
+    phone?: string
+    wechat?: string
+    twitter?: string
+    orcid?: string
+    googleScholar?: string
+    researchGate?: string
+  }
+}
+
+interface Education {
+  institution: string
+  area: string
+  degree: string
+  startDate: string
+  endDate: string
+  summary?: string
+  highlights: string[]
+  supervisor?: string
+}
+
+interface Experience {
+  company: string
+  position: string
+  startDate: string
+  endDate: string
+  summary?: string
+  highlights: string[]
+  location?: string
+}
+
+interface Skills {
+  categories: string[]
+  skills: Array<{
+    name: string
+    category: string
+    description: string
+  }>
+}
+
+interface Award {
+  title: string
+  date: string
+  description?: string
+  issuer?: string
+  url?: string
+}
+
+interface Talk {
+  title: string
+  date: string
+  venue: string
+  location?: string
+  url?: string
+  type: string
+}
+
+interface CVData {
+  hero: Hero
+  education: Education[]
+  experience: Experience[]
+  skills: Skills
+  publications: Publication[]
+  awards: Award[]
+  talks?: Talk[]
+}
+
+interface CVProps {
+  data: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  locale?: string
+}
+
+export function CV({ data, locale }: CVProps) {
+  if (!data) return null
+
+  // Map CVData to the expected Hero format
+  const heroData = {
+    ...data.hero,
+    social: {
+      ...data.hero.social,
+      // Add research-related contacts if they exist
+      orcid: data.hero.social.orcid || "https://orcid.org/0000-0000-0000-0000",
+      googleScholar: data.hero.social.googleScholar || "https://scholar.google.com/citations?user=example",
+      researchGate: data.hero.social.researchGate || "https://www.researchgate.net/profile/example"
+    }
+  }
+
+  // Map skills to the expected format
+  const skillsData = {
+    skills: data.skills ? data.skills.categories.reduce((acc: { [category: string]: string[] }, category: string) => { // eslint-disable-line @typescript-eslint/no-explicit-any
+      const categorySkills = data.skills.skills
+        .filter((skill: any) => skill.category === category) // eslint-disable-line @typescript-eslint/no-explicit-any
+        .map((skill: any) => skill.name) // eslint-disable-line @typescript-eslint/no-explicit-any
+      if (categorySkills.length > 0) {
+        acc[category] = categorySkills
+      }
+      return acc
+    }, {} as { [category: string]: string[] }) : {},
+    projects: [] // Will use default placeholder projects
+  }
+
+  // Map publications to the expected format
+  const publicationsData = data.publications?.map((pub: any) => ({ // eslint-disable-line @typescript-eslint/no-explicit-any
+    ...pub,
+    venue: pub.journal || pub.conference || pub.venue || 'Unknown Venue'
+  })) || []
+
   return (
-    <div className="bg-background print:bg-white shadow-sm print:shadow-none w-full max-w-[210mm] min-h-[297mm] print:min-h-0 print:w-[210mm] print:h-auto flex flex-col relative border border-border print:border-none">
-      {/* Content with minimal styling */}
-      <div className="relative">
-        <HeroSection data={data.hero} />
-        <div className="px-8 py-6 print:px-6 print:py-4">
-          <div className="space-y-6">
-            <EducationSection data={data.education} />
-            <ExperienceSection data={data.experience} />
-            <SkillsSection data={data.skills} />
-            <AwardsSection data={data.awards} />
-            <PublicationsSection data={data.publications} ownerName={data.hero.name} ownerEnName={data.hero.enName} />
-          </div>
-        </div>
+    <main className="min-h-screen bg-background print:bg-white animate-fade-in">
+      {/* Hero Section */}
+      <div style={{ animationDelay: '100ms' }} className="animate-slide-up">
+        <HeroSection data={heroData} locale={locale} />
       </div>
-    </div>
+
+      {/* Content Sections */}
+      <div className="paper-container py-10 space-y-12">
+        {/* Bio Section */}
+        {data.hero.bio && (
+          <div style={{ animationDelay: '200ms' }} className="animate-slide-up">
+            <BioSection data={{ bio: data.hero.bio, summary: data.hero.bio }} />
+          </div>
+        )}
+
+        {/* Profile Highlights */}
+        <div style={{ animationDelay: '300ms' }} className="animate-slide-up">
+          <ProfileSection data={{
+            education: data.education?.map((edu: any) => ({ // eslint-disable-line @typescript-eslint/no-explicit-any
+              institution: edu.institution,
+              degree: edu.degree,
+              major: edu.area,
+              period: `${edu.startDate} - ${edu.endDate}`,
+              gpa: edu.summary?.includes('GPA') ? edu.summary.split('GPA')[1]?.trim() : undefined
+            })),
+            publications: publicationsData,
+            awards: data.awards,
+            projects: []
+          }} />
+        </div>
+
+        {/* Research Interests */}
+        <div style={{ animationDelay: '400ms' }} className="animate-slide-up">
+          <ResearchInterestsSection data={{ 
+            researchInterests: [
+              "Large Language Models",
+              "3D Reconstruction", 
+              "Human-Computer Interaction",
+              "Smart Manufacturing",
+              "AI-Powered Systems"
+            ]
+          }} />
+        </div>
+
+        {/* Education */}
+        {data.education && data.education.length > 0 && (
+          <div style={{ animationDelay: '500ms' }} className="animate-slide-up">
+            <EducationSection data={data.education} />
+          </div>
+        )}
+
+        {/* Experience */}
+        {data.experience && data.experience.length > 0 && (
+          <div style={{ animationDelay: '600ms' }} className="animate-slide-up">
+            <ExperienceSection data={data.experience} />
+          </div>
+        )}
+
+        {/* Skills & Projects */}
+        {(data.skills || skillsData.skills) && (
+          <div style={{ animationDelay: '700ms' }} className="animate-slide-up">
+            <SkillsSection data={skillsData} />
+          </div>
+        )}
+
+        {/* Publications */}
+        {data.publications && data.publications.length > 0 && (
+          <div style={{ animationDelay: '800ms' }} className="animate-slide-up">
+            <PublicationsSection data={publicationsData} ownerName={data.hero.name} ownerEnName={data.hero.enName} />
+          </div>
+        )}
+
+        {/* Awards */}
+        {data.awards && data.awards.length > 0 && (
+          <div style={{ animationDelay: '900ms' }} className="animate-slide-up">
+            <AwardsSection data={data.awards} />
+          </div>
+        )}
+
+        {/* Talks */}
+        {data.talks && data.talks.length > 0 && (
+          <div style={{ animationDelay: '1000ms' }} className="animate-slide-up">
+            <TalksSection data={data.talks} />
+          </div>
+        )}
+      </div>
+    </main>
   )
 }

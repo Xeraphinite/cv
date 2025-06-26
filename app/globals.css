@@ -1,3 +1,5 @@
+@import 'tailwindcss-uikit-colors/selector.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,153 +7,372 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 13%;
-
+    --foreground: 0 0% 11%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 13%;
-
+    --card-foreground: 0 0% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 13%;
-
-    --primary: 0 0% 13%;
+    --popover-foreground: 0 0% 11%;
+    --primary: 0 0% 11%;
     --primary-foreground: 0 0% 98%;
-
     --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 13%;
-
+    --secondary-foreground: 0 0% 11%;
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
-
     --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 13%;
-
-    --destructive: 0 0% 45%;
+    --accent-foreground: 0 0% 11%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 89%;
-    --input: 0 0% 89%;
-    --ring: 0 0% 13%;
-
-    --radius: 0.25rem;
-
-    --chart-1: 0 0% 13%;
-    --chart-2: 0 0% 25%;
-    --chart-3: 0 0% 35%;
-    --chart-4: 0 0% 45%;
-    --chart-5: 0 0% 55%;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 0 0% 13%;
-    --sidebar-primary: 0 0% 13%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 0 0% 96%;
-    --sidebar-accent-foreground: 0 0% 13%;
-    --sidebar-border: 0 0% 89%;
-    --sidebar-ring: 0 0% 13%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 11%;
+    --radius: 8px;
+    
+    /* Apple-inspired design tokens */
+    --paper-texture: 0 0% 99%;
+    --paper-shadow: 0 0% 0%;
+    --glass-backdrop: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.2);
   }
 
   .dark {
     --background: 0 0% 4%;
     --foreground: 0 0% 98%;
-
-    --card: 0 0% 4%;
+    --card: 0 0% 6%;
     --card-foreground: 0 0% 98%;
-
     --popover: 0 0% 4%;
     --popover-foreground: 0 0% 98%;
-
     --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 13%;
-
-    --secondary: 0 0% 15%;
+    --primary-foreground: 0 0% 11%;
+    --secondary: 0 0% 8%;
     --secondary-foreground: 0 0% 98%;
-
-    --muted: 0 0% 15%;
+    --muted: 0 0% 8%;
     --muted-foreground: 0 0% 64%;
-
-    --accent: 0 0% 15%;
+    --accent: 0 0% 8%;
     --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 0% 55%;
+    --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
+    --border: 0 0% 12%;
+    --input: 0 0% 12%;
     --ring: 0 0% 83%;
-
-    --chart-1: 0 0% 85%;
-    --chart-2: 0 0% 70%;
-    --chart-3: 0 0% 60%;
-    --chart-4: 0 0% 50%;
-    --chart-5: 0 0% 40%;
-
-    --sidebar-background: 0 0% 4%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 0 0% 98%;
-    --sidebar-primary-foreground: 0 0% 13%;
-    --sidebar-accent: 0 0% 15%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 0 0% 83%;
+    
+    /* Dark mode adjustments */
+    --paper-texture: 0 0% 5%;
+    --paper-shadow: 0 0% 100%;
+    --glass-backdrop: rgba(0, 0, 0, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.1);
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border/40;
   }
+  
   body {
     @apply bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.03), transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.03), transparent 50%),
+      radial-gradient(circle at 40% 80%, rgba(120, 200, 255, 0.03), transparent 50%);
   }
 }
 
+/* Enhanced typography inspired by Apple's SF Pro and printed materials */
 .font-noto-sans-sc {
-  font-family: "Noto Sans SC", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
 }
 
 .font-noto-serif-sc {
-  font-family: "Noto Serif SC", serif;
+  font-family: "New York", "Charter", "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
 }
 
-/* Print-friendly styles */
+/* Magazine-inspired container with better spacing */
+.paper-container {
+  @apply max-w-5xl mx-auto px-6 sm:px-8 lg:px-12;
+  position: relative;
+}
+
+/* Enhanced section styling with magazine-like spacing */
+.paper-section {
+  @apply mb-16 sm:mb-20;
+  position: relative;
+}
+
+.paper-section-title {
+  @apply text-2xl font-bold text-foreground mb-8 pb-4;
+  border-bottom: 2px solid hsl(var(--border));
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  position: relative;
+}
+
+.paper-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: hsl(var(--primary));
+  border-radius: 1px;
+}
+
+/* Apple-inspired glass card with magazine layout */
+.paper-card {
+  @apply bg-card/90 rounded-2xl p-8 mb-8;
+  backdrop-filter: blur(20px);
+  border: 1px solid hsl(var(--border) / 0.2);
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 4px 16px rgba(0, 0, 0, 0.04),
+    0 8px 32px rgba(0, 0, 0, 0.02);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.paper-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, hsl(var(--border) / 0.5), transparent);
+}
+
+.paper-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    0 16px 48px rgba(0, 0, 0, 0.04);
+  border-color: hsl(var(--border) / 0.3);
+}
+
+/* Enhanced typography hierarchy */
+.paper-title {
+  @apply text-4xl font-bold text-foreground leading-tight;
+  letter-spacing: -0.025em;
+  font-weight: 800;
+}
+
+.paper-subtitle {
+  @apply text-2xl font-semibold text-foreground;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.paper-body {
+  @apply text-base text-foreground/85 leading-relaxed;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.paper-meta {
+  @apply text-sm text-muted-foreground/80;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+/* Apple-inspired contact links */
+.paper-contact-link {
+  @apply inline-flex items-center gap-3 text-foreground/85 hover:text-primary transition-all duration-300 ease-out;
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+}
+
+.paper-contact-link:hover {
+  background: hsl(var(--muted) / 0.5);
+  transform: translateY(-1px);
+}
+
+/* Refined badges with Apple aesthetics */
+.paper-badge {
+  @apply inline-flex items-center px-3 py-1.5 bg-muted/60 text-muted-foreground text-sm rounded-full font-medium;
+  backdrop-filter: blur(10px);
+  border: 1px solid hsl(var(--border) / 0.3);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.paper-badge:hover {
+  background: hsl(var(--muted) / 0.8);
+  border-color: hsl(var(--border) / 0.5);
+  transform: translateY(-1px);
+}
+
+/* Enhanced avatar with Apple-like depth */
+.paper-avatar {
+  @apply rounded-2xl overflow-hidden;
+  border: 2px solid hsl(var(--border) / 0.3);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.08),
+    0 4px 16px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.paper-avatar:hover {
+  transform: scale(1.02);
+  border-color: hsl(var(--primary) / 0.3);
+}
+
+/* Apple-inspired buttons with depth */
+.paper-button {
+  @apply inline-flex items-center gap-3 px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold;
+  backdrop-filter: blur(20px);
+  border: 1px solid hsl(var(--primary) / 0.2);
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.paper-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.paper-button:active {
+  transform: translateY(0);
+}
+
+.paper-button-outline {
+  @apply inline-flex items-center gap-3 px-6 py-3 border-2 bg-background/80 text-foreground rounded-xl font-semibold;
+  backdrop-filter: blur(20px);
+  border-color: hsl(var(--border) / 0.4);
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.paper-button-outline:hover {
+  background: hsl(var(--muted) / 0.8);
+  border-color: hsl(var(--border) / 0.6);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.08),
+    0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* Elegant divider */
+.paper-divider {
+  @apply my-12 border-t;
+  border-color: hsl(var(--border) / 0.3);
+  position: relative;
+}
+
+.paper-divider::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.5), transparent);
+}
+
+/* Ruby text for Japanese with better styling */
+.paper-ruby {
+  @apply relative inline-block;
+}
+
+.paper-ruby rt {
+  @apply absolute -top-5 left-1/2 transform -translate-x-1/2 text-xs text-muted-foreground leading-none font-medium;
+  letter-spacing: 0.05em;
+}
+
+/* Enhanced print styles */
 @media print {
   @page {
     size: A4;
-    margin: 0.5in;
+    margin: 0.75in;
   }
-
+  
   * {
+    @apply text-black bg-white;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
-
+  
   body {
-    background: white !important;
-    color: black !important;
+    @apply text-black bg-white;
+    background: none !important;
   }
-
+  
+  .paper-card {
+    @apply bg-white border-gray-300 shadow-none;
+    backdrop-filter: none;
+  }
+  
+  .paper-avatar {
+    @apply border-gray-300;
+  }
+  
+  .paper-badge {
+    @apply bg-gray-100 text-gray-700 border-gray-300;
+  }
+  
+  .print\:hidden {
+    @apply hidden;
+  }
+  
+  .print\:text-black {
+    @apply text-black;
+  }
+  
+  .print\:bg-white {
+    @apply bg-white;
+  }
+  
   .print\:break-after-avoid {
     break-after: avoid;
   }
-
+  
   .print\:break-inside-avoid {
     break-inside: avoid;
   }
+}
 
-  .print\:break-inside-avoid-page {
-    break-inside: avoid-page;
+/* Accessibility enhancements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
+}
 
-  /* Force monochrome for print */
-  .print\:text-black {
-    color: black !important;
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .paper-card {
+    border-width: 2px;
+    border-color: hsl(var(--border));
   }
-
-  .print\:bg-white {
-    background-color: white !important;
-  }
-
-  .print\:border-gray {
-    border-color: #666666 !important;
+  
+  .paper-badge {
+    border-width: 2px;
   }
 }

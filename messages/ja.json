@@ -2,21 +2,28 @@
   "common": {
     "language": "言語",
     "loading": "読み込み中...",
-    "error": "エラー"
+    "error": "エラー",
+    "lastUpdated": "最終更新"
   },
   "navigation": {
     "home": "ホーム",
     "about": "概要",
     "contact": "連絡先"
   },
-  "section": {
+  "sections": {
     "education": "学歴",
     "experience": "プロジェクト経験",
-    "skills": "スキル",
+    "skills": "スキル・プロジェクト",
     "awards": "受賞歴",
-    "publications": "学術成果"
+    "publications": "学術成果",
+    "talks": "講演・発表",
+    "profileHighlights": "プロフィールハイライト",
+    "biography": "経歴",
+    "researchInterests": "研究分野",
+    "selectedProjects": "主要プロジェクト",
+    "technicalSkills": "技術スキル"
   },
-  "label": {
+  "labels": {
     "supervisor": "指導教授",
     "present": "現在",
     "duration": "期間",
@@ -24,12 +31,37 @@
     "position": "職位",
     "company": "会社",
     "date": "日付",
-    "description": "説明"
+    "description": "説明",
+    "in": "専攻",
+    "keyAchievements": "主な成果",
+    "publishedIn": "掲載誌",
+    "doi": "DOI",
+    "abstract": "概要",
+    "featured": "注目",
+    "impactFactor": "インパクトファクター",
+    "status": "ステータス",
+    "type": "種別",
+    "venue": "会議・雑誌",
+    "event": "イベント",
+    "slides": "スライド"
   },
-  "action": {
+  "actions": {
     "viewMore": "詳細を見る",
     "download": "ダウンロード",
     "print": "印刷",
-    "share": "シェア"
+    "share": "シェア",
+    "downloadPDF": "PDF ダウンロード",
+    "viewProject": "プロジェクトを見る",
+    "viewSource": "ソースを見る",
+    "viewEvent": "イベントを見る",
+    "viewSlides": "スライドを見る"
+  },
+  "content": {
+    "contact": "連絡先",
+    "yearsOld": "歳",
+    "publications": "論文数",
+    "awards": "受賞",
+    "projects": "プロジェクト",
+    "gpa": "GPA"
   }
 } 
