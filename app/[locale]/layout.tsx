@@ -12,8 +12,9 @@ import { LocaleDetector } from '@/components/layout/locale-detector'
 
 const inter = Inter({ subsets: ["latin"] })
 
-export function generateMetadata({ params }: { params: { locale: string } }) {
-  const locale = params.locale as Locale
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const localeTyped = locale as Locale
   
   const titles = {
     en: "Keyou Zheng - CV | Graduate Student & Researcher",
@@ -27,8 +28,8 @@ export function generateMetadata({ params }: { params: { locale: string } }) {
     ja: "広東工業大学大学院生。大規模言語モデル、3D再構成、ヒューマンコンピュータインタラクションを専門とし、AI駆動のスマート製造研究に従事。"
   }
   
-  const currentTitle = titles[locale] ?? titles.en
-  const currentDescription = descriptions[locale] ?? descriptions.en
+  const currentTitle = titles[localeTyped] ?? titles.en
+  const currentDescription = descriptions[localeTyped] ?? descriptions.en
   
   return {
     title: currentTitle,
@@ -44,7 +45,7 @@ export function generateMetadata({ params }: { params: { locale: string } }) {
     generator: 'Next.js',
     robots: "index, follow",
     alternates: {
-      canonical: `/${locale}`,
+      canonical: `/${localeTyped}`,
       languages: Object.fromEntries(
         locales.map((loc) => [loc, `/${loc}`])
       ),
@@ -53,8 +54,8 @@ export function generateMetadata({ params }: { params: { locale: string } }) {
       title: currentTitle,
       description: currentDescription,
       type: "profile",
-      locale: locale,
-      alternateLocale: locales.filter((loc) => loc !== locale),
+      locale: localeTyped,
+      alternateLocale: locales.filter((loc) => loc !== localeTyped),
       siteName: "Keyou Zheng - Professional CV",
       images: [
         {
@@ -83,17 +84,18 @@ export default async function LocaleLayout({
   params
 }: {
   children: React.ReactNode
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }) {
-  const { locale } = params
+  const { locale } = await params
+  const localeTyped = locale as Locale
   
-  if (!locales.includes(locale as Locale)) notFound()
+  if (!locales.includes(localeTyped)) notFound()
 
-  const messages = await getMessages({ locale })
-  const direction = getDirection(locale as Locale)
+  const messages = await getMessages({ locale: localeTyped })
+  const direction = getDirection(localeTyped)
 
   return (
-    <html lang={locale} dir={direction}>
+    <html lang={localeTyped} dir={direction}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

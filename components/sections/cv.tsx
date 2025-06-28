@@ -146,21 +146,21 @@ export function CV({ data, locale }: CVProps) {
   return (
     <main className="min-h-screen bg-background print:bg-white animate-fade-in">
       {/* Hero Section */}
-      <div style={{ animationDelay: '100ms' }} className="animate-slide-up">
+      <section id="hero" style={{ animationDelay: '100ms' }} className="animate-slide-up">
         <HeroSection data={heroData} locale={locale} />
-      </div>
+      </section>
 
       {/* Content Sections */}
       <div className="paper-container py-10 space-y-12">
         {/* Bio Section */}
         {data.hero.bio && (
-          <div style={{ animationDelay: '200ms' }} className="animate-slide-up">
+          <section id="bio" style={{ animationDelay: '200ms' }} className="animate-slide-up">
             <BioSection data={{ bio: data.hero.bio, summary: data.hero.bio }} />
-          </div>
+          </section>
         )}
 
         {/* Profile Highlights */}
-        <div style={{ animationDelay: '300ms' }} className="animate-slide-up">
+        <section id="profile" style={{ animationDelay: '300ms' }} className="animate-slide-up">
           <ProfileSection data={{
             education: data.education?.map((edu: any) => ({ // eslint-disable-line @typescript-eslint/no-explicit-any
               institution: edu.institution,
@@ -173,10 +173,10 @@ export function CV({ data, locale }: CVProps) {
             awards: data.awards,
             projects: []
           }} />
-        </div>
+        </section>
 
         {/* Research Interests */}
-        <div style={{ animationDelay: '400ms' }} className="animate-slide-up">
+        <section id="research" style={{ animationDelay: '400ms' }} className="animate-slide-up">
           <ResearchInterestsSection data={{ 
             researchInterests: [
               "Large Language Models",
@@ -186,48 +186,48 @@ export function CV({ data, locale }: CVProps) {
               "AI-Powered Systems"
             ]
           }} />
-        </div>
+        </section>
 
         {/* Education */}
         {data.education && data.education.length > 0 && (
-          <div style={{ animationDelay: '500ms' }} className="animate-slide-up">
+          <section id="education" style={{ animationDelay: '500ms' }} className="animate-slide-up">
             <EducationSection data={data.education} />
-          </div>
+          </section>
         )}
 
         {/* Experience */}
         {data.experience && data.experience.length > 0 && (
-          <div style={{ animationDelay: '600ms' }} className="animate-slide-up">
+          <section id="experience" style={{ animationDelay: '600ms' }} className="animate-slide-up">
             <ExperienceSection data={data.experience} />
-          </div>
+          </section>
         )}
 
         {/* Skills & Projects */}
         {(data.skills || skillsData.skills) && (
-          <div style={{ animationDelay: '700ms' }} className="animate-slide-up">
+          <section id="skills" style={{ animationDelay: '700ms' }} className="animate-slide-up">
             <SkillsSection data={skillsData} />
-          </div>
+          </section>
         )}
 
         {/* Publications */}
         {data.publications && data.publications.length > 0 && (
-          <div style={{ animationDelay: '800ms' }} className="animate-slide-up">
+          <section id="publications" style={{ animationDelay: '800ms' }} className="animate-slide-up">
             <PublicationsSection data={publicationsData} ownerName={data.hero.name} ownerEnName={data.hero.enName} />
-          </div>
+          </section>
         )}
 
         {/* Awards */}
         {data.awards && data.awards.length > 0 && (
-          <div style={{ animationDelay: '900ms' }} className="animate-slide-up">
+          <section id="awards" style={{ animationDelay: '900ms' }} className="animate-slide-up">
             <AwardsSection data={data.awards} />
-          </div>
+          </section>
         )}
 
         {/* Talks */}
         {data.talks && data.talks.length > 0 && (
-          <div style={{ animationDelay: '1000ms' }} className="animate-slide-up">
+          <section id="talks" style={{ animationDelay: '1000ms' }} className="animate-slide-up">
             <TalksSection data={data.talks} />
-          </div>
+          </section>
         )}
       </div>
     </main>
