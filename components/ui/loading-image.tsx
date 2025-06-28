@@ -33,28 +33,24 @@ export function LoadingImage({
   const [isLoading, setLoading] = useState(true)
 
   return (
-    <div className="relative overflow-hidden">
-      <Image
-        src={src}
-        alt={alt}
-        fill={fill}
-        width={width}
-        height={height}
-        priority={priority}
-        sizes={sizes}
-        quality={quality}
-        placeholder={blurDataURL ? "blur" : undefined}
-        blurDataURL={blurDataURL}
-        className={cn(
-          'duration-700 ease-in-out',
-          isLoading
-            ? 'scale-110 blur-2xl grayscale'
-            : 'scale-100 blur-0 grayscale-0',
-          className
-        )}
-        onLoad={() => setLoading(false)}
-        {...props}
-      />
-    </div>
+    <Image
+      src={src}
+      alt={alt}
+      fill={fill}
+      width={width}
+      height={height}
+      priority={priority}
+      sizes={sizes}
+      quality={quality}
+      placeholder={blurDataURL ? "blur" : undefined}
+      blurDataURL={blurDataURL}
+      className={cn(
+        'transition-opacity duration-500 ease-in-out',
+        isLoading ? 'opacity-0' : 'opacity-100',
+        className
+      )}
+      onLoad={() => setLoading(false)}
+      {...props}
+    />
   )
 } 

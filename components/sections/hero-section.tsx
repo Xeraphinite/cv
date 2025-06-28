@@ -1,10 +1,10 @@
 'use client'
 
+import Image from "next/image"
 import { Icon } from '@iconify/react'
 import { Download } from "lucide-react"
 import { useTranslations } from 'next-intl'
 import { getResponsiveImageProps } from '@/lib/image-utils'
-import { LoadingImage } from '@/components/ui/loading-image'
 
 interface HeroSectionProps {
   data: {
@@ -138,11 +138,11 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
           {/* Avatar with enhanced styling */}
           <div className="shrink-0 lg:order-2">
             <div className="relative w-32 h-32 paper-avatar print:w-24 print:h-24 print:border-gray-300">
-              <LoadingImage
+              <Image
                 src={data.avatar || "/placeholder-user.jpg"}
                 alt={`${data.name} - ${data.enName}`}
                 fill
-                className="object-cover"
+                className="object-cover transition-opacity duration-300"
                 priority
                 {...getResponsiveImageProps(
                   data.avatar || "/placeholder-user.jpg",
