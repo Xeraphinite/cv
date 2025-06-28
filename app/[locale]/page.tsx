@@ -1,7 +1,6 @@
 import { CV } from "@/components/sections/cv"
 import { getCVData } from "@/lib/load-cv-data"
 import type { Locale } from "@/lib/types/cv"
-import Link from "next/link"
 
 export default async function Home({ 
   params
@@ -14,11 +13,11 @@ export default async function Home({
   return (
     <>
       {/* Preload critical images for better LCP */}
-      <Link
+      <link
         rel="preload"
         as="image"
         href={cvData.hero.avatar}
-        priority
+        fetchPriority="high"
       />
       
       <main className="min-h-screen bg-background print:bg-white">

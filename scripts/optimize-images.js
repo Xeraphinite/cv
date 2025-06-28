@@ -53,10 +53,9 @@ async function optimizeImages() {
       console.log(`✅ Generated optimized avatar at ${width}x${width} with blur placeholder`);
     }
 
-    // Save blur data to a JSON file for easy import
-    const blurDataPath = path.join(publicDir, 'blur-data.json');
-    fs.writeFileSync(blurDataPath, JSON.stringify(blurData, null, 2));
-    console.log('✅ Generated blur data file: public/blur-data.json');
+    // Print blur data for manual inclusion in lib/image-utils.ts
+    console.log('\n🎨 Generated blur data (copy to lib/image-utils.ts):');
+    console.log('const blurData: Record<string, string> = ' + JSON.stringify(blurData, null, 2) + ';');
 
     // Get file sizes for comparison
     const originalSize = fs.statSync(avatarPath).size;
