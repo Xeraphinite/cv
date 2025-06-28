@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { ChevronDown, List } from 'lucide-react'
 import {
   DropdownMenu,
@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
+import clsx from 'clsx'
 
 export interface TOCSection {
   id: string
@@ -22,54 +23,111 @@ interface TableOfContentsProps {
 
 export function TableOfContents({ sections }: TableOfContentsProps) {
   const [currentSection, setCurrentSection] = useState<string>(sections[0]?.id || '')
+  const [isScrolling, setIsScrolling] = useState(false)
   
+  // Debounced section update to prevent rapid changes
+  const debouncedSetCurrentSection = useCallback((sectionId: string) => {
+    if (!isScrolling) {
+      setCurrentSection(sectionId)
+    }
+  }, [isScrolling])
+
   useEffect(() => {
+    const observerOptions = {
+      threshold: [0.1, 0.5, 0.9],
+      rootMargin: '-100px 0px -60% 0px'
+    }
+
+    const sectionElements = new Map<string, HTMLElement>()
     const observers = new Map<string, IntersectionObserver>()
     
+    // Find and store all section elements
     sections.forEach((section) => {
       const element = document.getElementById(section.id)
       if (element) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                setCurrentSection(section.id)
-              }
-            })
-          },
-          {
-            threshold: 0.3,
-            rootMargin: '-20% 0px -70% 0px'
-          }
-        )
-        
-        observer.observe(element)
-        observers.set(section.id, observer)
+        sectionElements.set(section.id, element)
       }
     })
+
+    // Create intersection observers for each section
+    sectionElements.forEach((element, sectionId) => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+              debouncedSetCurrentSection(sectionId)
+            }
+          })
+        },
+        observerOptions
+      )
+      
+      observer.observe(element)
+      observers.set(sectionId, observer)
+    })
+
+    // Fallback scroll listener for edge cases
+    let scrollTimeout: NodeJS.Timeout
+    const handleScroll = () => {
+      setIsScrolling(true)
+      clearTimeout(scrollTimeout)
+      scrollTimeout = setTimeout(() => {
+        setIsScrolling(false)
+        
+        // Find the section closest to the top of viewport
+        let closestSection = sections[0]?.id
+        let closestDistance = Number.POSITIVE_INFINITY
+        
+        sectionElements.forEach((element, sectionId) => {
+          const rect = element.getBoundingClientRect()
+          const distance = Math.abs(rect.top - 100) // Account for header height
+          
+          if (distance < closestDistance && rect.top < window.innerHeight) {
+            closestDistance = distance
+            closestSection = sectionId
+          }
+        })
+        
+        if (closestSection) {
+          setCurrentSection(closestSection)
+        }
+      }, 100)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
     
     return () => {
       observers.forEach((observer) => observer.disconnect())
+      window.removeEventListener('scroll', handleScroll)
+      clearTimeout(scrollTimeout)
     }
-  }, [sections])
+  }, [sections, debouncedSetCurrentSection])
   
   const handleSectionClick = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
-      const headerHeight = 80 // Approximate header height
+      setIsScrolling(true)
+      setCurrentSection(sectionId)
+      
+      const headerHeight = 100 // Account for sticky header
       const elementPosition = element.offsetTop - headerHeight
       
       window.scrollTo({
         top: elementPosition,
         behavior: 'smooth'
       })
+      
+      // Reset scrolling state after animation
+      setTimeout(() => setIsScrolling(false), 1000)
     }
   }
   
   const currentSectionData = sections.find(section => section.id === currentSection)
   
-  if (sections.length === 0) return null
-  
+  if (sections.length === 0) {
+    return null
+  }
+
   return (
     <div className="flex items-center">
       <DropdownMenu>
@@ -77,29 +135,30 @@ export function TableOfContents({ sections }: TableOfContentsProps) {
           <Button 
             variant="ghost" 
             size="sm"
-            className="hidden md:flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            className="hidden items-center gap-2 font-medium text-muted-foreground text-sm transition-all duration-200 hover:text-foreground hover:bg-muted/50 md:flex group"
           >
-            <List className="h-4 w-4" />
-            <span className="max-w-48 truncate">
+            <List className="h-4 w-4 transition-transform duration-200 group-hover:scale-110" />
+            <span className="max-w-48 truncate transition-all duration-200">
               {currentSectionData?.title || sections[0]?.title}
             </span>
-            <ChevronDown className="h-3 w-3" />
+            <ChevronDown className="h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent 
           align="center" 
-          className="w-64 max-h-80 overflow-y-auto"
+          className="max-h-80 w-64 overflow-y-auto animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 duration-200"
           sideOffset={8}
         >
           {sections.map((section) => (
             <DropdownMenuItem
               key={section.id}
               onClick={() => handleSectionClick(section.id)}
-              className={`cursor-pointer transition-colors ${
-                currentSection === section.id
-                  ? 'bg-primary/10 text-primary font-medium'
-                  : 'hover:bg-muted/50'
-              }`}
+              className={clsx(
+                "cursor-pointer transition-all duration-200 hover:translate-x-1",
+                currentSection === section.id 
+                  ? "bg-primary/10 font-medium text-primary border-l-2 border-primary" 
+                  : "hover:bg-muted/50"
+              )}
             >
               {section.title}
             </DropdownMenuItem>
@@ -113,7 +172,7 @@ export function TableOfContents({ sections }: TableOfContentsProps) {
           <Button 
             variant="ghost" 
             size="sm"
-            className="md:hidden"
+            className="md:hidden transition-all duration-200 hover:bg-muted/50 hover:scale-105"
             aria-label="Table of contents"
           >
             <List className="h-4 w-4" />
@@ -121,18 +180,19 @@ export function TableOfContents({ sections }: TableOfContentsProps) {
         </DropdownMenuTrigger>
         <DropdownMenuContent 
           align="center" 
-          className="w-64 max-h-80 overflow-y-auto"
+          className="max-h-80 w-64 overflow-y-auto animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 duration-200"
           sideOffset={8}
         >
           {sections.map((section) => (
             <DropdownMenuItem
               key={section.id}
               onClick={() => handleSectionClick(section.id)}
-              className={`cursor-pointer transition-colors ${
-                currentSection === section.id
-                  ? 'bg-primary/10 text-primary font-medium'
-                  : 'hover:bg-muted/50'
-              }`}
+              className={clsx(
+                "cursor-pointer transition-all duration-200 hover:translate-x-1",
+                currentSection === section.id 
+                  ? "bg-primary/10 font-medium text-primary border-l-2 border-primary" 
+                  : "hover:bg-muted/50"
+              )}
             >
               {section.title}
             </DropdownMenuItem>

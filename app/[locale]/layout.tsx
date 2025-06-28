@@ -1,11 +1,13 @@
+import "../globals.css"
+
 import { Inter } from "next/font/google"
+import Head from "next/head"
+import Link from "next/link"
 import { notFound } from 'next/navigation'
 import { getMessages } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
-
-import "../globals.css"
-import { type Locale, localeLabels, locales } from '@/i18n'
 import { getDirection } from '@/lib/i18n-utils'
+import { type Locale, locales } from '@/i18n'
 import { CVHeader } from '@/components/layout/cv-header'
 import { ThemeProvider } from "@/components/theme-provider"
 import { LocaleDetector } from '@/components/layout/locale-detector'
@@ -17,15 +19,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const localeTyped = locale as Locale
   
   const titles = {
-    en: "Keyou Zheng - CV | Graduate Student & Researcher",
-    zh: "郑恪悠 - 简历 | 研究生 & 研究员", 
-    ja: "郑恪悠 - 履歴書 | 大学院生 & 研究者"
+    en: "Keyou Zheng - CV",
+    zh: "郑恪悠 - 简历", 
+    ja: "郑恪悠 - 履歴書"
   }
   
   const descriptions = {
-    en: "Graduate student at Guangdong University of Technology specializing in Large Language Models, 3D Reconstruction, and Human-Computer Interaction. Researcher in AI-powered Smart Manufacturing.",
-    zh: "广东工业大学硕士研究生，专注于大语言模型、3D重建和人机交互。AI驱动智能制造研究员。",
-    ja: "広東工業大学大学院生。大規模言語モデル、3D再構成、ヒューマンコンピュータインタラクションを専門とし、AI駆動のスマート製造研究に従事。"
+    en: "Keyou Zheng - CV",
+    zh: "郑恪悠 - 简历",
+    ja: "郑恪悠 - 履歴書"
   }
   
   const currentTitle = titles[localeTyped] ?? titles.en
@@ -35,9 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: currentTitle,
     description: currentDescription,
     keywords: [
-      "Keyou Zheng", "郑恪悠", "CV", "Resume", "研究生", "Graduate Student", 
-      "Large Language Models", "大语言模型", "3D Reconstruction", "Smart Manufacturing",
-      "Guangdong University of Technology", "广东工业大学", "AI Research"
+      "Keyou Zheng", "郑恪悠", "CV", "Resume", "研究生", "Graduate Student"
     ],
     authors: [{ name: "Keyou Zheng" }],
     creator: "Keyou Zheng",
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: "Keyou Zheng - Professional CV",
       images: [
         {
-          url: "/avatar.png",
+          url: "/icon.png",
           width: 400,
           height: 400,
           alt: "Keyou Zheng",
@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       card: "summary",
       title: currentTitle,
       description: currentDescription,
-      images: ["/avatar.png"],
+      images: ["/icon.png"],
     },
   }
 }
@@ -89,26 +89,28 @@ export default async function LocaleLayout({
   const { locale } = await params
   const localeTyped = locale as Locale
   
-  if (!locales.includes(localeTyped)) notFound()
+  if (!locales.includes(localeTyped)) {
+    notFound()
+  }
 
   const messages = await getMessages({ locale: localeTyped })
   const direction = getDirection(localeTyped)
 
   return (
     <html lang={localeTyped} dir={direction}>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
+      <Head>
+        <Link rel="preconnect" href="https://fonts.googleapis.com" />
+        <Link rel="preconnect" href="https://fonts.gstatic.com" />
+        <Link
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&display=swap"
           rel="stylesheet"
         />
-      </head>
+      </Head>
       <body className={`${inter.className} font-noto-sans-sc`}>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider 
             attribute="class" 
-            defaultTheme="light" 
+            defaultTheme="system" 
             enableSystem
           >
             <CVHeader />
