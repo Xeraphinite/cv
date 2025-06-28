@@ -1,9 +1,10 @@
 'use client'
 
-import Image from "next/image"
 import { Icon } from '@iconify/react'
 import { Download } from "lucide-react"
 import { useTranslations } from 'next-intl'
+import { getResponsiveImageProps } from '@/lib/image-utils'
+import { LoadingImage } from '@/components/ui/loading-image'
 
 interface HeroSectionProps {
   data: {
@@ -54,7 +55,7 @@ const socialPlatforms = [
     key: 'wechat',
     iconLine: 'mingcute:wechat-line',
     iconFill: 'mingcute:wechat-fill',
-    getHref: (value: string) => '#',
+    getHref: (_value: string) => '#',
     getLabel: (value: string) => `WeChat: ${value}`,
     external: false
   },
@@ -71,7 +72,7 @@ const socialPlatforms = [
     iconLine: 'mingcute:user-search-line',
     iconFill: 'mingcute:user-search-fill',
     getHref: (value: string) => value,
-    getLabel: (value: string) => 'Google Scholar',
+    getLabel: (_value: string) => 'Google Scholar',
     external: true
   },
   {
@@ -79,7 +80,7 @@ const socialPlatforms = [
     iconLine: 'mingcute:idcard-line',
     iconFill: 'mingcute:idcard-fill',
     getHref: (value: string) => value,
-    getLabel: (value: string) => 'ORCID',
+    getLabel: (_value: string) => 'ORCID',
     external: true
   },
   {
@@ -87,7 +88,7 @@ const socialPlatforms = [
     iconLine: 'mingcute:bluesky-social-line',
     iconFill: 'mingcute:bluesky-social-fill',
     getHref: (value: string) => value,
-    getLabel: (value: string) => 'Bluesky',
+    getLabel: (_value: string) => 'Bluesky',
     external: true
   }
 ] as const
@@ -137,14 +138,16 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
           {/* Avatar with enhanced styling */}
           <div className="shrink-0 lg:order-2">
             <div className="relative w-32 h-32 paper-avatar print:w-24 print:h-24 print:border-gray-300">
-              <Image
+              <LoadingImage
                 src={data.avatar || "/placeholder-user.jpg"}
                 alt={`${data.name} - ${data.enName}`}
                 fill
                 className="object-cover"
                 priority
-                sizes="128px"
-                quality={95}
+                {...getResponsiveImageProps(
+                  data.avatar || "/placeholder-user.jpg",
+                  "(max-width: 768px) 128px, (max-width: 1024px) 128px, 128px"
+                )}
               />
             </div>
           </div>
