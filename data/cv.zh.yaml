@@ -4,19 +4,16 @@ hero:
   avatar: "/avatar.png"
   location: "广东广州"
   age: "2001-09"
-  bio: "专注于人工智能、机器学习和人机交互领域的研究者和开发者。致力于通过创新研究和实际应用推进技术进步，在学术理论与现实影响之间架起桥梁。"
+  bio: "PhD Applicant | Design Engineer | AI Researcher"
+  description: "你好！我正在研究大语言模型！"
   social:
-    github: "https://github.com/Xeraphinite"
     email: "keyouzheng0915@gmail.com"
-    phone: "+86 138-0000-0000"
-    wechat: "keyou_zheng"
-    linkedin: "https://linkedin.com/in/keyou-zheng"
+    github: "https://github.com/Xeraphinite"
+    wechat: "ShandyKubota"
     website: "https://keyzheng.pages.dev"
-    orcid: "https://orcid.org/0000-0000-0000-0000"
     googleScholar: "https://scholar.google.com/citations?user=example"
-    researchGate: "https://www.researchgate.net/profile/your-profile"
-    # twitter: "https://twitter.com/keyou_zheng"
-
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+    bluesky: "https://bsky.app/profile/keyou.bsky.social"
 
 education:
   - institution: "广东工业大学"
@@ -44,9 +41,9 @@ publications:
   - title: "AIGC-empowered Smart Manufacturing: Prospects and Challenges" 
     authors: ["Jiewu Leng", "Keyou Zheng", "Rongjie Li et al."]
     type: "期刊论文"
-    status: "审稿中, R2"
+    status: "已接受"
     indexing: ["SCI TOP", "SCI I"]
-    impactFactor: 9.1
+    impactFactor: 11.4
     publishedIn: "Robotics and Computer-Integrated Manufacturing (RCIM)"
     abstract: "本文提出了一个将GenAI为中心的方法与产品生命周期管理（PLM）相结合的综合框架，对AIGC领域进行了深入分析，并系统地探索了其在智能制造中的应用。"
 

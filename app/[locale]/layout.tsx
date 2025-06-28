@@ -34,6 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const currentDescription = descriptions[localeTyped] ?? descriptions.en
   
   return {
+    metadataBase: new URL('https://keyzh.pages.dev'),
     title: currentTitle,
     description: currentDescription,
     keywords: [

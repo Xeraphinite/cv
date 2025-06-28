@@ -1,12 +1,14 @@
 export interface SocialLinks {
-  github?: string;
   email?: string;
-  phone?: string;
+  github?: string;
   wechat?: string;
-  linkedin?: string;
   website?: string;
-  orcid?: string;
   googleScholar?: string;
+  orcid?: string;
+  bluesky?: string;
+  // Deprecated fields - keeping for backward compatibility but not using in UI
+  phone?: string;
+  linkedin?: string;
   researchGate?: string;
   twitter?: string;
 }
@@ -18,6 +20,7 @@ export interface Hero {
   location: string;
   age: string;
   bio?: string;
+  description?: string;
   social: SocialLinks;
 }
 

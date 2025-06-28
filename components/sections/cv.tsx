@@ -29,19 +29,22 @@ interface Hero {
   name: string
   enName: string
   bio?: string
+  description?: string
   avatar: string
   location: string
   age: number
   social: {
-    github?: string
     email?: string
-    linkedin?: string
-    website?: string
-    phone?: string
+    github?: string
     wechat?: string
-    twitter?: string
-    orcid?: string
+    website?: string
     googleScholar?: string
+    orcid?: string
+    bluesky?: string
+    // Legacy fields for backward compatibility
+    phone?: string
+    linkedin?: string
+    twitter?: string
     researchGate?: string
   }
 }
@@ -93,15 +96,7 @@ interface Talk {
   type: string
 }
 
-interface CVData {
-  hero: Hero
-  education: Education[]
-  experience: Experience[]
-  skills: Skills
-  publications: Publication[]
-  awards: Award[]
-  talks?: Talk[]
-}
+
 
 interface CVProps {
   data: any // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -115,11 +110,7 @@ export function CV({ data, locale }: CVProps) {
   const heroData = {
     ...data.hero,
     social: {
-      ...data.hero.social,
-      // Add research-related contacts if they exist
-      orcid: data.hero.social.orcid || "https://orcid.org/0000-0000-0000-0000",
-      googleScholar: data.hero.social.googleScholar || "https://scholar.google.com/citations?user=example",
-      researchGate: data.hero.social.researchGate || "https://www.researchgate.net/profile/example"
+      ...data.hero.social
     }
   }
 
@@ -144,23 +135,16 @@ export function CV({ data, locale }: CVProps) {
   })) || []
 
   return (
-    <main className="min-h-screen bg-background print:bg-white animate-fade-in">
+    <main className="min-h-screen bg-background print:bg-white">
       {/* Hero Section */}
-      <section id="hero" style={{ animationDelay: '100ms' }} className="animate-slide-up">
+      <section id="hero">
         <HeroSection data={heroData} locale={locale} />
       </section>
 
       {/* Content Sections */}
       <div className="paper-container py-10 space-y-12">
-        {/* Bio Section */}
-        {data.hero.bio && (
-          <section id="bio" style={{ animationDelay: '200ms' }} className="animate-slide-up">
-            <BioSection data={{ bio: data.hero.bio, summary: data.hero.bio }} />
-          </section>
-        )}
-
         {/* Profile Highlights */}
-        <section id="profile" style={{ animationDelay: '300ms' }} className="animate-slide-up">
+        <section id="profile">
           <ProfileSection data={{
             education: data.education?.map((edu: any) => ({ // eslint-disable-line @typescript-eslint/no-explicit-any
               institution: edu.institution,
@@ -176,7 +160,7 @@ export function CV({ data, locale }: CVProps) {
         </section>
 
         {/* Research Interests */}
-        <section id="research" style={{ animationDelay: '400ms' }} className="animate-slide-up">
+        <section id="research">
           <ResearchInterestsSection data={{ 
             researchInterests: [
               "Large Language Models",
@@ -190,42 +174,42 @@ export function CV({ data, locale }: CVProps) {
 
         {/* Education */}
         {data.education && data.education.length > 0 && (
-          <section id="education" style={{ animationDelay: '500ms' }} className="animate-slide-up">
+          <section id="education">
             <EducationSection data={data.education} />
           </section>
         )}
 
         {/* Experience */}
         {data.experience && data.experience.length > 0 && (
-          <section id="experience" style={{ animationDelay: '600ms' }} className="animate-slide-up">
+          <section id="experience">
             <ExperienceSection data={data.experience} />
           </section>
         )}
 
         {/* Skills & Projects */}
         {(data.skills || skillsData.skills) && (
-          <section id="skills" style={{ animationDelay: '700ms' }} className="animate-slide-up">
+          <section id="skills">
             <SkillsSection data={skillsData} />
           </section>
         )}
 
         {/* Publications */}
         {data.publications && data.publications.length > 0 && (
-          <section id="publications" style={{ animationDelay: '800ms' }} className="animate-slide-up">
+          <section id="publications">
             <PublicationsSection data={publicationsData} ownerName={data.hero.name} ownerEnName={data.hero.enName} />
           </section>
         )}
 
         {/* Awards */}
         {data.awards && data.awards.length > 0 && (
-          <section id="awards" style={{ animationDelay: '900ms' }} className="animate-slide-up">
+          <section id="awards">
             <AwardsSection data={data.awards} />
           </section>
         )}
 
         {/* Talks */}
         {data.talks && data.talks.length > 0 && (
-          <section id="talks" style={{ animationDelay: '1000ms' }} className="animate-slide-up">
+          <section id="talks">
             <TalksSection data={data.talks} />
           </section>
         )}

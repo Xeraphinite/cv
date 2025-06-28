@@ -135,18 +135,18 @@ export function TableOfContents({ sections }: TableOfContentsProps) {
           <Button 
             variant="ghost" 
             size="sm"
-            className="hidden items-center gap-2 font-medium text-muted-foreground text-sm transition-all duration-200 hover:text-foreground hover:bg-muted/50 md:flex group"
+            className="hidden items-center gap-2 font-medium text-muted-foreground text-sm md:flex"
           >
-            <List className="h-4 w-4 transition-transform duration-200 group-hover:scale-110" />
-            <span className="max-w-48 truncate transition-all duration-200">
+            <List className="h-4 w-4" />
+            <span className="max-w-48 truncate">
               {currentSectionData?.title || sections[0]?.title}
             </span>
-            <ChevronDown className="h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />
+            <ChevronDown className="h-3 w-3" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent 
           align="center" 
-          className="max-h-80 w-64 overflow-y-auto animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 duration-200"
+          className="max-h-80 w-64 overflow-y-auto"
           sideOffset={8}
         >
           {sections.map((section) => (
@@ -154,9 +154,9 @@ export function TableOfContents({ sections }: TableOfContentsProps) {
               key={section.id}
               onClick={() => handleSectionClick(section.id)}
               className={clsx(
-                "cursor-pointer transition-all duration-200 hover:translate-x-1",
+                "cursor-pointer",
                 currentSection === section.id 
-                  ? "bg-primary/10 font-medium text-primary border-l-2 border-primary" 
+                  ? "bg-primary/10 font-medium text-primary" 
                   : "hover:bg-muted/50"
               )}
             >
@@ -172,7 +172,7 @@ export function TableOfContents({ sections }: TableOfContentsProps) {
           <Button 
             variant="ghost" 
             size="sm"
-            className="md:hidden transition-all duration-200 hover:bg-muted/50 hover:scale-105"
+            className="md:hidden"
             aria-label="Table of contents"
           >
             <List className="h-4 w-4" />
@@ -180,7 +180,7 @@ export function TableOfContents({ sections }: TableOfContentsProps) {
         </DropdownMenuTrigger>
         <DropdownMenuContent 
           align="center" 
-          className="max-h-80 w-64 overflow-y-auto animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 duration-200"
+          className="max-h-80 w-64 overflow-y-auto"
           sideOffset={8}
         >
           {sections.map((section) => (
@@ -188,9 +188,9 @@ export function TableOfContents({ sections }: TableOfContentsProps) {
               key={section.id}
               onClick={() => handleSectionClick(section.id)}
               className={clsx(
-                "cursor-pointer transition-all duration-200 hover:translate-x-1",
+                "cursor-pointer",
                 currentSection === section.id 
-                  ? "bg-primary/10 font-medium text-primary border-l-2 border-primary" 
+                  ? "bg-primary/10 font-medium text-primary" 
                   : "hover:bg-muted/50"
               )}
             >

@@ -44,7 +44,12 @@ export function CVHeader() {
   const currentLocale = getLocaleFromPathname(pathname)
   const [isScrolled, setIsScrolled] = useState(false)
   
-  const lastUpdated = new Date().toLocaleDateString(currentLocale || 'en', {
+  const lastUpdated = new Date()
+  const shortDate = lastUpdated.toLocaleDateString(currentLocale || 'en', {
+    year: '2-digit',
+    month: 'short'
+  })
+  const fullDate = lastUpdated.toLocaleDateString(currentLocale || 'en', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
@@ -66,18 +71,23 @@ export function CVHeader() {
 
   return (
     <header className={clsx(
-      "sticky top-0 z-50 border-border/20 border-b backdrop-blur-lg transition-all duration-300 print:hidden",
+      "sticky top-0 z-50 border-b backdrop-blur-lg transition-all duration-200 print:hidden",
       isScrolled 
-        ? "bg-background/95 shadow-lg shadow-black/5 border-border/30" 
-        : "bg-background/80 hover:bg-background/90"
+        ? "border-border/30 bg-background/95 shadow-sm" 
+        : "border-border/20 bg-background/80"
     )}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between py-4">
+        <div className="flex items-center justify-between py-3">
           {/* Left: Last Updated */}
-          <div className="flex items-center gap-3 text-sm transition-all duration-200 hover:scale-105">
-            <Calendar className="h-4 w-4 text-primary/70 transition-colors duration-200" />
-            <span className="font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground">
-              {t('common.lastUpdated')}: {lastUpdated}
+          <div className="flex items-center gap-2 text-sm">
+            <Calendar className="h-4 w-4 text-primary/70" />
+            <span className="font-medium text-muted-foreground">
+              <span className="hidden sm:inline">
+                {t('common.lastUpdated')}: {fullDate}
+              </span>
+              <span className="sm:hidden">
+                {shortDate}
+              </span>
             </span>
           </div>
           
@@ -94,18 +104,18 @@ export function CVHeader() {
                 <Button 
                   variant="outline" 
                   size="sm"
-                  className="h-auto px-3 py-2 transition-all duration-200 hover:scale-105 hover:shadow-md group"
+                  className="h-auto px-3 py-2 transition-colors"
                   aria-label={t('common.language')}
                 >
-                  <Languages className="h-4 w-4 transition-transform duration-200 group-hover:rotate-12" />
-                  <span className="ml-2 hidden font-medium sm:inline-block transition-all duration-200">
+                  <Languages className="h-4 w-4" />
+                  <span className="ml-2 hidden font-medium sm:inline-block">
                     {localeLabels[currentLocale || 'en']}
                   </span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent 
                 align="end" 
-                className="w-48 animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 duration-200"
+                className="w-48"
                 sideOffset={8}
               >
                 {locales.map((locale) => {
@@ -117,9 +127,9 @@ export function CVHeader() {
                       <Link
                         href={href}
                         className={clsx(
-                          "flex w-full cursor-pointer transition-all duration-200 hover:translate-x-1", 
+                          "flex w-full cursor-pointer", 
                           isActive 
-                            ? "bg-primary/10 font-medium text-primary border-l-2 border-primary" 
+                            ? "bg-primary/10 font-medium text-primary" 
                             : "hover:bg-muted/50"
                         )}
                       >
@@ -137,10 +147,10 @@ export function CVHeader() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="relative h-auto overflow-hidden px-3 py-2 transition-all duration-200 hover:scale-105 hover:shadow-md group"
+                  className="h-auto px-3 py-2 transition-colors"
                   aria-label="Toggle theme"
                 >
-                  <currentThemeOption.icon className="h-4 w-4 transition-transform duration-200 group-hover:rotate-12" />
+                  <currentThemeOption.icon className="h-4 w-4" />
                   <span className="ml-2 hidden font-medium sm:inline-block">
                     {currentThemeOption.label}
                   </span>
@@ -148,7 +158,7 @@ export function CVHeader() {
               </DropdownMenuTrigger>
               <DropdownMenuContent 
                 align="end" 
-                className="w-36 animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 duration-200"
+                className="w-36"
                 sideOffset={8}
               >
                 {themeOptions.map((option) => {
@@ -159,9 +169,9 @@ export function CVHeader() {
                       key={option.value}
                       onClick={() => setTheme(option.value)}
                       className={clsx(
-                        "flex items-center gap-2 cursor-pointer transition-all duration-200 hover:translate-x-1",
+                        "flex cursor-pointer items-center gap-2",
                         isActive 
-                          ? "bg-primary/10 font-medium text-primary border-l-2 border-primary" 
+                          ? "bg-primary/10 font-medium text-primary" 
                           : "hover:bg-muted/50"
                       )}
                     >

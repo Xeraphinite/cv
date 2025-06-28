@@ -20,7 +20,9 @@ interface ExperienceSectionProps {
 export function ExperienceSection({ data }: ExperienceSectionProps) {
   const t = useTranslations()
   
-  if (!data || data.length === 0) return null
+  if (!data || data.length === 0) {
+    return null
+  }
 
   return (
     <section className="paper-section print:break-inside-avoid">

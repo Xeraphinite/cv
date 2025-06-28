@@ -1,7 +1,8 @@
 'use client'
 
 import Image from "next/image"
-import { MapPin, Calendar, Mail, Globe, Github, Linkedin, Phone, MessageCircle, Download, User, BookOpen } from "lucide-react"
+import { Icon } from '@iconify/react'
+import { Download } from "lucide-react"
 import { useTranslations } from 'next-intl'
 
 interface HeroSectionProps {
@@ -12,21 +13,84 @@ interface HeroSectionProps {
     location: string
     age: number
     bio?: string
+    description?: string
     social: {
-      github?: string
       email?: string
-      linkedin?: string
-      website?: string
-      phone?: string
+      github?: string
       wechat?: string
-      twitter?: string
-      orcid?: string
+      website?: string
       googleScholar?: string
+      orcid?: string
+      bluesky?: string
+      // Legacy fields for backward compatibility
+      phone?: string
+      linkedin?: string
+      twitter?: string
       researchGate?: string
     }
   }
   locale?: string
 }
+
+// Define social platform configurations with mingcute icons
+const socialPlatforms = [
+  {
+    key: 'email',
+    iconLine: 'mingcute:mail-line',
+    iconFill: 'mingcute:mail-fill',
+    getHref: (value: string) => `mailto:${value}`,
+    getLabel: (value: string) => value,
+    external: false
+  },
+  {
+    key: 'github',
+    iconLine: 'mingcute:github-line',
+    iconFill: 'mingcute:github-fill',
+    getHref: (value: string) => value,
+    getLabel: (value: string) => `GitHub: ${value.split("/").pop()}`,
+    external: true
+  },
+  {
+    key: 'wechat',
+    iconLine: 'mingcute:wechat-line',
+    iconFill: 'mingcute:wechat-fill',
+    getHref: (value: string) => '#',
+    getLabel: (value: string) => `WeChat: ${value}`,
+    external: false
+  },
+  {
+    key: 'website',
+    iconLine: 'mingcute:world-line',
+    iconFill: 'mingcute:world-fill',
+    getHref: (value: string) => value,
+    getLabel: (value: string) => value.replace(/^https?:\/\/(www\.)?/, ""),
+    external: true
+  },
+  {
+    key: 'googleScholar',
+    iconLine: 'mingcute:user-search-line',
+    iconFill: 'mingcute:user-search-fill',
+    getHref: (value: string) => value,
+    getLabel: (value: string) => 'Google Scholar',
+    external: true
+  },
+  {
+    key: 'orcid',
+    iconLine: 'mingcute:idcard-line',
+    iconFill: 'mingcute:idcard-fill',
+    getHref: (value: string) => value,
+    getLabel: (value: string) => 'ORCID',
+    external: true
+  },
+  {
+    key: 'bluesky',
+    iconLine: 'mingcute:bluesky-social-line',
+    iconFill: 'mingcute:bluesky-social-fill',
+    getHref: (value: string) => value,
+    getLabel: (value: string) => 'Bluesky',
+    external: true
+  }
+] as const
 
 export function HeroSection({ data, locale }: HeroSectionProps) {
   const t = useTranslations()
@@ -96,19 +160,33 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
                   {data.enName}
                 </h2>
               )}
+              {/* Description */}
+              {data.description && (
+                <div className="mt-4">
+                  <p className="text-lg font-semibold text-primary/90 print:text-gray-800 tracking-wide">
+                    {data.description}
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Basic details with improved spacing */}
             <div className="flex flex-wrap gap-6 paper-meta print:text-gray-600 mb-6">
               {data.location && (
                 <div className="flex items-center gap-3">
-                  <MapPin className="h-5 w-5 text-primary/70" />
+                  <Icon 
+                    icon="mingcute:location-line" 
+                    className="h-5 w-5 text-primary/70" 
+                  />
                   <span className="font-medium">{data.location}</span>
                 </div>
               )}
               {data.age && (
                 <div className="flex items-center gap-3">
-                  <Calendar className="h-5 w-5 text-primary/70" />
+                  <Icon 
+                    icon="mingcute:calendar-line" 
+                    className="h-5 w-5 text-primary/70" 
+                  />
                   <span className="font-medium">{formatAge(data.age)}</span>
                 </div>
               )}
@@ -142,110 +220,52 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
           <h3 className="paper-subtitle mb-6 print:text-black">{t('content.contact')}</h3>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 text-sm">
-            {/* Essential contacts */}
-            {data.social.email && (
-              <a
-                href={`mailto:${data.social.email}`}
-                className="paper-contact-link print:hover:text-primary"
-              >
-                <Mail className="h-5 w-5 text-primary/70" />
-                <span className="truncate font-medium">{data.social.email}</span>
-              </a>
-            )}
+            {socialPlatforms.map(({ key, iconLine, iconFill, getHref, getLabel, external }) => {
+              const value = data.social[key as keyof typeof data.social]
+              if (!value) return null
 
-            {data.social.phone && (
-              <a
-                href={`tel:${data.social.phone.replace(/\s/g, '')}`}
-                className="paper-contact-link print:hover:text-primary"
-              >
-                <Phone className="h-5 w-5 text-primary/70" />
-                <span className="font-medium">{data.social.phone}</span>
-              </a>
-            )}
+              const href = getHref(value)
+              const label = getLabel(value)
+              const isClickable = key !== 'wechat'
 
-            {data.social.website && (
-              <a
-                href={data.social.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="paper-contact-link print:hover:text-primary"
-              >
-                <Globe className="h-5 w-5 text-primary/70" />
-                <span className="truncate font-medium">
-                  {data.social.website.replace(/^https?:\/\/(www\.)?/, "")}
-                </span>
-              </a>
-            )}
+              const content = (
+                <>
+                  <div className="relative h-5 w-5">
+                    {/* Line icon (default state) */}
+                    <Icon 
+                      icon={iconLine}
+                      className="h-5 w-5 text-primary/70 absolute inset-0 transition-opacity duration-300 ease-in-out group-hover:opacity-0"
+                    />
+                    {/* Fill icon (hover state) */}
+                    <Icon 
+                      icon={iconFill}
+                      className="h-5 w-5 text-primary absolute inset-0 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
+                    />
+                  </div>
+                  <span className="truncate font-medium">{label}</span>
+                </>
+              )
 
-            {data.social.github && (
-              <a
-                href={data.social.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="paper-contact-link print:hover:text-primary"
-              >
-                <Github className="h-5 w-5 text-primary/70" />
-                <span className="truncate font-medium">
-                  GitHub: {data.social.github.split("/").pop()}
-                </span>
-              </a>
-            )}
+              if (isClickable) {
+                return (
+                  <a
+                    key={key}
+                    href={href}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    className="paper-contact-link group print:hover:text-primary"
+                  >
+                    {content}
+                  </a>
+                )
+              }
 
-            {data.social.linkedin && (
-              <a
-                href={data.social.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="paper-contact-link print:hover:text-primary"
-              >
-                <Linkedin className="h-5 w-5 text-primary/70" />
-                <span className="font-medium">LinkedIn</span>
-              </a>
-            )}
-
-            {data.social.wechat && (
-              <div className="paper-contact-link">
-                <MessageCircle className="h-5 w-5 text-primary/70" />
-                <span className="font-medium">WeChat: {data.social.wechat}</span>
-              </div>
-            )}
-
-            {/* Academic/Research contacts */}
-            {data.social.orcid && (
-              <a
-                href={data.social.orcid}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="paper-contact-link print:hover:text-primary"
-              >
-                <User className="h-5 w-5 text-primary/70" />
-                <span className="font-medium">ORCID</span>
-              </a>
-            )}
-
-            {data.social.googleScholar && (
-              <a
-                href={data.social.googleScholar}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="paper-contact-link print:hover:text-primary"
-              >
-                <BookOpen className="h-5 w-5 text-primary/70" />
-                <span className="font-medium">Google Scholar</span>
-              </a>
-            )}
-
-            {data.social.researchGate && (
-              <a
-                href={data.social.researchGate}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="paper-contact-link print:hover:text-primary"
-              >
-                <BookOpen className="h-5 w-5 text-primary/70" />
-                <span className="font-medium">ResearchGate</span>
-              </a>
-            )}
+              return (
+                <div key={key} className="paper-contact-link group">
+                  {content}
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>

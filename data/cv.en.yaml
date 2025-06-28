@@ -5,17 +5,15 @@ hero:
   location: "Guangzhou, Guangdong"
   age: "2001-09"
   bio: "A passionate researcher and developer with expertise in artificial intelligence, machine learning, and human-computer interaction. Dedicated to advancing the field through innovative research and practical applications that bridge the gap between academic theory and real-world impact."
+  description: "PhD Applicant | Design Engineer | AI Researcher"
   social:
-    github: "https://github.com/Xeraphinite"
     email: "keyouzheng0915@gmail.com"
-    phone: "+86 138-0000-0000"
+    github: "https://github.com/Xeraphinite"
     wechat: "keyou_zheng"
-    linkedin: "https://linkedin.com/in/keyou-zheng"
     website: "https://keyzheng.pages.dev"
-    orcid: "https://orcid.org/0000-0000-0000-0000"
     googleScholar: "https://scholar.google.com/citations?user=example"
-    researchGate: "https://www.researchgate.net/profile/your-profile"
-    # twitter: "https://twitter.com/keyou_zheng"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+    bluesky: "https://bsky.app/profile/keyou.bsky.social"
 
 education:
   - institution: "Guangdong University of Technology"
