@@ -1,0 +1,125 @@
+hero:
+  name: "정각유"
+  enName: "Keyou Zheng"
+  avatar: "/avatar-128.png"
+  location: "광저우, 광둥성"
+  age: "2001-09"
+  bio: "인공지능, 머신러닝, 인간-컴퓨터 상호작용 분야의 전문성을 갖춘 열정적인 연구원이자 개발자입니다. 학술 이론과 실제 영향 사이의 격차를 해소하는 혁신적인 연구와 실용적인 응용을 통해 이 분야를 발전시키는 데 전념하고 있습니다."
+  description: "박사과정 지원자 | 설계 엔지니어 | AI 연구원"
+  social:
+    email: "keyouzheng0915@gmail.com"
+    github: "https://github.com/Xeraphinite"
+    wechat: "keyou_zheng"
+    website: "https://keyzheng.pages.dev"
+    googleScholar: "https://scholar.google.com/citations?user=example"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+    bluesky: "https://bsky.app/profile/keyou.bsky.social"
+
+education:
+  - institution: "광둥공업대학교"
+    area: "기계공학"
+    degree: "석사"
+    supervisor: "냉절무"
+    startDate: "2023년 9월"
+    endDate: "현재"
+    summary: ""
+    highlights:
+       - "평점: 3.62/4; 9개 과목에서 90+ 점수;"
+       - "연구 관심사: 대형 언어 모델, 프로그램 기반 3D 재구성, 인간-컴퓨터 상호작용"
+
+  - institution: "광둥재경대학교"
+    area: "컴퓨터 과학 기술 (실험반)"
+    degree: "학사"
+    startDate: "2019년 6월"
+    endDate: "2023년 6월"
+    summary: ""
+    highlights:
+      - "평점: 3.75/5, 순위: 상위 5%; 여러 핵심 과목에서 1등;"
+      - "졸업논문: 심화 강화학습 기반 마리오 게임 에이전트 설계 및 구현"
+
+publications:
+  - title: "AIGC-empowered Smart Manufacturing: Prospects and Challenges" 
+    authors: ["냉절무", "정각유", "이영걸 외"]
+    type: "저널 논문"
+    status: "심사 중, R2"
+    indexing: ["SCI TOP", "SCI I"]
+    impactFactor: 9.1
+    publishedIn: "Robotics and Computer-Integrated Manufacturing (RCIM)"
+    abstract: "이 논문은 GenAI 중심 접근법을 제품 수명주기 관리(PLM)와 통합하는 포괄적인 프레임워크를 제시하며, AIGC 환경에 대한 심층 분석과 스마트 제조에서의 응용을 체계적으로 탐구합니다."
+
+  - title: "SPADA: A Sequential Parametric CAD Program Agent with Fine-grained Control"
+    authors: ["정각유", "종원위", "냉절무*"]
+    type: "프리프린트"
+    status: "진행 중"
+    indexing: ["CCF-A"]
+    publishedIn: "AAAI'26 목표"
+
+  - title: "Agentic Workflow in Smart Manufacturing: A Fresh Viewpoint"
+    authors: ["정각유", "종원위", "냉절무*"]
+    type: "프리프린트"
+    status: "진행 중"
+    indexing: ["SCI-II", "JCR-Q1"]
+    impactFactor: 7.2
+    publishedIn: "Applied Soft Computing 목표"
+
+experience:
+  - position: "다중모달 대형 언어 모델 지원 CAD 코드 생성 및 모델링 시스템"
+    company: "광둥공업대학교"
+    startDate: "2025년 1월"
+    endDate: "현재"
+    highlights:
+      - "데이터 수집: 여러 개별 소스에서 대규모 실제 데이터를 수집하고, 다중 모델 라우팅, 데이터 합성 및 평가 파이프라인을 통해 향상;"
+      - "알고리즘 설계: Qwen 2.5-VL-7B 기반 다중모달 에이전트 시스템 개발, 다중모달 융합 사용, AAAI'26 목표;"
+      - "프로토타입 개발: Next.js와 React-three-fiber를 사용하여 웹 애플리케이션 구축, 고성능 실시간 3D 미리보기 및 사용자 친화적 코드 연결 편집 기능 달성"
+
+awards:
+  - name: "학업 장학금"
+    institute: "광둥공업대학교"
+    date: "2023, 2024"
+
+  - name: "학업 장학금"
+    institute: "광둥재경대학교"
+    date: "2020, 2021, 2022"
+
+skills:
+  categories:
+    - "프로그래밍"
+    - "연구"
+    - "의사소통"
+  
+  skills:
+    - name: "풀스택 개발"
+      category: "프로그래밍"
+      description: "Next.js, Rust, C++"
+    
+    - name: "딥러닝"
+      category: "프로그래밍"
+      description: "PyTorch, vLLM, Transformers, LangChain"
+    
+    - name: "개발 실무"
+      category: "프로그래밍"
+      description: "Git, VSCode, CI/CD"
+    
+    - name: "문헌 리뷰"
+      category: "연구"
+      description: "영어 학술 문헌 및 서적 읽기에 능숙"
+    
+    - name: "학술 글쓰기"
+      category: "연구"
+      description: "학술 논문 작성에 숙련됨"
+
+    - name: "영어"
+      category: "의사소통"
+      description: "CET-6, 대학원 입학시험 영어 70+"
+    
+    - name: "일본어"
+      category: "의사소통"
+      description: "JLPT N1, 읽기 만점"
+    
+    - name: "광둥어"
+      category: "의사소통"
+      description: "원어민"
+
+    - name: "한국어"
+      category: "의사소통"
+      description: "초급 수준" 

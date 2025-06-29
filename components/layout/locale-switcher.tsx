@@ -31,7 +31,7 @@ export default function LocaleSwitcher() {
           <div className="flex items-center gap-2 px-3 py-1">
             <Languages className="h-4 w-4 text-slate-600" />
             <span className="text-sm font-medium text-slate-600">
-              {t('language').toString()}
+              {t('language')}
             </span>
           </div>
           <div className="h-6 w-px bg-slate-200" />

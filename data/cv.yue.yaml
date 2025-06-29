@@ -1,0 +1,125 @@
+hero:
+  name: "鄭恪悠"
+  enName: "Keyou Zheng"
+  avatar: "/avatar-128.png"
+  location: "廣州, 廣東"
+  age: "2001-09"
+  bio: "一個充滿熱誠嘅研究員同開發者，喺人工智能、機器學習同人機交互方面有專業知識。致力於透過創新研究同實際應用推進呢個領域，連接學術理論同現實影響之間嘅鴻溝。"
+  description: "博士申請人 | 設計工程師 | AI研究員"
+  social:
+    email: "keyouzheng0915@gmail.com"
+    github: "https://github.com/Xeraphinite"
+    wechat: "keyou_zheng"
+    website: "https://keyzheng.pages.dev"
+    googleScholar: "https://scholar.google.com/citations?user=example"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+    bluesky: "https://bsky.app/profile/keyou.bsky.social"
+
+education:
+  - institution: "廣東工業大學"
+    area: "機械工程"
+    degree: "碩士"
+    supervisor: "冷劼武"
+    startDate: "2023年9月"
+    endDate: "現在"
+    summary: ""
+    highlights:
+       - "平均績點：3.62/4；9門課程90+分數；"
+       - "研究興趣：大型語言模型、程序驅動3D重建、人機交互"
+
+  - institution: "廣東財經大學"
+    area: "計算機科學與技術（實驗班）"
+    degree: "學士"
+    startDate: "2019年6月"
+    endDate: "2023年6月"
+    summary: ""
+    highlights:
+      - "平均績點：3.75/5，排名：前5%；多門核心課程第一名；"
+      - "畢業論文：基於深度強化學習嘅馬里奧遊戲代理設計與實現"
+
+publications:
+  - title: "AIGC-empowered Smart Manufacturing: Prospects and Challenges" 
+    authors: ["冷劼武", "鄭恪悠", "李榮杰 等"]
+    type: "期刊論文"
+    status: "審稿中，R2"
+    indexing: ["SCI TOP", "SCI I"]
+    impactFactor: 9.1
+    publishedIn: "Robotics and Computer-Integrated Manufacturing (RCIM)"
+    abstract: "呢篇論文提出咗一個綜合框架，將GenAI為中心嘅方法同產品生命週期管理（PLM）整合，深入分析AIGC景觀並系統性探索佢喺智能製造中嘅應用。"
+
+  - title: "SPADA: A Sequential Parametric CAD Program Agent with Fine-grained Control"
+    authors: ["鄭恪悠", "鍾元偉", "冷劼武*"]
+    type: "預印本"
+    status: "進行中"
+    indexing: ["CCF-A"]
+    publishedIn: "目標AAAI'26"
+
+  - title: "Agentic Workflow in Smart Manufacturing: A Fresh Viewpoint"
+    authors: ["鄭恪悠", "鍾元偉", "冷劼武*"]
+    type: "預印本"
+    status: "進行中"
+    indexing: ["SCI-II", "JCR-Q1"]
+    impactFactor: 7.2
+    publishedIn: "目標Applied Soft Computing"
+
+experience:
+  - position: "多模態大型語言模型輔助CAD代碼生成同建模系統"
+    company: "廣東工業大學"
+    startDate: "2025年1月"
+    endDate: "現在"
+    highlights:
+      - "數據收集：從多個離散來源收集大規模現實世界數據，通過多模型路由、數據合成同評估管道增強；"
+      - "算法設計：基於Qwen 2.5-VL-7B開發多模態代理系統，使用多模態融合，目標AAAI'26；"
+      - "原型開發：使用Next.js同React-three-fiber構建Web應用，實現高性能實時3D預覽同用戶友好嘅代碼連結編輯功能"
+
+awards:
+  - name: "學業獎學金"
+    institute: "廣東工業大學"
+    date: "2023, 2024"
+
+  - name: "學業獎學金"
+    institute: "廣東財經大學"
+    date: "2020, 2021, 2022"
+
+skills:
+  categories:
+    - "編程"
+    - "研究"
+    - "溝通"
+  
+  skills:
+    - name: "全棧開發"
+      category: "編程"
+      description: "Next.js, Rust, C++"
+    
+    - name: "深度學習"
+      category: "編程"
+      description: "PyTorch, vLLM, Transformers, LangChain"
+    
+    - name: "開發實踐"
+      category: "編程"
+      description: "Git, VSCode, CI/CD"
+    
+    - name: "文獻回顧"
+      category: "研究"
+      description: "熟練閱讀英文學術文獻同書籍"
+    
+    - name: "學術寫作"
+      category: "研究"
+      description: "熟練掌握學術論文寫作"
+
+    - name: "英語"
+      category: "溝通"
+      description: "CET-6，研究生入學考試英語70+"
+    
+    - name: "日語"
+      category: "溝通"
+      description: "JLPT N1，閱讀滿分"
+    
+    - name: "粵語"
+      category: "溝通"
+      description: "母語"
+
+    - name: "韓語"
+      category: "溝通"
+      description: "初級水平" 
