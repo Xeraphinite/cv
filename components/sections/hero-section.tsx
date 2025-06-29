@@ -5,6 +5,7 @@ import { Icon } from '@iconify/react'
 import { Download } from "lucide-react"
 import { useTranslations } from 'next-intl'
 import { getResponsiveImageProps } from '@/lib/image-utils'
+import { getTypographyClasses, getFontClass } from '@/lib/utils'
 
 interface HeroSectionProps {
   data: {
@@ -95,6 +96,8 @@ const socialPlatforms = [
 
 export function HeroSection({ data, locale }: HeroSectionProps) {
   const t = useTranslations()
+  const typographyClasses = getTypographyClasses(locale)
+  const fontClass = getFontClass(locale)
   
   const handleDownloadPDF = () => {
     const link = document.createElement('a')
@@ -155,18 +158,18 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
           {/* Name and basic info with magazine typography */}
           <div className="flex-1 min-w-0 lg:order-1">
             <div className="mb-6">
-              <h1 className="paper-title print:text-black mb-3">
+              <h1 className={`${typographyClasses.title} print:text-black mb-3`}>
                 {formatNameWithRuby()}
               </h1>
               {locale !== 'ja' && (
-                <h2 className="text-xl text-muted-foreground/80 print:text-gray-600 font-medium tracking-wide">
+                <h2 className={`${typographyClasses.subtitle} text-muted-foreground/80 print:text-gray-600`}>
                   {data.enName}
                 </h2>
               )}
               {/* Description */}
               {data.description && (
                 <div className="mt-4">
-                  <p className="text-lg font-semibold text-primary/90 print:text-gray-800 tracking-wide">
+                  <p className={`${typographyClasses.body} text-lg font-semibold text-primary/90 print:text-gray-800`}>
                     {data.description}
                   </p>
                 </div>
@@ -174,14 +177,14 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
             </div>
 
             {/* Basic details with improved spacing */}
-            <div className="flex flex-wrap gap-6 paper-meta print:text-gray-600 mb-6">
+            <div className={`flex flex-wrap gap-6 ${typographyClasses.meta} print:text-gray-600 mb-6`}>
               {data.location && (
                 <div className="flex items-center gap-3">
                   <Icon 
                     icon="mingcute:location-line" 
                     className="h-5 w-5 text-primary/70" 
                   />
-                  <span className="font-medium">{data.location}</span>
+                  <span className={`font-medium ${fontClass}`}>{data.location}</span>
                 </div>
               )}
               {data.age && (
@@ -190,7 +193,7 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
                     icon="mingcute:calendar-line" 
                     className="h-5 w-5 text-primary/70" 
                   />
-                  <span className="font-medium">{formatAge(data.age)}</span>
+                  <span className={`font-medium ${fontClass}`}>{formatAge(data.age)}</span>
                 </div>
               )}
             </div>
@@ -198,7 +201,7 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
             {/* Bio with enhanced typography */}
             {data.bio && (
               <div className="prose prose-lg prose-neutral dark:prose-invert max-w-none">
-                <p className="text-lg text-foreground/85 print:text-gray-700 leading-relaxed font-light">
+                <p className={`${typographyClasses.body} text-lg text-foreground/85 print:text-gray-700`}>
                   {data.bio}
                 </p>
               </div>

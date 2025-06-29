@@ -20,6 +20,161 @@ const config = {
   		}
   	},
   	extend: {
+      fontFamily: {
+        // English typography - following Practical Typography guidelines
+        'sans': [
+          '-apple-system',
+          'BlinkMacSystemFont', 
+          'SF Pro Display',
+          'SF Pro Text',
+          'Inter',
+          'system-ui',
+          'sans-serif'
+        ],
+        'serif': [
+          'New York',
+          'Charter',
+          'Georgia',
+          'Times New Roman',
+          'serif'
+        ],
+        
+        // Chinese typography - following W3C CLREQ guidelines
+        'zh-sans': [
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'SF Pro SC',
+          'SF Pro Text',
+          'Inter',
+          'Noto Sans SC',
+          'Source Han Sans SC',
+          'PingFang SC',
+          'Hiragino Sans GB',
+          'Microsoft YaHei',
+          'WenQuanYi Micro Hei',
+          'system-ui',
+          'sans-serif'
+        ],
+        'zh-serif': [
+          'New York',
+          'Noto Serif SC',
+          'Source Han Serif SC',
+          'Songti SC',
+          'SimSun',
+          'NSimSun',
+          'FangSong',
+          'STSong',
+          'serif'
+        ],
+        
+        // Traditional Chinese
+        'zh-hant-sans': [
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'SF Pro TC',
+          'SF Pro Text',
+          'Inter',
+          'Noto Sans TC',
+          'Source Han Sans TC',
+          'PingFang TC',
+          'Hiragino Sans CNS',
+          'Microsoft JhengHei',
+          'system-ui',
+          'sans-serif'
+        ],
+        'zh-hant-serif': [
+          'New York',
+          'Noto Serif TC',
+          'Source Han Serif TC',
+          'Songti TC',
+          'PMingLiU',
+          'MingLiU',
+          'serif'
+        ],
+        
+        // Japanese typography - following W3C JLREQ guidelines
+        'ja-sans': [
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'SF Pro JP',
+          'SF Pro Text',
+          'Inter',
+          'Noto Sans JP',
+          'Source Han Sans JP',
+          'Hiragino Kaku Gothic ProN',
+          'Hiragino Sans',
+          'Yu Gothic',
+          'Meiryo',
+          'Takao Gothic',
+          'IPAexGothic',
+          'IPAPGothic',
+          'VL PGothic',
+          'system-ui',
+          'sans-serif'
+        ],
+        'ja-serif': [
+          'New York',
+          'Noto Serif JP',
+          'Source Han Serif JP',
+          'Hiragino Mincho ProN',
+          'Hiragino Mincho Pro',
+          'Yu Mincho',
+          'YuMincho',
+          'Times New Roman',
+          'serif'
+        ],
+        
+        // Korean typography - following W3C KLREQ guidelines
+        'ko-sans': [
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'SF Pro KR',
+          'SF Pro Text',  
+          'Inter',
+          'Noto Sans KR',
+          'Source Han Sans KR',
+          'Apple SD Gothic Neo',
+          'Malgun Gothic',
+          'Nanum Gothic',
+          'Dotum',
+          'system-ui',
+          'sans-serif'
+        ],
+        'ko-serif': [
+          'New York',
+          'Noto Serif KR',
+          'Source Han Serif KR',
+          'Nanum Myeongjo',
+          'Batang',
+          'serif'
+        ]
+      },
+      
+      // Enhanced letter spacing for different scripts
+      letterSpacing: {
+        'zh': '-0.02em',    // Chinese characters need tighter spacing
+        'ja': '-0.01em',    // Japanese mixed scripts
+        'ko': '-0.015em',   // Korean Hangul spacing
+        'en': '-0.01em',    // English optimal spacing
+        'wide': '0.025em',
+        'wider': '0.05em',
+        'widest': '0.1em'
+      },
+      
+      // Line heights optimized for different scripts
+      lineHeight: {
+        'zh': '1.7',        // Chinese needs more line height for readability
+        'ja': '1.75',       // Japanese mixed scripts need extra space
+        'ko': '1.6',        // Korean is more compact
+        'en': '1.5',        // English standard
+        'title': '1.2',     // Titles across all languages
+        'tight': '1.25',
+        'snug': '1.375',
+        'normal': '1.5',
+        'relaxed': '1.625',
+        'loose': '1.75'
+      },
+      
   		colors: {
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',

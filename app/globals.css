@@ -1,3 +1,13 @@
+/* Import high-quality fonts from CDN for multilingual typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200..900&display=swap');
+
 @import 'tailwindcss-uikit-colors/selector.css';
 
 @tailwind base;
@@ -70,12 +80,13 @@
   
   body {
     @apply bg-background text-foreground;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
     line-height: 1.6;
     letter-spacing: -0.01em;
+    text-rendering: optimizeLegibility;
     background: 
       radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.03), transparent 50%),
       radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.03), transparent 50%),
@@ -83,15 +94,106 @@
   }
 }
 
-/* Enhanced typography inspired by Apple's SF Pro and printed materials */
-.font-noto-sans-sc {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+/* Enhanced multilingual typography following W3C guidelines */
+
+/* Chinese Typography (CLREQ) */
+.font-zh-sans {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro SC", "SF Pro Text", Inter, "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", system-ui, sans-serif;
   font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+  line-height: 1.7;
+  letter-spacing: -0.02em;
+}
+
+.font-zh-serif {
+  font-family: "New York", "Noto Serif SC", "Source Han Serif SC", "Songti SC", SimSun, NSimSun, FangSong, STSong, serif;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+  line-height: 1.7;
+  letter-spacing: -0.02em;
+}
+
+.font-zh-hant-sans {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro TC", "SF Pro Text", Inter, "Noto Sans TC", "Source Han Sans TC", "PingFang TC", "Hiragino Sans CNS", "Microsoft JhengHei", system-ui, sans-serif;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+  line-height: 1.7;
+  letter-spacing: -0.02em;
+}
+
+.font-zh-hant-serif {
+  font-family: "New York", "Noto Serif TC", "Source Han Serif TC", "Songti TC", PMingLiU, MingLiU, serif;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+  line-height: 1.7;
+  letter-spacing: -0.02em;
+}
+
+/* Japanese Typography (JLREQ) */
+.font-ja-sans {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro JP", "SF Pro Text", Inter, "Noto Sans JP", "Source Han Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", Meiryo, "Takao Gothic", IPAexGothic, IPAPGothic, "VL PGothic", system-ui, sans-serif;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1, "palt" 1;
+  line-height: 1.75;
+  letter-spacing: -0.01em;
+}
+
+.font-ja-serif {
+  font-family: "New York", "Noto Serif JP", "Source Han Serif JP", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Yu Mincho", YuMincho, "Times New Roman", serif;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1, "palt" 1;
+  line-height: 1.75;
+  letter-spacing: -0.01em;
+}
+
+/* Korean Typography (KLREQ) */
+.font-ko-sans {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro KR", "SF Pro Text", Inter, "Noto Sans KR", "Source Han Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "Nanum Gothic", Dotum, system-ui, sans-serif;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+  line-height: 1.6;
+  letter-spacing: -0.015em;
+}
+
+.font-ko-serif {
+  font-family: "New York", "Noto Serif KR", "Source Han Serif KR", "Nanum Myeongjo", Batang, serif;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+  line-height: 1.6;
+  letter-spacing: -0.015em;
+}
+
+/* English Typography (Practical Typography) */
+.font-en-sans {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, system-ui, sans-serif;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+.font-en-serif {
+  font-family: "New York", Charter, Georgia, "Times New Roman", serif;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+/* Language-specific text classes */
+.text-zh {
+  @apply font-zh-sans leading-zh tracking-zh;
+}
+
+.text-ja {
+  @apply font-ja-sans leading-ja tracking-ja;
+}
+
+.text-ko {
+  @apply font-ko-sans leading-ko tracking-ko;
+}
+
+.text-en {
+  @apply font-en-sans leading-en tracking-en;
+}
+
+/* Backward compatibility */
+.font-noto-sans-sc {
+  @apply font-zh-sans;
 }
 
 .font-noto-serif-sc {
-  font-family: "New York", "Charter", "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
-  font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+  @apply font-zh-serif;
 }
 
 /* Magazine-inspired container with better spacing */
@@ -158,29 +260,96 @@
   border-color: hsl(var(--border) / 0.3);
 }
 
-/* Enhanced typography hierarchy */
+/* Enhanced multilingual typography hierarchy */
 .paper-title {
-  @apply text-4xl font-bold text-foreground leading-tight;
+  @apply text-4xl font-bold text-foreground;
+  line-height: 1.2;
   letter-spacing: -0.025em;
   font-weight: 800;
+}
+
+.paper-title.lang-zh {
+  @apply font-zh-sans leading-tight;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+.paper-title.lang-ja {
+  @apply font-ja-sans leading-tight;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.paper-title.lang-ko {
+  @apply font-ko-sans leading-tight;
+  letter-spacing: -0.025em;
+  font-weight: 700;
 }
 
 .paper-subtitle {
   @apply text-2xl font-semibold text-foreground;
   letter-spacing: -0.02em;
   font-weight: 600;
+  line-height: 1.3;
+}
+
+.paper-subtitle.lang-zh {
+  @apply font-zh-sans;
+  letter-spacing: -0.025em;
+}
+
+.paper-subtitle.lang-ja {
+  @apply font-ja-sans;
+  letter-spacing: -0.015em;
+}
+
+.paper-subtitle.lang-ko {
+  @apply font-ko-sans;
+  letter-spacing: -0.02em;
 }
 
 .paper-body {
-  @apply text-base text-foreground/85 leading-relaxed;
+  @apply text-base text-foreground/85;
   font-weight: 400;
+  line-height: 1.6;
   letter-spacing: -0.01em;
+}
+
+.paper-body.lang-zh {
+  @apply font-zh-sans leading-zh;
+  letter-spacing: -0.02em;
+}
+
+.paper-body.lang-ja {
+  @apply font-ja-sans leading-ja;
+  letter-spacing: -0.01em;
+}
+
+.paper-body.lang-ko {
+  @apply font-ko-sans leading-ko;
+  letter-spacing: -0.015em;
 }
 
 .paper-meta {
   @apply text-sm text-muted-foreground/80;
   font-weight: 500;
   letter-spacing: 0;
+  line-height: 1.4;
+}
+
+.paper-meta.lang-zh {
+  @apply font-zh-sans;
+  letter-spacing: -0.01em;
+}
+
+.paper-meta.lang-ja {
+  @apply font-ja-sans;
+  letter-spacing: 0;
+}
+
+.paper-meta.lang-ko {
+  @apply font-ko-sans;
+  letter-spacing: -0.01em;
 }
 
 /* Apple-inspired contact links */
@@ -293,14 +462,81 @@
   background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.5), transparent);
 }
 
-/* Ruby text for Japanese with better styling */
+/* Enhanced Ruby text for Japanese (JLREQ) */
 .paper-ruby {
   @apply relative inline-block;
+  ruby-align: center;
+  ruby-position: over;
+  font-feature-settings: "ruby" 1;
 }
 
 .paper-ruby rt {
   @apply absolute -top-5 left-1/2 transform -translate-x-1/2 text-xs text-muted-foreground leading-none font-medium;
   letter-spacing: 0.05em;
+  font-weight: 400;
+}
+
+/* Additional multilingual typography enhancements */
+
+/* Vertical text support for Japanese (JLREQ) */
+.vertical-rl {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.vertical-lr {
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+}
+
+/* CJK punctuation adjustments */
+.cjk-punctuation {
+  text-spacing: trim-start allow-end;
+  hanging-punctuation: first last;
+}
+
+/* Language-specific text justification */
+.text-justify-zh {
+  text-align: justify;
+  text-justify: inter-character;
+}
+
+.text-justify-ja {
+  text-align: justify;
+  text-justify: inter-character;
+}
+
+.text-justify-ko {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Improved text selection for CJK */
+.cjk-text {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+}
+
+/* Typography emphasis for different languages */
+.emphasis-zh {
+  @apply font-zh-sans font-semibold;
+  text-emphasis: filled circle;
+  text-emphasis-position: under;
+}
+
+.emphasis-ja {
+  @apply font-ja-sans font-semibold;
+  text-emphasis: filled sesame;
+  text-emphasis-position: over;
+}
+
+.emphasis-ko {
+  @apply font-ko-sans font-semibold;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 /* Enhanced print styles */
