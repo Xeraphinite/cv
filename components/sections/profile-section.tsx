@@ -128,26 +128,6 @@ export function ProfileSection({ data }: ProfileSectionProps) {
   )
 }
 
-export function BioSection({ data }: BioSectionProps) {
-  if (!data.bio && !data.summary) return null
-
-  return (
-    <section className="paper-section print:break-inside-avoid">
-      <h2 className="paper-section-title print:text-black">
-        <User className="h-5 w-5 mr-3 inline-block text-primary" />
-        Biography
-      </h2>
-
-      <div className="paper-card print:bg-white print:border-gray-300">
-        <div className="space-y-4 prose prose-neutral dark:prose-invert max-w-none prose-p:paper-body">
-          {data.bio && <p>{data.bio}</p>}
-          {data.summary && data.summary !== data.bio && <p>{data.summary}</p>}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 export function ResearchInterestsSection({ data }: ResearchInterestsSectionProps) {
   if (!data.researchInterests || data.researchInterests.length === 0) return null
 

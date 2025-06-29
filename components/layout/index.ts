@@ -1,4 +1,5 @@
-export { CVHeader } from './cv-header';
-export { default as LocaleSwitcher } from './locale-switcher';
-export { LocaleDetector } from './locale-detector';
-export { TableOfContents, type TOCSection } from './table-of-contents'; 
+export * from './cv-header'
+export * from './cv-footer'
+export * from './locale-detector'
+export * from './locale-switcher'
+export * from './table-of-contents' 

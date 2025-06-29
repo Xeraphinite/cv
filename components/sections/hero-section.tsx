@@ -69,16 +69,16 @@ const socialPlatforms = [
   },
   {
     key: 'googleScholar',
-    iconLine: 'mingcute:user-search-line',
-    iconFill: 'mingcute:user-search-fill',
+    iconLine: 'academicons:google-scholar',
+    iconFill: 'academicons:google-scholar',
     getHref: (value: string) => value,
     getLabel: (_value: string) => 'Google Scholar',
     external: true
   },
   {
     key: 'orcid',
-    iconLine: 'mingcute:idcard-line',
-    iconFill: 'mingcute:idcard-fill',
+    iconLine: 'academicons:orcid',
+    iconFill: 'academicons:orcid',
     getHref: (value: string) => value,
     getLabel: (_value: string) => 'ORCID',
     external: true

@@ -8,7 +8,7 @@ import { getMessages } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import { getDirection } from '@/lib/i18n-utils'
 import { type Locale, locales } from '@/i18n'
-import { CVHeader } from '@/components/layout/cv-header'
+import { CVHeader, CVFooter } from '@/components/layout'
 import { ThemeProvider } from "@/components/theme-provider"
 import { LocaleDetector } from '@/components/layout/locale-detector'
 
@@ -117,6 +117,7 @@ export default async function LocaleLayout({
             <CVHeader />
             <LocaleDetector />
             {children}
+            <CVFooter />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

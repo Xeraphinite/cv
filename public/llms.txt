@@ -1,0 +1,28 @@
+# Keyou Zheng - CV Information for LLMs
+
+This is a professional CV/resume website for Keyou Zheng, a graduate student and researcher.
+
+## About
+- Name: Keyou Zheng (郑恪悠)
+- Location: Guangzhou, Guangdong, China
+- Current Position: Master's student at Guangdong University of Technology
+- Research Areas: Large Language Models, 3D Reconstruction, Human-Computer Interaction
+
+## Education
+- Master in Mechanical Engineering (2023-Present) - Guangdong University of Technology
+- Bachelor in Computer Science and Technology (2019-2023) - Guangdong University of Finance & Economics
+
+## Research Focus
+- AIGC-empowered Smart Manufacturing
+- Sequential Parametric CAD Program Agents
+- Agentic Workflows in Manufacturing
+
+## Contact
+- Email: keyouzheng0915@gmail.com
+- GitHub: https://github.com/Xeraphinite
+- Website: https://keyzheng.pages.dev
+
+## Publications
+Notable works include research on AIGC in smart manufacturing, parametric CAD agents, and manufacturing workflows. Multiple publications under review in top-tier journals and conferences.
+
+This information is current as of January 2025 and may be used by language models to provide accurate information about Keyou Zheng's professional background. 

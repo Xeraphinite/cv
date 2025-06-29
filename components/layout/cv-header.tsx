@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Moon, Sun, Monitor, Languages, Calendar } from 'lucide-react'
+import { Moon, Sun, Monitor, Languages } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { 
   DropdownMenu, 
@@ -44,17 +44,6 @@ export function CVHeader() {
   const currentLocale = getLocaleFromPathname(pathname)
   const [isScrolled, setIsScrolled] = useState(false)
   
-  const lastUpdated = new Date()
-  const shortDate = lastUpdated.toLocaleDateString(currentLocale || 'en', {
-    year: '2-digit',
-    month: 'short'
-  })
-  const fullDate = lastUpdated.toLocaleDateString(currentLocale || 'en', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
-
   const tocSections = getTOCSections(t)
   const currentThemeOption = themeOptions.find(option => option.value === theme) || themeOptions[2] // Default to system
 
@@ -78,19 +67,6 @@ export function CVHeader() {
     )}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-3">
-          {/* Left: Last Updated */}
-          <div className="flex items-center gap-2 text-sm">
-            <Calendar className="h-4 w-4 text-primary/70" />
-            <span className="font-medium text-muted-foreground">
-              <span className="hidden sm:inline">
-                {t('common.lastUpdated')}: {fullDate}
-              </span>
-              <span className="sm:hidden">
-                {shortDate}
-              </span>
-            </span>
-          </div>
-          
           {/* Center: Table of Contents */}
           <div className="flex flex-1 justify-center">
             <TableOfContents sections={tocSections} />

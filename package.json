@@ -70,6 +70,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.1",
+    "@iconify-json/academicons": "^1.2.2",
     "@iconify-json/mingcute": "^1.2.3",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^22",

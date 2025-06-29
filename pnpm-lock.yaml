@@ -180,6 +180,9 @@ importers:
       '@biomejs/biome':
         specifier: 2.0.1
         version: 2.0.1
+      '@iconify-json/academicons':
+        specifier: ^1.2.2
+        version: 1.2.2
       '@iconify-json/mingcute':
         specifier: ^1.2.3
         version: 1.2.3
@@ -314,6 +317,9 @@ packages:
     resolution: {integrity: sha512-79Dv+3mDF7i+2ajj7SkypSKHhl1cbln1OGavqrsF7p6mbUv11xpqpacPsGDCTRvCSjEEIez2ef1NveSVL3b0Ag==}
     peerDependencies:
       react-hook-form: ^7.0.0
+
+  '@iconify-json/academicons@1.2.2':
+    resolution: {integrity: sha512-rOcj3ESbwXlT2pKQisnohQ9quXopb0/XdHfjTAY9vHEIR4c1hX9itKl0wPAqg/gKTvWJZr218Fgd4oKvJPZ+uQ==}
 
   '@iconify-json/mingcute@1.2.3':
     resolution: {integrity: sha512-yiEQfLBF5iwyOdxuY0kEU06+8Mp6Mrp14KVXTb+5jjSVuD71C9EQrzM/mm1Efd8Nu2amJalTPisl3loC8pHBqQ==}
@@ -2250,6 +2256,10 @@ snapshots:
   '@hookform/resolvers@3.10.0(react-hook-form@7.58.1(react@19.1.0))':
     dependencies:
       react-hook-form: 7.58.1(react@19.1.0)
+
+  '@iconify-json/academicons@1.2.2':
+    dependencies:
+      '@iconify/types': 2.0.0
 
   '@iconify-json/mingcute@1.2.3':
     dependencies:
