@@ -8,11 +8,16 @@
     "start": "next start",
     "lint": "next lint",
     "format": "pnpm biome check --apply-unsafe .",
-    "optimize-images": "node scripts/optimize-images.js"
+    "optimize-images": "node scripts/optimize-images.js",
+    "cf:build": "opennextjs-cloudflare build",
+    "cf:preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "cf:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf:typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@iconify/react": "^6.0.0",
+    "@opennextjs/cloudflare": "^1.16.5",
     "@radix-ui/react-accordion": "^1.2.2",
     "@radix-ui/react-alert-dialog": "^1.1.4",
     "@radix-ui/react-aspect-ratio": "^1.1.1",
@@ -49,7 +54,7 @@
     "input-otp": "1.4.1",
     "js-yaml": "^4.1.0",
     "lucide-react": "^0.454.0",
-    "next": "15.2.4",
+    "next": "15.2.9",
     "next-intl": "^4.1.0",
     "next-themes": "^0.4.4",
     "plaiceholder": "^3.0.0",
@@ -79,6 +84,7 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.17",
     "tailwindcss-uikit-colors": "1.0.0-alpha.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.65.0"
   }
 }

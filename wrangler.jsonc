@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "minimal-cv",
+  "main": ".open-next/worker.js",
+  "assets": {
+    "directory": ".open-next/assets"
+  },
+  "compatibility_date": "2026-02-17",
+  "compatibility_flags": ["nodejs_compat"]
+}

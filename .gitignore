@@ -30,6 +30,11 @@ yarn-error.log*
 
 # vercel
 .vercel
+.open-next
+
+# cloudflare
+.dev.vars
+cloudflare-env.d.ts
 
 # typescript
 *.tsbuildinfo
