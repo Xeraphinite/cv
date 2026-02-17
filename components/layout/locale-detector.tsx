@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
-import { Globe, X } from 'lucide-react'
+import { Icon } from '@iconify/react'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -70,7 +70,7 @@ export function LocaleDetector() {
         <DialogHeader>
           <div className="flex items-center gap-3">
             <div className="flex items-center justify-center w-10 h-10 bg-primary/10 rounded-xl">
-              <Globe className="h-5 w-5 text-primary" />
+              <Icon icon="mingcute:globe-line" className="h-5 w-5 text-primary" />
             </div>
             <div>
               <DialogTitle className="text-left">
@@ -89,7 +89,7 @@ export function LocaleDetector() {
             className="w-full justify-start gap-3"
             size="lg"
           >
-            <Globe className="h-4 w-4" />
+            <Icon icon="mingcute:globe-line" className="h-4 w-4" />
             Switch to {localeLabels[detectedLocale]}
           </Button>
           
@@ -99,7 +99,7 @@ export function LocaleDetector() {
             className="w-full justify-start gap-3"
             size="lg"
           >
-            <X className="h-4 w-4" />
+            <Icon icon="mingcute:close-line" className="h-4 w-4" />
             Keep {localeLabels[currentLocale || 'en']}
           </Button>
         </div>

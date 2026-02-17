@@ -21,10 +21,10 @@ export function getTypographyClasses(locale?: string) {
     case 'zh-HK':
     case 'zh-TW':
       return {
-        title: 'paper-title lang-zh font-zh-hant-sans leading-tight tracking-zh',
-        subtitle: 'paper-subtitle lang-zh font-zh-hant-sans tracking-zh',
-        body: 'paper-body lang-zh font-zh-hant-sans leading-zh tracking-zh text-justify-zh cjk-text',
-        meta: 'paper-meta lang-zh font-zh-hant-sans tracking-zh',
+        title: 'paper-title lang-zh font-zh-sans leading-tight tracking-zh',
+        subtitle: 'paper-subtitle lang-zh font-zh-sans tracking-zh',
+        body: 'paper-body lang-zh font-zh-sans leading-zh tracking-zh text-justify-zh cjk-text',
+        meta: 'paper-meta lang-zh font-zh-sans tracking-zh',
         emphasis: 'emphasis-zh'
       }
     case 'ja':
@@ -78,9 +78,9 @@ export function getFontClass(locale?: string, variant: 'sans' | 'serif' = 'sans'
   const fontMap = {
     'zh': variant === 'serif' ? 'font-zh-serif' : 'font-zh-sans',
     'zh-CN': variant === 'serif' ? 'font-zh-serif' : 'font-zh-sans',
-    'yue': variant === 'serif' ? 'font-zh-hant-serif' : 'font-zh-hant-sans',
-    'zh-HK': variant === 'serif' ? 'font-zh-hant-serif' : 'font-zh-hant-sans',
-    'zh-TW': variant === 'serif' ? 'font-zh-hant-serif' : 'font-zh-hant-sans',
+    'yue': variant === 'serif' ? 'font-zh-serif' : 'font-zh-sans',
+    'zh-HK': variant === 'serif' ? 'font-zh-serif' : 'font-zh-sans',
+    'zh-TW': variant === 'serif' ? 'font-zh-serif' : 'font-zh-sans',
     'ja': variant === 'serif' ? 'font-ja-serif' : 'font-ja-sans',
     'ko': variant === 'serif' ? 'font-ko-serif' : 'font-ko-sans',
     'en': variant === 'serif' ? 'font-en-serif' : 'font-en-sans'

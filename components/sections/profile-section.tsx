@@ -1,6 +1,6 @@
 'use client'
 
-import { GraduationCap, Award, BookOpen, Target, Star, User, Brain } from "lucide-react"
+import { Icon } from '@iconify/react'
 
 interface ProfileSectionProps {
   data: {
@@ -79,38 +79,38 @@ export function ProfileSection({ data }: ProfileSectionProps) {
     {
       label: "Publications",
       value: highlights.totalPublications || 0,
-      icon: BookOpen,
+      icon: "mingcute:book-6-line",
     },
     {
       label: "Awards",
       value: highlights.awardsCount || 0,
-      icon: Award,
+      icon: "mingcute:award-line",
     },
     {
       label: "Projects",
       value: highlights.totalProjects || 0,
-      icon: Target,
+      icon: "mingcute:target-line",
     },
     {
       label: "GPA",
       value: highlights.gpa || "N/A",
-      icon: GraduationCap,
+      icon: "mingcute:mortarboard-line",
     },
   ]
 
   return (
     <section className="paper-section print:break-inside-avoid">
       <h2 className="paper-section-title print:text-black">
-        <Star className="h-5 w-5 mr-3 inline-block text-primary" />
+        <Icon icon="mingcute:star-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
         Profile Highlights
       </h2>
 
-      <div className="paper-card print:bg-white print:border-gray-300">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="paper-card print:bg-white">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {highlightItems.map((item) => (
             <div key={item.label} className="flex flex-col items-center text-center p-2 rounded-lg transition-all duration-200 hover:bg-muted/80">
               <div className="flex items-center justify-center w-12 h-12 mb-3 rounded-full bg-primary/10 text-primary">
-                <item.icon className="h-6 w-6" />
+                <Icon icon={item.icon} className="h-6 w-6" />
               </div>
               <div className="space-y-1">
                 <div className="text-2xl font-bold text-foreground print:text-black">
@@ -134,11 +134,11 @@ export function ResearchInterestsSection({ data }: ResearchInterestsSectionProps
   return (
     <section className="paper-section print:break-inside-avoid">
       <h2 className="paper-section-title print:text-black">
-        <Brain className="h-5 w-5 mr-3 inline-block text-primary" />
+        <Icon icon="mingcute:brain-line" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
         Research Interests
       </h2>
 
-      <div className="paper-card print:bg-white print:border-gray-300">
+      <div className="paper-card print:bg-white">
         <div className="flex flex-wrap gap-3">
           {data.researchInterests.map((interest) => (
             <span key={interest} className="paper-badge print:bg-gray-100 print:text-gray-700">

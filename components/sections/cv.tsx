@@ -1,126 +1,98 @@
 import { HeroSection } from './hero-section'
-import { ProfileSection, ResearchInterestsSection } from './profile-section'
 import { EducationSection } from './education-section'
 import { ExperienceSection } from './experience-section'
 import { SkillsSection } from './skills-section'
+import { ProjectsSection } from './projects-section'
 import { PublicationsSection } from './publications-section'
 import { AwardsSection } from './awards-section'
 import { TalksSection } from './talks-section'
+import type { CVData } from '@/lib/types/cv'
+
+interface CVProject {
+  name: string
+  description: string
+  tech: string[]
+  url?: string
+  github?: string
+  status?: string
+  year?: number
+}
 
 interface CVProps {
-  data: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  data: (CVData & { projects?: CVProject[] }) | null
   locale?: string
 }
 
 export function CV({ data, locale }: CVProps) {
   if (!data) return null
 
-  // Map CVData to the expected Hero format
-  const heroData = {
-    ...data.hero,
-    social: {
-      ...data.hero.social
+  const mappedSkills: Record<string, string[]> = {}
+
+  for (const category of data.skills?.categories ?? []) {
+    mappedSkills[category] = []
+  }
+
+  for (const skill of data.skills?.skills ?? []) {
+    if (!skill.name) continue
+    if (!mappedSkills[skill.category]) {
+      mappedSkills[skill.category] = []
     }
+    mappedSkills[skill.category].push(skill.name)
   }
 
-  // Map skills to the expected format
-  const skillsData = {
-    skills: data.skills ? data.skills.categories.reduce((acc: { [category: string]: string[] }, category: string) => { // eslint-disable-line @typescript-eslint/no-explicit-any
-      const categorySkills = data.skills.skills
-        .filter((skill: any) => skill.category === category) // eslint-disable-line @typescript-eslint/no-explicit-any
-        .map((skill: any) => skill.name) // eslint-disable-line @typescript-eslint/no-explicit-any
-      if (categorySkills.length > 0) {
-        acc[category] = categorySkills
-      }
-      return acc
-    }, {} as { [category: string]: string[] }) : {},
-    projects: [] // Will use default placeholder projects
-  }
-
-  // Map publications to the expected format
-  const publicationsData = data.publications?.map((pub: any) => ({ // eslint-disable-line @typescript-eslint/no-explicit-any
+  const projectsData = data.projects || []
+  const publicationsData = (data.publications ?? []).map((pub) => ({
     ...pub,
-    venue: pub.journal || pub.conference || pub.venue || 'Unknown Venue'
-  })) || []
+    publishedIn: pub.journal || pub.publishedIn || 'Unknown Venue',
+  }))
 
   return (
-    <main className="min-h-screen bg-background print:bg-white">
-      {/* Hero Section */}
+    <div className="paper-container">
       <section id="hero">
-        <HeroSection data={heroData} locale={locale} />
+        <HeroSection data={data.hero} locale={locale} />
       </section>
 
-      {/* Content Sections */}
-      <div className="paper-container py-10 space-y-12">
-        {/* Profile Highlights */}
-        <section id="profile">
-          <ProfileSection data={{
-            education: data.education?.map((edu: any) => ({ // eslint-disable-line @typescript-eslint/no-explicit-any
-              institution: edu.institution,
-              degree: edu.degree,
-              major: edu.area,
-              period: `${edu.startDate} - ${edu.endDate}`,
-              gpa: edu.summary?.includes('GPA') ? edu.summary.split('GPA')[1]?.trim() : undefined
-            })),
-            publications: publicationsData,
-            awards: data.awards,
-            projects: []
-          }} />
-        </section>
-
-        {/* Research Interests */}
-        <section id="research">
-          <ResearchInterestsSection data={{ 
-            researchInterests: [
-              "Large Language Models",
-              "3D Reconstruction", 
-              "Human-Computer Interaction",
-            ]
-          }} />
-        </section>
-
-        {/* Education */}
-        {data.education && data.education.length > 0 && (
+      <div className="py-2 sm:py-4">
+        {data.education.length > 0 && (
           <section id="education">
             <EducationSection data={data.education} />
           </section>
         )}
 
-        {/* Experience */}
-        {data.experience && data.experience.length > 0 && (
+        {data.experience.length > 0 && (
           <section id="experience">
             <ExperienceSection data={data.experience} />
           </section>
         )}
 
-        {/* Skills & Projects */}
-        {(data.skills || skillsData.skills) && (
+        {Object.keys(mappedSkills).length > 0 && (
           <section id="skills">
-            <SkillsSection data={skillsData} />
+            <SkillsSection data={{ skills: mappedSkills }} />
           </section>
         )}
 
-        {/* Publications */}
-        {data.publications && data.publications.length > 0 && (
+        <section id="projects">
+          <ProjectsSection data={projectsData} />
+        </section>
+
+        {data.publications.length > 0 && (
           <section id="publications">
             <PublicationsSection data={publicationsData} ownerName={data.hero.name} ownerEnName={data.hero.enName} />
           </section>
         )}
 
-        {/* Awards */}
-        {data.awards && data.awards.length > 0 && (
+        {data.awards.length > 0 && (
           <section id="awards">
             <AwardsSection data={data.awards} />
           </section>
         )}
 
-        {/* Talks */}
         {data.talks && data.talks.length > 0 && (
           <section id="talks">
             <TalksSection data={data.talks} />
           </section>
         )}
       </div>
-    </main>
+    </div>
   )
 }

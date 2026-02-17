@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { locales, localeLabels, defaultLocale, type Locale } from '@/i18n'
 import { createLocalizedPath, getLocaleFromPathname } from '@/lib/i18n-utils'
-import { Languages } from 'lucide-react'
+import { Icon } from '@iconify/react'
 import { useTransition } from 'react'
 
 export default function LocaleSwitcher() {
@@ -29,7 +29,7 @@ export default function LocaleSwitcher() {
       <div className="bg-white/90 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl p-2">
         <div className="flex items-center gap-1">
           <div className="flex items-center gap-2 px-3 py-1">
-            <Languages className="h-4 w-4 text-slate-600" />
+            <Icon icon="mingcute:translate-2-line" className="h-4 w-4 text-slate-600" />
             <span className="text-sm font-medium text-slate-600">
               {t('language')}
             </span>

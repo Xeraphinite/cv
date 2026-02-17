@@ -21,10 +21,10 @@ export default async function Home({
       />
       
       <main className="min-h-screen bg-background print:bg-white">
-        <div className="flex justify-center p-6 print:p-0">
-          <CV data={cvData} />
+        <div className="flex justify-center p-0 print:p-0">
+          <CV data={cvData} locale={locale} />
         </div>
       </main>
     </>
   )
-} 
+}

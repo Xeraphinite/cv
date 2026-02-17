@@ -1,11 +1,11 @@
-import { Mic, Calendar, MapPin, ExternalLink } from "lucide-react"
+import { Icon } from '@iconify/react'
 
 interface Talk {
   title: string
   event: string
-  location: string
+  location?: string
   date: string
-  type: string
+  type?: string
   description?: string
   url?: string
   slides?: string
@@ -64,23 +64,23 @@ export function TalksSection({ data }: TalksSectionProps) {
   return (
     <section className="paper-section print:break-inside-avoid">
       <h2 className="paper-section-title print:text-black">
-        <Mic className="h-5 w-5 mr-3 inline-block text-primary" />
+        <Icon icon="mingcute:mic-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
         Talks & Presentations
       </h2>
 
-      <div className="space-y-8">
+      <div className="space-y-6">
         {talks.map((talk, index) => (
-          <div key={`${talk.title}-${index}`} className="paper-card print:bg-white print:border-gray-300 print:break-inside-avoid hover:shadow-lg transition-shadow duration-300">
-            <div className="space-y-3">
+          <div key={`${talk.title}-${index}`} className="paper-card print:bg-white print:break-inside-avoid transition-shadow duration-300">
+            <div className="space-y-2.5">
               {/* Talk Header */}
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <h3 className="paper-subtitle !text-base font-semibold text-foreground print:text-black leading-tight">
+                  <h3 className="paper-subtitle font-semibold text-foreground print:text-black leading-tight">
                     {talk.title}
                   </h3>
                   <div className="flex items-center gap-2 mt-2">
-                    <span className="paper-badge !bg-primary/10 !text-primary !text-xs">
-                      {talk.type}
+                    <span className="paper-badge !bg-primary/10 !text-primary text-xs">
+                      {talk.type ?? 'Talk'}
                     </span>
                   </div>
                 </div>
@@ -93,7 +93,7 @@ export function TalksSection({ data }: TalksSectionProps) {
                       className="p-1.5 rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
                       title="View Event"
                     >
-                      <ExternalLink className="h-4 w-4" />
+                      <Icon icon="mingcute:external-link-line" className="h-4 w-4" />
                     </a>
                   )}
                   {talk.slides && (
@@ -104,14 +104,14 @@ export function TalksSection({ data }: TalksSectionProps) {
                       className="p-1.5 rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
                       title="View Slides"
                     >
-                      <ExternalLink className="h-4 w-4" />
+                      <Icon icon="mingcute:external-link-line" className="h-4 w-4" />
                     </a>
                   )}
                 </div>
               </div>
 
               {/* Event Information */}
-              <div className="space-y-2 !mt-4">
+              <div className="space-y-2 !mt-3">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground print:text-gray-600">
                   <div className="font-medium text-foreground print:text-black">
                     {talk.event}
@@ -120,19 +120,19 @@ export function TalksSection({ data }: TalksSectionProps) {
                 
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-1 paper-meta">
                   <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4" />
+                    <Icon icon="mingcute:calendar-line" className="h-4 w-4" />
                     <span>{formatDate(talk.date)}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <MapPin className="h-4 w-4" />
-                    <span>{talk.location}</span>
+                    <Icon icon="mingcute:map-pin-line" className="h-4 w-4" />
+                    <span>{talk.location ?? 'N/A'}</span>
                   </div>
                 </div>
               </div>
 
               {/* Talk Description */}
               {talk.description && (
-                <p className="paper-body !text-sm !mt-4 pt-4 border-t border-border/60">
+                <p className="paper-body text-sm mt-3 pt-3">
                   {talk.description}
                 </p>
               )}

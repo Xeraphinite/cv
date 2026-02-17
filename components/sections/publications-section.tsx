@@ -1,27 +1,21 @@
 'use client'
 
-import { BookOpen, ExternalLink, Star, Award, FileText, Calendar } from "lucide-react"
+import { Icon } from '@iconify/react'
 import { useTranslations } from 'next-intl'
 
 // Improved type definitions
-type PublicationStatus = 'Published' | 'Under Review' | 'In Press' | 'Ongoing' | 'Under Review, R2' | '査読中' | '進行中' | '実質審査'
-
-type PublicationType = 'Journal Article' | 'Conference Paper' | 'Preprint' | 'Patent' | 'Workshop Paper' | 'Book Chapter' | '学术论文' | 'プレプリント' | '特許'
-
-type IndexingType = 'SCI TOP' | 'SCI I' | 'SCI II' | 'SCI III' | 'SCI' | 'JCR-Q1' | 'JCR-Q2' | 'JCR-Q3' | 'JCR-Q4' | 'JCR' | 'CCF-A' | 'CCF-B' | 'CCF-C' | 'EI' | 'ESCI'
-
 interface Publication {
   title: string
   authors: string[]
-  type: PublicationType
-  status: PublicationStatus
+  type: string
+  status: string
   highlight?: boolean
   involved?: boolean
   journal?: string
   publishedIn?: string
   doi?: string
   url?: string
-  indexing?: IndexingType[]
+  indexing?: string[]
   impactFactor?: number
   abstract?: string
   year?: string
@@ -34,17 +28,6 @@ interface PublicationsSectionProps {
   data: Publication[]
   ownerName?: string
   ownerEnName?: string
-}
-
-// Helper function for badge styling
-const getBadgeStyle = (type: 'type' | 'status' | 'indexing' | 'impact') => {
-  const styles = {
-    type: "bg-gradient-to-r from-rose-50 to-pink-50 text-rose-900 border border-rose-100 print:bg-gray-100 print:text-black print:border-gray-300",
-    status: "bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-900 border border-blue-100 print:bg-gray-50 print:text-black print:border-gray-300", 
-    indexing: "bg-gradient-to-r from-emerald-50 to-green-50 text-emerald-900 border border-emerald-100 print:bg-gray-100 print:text-black print:border-gray-300",
-    impact: "bg-gradient-to-r from-amber-50 to-yellow-50 text-amber-900 border border-amber-100 print:bg-gray-100 print:text-black print:border-gray-300"
-  }
-  return styles[type]
 }
 
 export function PublicationsSection({ data, ownerName, ownerEnName }: PublicationsSectionProps) {
@@ -79,18 +62,18 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
   return (
     <section className="paper-section print:break-inside-avoid-page">
       <h2 className="paper-section-title print:text-black">
-        <BookOpen className="h-5 w-5 mr-3 inline-block text-primary" />
+        <Icon icon="mingcute:book-6-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
         {t('sections.publications')}
       </h2>
 
-      <div className="space-y-8">
+      <div className="space-y-6">
         {data.map((publication, index) => (
-          <div key={`${publication.title}-${index}`} className="paper-card print:bg-white print:border-gray-300 print:break-inside-avoid hover:shadow-lg transition-shadow duration-300">
-            <div className="space-y-4">
+          <div key={`${publication.title}-${index}`} className="paper-card print:bg-white print:break-inside-avoid transition-shadow duration-300">
+            <div className="space-y-3">
               {/* Header with title and featured badge */}
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
-                  <h3 className="paper-subtitle !text-lg font-semibold text-foreground print:text-black leading-tight break-words">
+                  <h3 className="paper-subtitle font-semibold text-foreground print:text-black leading-tight break-words">
                     {publication.url ? (
                       <a
                         href={publication.url}
@@ -99,7 +82,7 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
                         className="hover:underline transition-all inline-flex items-start gap-2 group"
                       >
                         <span>{publication.title}</span>
-                        <ExternalLink className="h-4 w-4 mt-1 opacity-50 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                        <Icon icon="mingcute:external-link-line" className="h-4 w-4 mt-1 opacity-50 group-hover:opacity-100 transition-opacity flex-shrink-0" />
                       </a>
                     ) : (
                       publication.title
@@ -109,7 +92,7 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
                 
                 {publication.highlight && (
                   <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary print:bg-gray-100 print:text-black rounded-full whitespace-nowrap">
-                    <Star className="h-4 w-4" />
+                    <Icon icon="mingcute:star-fill" className="h-4 w-4" />
                     <span className="text-sm font-medium">Featured</span>
                   </div>
                 )}
@@ -121,10 +104,10 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
               </div>
               
               {/* Publication venue and meta information */}
-              <div className="space-y-2 !mt-5">
+              <div className="space-y-2 !mt-4">
                 {(publication.journal || publication.publishedIn) && (
                   <div className="flex items-start gap-3 paper-meta">
-                    <FileText className="h-4 w-4 mt-1 flex-shrink-0" />
+                    <Icon icon="mingcute:file-line" className="h-4 w-4 mt-1 flex-shrink-0" />
                     <div className="break-words">
                       <span className="italic">{publication.journal || publication.publishedIn}</span>
                       {formatPublicationMeta(publication) && (
@@ -136,13 +119,13 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
                 
                 {publication.doi && (
                   <div className="flex items-start gap-3 paper-meta">
-                    <Award className="h-4 w-4 mt-1 flex-shrink-0" />
+                    <Icon icon="mingcute:award-line" className="h-4 w-4 mt-1 flex-shrink-0" />
                     <div className="break-all">
                       <a
                         href={`https://doi.org/${publication.doi}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:underline transition-colors font-medium"
+                        className="hover:underline transition-colors font-medium font-mono"
                       >
                         {publication.doi}
                       </a>
@@ -152,23 +135,23 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
               </div>
               
               {/* Badges for type, status, indexing, and impact factor */}
-              <div className="flex flex-wrap items-center gap-2 !mt-5">
-                <span className="paper-badge !bg-primary/10 !text-primary !text-xs">
+              <div className="flex flex-wrap items-center gap-2 !mt-4">
+                <span className="paper-badge !bg-primary/10 !text-primary text-xs">
                   {publication.type}
                 </span>
                 
-                <span className="paper-badge !bg-blue-500/10 !text-blue-600 !text-xs">
+                <span className="paper-badge !bg-blue-500/10 !text-blue-600 text-xs">
                   {publication.status}
                 </span>
                 
                 {publication.indexing?.map((idx) => (
-                  <span key={idx} className="paper-badge !bg-green-500/10 !text-green-600 !text-xs">
+                  <span key={idx} className="paper-badge !bg-green-500/10 !text-green-600 text-xs">
                     {idx}
                   </span>
                 ))}
                 
                 {publication.impactFactor && (
-                  <span className="paper-badge !bg-amber-500/10 !text-amber-600 !text-xs">
+                  <span className="paper-badge !bg-amber-500/10 !text-amber-600 text-xs font-mono">
                     IF: {publication.impactFactor}
                   </span>
                 )}
@@ -176,8 +159,8 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
 
               {/* Abstract */}
               {publication.abstract && (
-                <div className="!mt-5 pt-4 border-t border-border/60">
-                  <p className="paper-body !text-sm break-words">{publication.abstract}</p>
+                <div className="!mt-4 pt-3">
+                  <p className="paper-body text-sm break-words">{publication.abstract}</p>
                 </div>
               )}
             </div>

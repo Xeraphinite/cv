@@ -9,7 +9,7 @@ export function CVFooter() {
   const t = useTranslations()
   const pathname = usePathname()
   const currentLocale = getLocaleFromPathname(pathname)
-  
+
   const lastUpdated = new Date()
   const fullDate = lastUpdated.toLocaleDateString(currentLocale || 'en', {
     year: 'numeric',
@@ -24,7 +24,7 @@ export function CVFooter() {
       icon: 'mingcute:rss-line'
     },
     {
-      href: '/sitemap.xml', 
+      href: '/sitemap.xml',
       label: 'Sitemap',
       icon: 'mingcute:map-2-line'
     },
@@ -45,7 +45,7 @@ export function CVFooter() {
             {t('common.lastUpdated')}: {fullDate}
           </span>
         </div>
-        
+
         {/* Links */}
         <div className="flex items-center gap-4">
           {footerLinks.map((link) => (

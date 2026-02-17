@@ -1,6 +1,6 @@
 'use client'
 
-import { GraduationCap, Calendar, User } from "lucide-react"
+import { Icon } from '@iconify/react'
 import { useSectionTranslations, useLabelTranslations } from '@/hooks/use-translations'
 
 interface EducationItem {
@@ -31,15 +31,15 @@ export function EducationSection({ data }: EducationSectionProps) {
   return (
     <section className="paper-section print:break-inside-avoid">
       <h2 className="paper-section-title print:text-black">
-        <GraduationCap className="h-5 w-5 mr-3 inline-block text-primary" />
+        <Icon icon="mingcute:mortarboard-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
         {tSection('education')}
       </h2>
 
-      <div className="space-y-8">
+      <div className="space-y-6">
         {data.map((education, index) => (
-          <div key={`${education.institution}-${education.degree}-${index}`} className="paper-card print:bg-white print:border-gray-300 transition-all duration-300 hover:shadow-lg hover:border-primary/20">
-            <div className="flex flex-col sm:flex-row gap-6">
-              <div className="flex-1 space-y-4">
+          <div key={`${education.institution}-${education.degree}-${index}`} className="paper-card print:bg-white transition-all duration-300">
+            <div className="flex flex-col sm:flex-row gap-5">
+              <div className="flex-1 space-y-3">
                 {/* Institution and Degree */}
                 <div>
                   <h3 className="paper-subtitle print:text-black mb-1">
@@ -51,15 +51,15 @@ export function EducationSection({ data }: EducationSectionProps) {
                 </div>
 
                 {/* Duration and Supervisor */}
-                <div className="flex flex-wrap gap-x-6 gap-y-2 paper-meta print:text-gray-600">
+                <div className="flex flex-wrap gap-x-4 gap-y-1.5 paper-meta print:text-gray-600">
                   <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4" />
+                    <Icon icon="mingcute:calendar-line" className="h-4 w-4" />
                     <span>{formatDate(education.startDate)} - {formatDate(education.endDate)}</span>
                   </div>
                   
                   {education.supervisor && (
                     <div className="flex items-center gap-2">
-                      <User className="h-4 w-4" />
+                      <Icon icon="mingcute:user-3-line" className="h-4 w-4" />
                       <span>{tLabel('supervisor')}: {education.supervisor}</span>
                     </div>
                   )}
@@ -69,8 +69,8 @@ export function EducationSection({ data }: EducationSectionProps) {
 
             {/* Highlights */}
             {education.highlights && education.highlights.length > 0 && (
-              <div className="mt-6">
-                <ul className="space-y-2">
+              <div className="mt-4">
+                <ul className="space-y-1.5">
                   {education.highlights.map((highlight, i) => (
                     <li key={`${education.institution}-highlight-${i}`} className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 bg-primary/40 rounded-full mt-2 shrink-0" />

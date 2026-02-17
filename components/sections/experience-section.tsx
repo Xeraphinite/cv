@@ -1,6 +1,6 @@
 'use client'
 
-import { Calendar, Briefcase, Building2 } from "lucide-react"
+import { Icon } from '@iconify/react'
 import { useTranslations } from 'next-intl'
 
 interface Experience {
@@ -27,20 +27,20 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
   return (
     <section className="paper-section print:break-inside-avoid">
       <h2 className="paper-section-title print:text-black">
-        <Briefcase className="h-5 w-5 mr-3 inline-block text-primary" />
+        <Icon icon="mingcute:briefcase-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
         {t('sections.experience')}
       </h2>
 
-      <div className="space-y-8">
+      <div className="space-y-6">
         {data.map((experience, index) => (
-          <div key={`${experience.company}-${experience.position}-${index}`} className="paper-card print:bg-white print:border-gray-300 print:break-inside-avoid transition-all duration-300 hover:shadow-lg hover:border-primary/20">
-            <div className="space-y-4">
+          <div key={`${experience.company}-${experience.position}-${index}`} className="paper-card print:bg-white print:break-inside-avoid transition-all duration-300">
+            <div className="space-y-3">
               {/* Header section */}
               <div className="flex flex-col sm:flex-row justify-between sm:items-center">
                 <div>
                   <h3 className="paper-subtitle print:text-black">{experience.position}</h3>
                   <div className="flex items-center gap-2 paper-body mt-1">
-                    <Building2 className="h-4 w-4 text-muted-foreground" />
+                    <Icon icon="mingcute:building-2-line" className="h-4 w-4 text-muted-foreground" />
                     <span>{experience.company}</span>
                     {experience.location && (
                       <>
@@ -51,7 +51,7 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
                   </div>
                 </div>
                 <div className="flex items-center gap-2 paper-meta mt-2 sm:mt-0">
-                  <Calendar className="h-4 w-4" />
+                  <Icon icon="mingcute:calendar-line" className="h-4 w-4" />
                   <span>
                     {experience.startDate} - {experience.endDate || 'Present'}
                   </span>
@@ -59,14 +59,14 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
               </div>
 
               {experience.summary && (
-                <p className="paper-body print:text-gray-700 !mt-5">
+                <p className="paper-body print:text-gray-700 !mt-4">
                   {experience.summary}
                 </p>
               )}
 
               {experience.highlights && experience.highlights.length > 0 && (
-                <div className="!mt-5">
-                  <ul className="space-y-2">
+                <div className="!mt-4">
+                  <ul className="space-y-1.5">
                     {experience.highlights.map((highlight, idx) => (
                       <li key={`${experience.company}-highlight-${idx}`} className="flex items-start gap-3">
                         <div className="w-1.5 h-1.5 bg-primary/40 rounded-full mt-2 shrink-0" />

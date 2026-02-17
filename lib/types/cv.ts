@@ -1,3 +1,5 @@
+import type { SupportedLocale } from "@/lib/config/app-config"
+
 export interface SocialLinks {
   email?: string;
   github?: string;
@@ -99,7 +101,7 @@ export interface CVData {
   talks?: TalkItem[];
 }
 
-export type Locale = 'en' | 'zh' | 'ja';
+export type Locale = SupportedLocale
 
 export interface LocalizedCVData extends CVData {
   locale: Locale;
