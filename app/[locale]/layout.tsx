@@ -105,7 +105,7 @@ export default async function LocaleLayout({
             <CVHeader />
             <LocaleDetector />
             {children}
-            <CVFooter />
+            <CVFooter className="lg:hidden" />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

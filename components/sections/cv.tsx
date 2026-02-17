@@ -6,6 +6,7 @@ import { ProjectsSection } from './projects-section'
 import { PublicationsSection } from './publications-section'
 import { AwardsSection } from './awards-section'
 import { TalksSection } from './talks-section'
+import { CVFooter } from '@/components/layout/cv-footer'
 import type { CVData } from '@/lib/types/cv'
 
 interface CVProject {
@@ -47,51 +48,59 @@ export function CV({ data, locale }: CVProps) {
   }))
 
   return (
-    <div className="paper-container grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] lg:gap-10">
-      <section id="hero" className="lg:sticky lg:top-24 lg:self-start">
-        <HeroSection data={data.hero} locale={locale} />
-      </section>
-
-      <div className="py-2 sm:py-4 lg:py-6">
-        {data.education.length > 0 && (
-          <section id="education">
-            <EducationSection data={data.education} />
+    <div className="paper-container">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] lg:gap-10">
+        <div className="lg:sticky lg:top-4 lg:flex lg:h-[calc(100vh-2rem)] lg:flex-col">
+          <section id="hero" className="lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
+            <HeroSection data={data.hero} locale={locale} />
           </section>
-        )}
 
-        {data.experience.length > 0 && (
-          <section id="experience">
-            <ExperienceSection data={data.experience} />
+          <div className="hidden lg:block">
+            <CVFooter compact showLocaleThemeControls className="mt-0 block max-w-none border-t-0" />
+          </div>
+        </div>
+
+        <div className="py-2 sm:py-4 lg:py-6">
+          {data.education.length > 0 && (
+            <section id="education">
+              <EducationSection data={data.education} />
+            </section>
+          )}
+
+          {data.experience.length > 0 && (
+            <section id="experience">
+              <ExperienceSection data={data.experience} />
+            </section>
+          )}
+
+          {Object.keys(mappedSkills).length > 0 && (
+            <section id="skills">
+              <SkillsSection data={{ skills: mappedSkills }} />
+            </section>
+          )}
+
+          <section id="projects">
+            <ProjectsSection data={projectsData} />
           </section>
-        )}
 
-        {Object.keys(mappedSkills).length > 0 && (
-          <section id="skills">
-            <SkillsSection data={{ skills: mappedSkills }} />
-          </section>
-        )}
+          {data.publications.length > 0 && (
+            <section id="publications">
+              <PublicationsSection data={publicationsData} ownerName={data.hero.name} ownerEnName={data.hero.enName} />
+            </section>
+          )}
 
-        <section id="projects">
-          <ProjectsSection data={projectsData} />
-        </section>
+          {data.awards.length > 0 && (
+            <section id="awards">
+              <AwardsSection data={data.awards} />
+            </section>
+          )}
 
-        {data.publications.length > 0 && (
-          <section id="publications">
-            <PublicationsSection data={publicationsData} ownerName={data.hero.name} ownerEnName={data.hero.enName} />
-          </section>
-        )}
-
-        {data.awards.length > 0 && (
-          <section id="awards">
-            <AwardsSection data={data.awards} />
-          </section>
-        )}
-
-        {data.talks && data.talks.length > 0 && (
-          <section id="talks">
-            <TalksSection data={data.talks} />
-          </section>
-        )}
+          {data.talks && data.talks.length > 0 && (
+            <section id="talks">
+              <TalksSection data={data.talks} />
+            </section>
+          )}
+        </div>
       </div>
     </div>
   )

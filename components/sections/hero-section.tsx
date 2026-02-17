@@ -101,6 +101,7 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
   const t = useTranslations()
   const typographyClasses = getTypographyClasses(locale)
   const fontClass = getFontClass(locale)
+  const serifFontClass = getFontClass(locale, 'serif')
 
   const handleDownloadPDF = () => {
     const link = document.createElement('a')
@@ -178,7 +179,7 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
                       className="absolute inset-0 h-4 w-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
                     />
                   </div>
-                  <span className={fontClass}>{data.location}</span>
+                  <span className={serifFontClass}>{data.location}</span>
                 </div>
               )}
 

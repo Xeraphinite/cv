@@ -2,6 +2,7 @@
 
 import { Icon } from '@iconify/react'
 import clsx from 'clsx'
+import { useTranslations } from 'next-intl'
 import { useEffect, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
@@ -14,17 +15,46 @@ import {
 export interface TOCSection {
   id: string
   title: string
-  element?: HTMLElement
 }
 
 interface TableOfContentsProps {
-  sections: TOCSection[]
+  className?: string
 }
 
-export function TableOfContents({ sections }: TableOfContentsProps) {
-  const [currentSection, setCurrentSection] = useState<string>(sections[0]?.id || '')
+export function TableOfContents({ className }: TableOfContentsProps) {
+  const t = useTranslations()
+  const [sections, setSections] = useState<TOCSection[]>([])
+  const [currentSection, setCurrentSection] = useState<string>('')
   const isProgrammaticScrollRef = useRef(false)
   const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    const sectionElements = Array.from(document.querySelectorAll('main section[id]')) as HTMLElement[]
+    const nextSections = sectionElements
+      .map((element) => {
+        const id = element.id
+        if (!id) return null
+        if (id === 'hero') {
+          return { id, title: t('navigation.about') || 'About' }
+        }
+
+        const heading = element.querySelector('h2')
+        const title = heading?.textContent?.trim()
+        if (title) return { id, title }
+
+        return {
+          id,
+          title: id
+            .split('-')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' '),
+        }
+      })
+      .filter((section): section is TOCSection => section !== null)
+
+    setSections(nextSections)
+    setCurrentSection(nextSections[0]?.id || '')
+  }, [t])
 
   useEffect(() => {
     if (sections.length === 0) return
@@ -102,42 +132,20 @@ export function TableOfContents({ sections }: TableOfContentsProps) {
   }
 
   return (
-    <div className="flex items-center">
+    <div className={clsx('flex items-center', className)}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
             size="sm"
-            className="hidden items-center gap-2 font-medium text-muted-foreground text-sm md:flex"
+            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium hover:bg-muted/50"
+            aria-label="Table of contents"
           >
-            <Icon icon="mingcute:list-check-3-line" className="h-4 w-4" />
-            <span className="max-w-48 truncate">{currentSectionData?.title || sections[0]?.title}</span>
+            <span className="max-w-32 truncate">{currentSectionData?.title || sections[0]?.title}</span>
             <Icon icon="mingcute:down-line" className="h-3 w-3" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="center" className="max-h-80 w-64 overflow-y-auto" sideOffset={8}>
-          {sections.map((section) => (
-            <DropdownMenuItem
-              key={section.id}
-              onClick={() => handleSectionClick(section.id)}
-              className={clsx(
-                'cursor-pointer',
-                currentSection === section.id ? 'bg-primary/10 font-medium text-primary' : 'hover:bg-muted/50'
-              )}
-            >
-              {section.title}
-            </DropdownMenuItem>
-          ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
-
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="sm" className="md:hidden" aria-label="Table of contents">
-            <Icon icon="mingcute:list-check-3-line" className="h-4 w-4" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="center" className="max-h-80 w-64 overflow-y-auto" sideOffset={8}>
+        <DropdownMenuContent align="center" className="max-h-80 w-56 overflow-y-auto" sideOffset={8}>
           {sections.map((section) => (
             <DropdownMenuItem
               key={section.id}

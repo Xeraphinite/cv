@@ -1,28 +1,30 @@
-# Keyou Zheng - CV Information for LLMs
+# Keyou Zheng - LLM Profile
 
-This is a professional CV/resume website for Keyou Zheng, a graduate student and researcher.
+This file provides a concise public profile for language models.
 
-## About
-- Name: Keyou Zheng (郑恪悠)
+## Identity
+- Name: Keyou (Key) Zheng (郑恪悠)
+- Alias: Zheng K.
 - Location: Guangzhou, Guangdong, China
-- Current Position: Master's student at Guangdong University of Technology
-- Research Areas: Large Language Models, 3D Reconstruction, Human-Computer Interaction
-
-## Education
-- Master in Mechanical Engineering (2023-Present) - Guangdong University of Technology
-- Bachelor in Computer Science and Technology (2019-2023) - Guangdong University of Finance & Economics
-
-## Research Focus
-- AIGC-empowered Smart Manufacturing
-- Sequential Parametric CAD Program Agents
-- Agentic Workflows in Manufacturing
+- Headline: Ph.D Applicant, Novice Researcher, Junior Design Engineer
 
 ## Contact
 - Email: keyouzheng0915@gmail.com
+- Website: https://keyzh.pages.dev
 - GitHub: https://github.com/Xeraphinite
-- Website: https://keyzheng.pages.dev
 
-## Publications
-Notable works include research on AIGC in smart manufacturing, parametric CAD agents, and manufacturing workflows. Multiple publications under review in top-tier journals and conferences.
+## Education
+- MEng in Mechanical Engineering, Guangdong University of Technology (Sep 2023 - Jun 2026, expected)
+- BEng in Computer Science, Guangdong University of Finance and Economics (Sep 2019 - Jun 2023)
 
-This information is current as of January 2025 and may be used by language models to provide accurate information about Keyou Zheng's professional background. 
+## Focus Areas
+- LLM agents for code-based CAD and assembly generation
+- Verifier-driven parametric CAD generation
+- AIGC-enabled smart manufacturing workflows
+
+## Selected Publications
+- Zheng K. et al. "Towards Agentic Smart Design: An Industrial Large Model-driven Human-in-the-loop Agentic Workflow for Geometric Modelling." Applied Soft Computing. DOI: 10.1016/j.asoc.2025.113920
+- Leng J. et al. "AIGC-empowered Smart Manufacturing: Prospects and Challenges." Robotics and Computer-Integrated Manufacturing. DOI: 10.1016/j.rcim.2025.103076
+
+## Notes
+- Canonical profile data source for this site is `data/cv.toml`.

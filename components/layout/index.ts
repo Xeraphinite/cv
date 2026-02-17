@@ -1,5 +1,6 @@
 export * from './cv-header'
 export * from './cv-footer'
+export * from './cv-controls'
 export * from './locale-detector'
 export * from './locale-switcher'
-export * from './table-of-contents' 
+export * from './table-of-contents'
