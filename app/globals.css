@@ -281,13 +281,14 @@
 
 /* Apple-inspired contact links */
 .paper-contact-link {
-  @apply inline-flex items-center gap-3 text-foreground/85 hover:text-primary transition-all duration-300 ease-out;
-  padding: 0.375rem;
+  @apply inline-flex w-fit self-start items-center gap-2 text-foreground/85 hover:text-primary transition-all duration-300 ease-out;
+  padding: 0;
   border-radius: 0.75rem;
   font-weight: 500;
 }
 
 .paper-contact-link:hover {
+  padding: 0.25rem 0.5rem;
   background: hsl(var(--muted) / 0.5);
   transform: translateY(-1px);
 }
@@ -460,56 +461,6 @@ samp,
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
 }
-
-/* Enhanced print styles */
-@media print {
-  @page {
-    size: A4;
-    margin: 0.75in;
-  }
-  
-  * {
-    @apply text-black bg-white;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-  
-  body {
-    @apply text-black bg-white;
-    background: none !important;
-  }
-  
-  .paper-card {
-    @apply bg-white shadow-none;
-    backdrop-filter: none;
-  }
-  
-  .paper-badge {
-    @apply bg-gray-100 text-gray-700;
-  }
-  
-  .print\:hidden {
-    @apply hidden;
-  }
-  
-  .print\:text-black {
-    @apply text-black;
-  }
-  
-  .print\:bg-white {
-    @apply bg-white;
-  }
-  
-  .print\:break-after-avoid {
-    break-after: avoid;
-  }
-  
-  .print\:break-inside-avoid {
-    break-inside: avoid;
-  }
-}
-
-
 
 /* Accessibility enhancements */
 @media (prefers-reduced-motion: reduce) {

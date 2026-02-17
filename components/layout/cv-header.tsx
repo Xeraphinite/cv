@@ -179,7 +179,7 @@ export function CVHeader() {
   return (
     <header
       className={clsx(
-        'sticky top-4 z-50 mx-auto mb-8 max-w-2xl transition-all duration-300 print:hidden',
+        'sticky top-4 z-50 mx-auto mb-8 max-w-2xl transition-all duration-300 ',
         isHeaderVisible ? 'translate-y-0 opacity-100' : '-translate-y-3 opacity-0 pointer-events-none',
         isScrolled
           ? 'rounded-2xl border border-border bg-background/80 px-4 py-2 shadow-lg backdrop-blur-lg'

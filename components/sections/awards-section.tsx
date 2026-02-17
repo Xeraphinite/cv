@@ -1,5 +1,6 @@
 'use client'
 
+import { Icon } from '@iconify/react'
 import { useTranslations } from 'next-intl'
 
 interface AwardItem {
@@ -19,8 +20,9 @@ export function AwardsSection({ data }: AwardsSectionProps) {
   if (!data || data.length === 0) return null
 
   return (
-    <section className="paper-section print:break-inside-avoid-page">
-      <h2 className="paper-section-title print:text-black">
+    <section className="paper-section">
+      <h2 className="paper-section-title">
+        <Icon icon="mingcute:medal-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
         {t('sections.awards')}
       </h2>
 
@@ -28,7 +30,7 @@ export function AwardsSection({ data }: AwardsSectionProps) {
         {data.map((award, index) => (
           <div
             key={`${award.name}-${award.institute}-${index}`}
-            className="paper-body leading-relaxed text-foreground print:text-black"
+            className="paper-body leading-relaxed text-foreground"
           >
             <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1.5fr)_minmax(0,1.2fr)_minmax(6ch,auto)_minmax(0,1.8fr)] gap-x-4 gap-y-1 items-baseline">
               <span className="font-medium min-w-0 truncate">{award.name}</span>

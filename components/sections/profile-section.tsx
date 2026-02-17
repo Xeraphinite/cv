@@ -84,7 +84,7 @@ export function ProfileSection({ data }: ProfileSectionProps) {
     {
       label: "Awards",
       value: highlights.awardsCount || 0,
-      icon: "mingcute:award-line",
+      icon: "mingcute:medal-line",
     },
     {
       label: "Projects",
@@ -99,13 +99,13 @@ export function ProfileSection({ data }: ProfileSectionProps) {
   ]
 
   return (
-    <section className="paper-section print:break-inside-avoid">
-      <h2 className="paper-section-title print:text-black">
+    <section className="paper-section">
+      <h2 className="paper-section-title">
         <Icon icon="mingcute:star-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
         Profile Highlights
       </h2>
 
-      <div className="paper-card print:bg-white">
+      <div className="paper-card">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {highlightItems.map((item) => (
             <div key={item.label} className="flex flex-col items-center text-center p-2 rounded-lg transition-all duration-200 hover:bg-muted/80">
@@ -113,7 +113,7 @@ export function ProfileSection({ data }: ProfileSectionProps) {
                 <Icon icon={item.icon} className="h-6 w-6" />
               </div>
               <div className="space-y-1">
-                <div className="text-2xl font-bold text-foreground print:text-black">
+                <div className="text-2xl font-bold text-foreground">
                   {item.value}
                 </div>
                 <div className="paper-meta">
@@ -132,16 +132,16 @@ export function ResearchInterestsSection({ data }: ResearchInterestsSectionProps
   if (!data.researchInterests || data.researchInterests.length === 0) return null
 
   return (
-    <section className="paper-section print:break-inside-avoid">
-      <h2 className="paper-section-title print:text-black">
+    <section className="paper-section">
+      <h2 className="paper-section-title">
         <Icon icon="mingcute:brain-line" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
         Research Interests
       </h2>
 
-      <div className="paper-card print:bg-white">
+      <div className="paper-card">
         <div className="flex flex-wrap gap-3">
           {data.researchInterests.map((interest) => (
-            <span key={interest} className="paper-badge print:bg-gray-100 print:text-gray-700">
+            <span key={interest} className="paper-badge">
               {interest}
             </span>
           ))}

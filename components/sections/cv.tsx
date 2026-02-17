@@ -47,12 +47,12 @@ export function CV({ data, locale }: CVProps) {
   }))
 
   return (
-    <div className="paper-container">
-      <section id="hero">
+    <div className="paper-container grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] lg:gap-10">
+      <section id="hero" className="lg:sticky lg:top-24 lg:self-start">
         <HeroSection data={data.hero} locale={locale} />
       </section>
 
-      <div className="py-2 sm:py-4">
+      <div className="py-2 sm:py-4 lg:py-6">
         {data.education.length > 0 && (
           <section id="education">
             <EducationSection data={data.education} />

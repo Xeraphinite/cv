@@ -20,8 +20,8 @@ export default async function Home({
         fetchPriority="high"
       />
       
-      <main className="min-h-screen bg-background print:bg-white">
-        <div className="flex justify-center p-0 print:p-0">
+      <main className="min-h-screen bg-background">
+        <div className="flex justify-center p-0">
           <CV data={cvData} locale={locale} />
         </div>
       </main>

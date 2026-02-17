@@ -62,20 +62,20 @@ export function TalksSection({ data }: TalksSectionProps) {
   }
 
   return (
-    <section className="paper-section print:break-inside-avoid">
-      <h2 className="paper-section-title print:text-black">
+    <section className="paper-section">
+      <h2 className="paper-section-title">
         <Icon icon="mingcute:mic-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
         Talks & Presentations
       </h2>
 
       <div className="space-y-6">
         {talks.map((talk, index) => (
-          <div key={`${talk.title}-${index}`} className="paper-card print:bg-white print:break-inside-avoid transition-shadow duration-300">
+          <div key={`${talk.title}-${index}`} className="paper-card transition-shadow duration-300">
             <div className="space-y-2.5">
               {/* Talk Header */}
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <h3 className="paper-subtitle font-semibold text-foreground print:text-black leading-tight">
+                  <h3 className="paper-subtitle font-semibold text-foreground leading-tight">
                     {talk.title}
                   </h3>
                   <div className="flex items-center gap-2 mt-2">
@@ -84,7 +84,7 @@ export function TalksSection({ data }: TalksSectionProps) {
                     </span>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 ml-4 print:hidden">
+                <div className="flex items-center gap-2 ml-4">
                   {talk.url && (
                     <a
                       href={talk.url}
@@ -112,8 +112,8 @@ export function TalksSection({ data }: TalksSectionProps) {
 
               {/* Event Information */}
               <div className="space-y-2 !mt-3">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground print:text-gray-600">
-                  <div className="font-medium text-foreground print:text-black">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div className="font-medium text-foreground">
                     {talk.event}
                   </div>
                 </div>

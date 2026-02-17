@@ -25,7 +25,7 @@ export default function LocaleSwitcher() {
   }
   
   return (
-    <div className="fixed top-6 right-6 z-50 print:hidden">
+    <div className="fixed top-6 right-6 z-50">
       <div className="bg-white/90 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl p-2">
         <div className="flex items-center gap-1">
           <div className="flex items-center gap-2 px-3 py-1">
@@ -45,11 +45,7 @@ export default function LocaleSwitcher() {
                   {/* Regular link for non-JS environments */}
                   <Link
                     href={href}
-                    className={`block px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-105 ${
-                      isActive
-                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
-                        : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
-                    } ${isPending ? 'opacity-50 pointer-events-none' : ''}`}
+                    className={`block px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-105 ${ isActive ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800' } ${isPending ? 'opacity-50 pointer-events-none' : ''}`}
                     title={`Switch to ${localeLabels[locale]}`}
                     aria-label={`Switch to ${localeLabels[locale]}`}
                     onClick={(e) => {

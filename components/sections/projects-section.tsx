@@ -51,22 +51,22 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
   const projects = data && data.length > 0 ? data : defaultProjects
 
   return (
-    <section className="paper-section print:break-inside-avoid">
-      <h2 className="paper-section-title print:text-black">
+    <section className="paper-section">
+      <h2 className="paper-section-title">
         <Icon icon="mingcute:light-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
         {t('sections.selectedProjects')}
       </h2>
 
       <div className="space-y-1">
         {projects.map((project) => (
-          <div key={project.name} className="paper-body leading-relaxed text-foreground print:text-black">
+          <div key={project.name} className="paper-body leading-relaxed text-foreground">
             <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1.2fr)_minmax(5ch,auto)_minmax(9ch,auto)_minmax(0,2fr)_minmax(0,1.5fr)_auto] gap-x-4 gap-y-1 items-baseline">
               <span className="font-medium min-w-0 truncate">{project.name}</span>
               <span className="font-mono whitespace-nowrap md:text-right">{project.year ?? ''}</span>
               <span className="min-w-0 truncate">{project.status ?? ''}</span>
               <span className="min-w-0 truncate">{project.description}</span>
               <span className="font-mono min-w-0 truncate text-muted-foreground">{project.tech.join(', ')}</span>
-              <span className="hidden print:hidden md:flex items-center gap-2 whitespace-nowrap">
+              <span className="hidden md:flex items-center gap-2 whitespace-nowrap">
                 {project.url ? (
                   <a
                     href={project.url}

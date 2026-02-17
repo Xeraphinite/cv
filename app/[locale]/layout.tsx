@@ -32,6 +32,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     publisher: "Keyou Zheng",
     generator: 'Next.js',
     robots: "index, follow",
+    icons: {
+      icon: [{ url: "/icon.png", type: "image/png" }],
+      shortcut: ["/icon.png"],
+      apple: [{ url: "/icon.png", type: "image/png" }],
+    },
     alternates: {
       canonical: `/${localeTyped}`,
       languages: Object.fromEntries(
@@ -85,7 +90,7 @@ export default async function LocaleLayout({
   const direction = getDirection(localeTyped)
 
   return (
-    <html lang={localeTyped} dir={direction}>
+    <html lang={localeTyped} dir={direction} suppressHydrationWarning>
       <Head>
         <Link rel="preconnect" href="https://fonts.googleapis.com" />
         <Link rel="preconnect" href="https://fonts.gstatic.com" />

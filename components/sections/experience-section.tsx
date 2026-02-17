@@ -25,20 +25,20 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
   }
 
   return (
-    <section className="paper-section print:break-inside-avoid">
-      <h2 className="paper-section-title print:text-black">
+    <section className="paper-section">
+      <h2 className="paper-section-title">
         <Icon icon="mingcute:briefcase-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
         {t('sections.experience')}
       </h2>
 
       <div className="space-y-6">
         {data.map((experience, index) => (
-          <div key={`${experience.company}-${experience.position}-${index}`} className="paper-card print:bg-white print:break-inside-avoid transition-all duration-300">
+          <div key={`${experience.company}-${experience.position}-${index}`} className="paper-card transition-all duration-300">
             <div className="space-y-3">
               {/* Header section */}
               <div className="flex flex-col sm:flex-row justify-between sm:items-center">
                 <div>
-                  <h3 className="paper-subtitle print:text-black">{experience.position}</h3>
+                  <h3 className="paper-subtitle">{experience.position}</h3>
                   <div className="flex items-center gap-2 paper-body mt-1">
                     <Icon icon="mingcute:building-2-line" className="h-4 w-4 text-muted-foreground" />
                     <span>{experience.company}</span>
@@ -59,7 +59,7 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
               </div>
 
               {experience.summary && (
-                <p className="paper-body print:text-gray-700 !mt-4">
+                <p className="paper-body !mt-4">
                   {experience.summary}
                 </p>
               )}
@@ -70,7 +70,7 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
                     {experience.highlights.map((highlight, idx) => (
                       <li key={`${experience.company}-highlight-${idx}`} className="flex items-start gap-3">
                         <div className="w-1.5 h-1.5 bg-primary/40 rounded-full mt-2 shrink-0" />
-                        <span className="paper-body print:text-gray-700">{highlight}</span>
+                        <span className="paper-body">{highlight}</span>
                       </li>
                     ))}
                   </ul>

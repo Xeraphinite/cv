@@ -36,7 +36,7 @@ export function CVFooter() {
   ]
 
   return (
-    <footer className="mx-auto mt-12 max-w-2xl border-t border-border/30 bg-background/60 backdrop-blur-sm print:hidden">
+    <footer className="mx-auto mt-12 max-w-2xl border-t border-border/30 bg-background/60 backdrop-blur-sm">
       <div className="flex flex-col items-center gap-3 px-4 py-6 text-xs text-muted-foreground sm:flex-row sm:justify-between">
         {/* Last Updated */}
         <div className="flex items-center gap-1.5">

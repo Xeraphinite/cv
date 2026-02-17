@@ -135,9 +135,9 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
   }
 
   return (
-    <header className="py-6 sm:py-8 print:py-6">
+    <header className="pt-0 pb-6 sm:pb-8">
       <div className="paper-card">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-[128px_1fr] md:gap-8">
+        <div className="grid grid-cols-1 gap-6">
           <div className="relative h-28 w-28 sm:h-32 sm:w-32 paper-avatar">
             <Image
               src={data.avatar || '/placeholder-user.jpg'}
@@ -153,13 +153,19 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
           </div>
 
           <div className="min-w-0">
-            <h1 className={`${typographyClasses.title} mb-2 print:text-black`}>{formatNameWithRuby()}</h1>
+            <h1 className={`${typographyClasses.title} mb-2`}>{formatNameWithRuby()}</h1>
 
             {locale !== 'ja' && data.enName && (
-              <h2 className={`${typographyClasses.subtitle} text-muted-foreground/80 print:text-gray-600`}>{data.enName}</h2>
+              <h2 className={`${typographyClasses.subtitle} text-muted-foreground/80`}>{data.enName}</h2>
             )}
 
-            <div className="mt-3 flex flex-wrap gap-2 sm:gap-3 print:mt-3">
+            {data.description && (
+              <p className={`${typographyClasses.body} mt-3 text-primary/90`}>{data.description}</p>
+            )}
+
+            {data.bio && <p className={`${typographyClasses.body} mt-4 text-foreground/85`}>{data.bio}</p>}
+
+            <div className="mt-4 flex flex-col space-y-3">
               {data.location && (
                 <div className="paper-contact-link group">
                   <div className="relative h-4 w-4">
@@ -183,7 +189,7 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
                 const href = getHref(value)
                 const label = getLabel(value)
                 const isClickable = key !== 'wechat'
-                const labelClass = key === 'email' ? 'break-all' : 'max-w-36 truncate'
+                const labelClass = 'break-all'
 
                 if (isClickable) {
                   return (
@@ -226,7 +232,7 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
                 )
               })}
 
-              <button type="button" onClick={handleDownloadPDF} className="paper-contact-link group print:hidden">
+              <button type="button" onClick={handleDownloadPDF} className="paper-contact-link group">
                 <div className="relative h-4 w-4">
                   <Icon
                     icon="mingcute:pdf-line"
@@ -239,22 +245,14 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
                 </div>
                 <span>PDF</span>
               </button>
-            </div>
 
-            {data.description && (
-              <p className={`${typographyClasses.body} mt-3 text-primary/90 print:text-gray-800`}>{data.description}</p>
-            )}
-
-            <div className={`mt-4 flex flex-wrap gap-4 ${typographyClasses.meta} print:text-gray-600`}>
               {data.age && (
-                <span className="inline-flex items-center gap-2">
+                <span className={`inline-flex items-center gap-2 paper-contact-link ${typographyClasses.meta}`}>
                   <Icon icon="mingcute:calendar-line" className="h-4 w-4 text-primary/70" />
                   <span className={`font-medium ${fontClass}`}>{formatAge(data.age)}</span>
                 </span>
               )}
             </div>
-
-            {data.bio && <p className={`${typographyClasses.body} mt-4 text-foreground/85 print:text-gray-700`}>{data.bio}</p>}
           </div>
         </div>
       </div>

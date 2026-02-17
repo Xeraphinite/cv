@@ -42,7 +42,7 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
                      (ownerName && author.includes?.(ownerName)) || (ownerEnName && author.includes?.(ownerEnName))
       
       return (
-        <span key={author} className={isOwner ? "font-bold text-foreground print:text-black" : "text-muted-foreground print:text-gray-600"}>
+        <span key={author} className={isOwner ? "font-bold text-foreground " : "text-muted-foreground "}>
           {author}
           {index < authors.length - 1 && ", "}
         </span>
@@ -60,20 +60,20 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
   }
 
   return (
-    <section className="paper-section print:break-inside-avoid-page">
-      <h2 className="paper-section-title print:text-black">
+    <section className="paper-section">
+      <h2 className="paper-section-title">
         <Icon icon="mingcute:book-6-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
         {t('sections.publications')}
       </h2>
 
       <div className="space-y-6">
         {data.map((publication, index) => (
-          <div key={`${publication.title}-${index}`} className="paper-card print:bg-white print:break-inside-avoid transition-shadow duration-300">
+          <div key={`${publication.title}-${index}`} className="paper-card transition-shadow duration-300">
             <div className="space-y-3">
               {/* Header with title and featured badge */}
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
-                  <h3 className="paper-subtitle font-semibold text-foreground print:text-black leading-tight break-words">
+                  <h3 className="paper-subtitle font-semibold text-foreground leading-tight break-words">
                     {publication.url ? (
                       <a
                         href={publication.url}
@@ -91,7 +91,7 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
                 </div>
                 
                 {publication.highlight && (
-                  <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary print:bg-gray-100 print:text-black rounded-full whitespace-nowrap">
+                  <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full whitespace-nowrap">
                     <Icon icon="mingcute:star-fill" className="h-4 w-4" />
                     <span className="text-sm font-medium">Featured</span>
                   </div>
