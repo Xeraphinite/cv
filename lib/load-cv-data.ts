@@ -5,6 +5,17 @@ import { parse as parseToml } from "smol-toml"
 import { appConfig } from "@/lib/config/app-config"
 import type { CVData, Locale } from '@/lib/types/cv'
 
+export async function getCVLastUpdated(locale: Locale = appConfig.cvData.fallbackLocale): Promise<string> {
+  try {
+    const filePath = getCVSourceFilePath(locale)
+    const stats = await fs.stat(filePath)
+    return stats.mtime.toISOString()
+  } catch (error) {
+    console.error(`Error reading CV source mtime for locale ${locale}:`, error)
+    return new Date().toISOString()
+  }
+}
+
 export async function getCVData(locale: Locale = "zh"): Promise<CVData> {
   try {
     if (appConfig.cvData.source === "toml") {
@@ -118,6 +129,16 @@ async function getCVDataFromYaml(locale: Locale): Promise<CVData> {
     throw new Error(`Invalid CV data structure for locale: ${locale}`)
   }
   return data
+}
+
+function getCVSourceFilePath(locale: Locale): string {
+  if (appConfig.cvData.source === "toml") {
+    return path.isAbsolute(appConfig.cvData.tomlFilePath)
+      ? appConfig.cvData.tomlFilePath
+      : path.join(process.cwd(), appConfig.cvData.tomlFilePath)
+  }
+  const fileName = appConfig.cvData.fallbackYamlTemplate.replace("{locale}", locale)
+  return path.join(process.cwd(), appConfig.cvData.fallbackYamlDir, fileName)
 }
 
 function mapTomlToCVData(source: TomlCVData): CVData {

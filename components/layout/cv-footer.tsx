@@ -21,6 +21,7 @@ interface CVFooterProps {
   className?: string
   compact?: boolean
   showLocaleThemeControls?: boolean
+  lastUpdated?: string
 }
 
 const themeOptions = [
@@ -37,7 +38,7 @@ const languageFlags: Record<string, string> = {
   ko: 'twemoji:flag-south-korea',
 }
 
-export function CVFooter({ className, compact = false, showLocaleThemeControls = false }: CVFooterProps) {
+export function CVFooter({ className, compact = false, showLocaleThemeControls = false, lastUpdated }: CVFooterProps) {
   const { theme, setTheme } = useTheme()
   const t = useTranslations()
   const pathname = usePathname()
@@ -46,9 +47,8 @@ export function CVFooter({ className, compact = false, showLocaleThemeControls =
 
   const relativeUpdated = useMemo(() => {
     const locale = currentLocale || 'en'
-    const source = typeof document !== 'undefined' ? document.lastModified : ''
-    const lastUpdated = source ? new Date(source) : new Date()
-    const safeDate = Number.isNaN(lastUpdated.getTime()) ? new Date() : lastUpdated
+    const parsedDate = lastUpdated ? new Date(lastUpdated) : new Date()
+    const safeDate = Number.isNaN(parsedDate.getTime()) ? new Date() : parsedDate
     const diffMs = safeDate.getTime() - Date.now()
 
     const ranges: Array<[Intl.RelativeTimeFormatUnit, number]> = [
@@ -69,7 +69,7 @@ export function CVFooter({ className, compact = false, showLocaleThemeControls =
     }
 
     return rtf.format(0, 'minute')
-  }, [currentLocale])
+  }, [currentLocale, lastUpdated])
 
   const footerLinks = [
     {

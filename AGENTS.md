@@ -48,6 +48,7 @@
   - TOC trigger should not show a leading icon; keep label text and chevron only.
 - Footer behavior:
   - Show `lastUpdated` as locale-aware relative time (e.g., today / 2 days ago) instead of absolute date.
+  - `lastUpdated` should be computed from CV source file mtime via `getCVLastUpdated` in `lib/load-cv-data.ts`, not from browser page metadata.
   - Footer links should include only `LLMs.txt` (no RSS/Sitemap links).
   - On `lg`, do not show TOC in first-column bottom area.
   - On `lg`, place language and theme controls in footer immediately after `LLMs.txt`.

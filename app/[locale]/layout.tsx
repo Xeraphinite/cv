@@ -12,6 +12,7 @@ import { CVHeader } from '@/components/layout/cv-header'
 import { CVFooter } from '@/components/layout/cv-footer'
 import { ThemeProvider } from "@/components/theme-provider"
 import { LocaleDetector } from '@/components/layout/locale-detector'
+import { getCVLastUpdated } from '@/lib/load-cv-data'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
@@ -88,6 +89,7 @@ export default async function LocaleLayout({
 
   const messages = await getMessages({ locale: localeTyped })
   const direction = getDirection(localeTyped)
+  const lastUpdated = await getCVLastUpdated(localeTyped)
 
   return (
     <html lang={localeTyped} dir={direction} suppressHydrationWarning>
@@ -105,7 +107,7 @@ export default async function LocaleLayout({
             <CVHeader />
             <LocaleDetector />
             {children}
-            <CVFooter className="lg:hidden" />
+            <CVFooter className="lg:hidden" lastUpdated={lastUpdated} />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
