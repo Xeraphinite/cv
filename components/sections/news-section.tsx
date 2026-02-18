@@ -2,7 +2,7 @@
 
 import { Icon } from '@iconify/react'
 import { useTranslations } from 'next-intl'
-import { formatToYearMonth } from '@/lib/date-format'
+import { formatToYearDotMonth } from '@/lib/date-format'
 
 interface NewsItem {
   title: string
@@ -49,7 +49,7 @@ export function NewsSection({ data }: NewsSectionProps) {
         {sortedItems.map((item, index) => (
           <div key={`${item.title}-${index}`} className="paper-body leading-relaxed text-foreground">
             <div className="grid grid-cols-[minmax(6ch,auto)_minmax(0,1fr)] items-start gap-x-3">
-              <span className="font-sans text-base font-bold whitespace-nowrap text-muted-foreground">{formatToYearMonth(item.date)}</span>
+              <span className="font-sans text-base font-bold whitespace-nowrap text-muted-foreground">{formatToYearDotMonth(item.date)}</span>
               {item.url ? (
                 <a href={item.url} target="_blank" rel="noopener noreferrer" className="no-underline hover:no-underline">
                   {item.summary || item.title || item.outlet}

@@ -19,6 +19,7 @@
   - Fallback YAML loading remains available for locale files in `data/cv.{locale}.yaml`.
   - News section is stored at `[news.*]` in TOML with fields `title`, `outlet`, `date`, `summary`, `url`, mapped to `CVData.news`.
   - News section UI format is concise: each row shows only `date` + description text, and rows are sorted newest first by `date` (supports `YYYY` and `YYYY.M`).
+  - News date display uses `yyyy.mm` when month exists (year-only stays `yyyy`), and this dot format is news-only.
 - Centralized app config:
   - `lib/config/app-config.ts` contains:
     - intl locales/default/labels

@@ -33,7 +33,7 @@ function padMonth(value: string | number): string {
   return String(month).padStart(2, "0")
 }
 
-export function formatToYearMonth(value?: string | number | null): string {
+function formatToYearMonthWithSeparator(value: string | number | null | undefined, separator: string): string {
   if (value === undefined || value === null) return ""
   const raw = String(value).trim()
   if (!raw) return ""
@@ -42,29 +42,37 @@ export function formatToYearMonth(value?: string | number | null): string {
   if (raw.includes(",") || raw.includes("，") || raw.includes("、")) {
     return raw
       .split(/,\s*|，\s*|、\s*/)
-      .map((part) => formatToYearMonth(part))
+      .map((part) => formatToYearMonthWithSeparator(part, separator))
       .join(", ")
   }
 
   const direct = raw.match(/^(\d{4})[.\-/](\d{1,2})(?:[.\-/]\d{1,2})?$/)
-  if (direct) return `${direct[1]}${padMonth(direct[2])}`
+  if (direct) return `${direct[1]}${separator}${padMonth(direct[2])}`
 
   const cjk = raw.match(/^(\d{4})年\s*(\d{1,2})月?$/)
-  if (cjk) return `${cjk[1]}${padMonth(cjk[2])}`
+  if (cjk) return `${cjk[1]}${separator}${padMonth(cjk[2])}`
 
   const english = raw.match(/^([A-Za-z]{3,9})\s+(\d{4})$/)
   if (english) {
     const month = MONTHS[english[1].toLowerCase()]
-    if (month) return `${english[2]}${month}`
+    if (month) return `${english[2]}${separator}${month}`
   }
 
   const yearOnly = raw.match(/^(\d{4})$/)
   if (yearOnly) return yearOnly[1]
 
   const isoLike = raw.match(/^(\d{4})-(\d{2})-\d{2}/)
-  if (isoLike) return `${isoLike[1]}${isoLike[2]}`
+  if (isoLike) return `${isoLike[1]}${separator}${isoLike[2]}`
 
   return raw
+}
+
+export function formatToYearMonth(value?: string | number | null): string {
+  return formatToYearMonthWithSeparator(value, "")
+}
+
+export function formatToYearDotMonth(value?: string | number | null): string {
+  return formatToYearMonthWithSeparator(value, ".")
 }
 
 export function formatDateRangeToYearMonth(start?: string, end?: string): string {

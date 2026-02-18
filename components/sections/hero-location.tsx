@@ -83,7 +83,7 @@ export function HeroLocation({ location, locale }: HeroLocationProps) {
         ) : (
           <div className="rounded-md border border-border/60 bg-card/60 p-3">
             <div className="flex items-center gap-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#9f7a63]">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#9f7a63]">
                 <Icon icon="mingcute:mortarboard-fill" className="h-6 w-6 text-white" />
               </div>
               <div className="space-y-1">
