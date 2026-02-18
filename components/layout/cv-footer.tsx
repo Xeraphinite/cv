@@ -45,11 +45,12 @@ export function CVFooter({ className, compact = false, showLocaleThemeControls =
   const currentLocale = getLocaleFromPathname(pathname)
   const currentThemeOption = themeOptions.find((option) => option.value === theme) || themeOptions[2]
 
-  const relativeUpdated = useMemo(() => {
+  const { relativeUpdated, updateToneClass } = useMemo(() => {
     const locale = currentLocale || 'en'
     const parsedDate = lastUpdated ? new Date(lastUpdated) : new Date()
     const safeDate = Number.isNaN(parsedDate.getTime()) ? new Date() : parsedDate
     const diffMs = safeDate.getTime() - Date.now()
+    const elapsedMs = Math.max(0, Date.now() - safeDate.getTime())
 
     const ranges: Array<[Intl.RelativeTimeFormatUnit, number]> = [
       ['year', 1000 * 60 * 60 * 24 * 365],
@@ -61,14 +62,29 @@ export function CVFooter({ className, compact = false, showLocaleThemeControls =
     ]
 
     const rtf = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' })
+    let text = rtf.format(0, 'minute')
 
     for (const [unit, ms] of ranges) {
       if (Math.abs(diffMs) >= ms || unit === 'minute') {
-        return rtf.format(Math.round(diffMs / ms), unit)
+        text = rtf.format(Math.round(diffMs / ms), unit)
+        break
       }
     }
 
-    return rtf.format(0, 'minute')
+    let toneClass = 'text-muted-foreground/60'
+    if (elapsedMs < 1000 * 60 * 30) {
+      toneClass = 'text-foreground'
+    } else if (elapsedMs < 1000 * 60 * 60 * 6) {
+      toneClass = 'text-foreground/85'
+    } else if (elapsedMs < 1000 * 60 * 60 * 24) {
+      toneClass = 'text-foreground/70'
+    } else if (elapsedMs < 1000 * 60 * 60 * 24 * 7) {
+      toneClass = 'text-muted-foreground'
+    } else if (elapsedMs < 1000 * 60 * 60 * 24 * 30) {
+      toneClass = 'text-muted-foreground/80'
+    }
+
+    return { relativeUpdated: text, updateToneClass: toneClass }
   }, [currentLocale, lastUpdated])
 
   const footerLinks = [
@@ -95,9 +111,7 @@ export function CVFooter({ className, compact = false, showLocaleThemeControls =
         {/* Last Updated */}
         <div className="flex items-center gap-1.5">
           <Icon icon="mingcute:calendar-line" className="h-3 w-3" />
-          <span>
-            {t('common.lastUpdated')}: {relativeUpdated}
-          </span>
+          <span className={clsx('transition-colors', updateToneClass)}>{relativeUpdated}</span>
         </div>
 
         {/* Links */}

@@ -91,11 +91,20 @@ export interface TalkItem {
   url?: string;
 }
 
+export interface NewsItem {
+  title: string;
+  outlet: string;
+  date: string;
+  summary?: string;
+  url?: string;
+}
+
 export interface CVData {
   hero: Hero;
   education: EducationItem[];
   publications: PublicationItem[];
   experience: ExperienceItem[];
+  news?: NewsItem[];
   awards: AwardItem[];
   skills: Skills;
   talks?: TalkItem[];

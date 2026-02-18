@@ -6,6 +6,7 @@ import { ProjectsSection } from './projects-section'
 import { PublicationsSection } from './publications-section'
 import { AwardsSection } from './awards-section'
 import { TalksSection } from './talks-section'
+import { NewsSection } from './news-section'
 import { CVFooter } from '@/components/layout/cv-footer'
 import type { CVData } from '@/lib/types/cv'
 
@@ -50,8 +51,8 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
 
   return (
     <div className="paper-container">
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] lg:gap-10">
-        <div className="lg:sticky lg:top-4 lg:flex lg:h-[calc(100vh-2rem)] lg:flex-col">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)] lg:gap-10">
+        <div className="lg:sticky lg:top-4 lg:bottom-4 lg:flex lg:h-[calc(100vh-2rem)] lg:flex-col">
           <section id="hero" className="lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
             <HeroSection data={data.hero} locale={locale} />
           </section>
@@ -62,6 +63,12 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
         </div>
 
         <div className="py-2 sm:py-4 lg:py-6">
+          {data.news && data.news.length > 0 && (
+            <section id="news">
+              <NewsSection data={data.news} />
+            </section>
+          )}
+
           {data.education.length > 0 && (
             <section id="education">
               <EducationSection data={data.education} />

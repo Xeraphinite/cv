@@ -2,6 +2,7 @@
 
 import { Icon } from '@iconify/react'
 import { useTranslations } from 'next-intl'
+import { formatToYearMonth } from '@/lib/date-format'
 
 interface AwardItem {
   name: string
@@ -32,11 +33,13 @@ export function AwardsSection({ data }: AwardsSectionProps) {
             key={`${award.name}-${award.institute}-${index}`}
             className="paper-body leading-relaxed text-foreground"
           >
-            <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1.5fr)_minmax(0,1.2fr)_minmax(6ch,auto)_minmax(0,1.8fr)] gap-x-4 gap-y-1 items-baseline">
-              <span className="font-medium min-w-0 truncate">{award.name}</span>
-              <span className="min-w-0 truncate">{award.institute}</span>
-              <span className="font-mono whitespace-nowrap md:text-right">{award.date}</span>
-              <span className="min-w-0 truncate text-muted-foreground">{award.description ?? ''}</span>
+            <div className="grid grid-cols-[minmax(7ch,auto)_minmax(0,1fr)] items-start gap-x-3">
+              <span className="font-sans text-base font-bold whitespace-nowrap text-muted-foreground">{formatToYearMonth(award.date)}</span>
+              <span className="min-w-0">
+                <span className="font-medium">{award.name}</span>
+                <span className="text-muted-foreground"> · {award.institute}</span>
+                {award.description ? <span className="text-muted-foreground"> — {award.description}</span> : null}
+              </span>
             </div>
           </div>
         ))}

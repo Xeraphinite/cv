@@ -2,6 +2,7 @@
 
 import { Icon } from '@iconify/react'
 import { useTranslations } from 'next-intl'
+import { formatToYearMonth } from '@/lib/date-format'
 
 interface Project {
   name: string
@@ -60,38 +61,43 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
       <div className="space-y-1">
         {projects.map((project) => (
           <div key={project.name} className="paper-body leading-relaxed text-foreground">
-            <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1.2fr)_minmax(5ch,auto)_minmax(9ch,auto)_minmax(0,2fr)_minmax(0,1.5fr)_auto] gap-x-4 gap-y-1 items-baseline">
-              <span className="font-medium min-w-0 truncate">{project.name}</span>
-              <span className="font-mono whitespace-nowrap md:text-right">{project.year ?? ''}</span>
-              <span className="min-w-0 truncate">{project.status ?? ''}</span>
-              <span className="min-w-0 truncate">{project.description}</span>
-              <span className="font-mono min-w-0 truncate text-muted-foreground">{project.tech.join(', ')}</span>
-              <span className="hidden md:flex items-center gap-2 whitespace-nowrap">
-                {project.url ? (
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-primary hover:underline"
-                    title={t('actions.viewProject')}
-                  >
-                    <Icon icon="mingcute:external-link-line" className="h-4 w-4" />
-                    <span className="text-sm">{t('actions.viewProject')}</span>
-                  </a>
-                ) : null}
-                {project.github ? (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-primary hover:underline"
-                    title={t('actions.viewSource')}
-                  >
-                    <Icon icon="mingcute:github-line" className="h-4 w-4" />
-                    <span className="text-sm">{t('actions.viewSource')}</span>
-                  </a>
-                ) : null}
-              </span>
+            <div className="grid grid-cols-[minmax(5ch,auto)_minmax(0,1fr)] items-start gap-x-3 gap-y-1">
+              <span className="font-sans text-base font-bold whitespace-nowrap text-muted-foreground">{formatToYearMonth(project.year)}</span>
+              <div className="flex flex-wrap items-baseline gap-x-2 min-w-0">
+                <span className="font-medium">{project.name}</span>
+                {project.status ? <span className="text-muted-foreground">{project.status}</span> : null}
+              </div>
+
+              <p className="col-start-2">{project.description}</p>
+              <p className="col-start-2 font-mono text-muted-foreground">{project.tech.join(', ')}</p>
+              {(project.url || project.github) ? (
+                <div className="col-start-2 mt-1 flex items-center gap-3">
+                  {project.url ? (
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-primary hover:underline"
+                      title={t('actions.viewProject')}
+                    >
+                      <Icon icon="mingcute:arrow-right-up-fill" className="h-4 w-4" />
+                      <span className="text-sm">{t('actions.viewProject')}</span>
+                    </a>
+                  ) : null}
+                  {project.github ? (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-primary hover:underline"
+                      title={t('actions.viewSource')}
+                    >
+                      <Icon icon="mingcute:github-line" className="h-4 w-4" />
+                      <span className="text-sm">{t('actions.viewSource')}</span>
+                    </a>
+                  ) : null}
+                </div>
+              ) : null}
             </div>
           </div>
         ))}

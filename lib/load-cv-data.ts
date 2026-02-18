@@ -92,6 +92,16 @@ type TomlCVData = {
       tldr?: string
     }
   >
+  news?: Record<
+    string,
+    {
+      title?: string
+      outlet?: string
+      date?: string
+      summary?: string
+      url?: string
+    }
+  >
   skills?: Record<
     string,
     {
@@ -146,6 +156,7 @@ function mapTomlToCVData(source: TomlCVData): CVData {
   const educationEntries = Object.values(source.education ?? {})
   const experienceEntries = Object.values(source.experience ?? {})
   const publicationEntries = Object.values(source.publications ?? {})
+  const newsEntries = Object.values(source.news ?? {})
   const skillEntries = Object.values(source.skills ?? {})
   const awardEntries = Object.values(source.awards ?? {})
 
@@ -203,6 +214,13 @@ function mapTomlToCVData(source: TomlCVData): CVData {
       institute: cleanText(item.from ?? ""),
       date: cleanText(item.date ?? ""),
       description: cleanText(item.description ?? ""),
+    })),
+    news: newsEntries.map((item) => ({
+      title: cleanText(item.title ?? ""),
+      outlet: cleanText(item.outlet ?? ""),
+      date: cleanText(item.date ?? ""),
+      summary: cleanText(item.summary ?? ""),
+      url: cleanText(item.url ?? ""),
     })),
     skills: {
       categories: skillEntries
@@ -368,6 +386,14 @@ function getSampleData(): CVData {
         institute: "Sample Institute",
         date: "2023",
         description: "Sample award description.",
+      },
+    ],
+    news: [
+      {
+        title: "Sample News Headline",
+        outlet: "Sample Media",
+        date: "2024",
+        summary: "Sample media coverage summary.",
       },
     ],
     skills: {

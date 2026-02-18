@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react'
+import { formatToYearMonth } from '@/lib/date-format'
 
 interface Talk {
   title: string
@@ -53,12 +54,7 @@ export function TalksSection({ data }: TalksSectionProps) {
   if (!talks || talks.length === 0) return null
 
   const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
-    })
+    return formatToYearMonth(dateString)
   }
 
   return (
@@ -93,7 +89,7 @@ export function TalksSection({ data }: TalksSectionProps) {
                       className="p-1.5 rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
                       title="View Event"
                     >
-                      <Icon icon="mingcute:external-link-line" className="h-4 w-4" />
+                      <Icon icon="mingcute:arrow-right-up-fill" className="h-4 w-4" />
                     </a>
                   )}
                   {talk.slides && (
@@ -104,7 +100,7 @@ export function TalksSection({ data }: TalksSectionProps) {
                       className="p-1.5 rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
                       title="View Slides"
                     >
-                      <Icon icon="mingcute:external-link-line" className="h-4 w-4" />
+                      <Icon icon="mingcute:arrow-right-up-fill" className="h-4 w-4" />
                     </a>
                   )}
                 </div>
@@ -121,7 +117,7 @@ export function TalksSection({ data }: TalksSectionProps) {
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-1 paper-meta">
                   <div className="flex items-center gap-2">
                     <Icon icon="mingcute:calendar-line" className="h-4 w-4" />
-                    <span>{formatDate(talk.date)}</span>
+                    <span className="font-sans text-base font-bold text-muted-foreground">{formatDate(talk.date)}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Icon icon="mingcute:map-pin-line" className="h-4 w-4" />

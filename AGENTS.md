@@ -9,12 +9,15 @@
 - Use `mingcute` icons for CV/UI iconography whenever an icon is needed.
 - Prefer `@iconify/react` with icon IDs in the form `mingcute:*`.
 - Do not introduce new `lucide-react` icons in CV/layout features unless explicitly requested.
+- Use `mingcute:arrow-right-up-fill` to denote external links.
 
 ## Reusable Project Knowledge
 - CV data source:
   - Primary source is TOML at `data/cv.toml`.
   - Loader maps TOML to app `CVData` in `lib/load-cv-data.ts`.
   - Fallback YAML loading remains available for locale files in `data/cv.{locale}.yaml`.
+  - News section is stored at `[news.*]` in TOML with fields `title`, `outlet`, `date`, `summary`, `url`, mapped to `CVData.news`.
+  - News section UI format is concise: each row shows only `date` + description text, and rows are sorted newest first by `date` (supports `YYYY` and `YYYY.M`).
 - Centralized app config:
   - `lib/config/app-config.ts` contains:
     - intl locales/default/labels
@@ -27,6 +30,17 @@
   - Keep mono font for `code`/`pre` via `Inconsolata`.
 - Awards/Honors iconography:
   - Use `mingcute:medal-fill` for section headers and `mingcute:medal-line` for compact/stat contexts.
+- Experience section styling:
+  - Use `mingcute:folder-3-fill` as the Experience section header icon.
+  - Show experience time in a muted time column before role/company details.
+  - In Experience item meta, use `mingcute:at-fill` and show only org/company (omit location text).
+- Time/date presentation:
+  - In time-related sections (Experience, Education, Projects, Awards, News), render date/time first using muted sans text (`font-sans text-base font-bold` + muted tone), followed by content.
+  - Use `yyyy.mm` date notation when month exists; if month is not available, show year only (`yyyy`). Footer `lastUpdated` is excluded and stays relative-time.
+  - In Experience and Education only, render month (`mm`) as superscript in `yyyy.mm`.
+  - Avoid calendar/date icons for section row timestamps.
+  - In two-column time layouts, keep all non-time content aligned to the second column (`col-start-2`) so descriptions/highlights sit under titles, not under time.
+  - In Education date ranges, render `(Expected)` on a second line in the time column.
 - Hero layout breakpoint:
   - Keep the hero section single-column on small/medium screens; switch to two-column split at `lg:`.
   - On non-`lg`, use the sticky mobile navigator-style `CVHeader` UX (show/hide on scroll) for controls.
@@ -49,6 +63,9 @@
 - Footer behavior:
   - Show `lastUpdated` as locale-aware relative time (e.g., today / 2 days ago) instead of absolute date.
   - `lastUpdated` should be computed from CV source file mtime via `getCVLastUpdated` in `lib/load-cv-data.ts`, not from browser page metadata.
+  - Do not show a textual prefix label before relative update time (render only the relative time text with icon).
+  - Use recency-based text tone for `lastUpdated`: freshest is darker/stronger, and it becomes dimmer as elapsed time increases.
   - Footer links should include only `LLMs.txt` (no RSS/Sitemap links).
   - On `lg`, do not show TOC in first-column bottom area.
   - On `lg`, place language and theme controls in footer immediately after `LLMs.txt`.
+  - On `lg`, page shell container width should step up one Tailwind max-width class (`max-w-6xl` -> `lg:max-w-7xl`), while the left column should stay narrower (`lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)]`) and use top+bottom sticky anchoring (`lg:top-4`, `lg:bottom-4`) with near-full viewport height (`h-[calc(100vh-2rem)]`).

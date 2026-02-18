@@ -2,6 +2,7 @@
 
 import { Icon } from '@iconify/react'
 import { useTranslations } from 'next-intl'
+import { formatToYearMonth } from '@/lib/date-format'
 
 // Improved type definitions
 interface Publication {
@@ -52,7 +53,7 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
 
   const formatPublicationMeta = (publication: Publication) => {
     const parts = []
-    if (publication.year) parts.push(publication.year)
+    if (publication.year) parts.push(formatToYearMonth(publication.year))
     if (publication.volume) parts.push(`Vol. ${publication.volume}`)
     if (publication.issue) parts.push(`No. ${publication.issue}`)
     if (publication.pages) parts.push(`pp. ${publication.pages}`)
@@ -82,7 +83,7 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
                         className="hover:underline transition-all inline-flex items-start gap-2 group"
                       >
                         <span>{publication.title}</span>
-                        <Icon icon="mingcute:external-link-line" className="h-4 w-4 mt-1 opacity-50 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                        <Icon icon="mingcute:arrow-right-up-fill" className="h-4 w-4 mt-1 opacity-50 group-hover:opacity-100 transition-opacity flex-shrink-0" />
                       </a>
                     ) : (
                       publication.title

@@ -19,6 +19,7 @@ contacts = [
 education = "Education"
 experience = "Selected Project"
 publications = "Publications"
+news = "News"
 skills = "Skills"
 awards = "Awards"
 
@@ -27,7 +28,7 @@ institution = "Guangdong University of Technology"
 degree = "Mechanical Engineering, MEng."
 date = "Sep 2023 - Jun 2026 (Expected)"
 details = [
-  "*GPA:* 3.62/4.0 (Top 2.5%), Supervised by Prof. #smallcaps(\"Jiewu Leng\");;",
+  "*GPA:* 3.62/4.0 (Top 2.5%), Supervised by Prof. #smallcaps(\"Jiewu Leng\");",
   "*Dissertation:* _Verifier-Driven Code-based Parametric CAD Generation with Large Language Models Agent_ (Ongoing).",
 ]
 
@@ -47,7 +48,6 @@ project = "Code-based CAD Assembly Generation"
 stack = "vLLM, OpenHands, Docker, Kubernetes, Laminar"
 role = "Leader"
 org = "State Key Lab of Manufacturing Technology & Equipment"
-location = "Guangzhou, China"
 start = "Aug 2025"
 end = "Present"
 summary = "Built a verifiable benchmark and an LLM agent for controllable code-based CAD generation under executable constraints."
@@ -63,7 +63,6 @@ details = [
 project = "Human-in-the-loop CAD Generation Workflow"
 role = "Leader"
 org = "State Key Lab of Manufacturing Technology & Equipment"
-location = "Guangzhou, China"
 start = "Dec 2024"
 end = "May 2025"
 summary = "Designed a HITL agentic workflow for Code-based CAD generation, and evaluated it with code validity and human preference."
@@ -104,6 +103,20 @@ authors = [
   "Shen W",
 ]
 tldr = ""
+
+[news.news-1]
+title = "Applied Soft Computing paper published"
+outlet = "Applied Soft Computing"
+date = "2025.9"
+summary = "One paper was published in Applied Soft Computing!"
+url = "https://www.sciencedirect.com/science/article/pii/S1568494625012335"
+
+[news.news-2]
+title = "RCIM paper accepted and indexed"
+outlet = "Robotics and Computer-Integrated Manufacturing"
+date = "2025.6"
+summary = "One paper was accepted by RCIM!"
+url = "https://www.sciencedirect.com/science/article/pii/S0736584525001309"
 
 
 [skills.ai-engineering]
