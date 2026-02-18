@@ -80,7 +80,7 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
                         href={publication.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:underline transition-all inline-flex items-start gap-2 group"
+                        className="no-underline hover:no-underline transition-all inline-flex items-start gap-2 group"
                       >
                         <span>{publication.title}</span>
                         <Icon icon="mingcute:arrow-right-up-fill" className="h-4 w-4 mt-1 opacity-50 group-hover:opacity-100 transition-opacity flex-shrink-0" />
@@ -126,7 +126,7 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
                         href={`https://doi.org/${publication.doi}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:underline transition-colors font-medium font-mono"
+                        className="no-underline hover:no-underline transition-colors font-medium font-mono"
                       >
                         {publication.doi}
                       </a>

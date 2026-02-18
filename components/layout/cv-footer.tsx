@@ -14,6 +14,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { locales, localeLabels } from '@/i18n'
 import { createLocalizedPath, getLocaleFromPathname } from '@/lib/i18n-utils'
 
@@ -102,103 +103,125 @@ export function CVFooter({ className, compact = false, showLocaleThemeControls =
         className
       )}
     >
-      <div
-        className={clsx(
-          'flex flex-col items-center gap-3 px-4 text-xs text-muted-foreground sm:flex-row sm:justify-between',
-          compact ? 'pt-0 pb-4' : 'py-6'
-        )}
-      >
-        {/* Last Updated */}
-        <div className="flex items-center gap-1.5">
-          <Icon icon="mingcute:calendar-line" className="h-3 w-3" />
-          <span className={clsx('transition-colors', updateToneClass)}>{relativeUpdated}</span>
-        </div>
+      <TooltipProvider delayDuration={120}>
+        <div
+          className={clsx(
+            'flex flex-col items-center gap-3 px-4 text-xs text-muted-foreground sm:flex-row sm:justify-between',
+            compact ? 'pt-0 pb-4' : 'py-6'
+          )}
+        >
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div className="flex items-center gap-1.5">
+                <Icon icon="mingcute:calendar-line" className="h-3 w-3" />
+                <span className={clsx('transition-colors', updateToneClass)}>{relativeUpdated}</span>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent side="top">
+              <span>Last updated</span>
+            </TooltipContent>
+          </Tooltip>
 
-        {/* Links */}
-        <div className="flex items-center gap-4">
-          {footerLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="flex items-center gap-1 hover:text-foreground transition-colors"
-              title={link.label}
-            >
-              <Icon icon={link.icon} className="h-3 w-3" />
-              <span>{link.label}</span>
-            </a>
-          ))}
-
-          {showLocaleThemeControls && (
-            <>
-              <DropdownMenu modal={false}>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-7 w-7 p-0 hover:bg-muted/50"
-                    aria-label={t('common.language')}
+          <div className="flex items-center gap-4">
+            {footerLinks.map((link) => (
+              <Tooltip key={link.href}>
+                <TooltipTrigger asChild>
+                  <a
+                    href={link.href}
+                    className="flex items-center gap-1 transition-colors hover:text-foreground"
+                    title={link.label}
                   >
-                    <Icon icon={languageFlags[currentLocale || 'en']} className="h-3.5 w-3.5" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-40" sideOffset={8}>
-                  {locales.map((locale) => {
-                    const href = createLocalizedPath(pathname, locale)
-                    const isActive = currentLocale === locale
+                    <Icon icon={link.icon} className="h-3 w-3" />
+                    <span>{link.label}</span>
+                  </a>
+                </TooltipTrigger>
+                <TooltipContent side="top">
+                  <span>{link.label}</span>
+                </TooltipContent>
+              </Tooltip>
+            ))}
 
-                    return (
-                      <DropdownMenuItem key={locale} asChild>
-                        <Link
-                          href={href}
+            {showLocaleThemeControls && (
+              <>
+                <DropdownMenu modal={false}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-7 w-7 p-0 hover:bg-muted/50"
+                          aria-label={t('common.language')}
+                        >
+                          <Icon icon={languageFlags[currentLocale || 'en']} className="h-3.5 w-3.5" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                    </TooltipTrigger>
+                    <TooltipContent side="top">
+                      <span>{t('common.language')}</span>
+                    </TooltipContent>
+                  </Tooltip>
+                  <DropdownMenuContent align="end" className="w-40" sideOffset={8}>
+                    {locales.map((locale) => {
+                      const href = createLocalizedPath(pathname, locale)
+                      const isActive = currentLocale === locale
+
+                      return (
+                        <DropdownMenuItem key={locale} asChild>
+                          <Link
+                            href={href}
+                            className={clsx(
+                              'flex w-full cursor-pointer items-center gap-2',
+                              isActive ? 'bg-primary/10 font-medium text-primary' : 'hover:bg-muted/50'
+                            )}
+                          >
+                            <Icon icon={languageFlags[locale]} className="h-4 w-4" />
+                            {localeLabels[locale]}
+                          </Link>
+                        </DropdownMenuItem>
+                      )
+                    })}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                <DropdownMenu modal={false}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="sm" className="h-7 w-7 p-0 hover:bg-muted/50" aria-label="Theme">
+                          <Icon icon={currentThemeOption.icon} className="h-3.5 w-3.5" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                    </TooltipTrigger>
+                    <TooltipContent side="top">
+                      <span>Theme</span>
+                    </TooltipContent>
+                  </Tooltip>
+                  <DropdownMenuContent align="end" className="w-32" sideOffset={8}>
+                    {themeOptions.map((option) => {
+                      const isActive = theme === option.value
+
+                      return (
+                        <DropdownMenuItem
+                          key={option.value}
+                          onClick={() => setTheme(option.value)}
                           className={clsx(
-                            'flex w-full cursor-pointer items-center gap-2',
+                            'flex cursor-pointer items-center gap-2',
                             isActive ? 'bg-primary/10 font-medium text-primary' : 'hover:bg-muted/50'
                           )}
                         >
-                          <Icon icon={languageFlags[locale]} className="h-4 w-4" />
-                          {localeLabels[locale]}
-                        </Link>
-                      </DropdownMenuItem>
-                    )
-                  })}
-                </DropdownMenuContent>
-              </DropdownMenu>
-
-              <DropdownMenu modal={false}>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-7 w-7 p-0 hover:bg-muted/50"
-                    aria-label="Toggle theme"
-                  >
-                    <Icon icon={currentThemeOption.icon} className="h-3.5 w-3.5" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-32" sideOffset={8}>
-                  {themeOptions.map((option) => {
-                    const isActive = theme === option.value
-
-                    return (
-                      <DropdownMenuItem
-                        key={option.value}
-                        onClick={() => setTheme(option.value)}
-                        className={clsx(
-                          'flex cursor-pointer items-center gap-2',
-                          isActive ? 'bg-primary/10 font-medium text-primary' : 'hover:bg-muted/50'
-                        )}
-                      >
-                        <Icon icon={option.icon} className="h-4 w-4" />
-                        {option.label}
-                      </DropdownMenuItem>
-                    )
-                  })}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </>
-          )}
+                          <Icon icon={option.icon} className="h-4 w-4" />
+                          {option.label}
+                        </DropdownMenuItem>
+                      )
+                    })}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </>
+            )}
+          </div>
         </div>
-      </div>
+      </TooltipProvider>
     </footer>
   )
 } 

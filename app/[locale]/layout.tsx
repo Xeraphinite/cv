@@ -1,7 +1,5 @@
 import "../globals.css"
 
-import Head from "next/head"
-import Link from "next/link"
 import { notFound } from 'next/navigation'
 import { getMessages } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
@@ -93,10 +91,10 @@ export default async function LocaleLayout({
 
   return (
     <html lang={localeTyped} dir={direction} suppressHydrationWarning>
-      <Head>
-        <Link rel="preconnect" href="https://fonts.googleapis.com" />
-        <Link rel="preconnect" href="https://fonts.gstatic.com" />
-      </Head>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+      </head>
       <body>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider 

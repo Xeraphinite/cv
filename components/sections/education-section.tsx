@@ -25,12 +25,12 @@ export function EducationSection({ data }: EducationSectionProps) {
 
   const renderYearMonthWithSup = (value: string) => {
     const formatted = formatToYearMonth(value)
-    const match = formatted.match(/^(\d{4})\.(\d{2})$/)
+    const match = formatted.match(/^(\d{4})\.?(\d{2})$/)
     if (!match) return <>{formatted}</>
     return (
       <>
-        <span>{match[1]}.</span>
-        <sup className="ml-0.5 align-super text-[0.72em] font-semibold">{match[2]}</sup>
+        <span>{match[1]}</span>
+        <sup className="relative top-[0.04em] ml-0.5 align-super text-[0.7em] font-semibold">{match[2]}</sup>
       </>
     )
   }

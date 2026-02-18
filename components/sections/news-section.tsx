@@ -51,7 +51,7 @@ export function NewsSection({ data }: NewsSectionProps) {
             <div className="grid grid-cols-[minmax(6ch,auto)_minmax(0,1fr)] items-start gap-x-3">
               <span className="font-sans text-base font-bold whitespace-nowrap text-muted-foreground">{formatToYearMonth(item.date)}</span>
               {item.url ? (
-                <a href={item.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                <a href={item.url} target="_blank" rel="noopener noreferrer" className="no-underline hover:no-underline">
                   {item.summary || item.title || item.outlet}
                 </a>
               ) : (

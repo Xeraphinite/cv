@@ -10,6 +10,7 @@
 - Prefer `@iconify/react` with icon IDs in the form `mingcute:*`.
 - Do not introduce new `lucide-react` icons in CV/layout features unless explicitly requested.
 - Use `mingcute:arrow-right-up-fill` to denote external links.
+- Do not underline URL links (including hover/focus/visited states).
 
 ## Reusable Project Knowledge
 - CV data source:
@@ -23,21 +24,24 @@
     - intl locales/default/labels
     - metadata labels
     - CV data source settings
+- App Router metadata:
+  - In `app/` routes, do not use `next/head`; use the Metadata API and/or native `<head>` in layout files.
 - Typography policy:
   - Keep the configured font families (`Spectral`, `Noto Serif SC`, `Rethink Sans`, `Inconsolata`).
   - Do not force xyndrome font-size values unless explicitly requested.
+  - Tooltip text should default to `font-sans` via the shared shadcn tooltip UI component.
 - Code-like text:
   - Keep mono font for `code`/`pre` via `Inconsolata`.
 - Awards/Honors iconography:
   - Use `mingcute:medal-fill` for section headers and `mingcute:medal-line` for compact/stat contexts.
 - Experience section styling:
-  - Use `mingcute:folder-3-fill` as the Experience section header icon.
+  - Use `mingcute:telescope-fill` as the Experience section header icon.
   - Show experience time in a muted time column before role/company details.
   - In Experience item meta, use `mingcute:at-fill` and show only org/company (omit location text).
 - Time/date presentation:
   - In time-related sections (Experience, Education, Projects, Awards, News), render date/time first using muted sans text (`font-sans text-base font-bold` + muted tone), followed by content.
-  - Use `yyyy.mm` date notation when month exists; if month is not available, show year only (`yyyy`). Footer `lastUpdated` is excluded and stays relative-time.
-  - In Experience and Education only, render month (`mm`) as superscript in `yyyy.mm`.
+  - Use `yyyymm` date notation when month exists; if month is not available, show year only (`yyyy`). Footer `lastUpdated` is excluded and stays relative-time.
+  - In Experience and Education only, render month (`mm`) as superscript in `yyyymm`, with `top-[0.04em]` for subtle lowering.
   - Avoid calendar/date icons for section row timestamps.
   - In two-column time layouts, keep all non-time content aligned to the second column (`col-start-2`) so descriptions/highlights sit under titles, not under time.
   - In Education date ranges, render `(Expected)` on a second line in the time column.
@@ -50,10 +54,20 @@
   - In the hero card, keep content vertically stacked (no avatar/name same-row split on `lg`): Avatar -> Name -> Description/Bio -> Contacts.
   - Remove top spacing above avatar/icon in hero wrapper so the avatar aligns flush with the content top.
   - Contacts in hero should be one item per line (icon + value), with values wrapping instead of truncating.
+  - Left-column hero contact items should use shadcn `Tooltip` for concise hover tips, positioned at the top of each trigger.
   - Do not add left padding/inset for contact rows; icon should not reserve extra left spacing.
   - Use `space-y` on the hero contacts list for vertical separation between contact rows.
   - Contact hover background should wrap only real content (`w-fit`/`self-start`) with rounded corners; inner padding should apply on hover only.
   - Hero location text should use locale-aware serif font.
+  - Hero location uses a dedicated `HeroLocation` component; for `Guangzhou, Guangdong`, hovering the location reveals a mapcn-style hover card with a marker rich popup showing current workplace.
+  - Hero location hover map should hide the map attribution/open-contributors text, and the current workplace popup should anchor above the marker (not below).
+  - In hero location map card: keep mouse-wheel zoom enabled, use `mingcute:location-fill` in a rounded-square marker, keep marker popup open by default with plain State Key text (no shadow/backdrop styling), and render a persistent bottom overlay square sized to half width + half height of the map with icon + `Work` label only; the square uses white background in light mode with a slightly larger icon, and default camera should place the marker near the top-right-center area.
+  - Hero location marker must remain high-contrast and clearly visible against the map background (use stronger icon/border contrast and slightly larger marker size when needed).
+  - Hero location marker visual direction should mimic Apple Maps-like treatment: visible halo/ring indicator with a clear marker chip placed near the map's top-right-center, plus a large rounded bottom-left work card.
+  - State key text on hero location map should use `MarkerLabel` (not `MarkerPopup`).
+  - When requested, hero location should use default map marker style (`MarkerContent` default) and position marker near top-right-center by tuning map camera center/zoom.
+  - When mimicking the showcase card style, hero location bottom card should be a large rounded panel with a circular icon chip and two-line text layout (`学校` / `Guangzhou`).
+  - For school-cap iconography in hero location card, use `mingcute:mortarboard-fill` (not non-existent `graduation-cap` ids).
 - Print styling policy:
   - Do not use Tailwind `print:*` variants or `@media print` overrides in runtime app styles/components.
 - TOC behavior:
@@ -66,6 +80,7 @@
   - Do not show a textual prefix label before relative update time (render only the relative time text with icon).
   - Use recency-based text tone for `lastUpdated`: freshest is darker/stronger, and it becomes dimmer as elapsed time increases.
   - Footer links should include only `LLMs.txt` (no RSS/Sitemap links).
+  - Footer last-updated text, `LLMs.txt`, language control, and theme control should expose concise top-positioned shadcn `Tooltip` tips.
   - On `lg`, do not show TOC in first-column bottom area.
   - On `lg`, place language and theme controls in footer immediately after `LLMs.txt`.
   - On `lg`, page shell container width should step up one Tailwind max-width class (`max-w-6xl` -> `lg:max-w-7xl`), while the left column should stay narrower (`lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)]`) and use top+bottom sticky anchoring (`lg:top-4`, `lg:bottom-4`) with near-full viewport height (`h-[calc(100vh-2rem)]`).

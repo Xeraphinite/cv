@@ -1,9 +1,12 @@
 'use client'
 
 import Image from 'next/image'
+import type { ReactNode } from 'react'
 import { Icon } from '@iconify/react'
 import { useTranslations } from 'next-intl'
 import { getResponsiveImageProps } from '@/lib/image-utils'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import { HeroLocation } from '@/components/sections/hero-location'
 import { getFontClass, getTypographyClasses } from '@/lib/utils'
 
 interface HeroSectionProps {
@@ -97,11 +100,21 @@ const socialPlatforms = [
   },
 ] as const
 
+function HoverTip({ children, tip }: { children: ReactNode; tip: string }) {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>{children}</TooltipTrigger>
+      <TooltipContent side="top" align="start">
+        <span>{tip}</span>
+      </TooltipContent>
+    </Tooltip>
+  )
+}
+
 export function HeroSection({ data, locale }: HeroSectionProps) {
   const t = useTranslations()
   const typographyClasses = getTypographyClasses(locale)
   const fontClass = getFontClass(locale)
-  const serifFontClass = getFontClass(locale, 'serif')
 
   const handleDownloadPDF = () => {
     const link = document.createElement('a')
@@ -135,6 +148,27 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
     return `${ageString} ${t('content.yearsOld')}`
   }
 
+  const getSocialHoverTip = (key: (typeof socialPlatforms)[number]['key']) => {
+    switch (key) {
+      case 'email':
+        return 'Email'
+      case 'github':
+        return 'GitHub'
+      case 'wechat':
+        return 'WeChat'
+      case 'website':
+        return 'Website'
+      case 'googleScholar':
+        return 'Google Scholar'
+      case 'orcid':
+        return 'ORCID'
+      case 'bluesky':
+        return 'Bluesky'
+      default:
+        return t('content.contact')
+    }
+  }
+
   return (
     <header className="pt-0 pb-6 sm:pb-8">
       <div className="paper-card">
@@ -166,94 +200,91 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 
             {data.bio && <p className={`${typographyClasses.body} mt-4 text-foreground/85`}>{data.bio}</p>}
 
-            <div className="mt-4 flex flex-col space-y-3">
-              {data.location && (
-                <div className="paper-contact-link group">
-                  <div className="relative h-4 w-4">
-                    <Icon
-                      icon="mingcute:canton-tower-line"
-                      className="absolute inset-0 h-4 w-4 transition-opacity duration-200 group-hover:opacity-0"
-                    />
-                    <Icon
-                      icon="mingcute:canton-tower-fill"
-                      className="absolute inset-0 h-4 w-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-                    />
-                  </div>
-                  <span className={serifFontClass}>{data.location}</span>
-                </div>
-              )}
+            <TooltipProvider delayDuration={120}>
+              <div className="mt-4 flex flex-col space-y-3">
+                {data.location && (
+                  <HeroLocation location={data.location} locale={locale} />
+                )}
 
-              {socialPlatforms.map(({ key, iconLine, iconFill, getHref, getLabel, external }) => {
-                const value = data.social[key as keyof typeof data.social]
-                if (!value) return null
+                {socialPlatforms.map(({ key, iconLine, iconFill, getHref, getLabel, external }) => {
+                  const value = data.social[key as keyof typeof data.social]
+                  if (!value) return null
 
-                const href = getHref(value)
-                const label = getLabel(value)
-                const isClickable = key !== 'wechat'
-                const labelClass = 'break-all'
+                  const href = getHref(value)
+                  const label = getLabel(value)
+                  const isClickable = key !== 'wechat'
+                  const labelClass = 'break-all'
 
-                if (isClickable) {
+                  if (isClickable) {
+                    return (
+                      <HoverTip key={key} tip={getSocialHoverTip(key)}>
+                        <a
+                          href={href}
+                          target={external ? '_blank' : undefined}
+                          rel={external ? 'noopener noreferrer' : undefined}
+                          className="paper-contact-link group"
+                        >
+                          <div className="relative h-4 w-4">
+                            <Icon
+                              icon={iconLine}
+                              className="absolute inset-0 h-4 w-4 transition-opacity duration-200 group-hover:opacity-0"
+                            />
+                            <Icon
+                              icon={iconFill}
+                              className="absolute inset-0 h-4 w-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                            />
+                          </div>
+                          <span className={labelClass}>{label}</span>
+                        </a>
+                      </HoverTip>
+                    )
+                  }
+
                   return (
-                    <a
-                      key={key}
-                      href={href}
-                      target={external ? '_blank' : undefined}
-                      rel={external ? 'noopener noreferrer' : undefined}
-                      className="paper-contact-link group"
-                    >
-                      <div className="relative h-4 w-4">
-                        <Icon
-                          icon={iconLine}
-                          className="absolute inset-0 h-4 w-4 transition-opacity duration-200 group-hover:opacity-0"
-                        />
-                        <Icon
-                          icon={iconFill}
-                          className="absolute inset-0 h-4 w-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-                        />
+                    <HoverTip key={key} tip={getSocialHoverTip(key)}>
+                      <div className="paper-contact-link group">
+                        <div className="relative h-4 w-4">
+                          <Icon
+                            icon={iconLine}
+                            className="absolute inset-0 h-4 w-4 transition-opacity duration-200 group-hover:opacity-0"
+                          />
+                          <Icon
+                            icon={iconFill}
+                            className="absolute inset-0 h-4 w-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                          />
+                        </div>
+                        <span className={labelClass}>{label}</span>
                       </div>
-                      <span className={labelClass}>{label}</span>
-                    </a>
+                    </HoverTip>
                   )
-                }
+                })}
 
-                return (
-                  <div key={key} className="paper-contact-link group">
+                <HoverTip tip={t('actions.downloadPDF')}>
+                  <button type="button" onClick={handleDownloadPDF} className="paper-contact-link group">
                     <div className="relative h-4 w-4">
                       <Icon
-                        icon={iconLine}
+                        icon="mingcute:pdf-line"
                         className="absolute inset-0 h-4 w-4 transition-opacity duration-200 group-hover:opacity-0"
                       />
                       <Icon
-                        icon={iconFill}
+                        icon="mingcute:pdf-fill"
                         className="absolute inset-0 h-4 w-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
                       />
                     </div>
-                    <span className={labelClass}>{label}</span>
-                  </div>
-                )
-              })}
+                    <span>PDF</span>
+                  </button>
+                </HoverTip>
 
-              <button type="button" onClick={handleDownloadPDF} className="paper-contact-link group">
-                <div className="relative h-4 w-4">
-                  <Icon
-                    icon="mingcute:pdf-line"
-                    className="absolute inset-0 h-4 w-4 transition-opacity duration-200 group-hover:opacity-0"
-                  />
-                  <Icon
-                    icon="mingcute:pdf-fill"
-                    className="absolute inset-0 h-4 w-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-                  />
-                </div>
-                <span>PDF</span>
-              </button>
-
-              {data.age && (
-                <span className={`inline-flex items-center gap-2 paper-contact-link ${typographyClasses.meta}`}>
-                  <Icon icon="mingcute:calendar-line" className="h-4 w-4 text-primary/70" />
-                  <span className={`font-medium ${fontClass}`}>{formatAge(data.age)}</span>
-                </span>
-              )}
-            </div>
+                {data.age && (
+                  <HoverTip tip={t('content.yearsOld')}>
+                    <span className={`inline-flex items-center gap-2 paper-contact-link ${typographyClasses.meta}`}>
+                      <Icon icon="mingcute:calendar-line" className="h-4 w-4 text-primary/70" />
+                      <span className={`font-medium ${fontClass}`}>{formatAge(data.age)}</span>
+                    </span>
+                  </HoverTip>
+                )}
+              </div>
+            </TooltipProvider>
           </div>
         </div>
       </div>

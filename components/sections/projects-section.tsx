@@ -77,7 +77,7 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-primary hover:underline"
+                      className="inline-flex items-center gap-1 text-primary no-underline hover:no-underline"
                       title={t('actions.viewProject')}
                     >
                       <Icon icon="mingcute:arrow-right-up-fill" className="h-4 w-4" />
@@ -89,7 +89,7 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-primary hover:underline"
+                      className="inline-flex items-center gap-1 text-primary no-underline hover:no-underline"
                       title={t('actions.viewSource')}
                     >
                       <Icon icon="mingcute:github-line" className="h-4 w-4" />

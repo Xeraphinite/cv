@@ -32,7 +32,7 @@
     --input: 0 0% 95%;
     --ring: 0 0% 25%;
     --radius: 8px;
-    
+
     /* Apple-inspired design tokens */
     --paper-texture: 0 0% 95%;
     --paper-shadow: 0 0% 0%;
@@ -60,12 +60,18 @@
     --border: 0 0% 10%;
     --input: 0 0% 10%;
     --ring: 0 0% 82%;
-    
+
     /* Dark mode adjustments */
     --paper-texture: 0 0% 10%;
     --paper-shadow: 0 0% 100%;
     --glass-backdrop: rgba(0, 0, 0, 0.6);
     --glass-border: rgba(255, 255, 255, 0.1);
+  }
+  .maplibregl-popup-content {
+    @apply bg-transparent! shadow-none! p-0! rounded-none!;
+  }
+  .maplibregl-popup-tip {
+    @apply hidden!;
   }
 }
 
@@ -73,7 +79,15 @@
   * {
     @apply border-border/40;
   }
-  
+
+  a,
+  a:hover,
+  a:focus,
+  a:active,
+  a:visited {
+    text-decoration: none;
+  }
+
   body {
     @apply bg-background px-4 md:px-7 lg:px-8 text-foreground;
     font-family: "Spectral", "Noto Serif SC", serif;
@@ -278,7 +292,6 @@
   letter-spacing: 0;
 }
 
-
 /* Apple-inspired contact links */
 .paper-contact-link {
   @apply inline-flex w-fit self-start items-center gap-2 text-foreground/85 hover:text-primary transition-all duration-300 ease-out;
@@ -476,7 +489,7 @@ samp,
   .paper-card {
     border-width: 0;
   }
-  
+
   .paper-badge {
     border-width: 0;
   }
