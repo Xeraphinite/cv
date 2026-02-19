@@ -7,6 +7,7 @@ import { PublicationsSection } from './publications-section'
 import { AwardsSection } from './awards-section'
 import { TalksSection } from './talks-section'
 import { NewsSection } from './news-section'
+import { MiscSection } from './misc-section'
 import type { SkillItemBadgeData } from './skill-item-badge'
 import { CVFooter } from '@/components/layout/cv-footer'
 import type { CVData } from '@/lib/types/cv'
@@ -51,6 +52,12 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
     })
   }
 
+  const miscCategory = 'Misc'
+  const miscSkills = mappedSkills[miscCategory] ?? []
+  const skillsOnly = Object.fromEntries(
+    Object.entries(mappedSkills).filter(([category, items]) => category !== miscCategory && items.length > 0)
+  )
+
   const projectsData = data.projects || []
   const publicationsData = (data.publications ?? []).map((pub) => ({
     ...pub,
@@ -89,9 +96,9 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
             </section>
           )}
 
-          {Object.keys(mappedSkills).length > 0 && (
+          {Object.keys(skillsOnly).length > 0 && (
             <section id="skills">
-              <SkillsSection data={{ skills: mappedSkills }} />
+              <SkillsSection data={{ skills: skillsOnly }} />
             </section>
           )}
 
@@ -114,6 +121,12 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
           {data.talks && data.talks.length > 0 && (
             <section id="talks">
               <TalksSection data={data.talks} />
+            </section>
+          )}
+
+          {miscSkills.length > 0 && (
+            <section id="misc">
+              <MiscSection items={miscSkills} />
             </section>
           )}
         </div>

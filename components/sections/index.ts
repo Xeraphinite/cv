@@ -9,3 +9,4 @@ export { ProjectsSection } from './projects-section';
 export { AwardsSection } from './awards-section';
 export { TalksSection } from './talks-section'; 
 export { NewsSection } from './news-section';
+export { MiscSection } from './misc-section';

@@ -11,6 +11,7 @@
 - Do not introduce new `lucide-react` icons in CV/layout features unless explicitly requested.
 - Use `mingcute:arrow-right-up-fill` to denote external links.
 - In Skills badges, do not show trailing external-direction icons; keep only leading skill icon/favicon and text with a small visual gap.
+- In language skills, prefer `twemoji:*` icons over mingcute and keep score/proficiency details in hover descriptions instead of badge text.
 - Do not underline URL links (including hover/focus/visited states).
 
 ## Reusable Project Knowledge
@@ -25,6 +26,7 @@
   - Localized CV data files use TOML overrides at `data/cv.{locale}.toml` and should only contain locale-specific fields.
   - When `data/cv.toml` is updated, keep localized `data/cv.{locale}.toml` files in sync with the same underlying records/structure.
   - Skills `items` in TOML support both string form and object form (`text`/`name`, optional `icon`, `url`, `code`, `description`).
+  - Main Skills category order should be: `Languages` -> `Programming Languages` -> `DevOps` -> `AI Engineering` -> `Web Dev & Design` -> `Backend Development`; `Misc` is rendered as a separate bottom section.
   - News section is stored at `[news.*]` in TOML with fields `title`, `outlet`, `date`, `summary`, `url`, mapped to `CVData.news`.
   - News section UI format is concise: each row shows only `date` + description text, and rows are sorted newest first by `date` (supports `YYYY` and `YYYY.M`).
   - News date display uses `yyyy.mm` when month exists (year-only stays `yyyy`), and this dot format is news-only.
@@ -53,8 +55,9 @@
   - Use reusable `SkillItemBadge` in `components/sections/skill-item-badge.tsx` for skills chips.
   - Supports `text` (required), `icon` (optional), `url` (optional), `code` (optional), and `description` (optional).
   - If `icon` is omitted and `url` exists, derive a favicon from the URL host.
-  - When `code = true`, render with `font-mono`; otherwise use serif text.
+  - When `code = true`, render with `font-mono`; otherwise use `font-sans` text.
   - If `description` exists, show concise hover content via shadcn `HoverCard`.
+  - Keep Interests under skills data label `Misc`, and render it as a dedicated bottom `Misc` section instead of inside the main Skills section.
 - Time/date presentation:
   - In time-related sections (Experience, Education, Projects, Awards, News), render date/time first using muted sans text (`font-sans text-base font-bold` + muted tone), followed by content.
   - Use `yyyymm` date notation when month exists; if month is not available, show year only (`yyyy`). Footer `lastUpdated` is excluded and stays relative-time.

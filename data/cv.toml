@@ -122,10 +122,37 @@ summary = "One paper was accepted by RCIM!"
 url = "https://www.sciencedirect.com/science/article/pii/S0736584525001309"
 
 
+[skills.languages]
+label = "Languages"
+items = [
+  { text = "English", url = "https://www.ets.org/toefl.html", icon = "twemoji:flag-united-kingdom", description = "TOEFL iBT: 90. Academic and technical communication in international contexts." },
+  { text = "Japanese", url = "https://www.jlpt.jp/e/", icon = "twemoji:flag-japan", description = "JLPT N1: 134. Advanced proficiency for reading and professional communication." },
+  { text = "Chinese", url = "https://en.wikipedia.org/wiki/Mandarin_Chinese", icon = "twemoji:flag-china", description = "Native proficiency in Mandarin Chinese." },
+  { text = "Cantonese", url = "https://en.wikipedia.org/wiki/Cantonese", icon = "twemoji:flag-hong-kong-sar-china", description = "Native proficiency in Cantonese." },
+  { text = "Korean", url = "https://www.topik.go.kr/usr/cmm/index.do", icon = "twemoji:flag-south-korea", description = "Basic conversational Korean and introductory reading ability." },
+]
+
+[skills.programming-languages]
+label = "Programming Languages"
+items = [
+  { text = "Python", url = "https://www.python.org/", code = true, description = "Primary scripting language for ML tooling and experiments." },
+  { text = "Rust", url = "https://www.rust-lang.org/", code = true, description = "Systems programming for performant and reliable backend tools." },
+  { text = "JavaScript", url = "https://developer.mozilla.org/docs/Web/JavaScript", code = true, description = "Core web language for browser and runtime scripting." },
+  { text = "TypeScript", url = "https://www.typescriptlang.org/", code = true, description = "Typed frontend and tooling code for safer refactors." },
+]
+
+[skills.devops]
+label = "DevOps"
+items = [
+  { text = "CLI", url = "https://en.wikipedia.org/wiki/Command-line_interface", code = true, description = "Command-line workflows for automation and developer productivity." },
+  { text = "Docker", url = "https://www.docker.com/", code = true, description = "Containerized environments for reproducible local and cloud runs." },
+  { text = "Kubernetes", url = "https://kubernetes.io/", code = true, description = "Container orchestration for scaling services and jobs." },
+  { text = "Azure", url = "https://azure.microsoft.com/", code = true, description = "Cloud platform services for deployment and infrastructure management." },
+]
+
 [skills.ai-engineering]
 label = "AI Engineering"
 items = [
-  { text = "Python", url = "https://www.python.org/", code = true, description = "Primary scripting language for ML tooling and experiments." },
   { text = "vLLM", url = "https://docs.vllm.ai/", code = true, description = "High-throughput LLM inference engine for serving and evaluation." },
   { text = "Unsloth", url = "https://unsloth.ai/", code = true, description = "Efficient fine-tuning workflows for open-source language models." },
   { text = "TRL", url = "https://huggingface.co/docs/trl/index", code = true, description = "Reinforcement learning toolkit for post-training language models." },
@@ -134,42 +161,25 @@ items = [
   { text = "CUDA", url = "https://developer.nvidia.com/cuda-toolkit", code = true, description = "GPU compute stack for accelerating training and inference." },
 ]
 
-
-[skills.languages]
-label = "Languages"
+[skills.web-dev-design]
+label = "Web Dev & Design"
 items = [
-  { text = "*English (TOEFL: 90)*", url = "https://www.ets.org/toefl.html", icon = "mingcute:translate-2-line", description = "Academic and technical communication in international contexts." },
-  { text = "*Japanese (N1: 134)*", url = "https://www.jlpt.jp/e/", icon = "mingcute:translate-2-line", description = "Advanced proficiency for reading and professional communication." },
-  { text = "Chinese & Cantonese (native)", url = "https://en.wikipedia.org/wiki/Cantonese", icon = "mingcute:translate-2-line", description = "Native fluency in Mandarin Chinese and Cantonese." },
-  { text = "Korean (basic)", url = "https://www.topik.go.kr/usr/cmm/index.do", icon = "mingcute:translate-2-line", description = "Basic conversational Korean and introductory reading ability." },
-]
-
-[skills.web-dev]
-label = "Frontend"
-items = [
-  { text = "TypeScript", url = "https://www.typescriptlang.org/", code = true, description = "Typed frontend and tooling code for safer refactors." },
-  { text = "JavaScript", url = "https://developer.mozilla.org/docs/Web/JavaScript", code = true, description = "Core web language for browser and runtime scripting." },
   { text = "Next.js", url = "https://nextjs.org/", code = true, description = "React framework for app routing, SSG, and SSR." },
+  { text = "React", url = "https://react.dev/", code = true, description = "Component architecture for interactive user interfaces." },
   { text = "Tailwind CSS", url = "https://tailwindcss.com/", code = true, description = "Utility-first CSS system for fast UI iteration." },
   { text = "Vite", url = "https://vite.dev/", code = true, description = "Fast build and dev tooling for modern frontend apps." },
-  { text = "React", url = "https://react.dev/", code = true, description = "Component architecture for interactive user interfaces." },
   { text = "PWA", url = "https://web.dev/explore/progressive-web-apps", code = true, description = "Progressive web app capabilities for installable web experiences." },
 ]
 
-[skills.devops]
-label = "DevOps & Backend"
+[skills.backend-development]
+label = "Backend Development"
 items = [
-  { text = "Rust", url = "https://www.rust-lang.org/", code = true, description = "Systems programming for performant and reliable backend tools." },
-  { text = "CLI", url = "https://en.wikipedia.org/wiki/Command-line_interface", code = true, description = "Command-line workflows for automation and developer productivity." },
-  { text = "Docker", url = "https://www.docker.com/", code = true, description = "Containerized environments for reproducible local and cloud runs." },
-  { text = "Kubernetes", url = "https://kubernetes.io/", code = true, description = "Container orchestration for scaling services and jobs." },
   { text = "Node", url = "https://nodejs.org/", code = true, description = "JavaScript runtime for APIs, tooling, and web services." },
   { text = "PostgreSQL", url = "https://www.postgresql.org/", code = true, description = "Relational database for transactional and analytical workloads." },
-  { text = "Azure", url = "https://azure.microsoft.com/", code = true, description = "Cloud platform services for deployment and infrastructure management." },
 ]
 
-[skills.interests]
-label = "Interests"
+[skills.misc]
+label = "Misc"
 items = [
   { text = "Typography", url = "https://en.wikipedia.org/wiki/Typography", icon = "mingcute:book-6-line", description = "Type systems, hierarchy, and readability in interface design." },
   { text = "Graphic Design", url = "https://en.wikipedia.org/wiki/Graphic_design", icon = "mingcute:star-fill", description = "Visual storytelling through layout, color, and composition." },
