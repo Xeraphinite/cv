@@ -7,6 +7,7 @@ import { PublicationsSection } from './publications-section'
 import { AwardsSection } from './awards-section'
 import { TalksSection } from './talks-section'
 import { NewsSection } from './news-section'
+import type { SkillItemBadgeData } from './skill-item-badge'
 import { CVFooter } from '@/components/layout/cv-footer'
 import type { CVData } from '@/lib/types/cv'
 
@@ -29,18 +30,25 @@ interface CVProps {
 export function CV({ data, locale, lastUpdated }: CVProps) {
   if (!data) return null
 
-  const mappedSkills: Record<string, string[]> = {}
+  const mappedSkills: Record<string, SkillItemBadgeData[]> = {}
 
   for (const category of data.skills?.categories ?? []) {
     mappedSkills[category] = []
   }
 
   for (const skill of data.skills?.skills ?? []) {
-    if (!skill.name) continue
+    const text = skill.text || skill.name
+    if (!text) continue
     if (!mappedSkills[skill.category]) {
       mappedSkills[skill.category] = []
     }
-    mappedSkills[skill.category].push(skill.name)
+    mappedSkills[skill.category].push({
+      text,
+      icon: skill.icon,
+      url: skill.url,
+      code: skill.code,
+      description: skill.description,
+    })
   }
 
   const projectsData = data.projects || []
@@ -71,7 +79,7 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
 
           {data.education.length > 0 && (
             <section id="education">
-              <EducationSection data={data.education} />
+              <EducationSection data={data.education} config={data.sectionConfig?.education} />
             </section>
           )}
 

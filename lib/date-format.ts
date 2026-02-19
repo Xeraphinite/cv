@@ -49,7 +49,7 @@ function formatToYearMonthWithSeparator(value: string | number | null | undefine
   const direct = raw.match(/^(\d{4})[.\-/](\d{1,2})(?:[.\-/]\d{1,2})?$/)
   if (direct) return `${direct[1]}${separator}${padMonth(direct[2])}`
 
-  const cjk = raw.match(/^(\d{4})年\s*(\d{1,2})月?$/)
+  const cjk = raw.match(/^(\d{4})[年년]\s*(\d{1,2})[月월]?$/)
   if (cjk) return `${cjk[1]}${separator}${padMonth(cjk[2])}`
 
   const english = raw.match(/^([A-Za-z]{3,9})\s+(\d{4})$/)

@@ -10,13 +10,21 @@
 - Prefer `@iconify/react` with icon IDs in the form `mingcute:*`.
 - Do not introduce new `lucide-react` icons in CV/layout features unless explicitly requested.
 - Use `mingcute:arrow-right-up-fill` to denote external links.
+- In Skills badges, do not show trailing external-direction icons; keep only leading skill icon/favicon and text with a small visual gap.
 - Do not underline URL links (including hover/focus/visited states).
 
 ## Reusable Project Knowledge
-- CV data source:
+  - CV data source:
   - Primary source is TOML at `data/cv.toml`.
+  - Default content locale (`en`) should resolve to `data/cv.toml` (not `data/cv.en.toml`).
   - Loader maps TOML to app `CVData` in `lib/load-cv-data.ts`.
-  - Fallback YAML loading remains available for locale files in `data/cv.{locale}.yaml`.
+  - Hero Japanese ruby should use `profile.furigana_name` and `profile.furigana`; when values are `|`-separated, render aligned segmented ruby per chunk.
+  - Furigana rendering should keep ruby text width-aligned to its base character/chunk (use normal ruby layout with `ruby-align`, avoid absolute-positioned `rt`).
+  - In Japanese locale hero, show English name (`enName`) beneath the Japanese display name.
+  - In English locale hero, always show the original-script name on the top line and show the English name beneath it when both are available.
+  - Localized CV data files use TOML overrides at `data/cv.{locale}.toml` and should only contain locale-specific fields.
+  - When `data/cv.toml` is updated, keep localized `data/cv.{locale}.toml` files in sync with the same underlying records/structure.
+  - Skills `items` in TOML support both string form and object form (`text`/`name`, optional `icon`, `url`, `code`, `description`).
   - News section is stored at `[news.*]` in TOML with fields `title`, `outlet`, `date`, `summary`, `url`, mapped to `CVData.news`.
   - News section UI format is concise: each row shows only `date` + description text, and rows are sorted newest first by `date` (supports `YYYY` and `YYYY.M`).
   - News date display uses `yyyy.mm` when month exists (year-only stays `yyyy`), and this dot format is news-only.
@@ -31,6 +39,8 @@
   - Keep the configured font families (`Spectral`, `Noto Serif SC`, `Rethink Sans`, `Inconsolata`).
   - Do not force xyndrome font-size values unless explicitly requested.
   - Tooltip text should default to `font-sans` via the shared shadcn tooltip UI component.
+- shadcn refresh policy:
+  - After `shadcn` component refreshes, keep project conventions: `Button` link variant stays non-underlined, tooltip content keeps `font-sans`, and toast/iconography should use `@iconify/react` + `mingcute:*` instead of newly introduced `lucide-react` icons.
 - Code-like text:
   - Keep mono font for `code`/`pre` via `Inconsolata`.
 - Awards/Honors iconography:
@@ -39,13 +49,21 @@
   - Use `mingcute:telescope-fill` as the Experience section header icon.
   - Show experience time in a muted time column before role/company details.
   - In Experience item meta, use `mingcute:at-fill` and show only org/company (omit location text).
+- Skills item component:
+  - Use reusable `SkillItemBadge` in `components/sections/skill-item-badge.tsx` for skills chips.
+  - Supports `text` (required), `icon` (optional), `url` (optional), `code` (optional), and `description` (optional).
+  - If `icon` is omitted and `url` exists, derive a favicon from the URL host.
+  - When `code = true`, render with `font-mono`; otherwise use serif text.
+  - If `description` exists, show concise hover content via shadcn `HoverCard`.
 - Time/date presentation:
   - In time-related sections (Experience, Education, Projects, Awards, News), render date/time first using muted sans text (`font-sans text-base font-bold` + muted tone), followed by content.
   - Use `yyyymm` date notation when month exists; if month is not available, show year only (`yyyy`). Footer `lastUpdated` is excluded and stays relative-time.
+  - Date parsing for normalization should support both CJK and Korean markers (`年/月` and `년/월`) so locale-specific source strings still render as unified `yyyymm`.
   - In Experience and Education only, render month (`mm`) as superscript in `yyyymm`, with `top-[0.04em]` for subtle lowering.
   - Avoid calendar/date icons for section row timestamps.
   - In two-column time layouts, keep all non-time content aligned to the second column (`col-start-2`) so descriptions/highlights sit under titles, not under time.
-  - In Education date ranges, render `(Expected)` on a second line in the time column.
+  - Education expected-suffix line split is controlled by CV data config `sectionConfig.education.splitExpectedLine` (default true).
+  - When expected-suffix split is enabled, use locale-aware text from `messages/*` key `labels.expected`, accept both ASCII/Full-width parentheses in source dates, and render a normalized ASCII `(${label})` display for cross-locale visual consistency.
 - Hero layout breakpoint:
   - Keep the hero section single-column on small/medium screens; switch to two-column split at `lg:`.
   - On non-`lg`, use the sticky mobile navigator-style `CVHeader` UX (show/hide on scroll) for controls.
@@ -68,6 +86,7 @@
   - State key text on hero location map should use `MarkerLabel` (not `MarkerPopup`).
   - Hero location display should remove `Guangzhou` prefix from location text and remove `State Key` prefix from map label text.
   - In `HeroLocation` implementation, prefer generic identifier names for map constants/labels (avoid `guangzhou*` / `state_key*` prefixes in code symbols).
+  - In hero location rendering, do not transform display strings via prefix replacement; `displayLocation` and map label text should use original source text.
   - When requested, hero location should use default map marker style (`MarkerContent` default) and position marker near top-right-center by tuning map camera center/zoom.
   - When mimicking the showcase card style, hero location bottom card should be a large rounded panel with a circular icon chip and two-line text layout (`学校` / `Guangzhou`).
   - For school-cap iconography in hero location card, use `mingcute:mortarboard-fill` (not non-existent `graduation-cap` ids).

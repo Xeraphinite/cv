@@ -4,6 +4,7 @@ export { EducationSection } from './education-section';
 export { ExperienceSection } from './experience-section';
 export { PublicationsSection } from './publications-section';
 export { SkillsSection } from './skills-section';
+export { SkillItemBadge } from './skill-item-badge';
 export { ProjectsSection } from './projects-section';
 export { AwardsSection } from './awards-section';
 export { TalksSection } from './talks-section'; 

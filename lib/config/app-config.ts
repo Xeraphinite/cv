@@ -21,10 +21,10 @@ export const appConfig = {
     } as const,
   },
   cvData: {
-    source: "toml" as const,
-    tomlFilePath: "data/cv.toml",
-    fallbackYamlDir: "data",
-    fallbackYamlTemplate: "cv.{locale}.yaml",
+    defaultTomlFilePath: "data/cv.toml",
+    defaultSourceLocale: "en" as const,
+    localizedTomlDir: "data",
+    localizedTomlTemplate: "cv.{locale}.toml",
     fallbackLocale: "zh" as const,
   },
 }

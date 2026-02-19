@@ -11,12 +11,15 @@ interface HeroLocationProps {
   locale?: string
 }
 
-const GUANGZHOU_COORDINATES: [number, number] = [113.39922790281463, 23.036126383069753]
-const GUANGZHOU_CAMERA_CENTER: [number, number] = [113.39922790281463, 23.036126383069753]
-const STATE_KEY_TEXT = 'State Key Lab of Manufacturing Technology & Equipment'
+
+const MAP_MARKER_COORDINATES: [number, number] = [113.39850748368237, 23.03593600443637]
+const MAP_CAMERA_CENTER: [number, number] = [113.39850748368237, 23.03593600443637]
+const WORKPLACE_LABEL_TEXT = 'State Key Lab of Manufacturing Technology & Equipment'
 
 export function HeroLocation({ location, locale }: HeroLocationProps) {
   const serifFontClass = getFontClass(locale, 'serif')
+  const displayLocation = location
+  const displayWorkplaceLabelText = WORKPLACE_LABEL_TEXT
   const normalizedLocation = location.trim().toLowerCase()
   const shouldShowMap = normalizedLocation === 'guangzhou, guangdong'
   const [canRenderMap, setCanRenderMap] = useState(false)
@@ -39,7 +42,7 @@ export function HeroLocation({ location, locale }: HeroLocationProps) {
           className="absolute inset-0 h-4 w-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
         />
       </div>
-      <span className={cn(serifFontClass, 'break-words')}>{location}</span>
+      <span className={cn(serifFontClass, 'break-words')}>{displayLocation}</span>
     </div>
   )
 
@@ -48,11 +51,12 @@ export function HeroLocation({ location, locale }: HeroLocationProps) {
   return (
     <HoverCard openDelay={120} closeDelay={120}>
       <HoverCardTrigger asChild>{trigger}</HoverCardTrigger>
-      <HoverCardContent align="start" side="top" className="w-[22rem] p-2">
+      <HoverCardContent align="start" side="top" className="w-[22rem] overflow-hidden rounded-2xl p-0">
         {canRenderMap ? (
-          <div className="relative h-52 overflow-hidden rounded-2xl border border-border/60">
+          <div className="hero-location-map relative h-52 w-full overflow-hidden rounded-2xl">
             <Map
-              center={GUANGZHOU_CAMERA_CENTER}
+              className="rounded-2xl"
+              center={MAP_CAMERA_CENTER}
               zoom={14.15}
               attributionControl={false}
               dragPan
@@ -61,10 +65,10 @@ export function HeroLocation({ location, locale }: HeroLocationProps) {
               doubleClickZoom={false}
               touchZoomRotate
             >
-              <MapMarker longitude={GUANGZHOU_COORDINATES[0]} latitude={GUANGZHOU_COORDINATES[1]}>
+              <MapMarker longitude={MAP_MARKER_COORDINATES[0]} latitude={MAP_MARKER_COORDINATES[1]}>
                 <MarkerContent />
                 <MarkerLabel position="bottom" className="mt-2 text-xs text-foreground/85">
-                  {STATE_KEY_TEXT}
+                  {displayWorkplaceLabelText}
                 </MarkerLabel>
               </MapMarker>
             </Map>
@@ -75,7 +79,7 @@ export function HeroLocation({ location, locale }: HeroLocationProps) {
                 </div>
                 <div className="space-y-1">
                   <p className="text-base leading-none text-foreground font-bold">学校</p>
-                  <p className="text-sm leading-none text-muted-foreground">Guangzhou</p>
+                  <p className="text-sm leading-none text-muted-foreground">Guangdong</p>
                 </div>
               </div>
             </div>
@@ -88,7 +92,7 @@ export function HeroLocation({ location, locale }: HeroLocationProps) {
               </div>
               <div className="space-y-1">
                 <p className="text-lg leading-none text-foreground">学校</p>
-                <p className="text-sm leading-none text-muted-foreground">Guangzhou</p>
+                <p className="text-sm leading-none text-muted-foreground">Guangdong</p>
               </div>
             </div>
           </div>

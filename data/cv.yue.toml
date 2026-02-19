@@ -1,0 +1,250 @@
+[hero]
+name = "鄭恪悠"
+enName = "Keyou (Key) Zheng"
+location = "廣州，廣東"
+age = ""
+bio = "博士申請人，新手研究員，初級設計工程師"
+
+[[education]]
+institution = "廣東工業大學"
+area = "機械工程"
+degree = "工程碩士"
+startDate = "2023年9月"
+endDate = "2026年6月（預計）"
+summary = "GPA：3.62/4.0（前2.5%），導師：冷杰武教授；論文：Verifier-Driven Code-based Parametric CAD Generation with Large Language Models Agent（進行中）。"
+highlights = [
+  "GPA：3.62/4.0（前2.5%），導師：冷杰武教授；",
+  "論文：Verifier-Driven Code-based Parametric CAD Generation with Large Language Models Agent（進行中）。",
+]
+
+[[education]]
+institution = "廣東財經大學"
+area = "計算機科學"
+degree = "工學學士"
+startDate = "2019年9月"
+endDate = "2023年6月"
+summary = "GPA：3.5/4.0（前5%）；畢業論文：Design and Implementation of a Mario Game Agent Based on Deep Reinforcement Learning。"
+highlights = [
+  "GPA：3.5/4.0（前5%）；",
+  "畢業論文：Design and Implementation of a Mario Game Agent Based on Deep Reinforcement Learning。",
+]
+
+[[experience]]
+position = "基於代碼嘅 CAD 裝配生成"
+company = "製造技術與裝備國家重點實驗室"
+location = ""
+startDate = "2025年8月"
+endDate = "而家"
+summary = "建立咗可驗證基準同 LLM agent，實現可控嘅代碼式 CAD 生成同可執行約束評測。"
+highlights = [
+  "Agent 基礎設施：搭建多語言容器化代碼執行沙箱，固定工具鏈並保證可重現；設計可橫向擴展後端，收集多條 agent 軌跡同失敗樣本以支援大規模實驗觀測；亦實作咗輕量 Web playground 方便快速除錯同產物生成。",
+  "基準構建：基於公開倉庫同 CAD 社群收集嘅 20 萬人類 CAD 代碼語料，配合確定性同啟發式規則（例如模糊去重）及 LLM pipeline，降低數據污染並控制任務難度；產出 1 萬單體任務同 1700 個裝配任務，附金標準工作區同可執行測試。",
+  "Agent 設計：設計咗透過自測同自修復生成/編輯 CAD 程式嘅 LLM 架構。唔同於只支援單文件嘅方法，agent 可以喺多文件裝配工作區調用特定工具（例如由自然語言抽取規格嘅 spec 工具），形成閉環修復。",
+  "評測結果：以可執行測試作核心指標衡量約束滿足度。喺裝配任務上，方法達到 54.2% pass rate、41.9% 全測通過率、2.4% 無效輸出率，並喺保持幾何分數競爭力之下，優於 GPT-5 等 LLM-only 同工具基線。",
+  "產出：一篇論文已投稿 ICML 2026（43rd International Conference on Machine Learning）並審稿中。",
+]
+
+[[experience]]
+position = "Human-in-the-loop CAD 生成工作流"
+company = "製造技術與裝備國家重點實驗室"
+location = ""
+startDate = "2024年12月"
+endDate = "2025年5月"
+summary = "設計咗用於代碼式 CAD 生成嘅 HITL agentic workflow，並用代碼有效率同人類偏好做評估。"
+highlights = [
+  "工作流設計：以微調 Qwen2.5-VL-7B 作 backbone，結合意圖澄清、有效性檢查、迭代優化、記憶同安全閘等模式。",
+  "結果：喺 100 個真實模型上以無效率同專家 pairwise Elo 評估，達到 2% 無效率同 1075.5 Elo，優於 Claude、GPT-4o 同非 agent Qwen 基線。",
+  "產出：一篇論文發表於 Applied Soft Computing。",
+]
+
+[[publications]]
+title = "Towards Agentic Smart Design: An Industrial Large Model-driven Human-in-the-loop Agentic Workflow for Geometric Modelling"
+type = "期刊論文"
+status = "已發表"
+
+[[publications]]
+title = "AIGC-empowered Smart Manufacturing: Prospects and Challenges"
+type = "期刊論文"
+status = "已發表"
+
+[[news]]
+title = "Applied Soft Computing 論文發表"
+date = "2025.9"
+summary = "一篇論文發表於 Applied Soft Computing。"
+
+[[news]]
+title = "RCIM 論文錄用並收錄"
+date = "2025.6"
+summary = "一篇論文俾 RCIM 錄用。"
+
+[[awards]]
+name = "國家獎學金"
+institute = "中華人民共和國教育部"
+date = "2025"
+description = ""
+
+[[awards]]
+name = "學業優秀獎學金"
+institute = "廣東工業大學"
+date = "2024, 2025"
+description = ""
+
+[[awards]]
+name = "新生入學獎學金"
+institute = "廣東工業大學"
+date = "2023"
+description = ""
+
+[[awards]]
+name = "學業優秀獎學金"
+institute = "廣東財經大學"
+date = "2020, 2021, 2022"
+description = ""
+
+[skills]
+categories = ["AI 工程", "語言", "前端", "後端與運維", "興趣"]
+
+[[skills.skills]]
+text = "Python"
+category = "AI 工程"
+description = "用於機器學習工具同實驗嘅主要腳本語言。"
+
+[[skills.skills]]
+text = "vLLM"
+category = "AI 工程"
+description = "用於服務同評測嘅高吞吐 LLM 推理引擎。"
+
+[[skills.skills]]
+text = "Unsloth"
+category = "AI 工程"
+description = "針對開源大模型嘅高效微調工作流。"
+
+[[skills.skills]]
+text = "TRL"
+category = "AI 工程"
+description = "用於語言模型後訓練嘅強化學習工具集。"
+
+[[skills.skills]]
+text = "OpenHands"
+category = "AI 工程"
+description = "面向代碼任務同自主工具調用嘅 agent 框架。"
+
+[[skills.skills]]
+text = "PyTorch"
+category = "AI 工程"
+description = "建模同訓練嘅核心深度學習框架。"
+
+[[skills.skills]]
+text = "CUDA"
+category = "AI 工程"
+description = "用於訓練同推理加速嘅 GPU 計算棧。"
+
+[[skills.skills]]
+text = "*英文（TOEFL: 90）*"
+category = "語言"
+description = "可應對國際場景嘅學術同技術溝通。"
+
+[[skills.skills]]
+text = "*日文（N1: 134）*"
+category = "語言"
+description = "具備高階閱讀同職場溝通能力。"
+
+[[skills.skills]]
+text = "中文同粵語（母語）"
+category = "語言"
+description = "普通話同粵語母語流利。"
+
+[[skills.skills]]
+text = "韓語（基礎）"
+category = "語言"
+description = "具備基礎對話同入門閱讀能力。"
+
+[[skills.skills]]
+text = "TypeScript"
+category = "前端"
+description = "提升前端同工具代碼可維護性嘅類型系統。"
+
+[[skills.skills]]
+text = "JavaScript"
+category = "前端"
+description = "瀏覽器同執行時腳本嘅核心語言。"
+
+[[skills.skills]]
+text = "Next.js"
+category = "前端"
+description = "支援路由、SSG、SSR 嘅 React 框架。"
+
+[[skills.skills]]
+text = "Tailwind CSS"
+category = "前端"
+description = "用於快速 UI 迭代嘅 utility-first CSS 體系。"
+
+[[skills.skills]]
+text = "Vite"
+category = "前端"
+description = "現代前端高速建構與開發工具。"
+
+[[skills.skills]]
+text = "React"
+category = "前端"
+description = "用嚟構建互動介面嘅組件化架構。"
+
+[[skills.skills]]
+text = "PWA"
+category = "前端"
+description = "為網頁提供可安裝等漸進式應用能力。"
+
+[[skills.skills]]
+text = "Rust"
+category = "後端與運維"
+description = "用於高性能高可靠後端工具嘅系統程式語言。"
+
+[[skills.skills]]
+text = "CLI"
+category = "後端與運維"
+description = "面向自動化同效率提升嘅命令列工作流。"
+
+[[skills.skills]]
+text = "Docker"
+category = "後端與運維"
+description = "用於本地與雲端可重現運行嘅容器環境。"
+
+[[skills.skills]]
+text = "Kubernetes"
+category = "後端與運維"
+description = "用於服務同任務擴縮容嘅容器編排系統。"
+
+[[skills.skills]]
+text = "Node"
+category = "後端與運維"
+description = "用於 API、工具鏈同伺服器開發嘅 JavaScript runtime。"
+
+[[skills.skills]]
+text = "PostgreSQL"
+category = "後端與運維"
+description = "適用於事務同分析場景嘅關聯式資料庫。"
+
+[[skills.skills]]
+text = "Azure"
+category = "後端與運維"
+description = "用於部署同基礎設施管理嘅雲平台服務。"
+
+[[skills.skills]]
+text = "Typography"
+category = "興趣"
+description = "關注介面設計中嘅字體系統、層級同可讀性。"
+
+[[skills.skills]]
+text = "Graphic Design"
+category = "興趣"
+description = "透過版式、色彩同構圖做視覺敘事。"
+
+[[skills.skills]]
+text = "UI/UX Design"
+category = "興趣"
+description = "重視清晰度、可用性同流程體驗嘅互動設計。"
+
+[[skills.skills]]
+text = "Rhythm Games"
+category = "興趣"
+description = "以節奏同判定精度為核心嘅興趣。"

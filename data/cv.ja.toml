@@ -1,0 +1,250 @@
+[hero]
+name = "鄭恪悠"
+enName = "Keyou (Key) Zheng"
+location = "広州・広東"
+age = ""
+bio = "博士課程志願者、若手研究者、ジュニア設計エンジニア"
+
+[[education]]
+institution = "広東工業大学"
+area = "機械工学"
+degree = "工学修士"
+startDate = "2023年9月"
+endDate = "2026年6月（予定）"
+summary = "GPA: 3.62/4.0（上位2.5%）、指導教員：Jiewu Leng 教授；論文：Verifier-Driven Code-based Parametric CAD Generation with Large Language Models Agent（進行中）。"
+highlights = [
+  "GPA: 3.62/4.0（上位2.5%）、指導教員：Jiewu Leng 教授；",
+  "論文：Verifier-Driven Code-based Parametric CAD Generation with Large Language Models Agent（進行中）。",
+]
+
+[[education]]
+institution = "広東財経大学"
+area = "コンピュータサイエンス"
+degree = "工学学士"
+startDate = "2019年9月"
+endDate = "2023年6月"
+summary = "GPA: 3.5/4.0（上位5%）；卒業論文：Design and Implementation of a Mario Game Agent Based on Deep Reinforcement Learning。"
+highlights = [
+  "GPA: 3.5/4.0（上位5%）；",
+  "卒業論文：Design and Implementation of a Mario Game Agent Based on Deep Reinforcement Learning。",
+]
+
+[[experience]]
+position = "コードベース CAD アセンブリ生成"
+company = "State Key Lab of Manufacturing Technology & Equipment"
+location = ""
+startDate = "2025年8月"
+endDate = "現在"
+summary = "実行可能制約下での制御可能なコードベース CAD 生成に向け、検証可能ベンチマークと LLM エージェントを構築。"
+highlights = [
+  "エージェント基盤：ツールチェーン固定・再現実行可能な多言語コンテナ型コード実行サンドボックスを構築。大規模実験観測のため、複数軌跡と失敗を収集する水平スケーラブルなバックエンドを設計。高速デバッグと成果物生成のための軽量 Web playground も実装。",
+  "ベンチマーク構築：公開リポジトリと CAD コミュニティ由来の 20 万件 CAD コードを基に、決定論・ヒューリスティック（例：あいまい重複除去）と LLM パイプラインで汚染低減と難易度制御を実施。単体 1 万タスク、アセンブリ 1700 タスクを、golden 参照ワークスペースと実行テスト付きで整備。",
+  "エージェント設計：自己テストと自己修復で CAD プログラムを生成・編集する LLM アーキテクチャを設計。単一ファイル前提の手法と異なり、アセンブリの複数ファイル環境で特定ツール（自然言語から仕様抽出する spec など）を利用し、閉ループ修正を実現。",
+  "評価結果：制約満足度の主要指標として実行テストを採用。アセンブリタスクで pass rate 54.2%、all-tests success 41.9%、invalid outputs 2.4% を達成し、幾何品質を維持しつつ GPT-5 などの LLM-only/ツール系ベースラインを上回る結果。",
+  "成果：1 本を ICML 2026（43rd International Conference on Machine Learning）に投稿中。",
+]
+
+[[experience]]
+position = "Human-in-the-loop CAD 生成ワークフロー"
+company = "State Key Lab of Manufacturing Technology & Equipment"
+location = ""
+startDate = "2024年12月"
+endDate = "2025年5月"
+summary = "コードベース CAD 生成向けの HITL エージェントワークフローを設計し、コード有効率と人間選好で評価。"
+highlights = [
+  "ワークフロー設計：微調整済み Qwen2.5-VL-7B を中核に、意図明確化・妥当性検査・反復改善・メモリ・安全ゲーティングを組み合わせ。",
+  "結果：実世界 100 モデルで invalid rate と専門家 pairwise Elo を評価し、invalid rate 2%、Elo 1075.5 を達成。Claude、GPT-4o、非エージェント Qwen を上回った。",
+  "成果：1 本を Applied Soft Computing に掲載。",
+]
+
+[[publications]]
+title = "Towards Agentic Smart Design: An Industrial Large Model-driven Human-in-the-loop Agentic Workflow for Geometric Modelling"
+type = "学術論文"
+status = "掲載済み"
+
+[[publications]]
+title = "AIGC-empowered Smart Manufacturing: Prospects and Challenges"
+type = "学術論文"
+status = "掲載済み"
+
+[[news]]
+title = "Applied Soft Computing 論文掲載"
+date = "2025.9"
+summary = "Applied Soft Computing に論文 1 本が掲載されました。"
+
+[[news]]
+title = "RCIM 論文採択・収録"
+date = "2025.6"
+summary = "RCIM に論文 1 本が採択されました。"
+
+[[awards]]
+name = "国家奨学金"
+institute = "中華人民共和国教育部"
+date = "2025"
+description = ""
+
+[[awards]]
+name = "学業優秀奨学金"
+institute = "広東工業大学"
+date = "2024, 2025"
+description = ""
+
+[[awards]]
+name = "新入生入学奨学金"
+institute = "広東工業大学"
+date = "2023"
+description = ""
+
+[[awards]]
+name = "学業優秀奨学金"
+institute = "広東財経大学"
+date = "2020, 2021, 2022"
+description = ""
+
+[skills]
+categories = ["AIエンジニアリング", "言語", "フロントエンド", "バックエンド・DevOps", "興味"]
+
+[[skills.skills]]
+text = "Python"
+category = "AIエンジニアリング"
+description = "機械学習ツールと実験の主力スクリプト言語。"
+
+[[skills.skills]]
+text = "vLLM"
+category = "AIエンジニアリング"
+description = "配信・評価向けの高スループット LLM 推論エンジン。"
+
+[[skills.skills]]
+text = "Unsloth"
+category = "AIエンジニアリング"
+description = "オープンソース LLM 向けの効率的な微調整ワークフロー。"
+
+[[skills.skills]]
+text = "TRL"
+category = "AIエンジニアリング"
+description = "言語モデルの事後学習向け強化学習ツールキット。"
+
+[[skills.skills]]
+text = "OpenHands"
+category = "AIエンジニアリング"
+description = "コードタスクと自律的ツール利用のためのエージェント基盤。"
+
+[[skills.skills]]
+text = "PyTorch"
+category = "AIエンジニアリング"
+description = "モデリングと学習の中核となる深層学習フレームワーク。"
+
+[[skills.skills]]
+text = "CUDA"
+category = "AIエンジニアリング"
+description = "学習・推論を高速化する GPU 計算スタック。"
+
+[[skills.skills]]
+text = "*英語（TOEFL: 90）*"
+category = "言語"
+description = "国際的な学術・技術コミュニケーションに対応。"
+
+[[skills.skills]]
+text = "*日本語（N1: 134）*"
+category = "言語"
+description = "高度な読解と実務コミュニケーション能力。"
+
+[[skills.skills]]
+text = "中国語・広東語（母語）"
+category = "言語"
+description = "標準中国語と広東語を母語として運用。"
+
+[[skills.skills]]
+text = "韓国語（基礎）"
+category = "言語"
+description = "基礎会話と初級読解が可能。"
+
+[[skills.skills]]
+text = "TypeScript"
+category = "フロントエンド"
+description = "安全なリファクタリングを支える型付き開発。"
+
+[[skills.skills]]
+text = "JavaScript"
+category = "フロントエンド"
+description = "ブラウザ/ランタイム双方の中核言語。"
+
+[[skills.skills]]
+text = "Next.js"
+category = "フロントエンド"
+description = "ルーティング・SSG・SSR を備えた React フレームワーク。"
+
+[[skills.skills]]
+text = "Tailwind CSS"
+category = "フロントエンド"
+description = "高速 UI 反復に適したユーティリティファースト CSS。"
+
+[[skills.skills]]
+text = "Vite"
+category = "フロントエンド"
+description = "モダンフロントエンド向け高速ビルド/開発ツール。"
+
+[[skills.skills]]
+text = "React"
+category = "フロントエンド"
+description = "対話的 UI を構築するためのコンポーネントアーキテクチャ。"
+
+[[skills.skills]]
+text = "PWA"
+category = "フロントエンド"
+description = "Web にインストール可能性などのプログレッシブ機能を提供。"
+
+[[skills.skills]]
+text = "Rust"
+category = "バックエンド・DevOps"
+description = "高性能・高信頼バックエンドツール向けシステム言語。"
+
+[[skills.skills]]
+text = "CLI"
+category = "バックエンド・DevOps"
+description = "自動化と生産性向上のためのコマンドライン運用。"
+
+[[skills.skills]]
+text = "Docker"
+category = "バックエンド・DevOps"
+description = "ローカル/クラウドで再現性を担保するコンテナ環境。"
+
+[[skills.skills]]
+text = "Kubernetes"
+category = "バックエンド・DevOps"
+description = "サービス・ジョブのスケーリング向けコンテナオーケストレーション。"
+
+[[skills.skills]]
+text = "Node"
+category = "バックエンド・DevOps"
+description = "API・ツール・Web サービス向け JavaScript ランタイム。"
+
+[[skills.skills]]
+text = "PostgreSQL"
+category = "バックエンド・DevOps"
+description = "トランザクション/分析の両面に適したリレーショナル DB。"
+
+[[skills.skills]]
+text = "Azure"
+category = "バックエンド・DevOps"
+description = "デプロイとインフラ管理のためのクラウドサービス。"
+
+[[skills.skills]]
+text = "Typography"
+category = "興味"
+description = "UI における書体設計、階層、可読性への関心。"
+
+[[skills.skills]]
+text = "Graphic Design"
+category = "興味"
+description = "レイアウト・色彩・構図によるビジュアル表現。"
+
+[[skills.skills]]
+text = "UI/UX Design"
+category = "興味"
+description = "明快さ・使いやすさ・導線を重視した体験設計。"
+
+[[skills.skills]]
+text = "Rhythm Games"
+category = "興味"
+description = "タイミング精度と音楽ゲーム性を重視する趣味。"

@@ -18,6 +18,8 @@ export interface SocialLinks {
 export interface Hero {
   name: string;
   enName?: string;
+  furiganaName?: string;
+  furigana?: string;
   avatar: string;
   location: string;
   age: string;
@@ -35,6 +37,14 @@ export interface EducationItem {
   endDate: string;
   summary?: string;
   highlights: string[];
+}
+
+export interface EducationSectionConfig {
+  splitExpectedLine?: boolean;
+}
+
+export interface SectionConfig {
+  education?: EducationSectionConfig;
 }
 
 export interface PublicationItem {
@@ -71,9 +81,14 @@ export interface AwardItem {
 }
 
 export interface SkillItem {
-  name: string;
+  text: string;
   category: string;
-  description: string;
+  description?: string;
+  icon?: string;
+  url?: string;
+  code?: boolean;
+  // Backward compatibility for legacy localized payloads.
+  name?: string;
 }
 
 export interface Skills {
@@ -102,6 +117,7 @@ export interface NewsItem {
 export interface CVData {
   hero: Hero;
   education: EducationItem[];
+  sectionConfig?: SectionConfig;
   publications: PublicationItem[];
   experience: ExperienceItem[];
   news?: NewsItem[];

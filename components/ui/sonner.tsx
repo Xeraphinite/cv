@@ -2,6 +2,7 @@
 
 import { useTheme } from "next-themes"
 import { Toaster as Sonner } from "sonner"
+import { Icon } from "@iconify/react"
 
 type ToasterProps = React.ComponentProps<typeof Sonner>
 
@@ -12,6 +13,13 @@ const Toaster = ({ ...props }: ToasterProps) => {
     <Sonner
       theme={theme as ToasterProps["theme"]}
       className="toaster group"
+      icons={{
+        success: <Icon icon="mingcute:check-circle-fill" className="h-4 w-4" />,
+        info: <Icon icon="mingcute:information-fill" className="h-4 w-4" />,
+        warning: <Icon icon="mingcute:warning-fill" className="h-4 w-4" />,
+        error: <Icon icon="mingcute:close-circle-fill" className="h-4 w-4" />,
+        loading: <Icon icon="mingcute:loading-fill" className="h-4 w-4 animate-spin" />,
+      }}
       toastOptions={{
         classNames: {
           toast:

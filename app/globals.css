@@ -38,6 +38,14 @@
     --paper-shadow: 0 0% 0%;
     --glass-backdrop: rgba(255, 255, 255, 0.8);
     --glass-border: rgba(255, 255, 255, 0.2);
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
@@ -66,12 +74,24 @@
     --paper-shadow: 0 0% 100%;
     --glass-backdrop: rgba(0, 0, 0, 0.6);
     --glass-border: rgba(255, 255, 255, 0.1);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .maplibregl-popup-content {
     @apply bg-transparent! shadow-none! p-0! rounded-none!;
   }
   .maplibregl-popup-tip {
     @apply hidden!;
+  }
+  .hero-location-map .maplibregl-canvas-container,
+  .hero-location-map .maplibregl-canvas {
+    border-radius: 1rem;
   }
 }
 
@@ -389,18 +409,20 @@
 
 /* Enhanced Ruby text for Japanese (JLREQ) */
 .paper-ruby {
-  @apply relative inline-block;
   ruby-align: center;
   ruby-position: over;
   font-feature-settings: "ruby" 1;
 }
 
 .paper-ruby rt {
-  @apply absolute left-1/2 transform -translate-x-1/2 text-muted-foreground leading-none font-medium;
-  top: -0.8em;
-  font-size: 0.4em;
-  letter-spacing: 0.05em;
-  font-weight: 400;
+  @apply text-muted-foreground leading-none font-medium;
+  font-size: 0.32em;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+
+.paper-ruby-group {
+  @apply inline;
 }
 
 code,

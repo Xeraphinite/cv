@@ -23,6 +23,9 @@ news = "News"
 skills = "Skills"
 awards = "Awards"
 
+[sectionConfig.education]
+splitExpectedLine = true
+
 [education.education-1]
 institution = "Guangdong University of Technology"
 degree = "Mechanical Engineering, MEng."
@@ -122,36 +125,57 @@ url = "https://www.sciencedirect.com/science/article/pii/S0736584525001309"
 [skills.ai-engineering]
 label = "AI Engineering"
 items = [
-  "Python",
-  "vLLM",
-  "Unsloth",
-  "TRL",
-  "OpenHands",
-  "PyTorch",
-  "CUDA",
+  { text = "Python", url = "https://www.python.org/", code = true, description = "Primary scripting language for ML tooling and experiments." },
+  { text = "vLLM", url = "https://docs.vllm.ai/", code = true, description = "High-throughput LLM inference engine for serving and evaluation." },
+  { text = "Unsloth", url = "https://unsloth.ai/", code = true, description = "Efficient fine-tuning workflows for open-source language models." },
+  { text = "TRL", url = "https://huggingface.co/docs/trl/index", code = true, description = "Reinforcement learning toolkit for post-training language models." },
+  { text = "OpenHands", url = "https://docs.all-hands.dev/", code = true, description = "Agent framework for code tasks and autonomous tool use." },
+  { text = "PyTorch", url = "https://pytorch.org/", code = true, description = "Core deep learning framework for modeling and training." },
+  { text = "CUDA", url = "https://developer.nvidia.com/cuda-toolkit", code = true, description = "GPU compute stack for accelerating training and inference." },
 ]
 
 
 [skills.languages]
 label = "Languages"
 items = [
-  "*English (TOEFL: 90)*",
-  "*Japanese (N1: 134)*",
-  "Chinese & Cantonese (native)",
-  "Korean (basic)",
+  { text = "*English (TOEFL: 90)*", url = "https://www.ets.org/toefl.html", icon = "mingcute:translate-2-line", description = "Academic and technical communication in international contexts." },
+  { text = "*Japanese (N1: 134)*", url = "https://www.jlpt.jp/e/", icon = "mingcute:translate-2-line", description = "Advanced proficiency for reading and professional communication." },
+  { text = "Chinese & Cantonese (native)", url = "https://en.wikipedia.org/wiki/Cantonese", icon = "mingcute:translate-2-line", description = "Native fluency in Mandarin Chinese and Cantonese." },
+  { text = "Korean (basic)", url = "https://www.topik.go.kr/usr/cmm/index.do", icon = "mingcute:translate-2-line", description = "Basic conversational Korean and introductory reading ability." },
 ]
 
 [skills.web-dev]
 label = "Frontend"
-items = ["TypeScript", "JavaScript", "Next.js", "Tailwind CSS", "Vite", "React", "PWA"]
+items = [
+  { text = "TypeScript", url = "https://www.typescriptlang.org/", code = true, description = "Typed frontend and tooling code for safer refactors." },
+  { text = "JavaScript", url = "https://developer.mozilla.org/docs/Web/JavaScript", code = true, description = "Core web language for browser and runtime scripting." },
+  { text = "Next.js", url = "https://nextjs.org/", code = true, description = "React framework for app routing, SSG, and SSR." },
+  { text = "Tailwind CSS", url = "https://tailwindcss.com/", code = true, description = "Utility-first CSS system for fast UI iteration." },
+  { text = "Vite", url = "https://vite.dev/", code = true, description = "Fast build and dev tooling for modern frontend apps." },
+  { text = "React", url = "https://react.dev/", code = true, description = "Component architecture for interactive user interfaces." },
+  { text = "PWA", url = "https://web.dev/explore/progressive-web-apps", code = true, description = "Progressive web app capabilities for installable web experiences." },
+]
 
 [skills.devops]
 label = "DevOps & Backend"
-items = ["Rust", "CLI", "Docker", "Kubernetes", "Node", "PostgreSQL", "Azure"]
+items = [
+  { text = "Rust", url = "https://www.rust-lang.org/", code = true, description = "Systems programming for performant and reliable backend tools." },
+  { text = "CLI", url = "https://en.wikipedia.org/wiki/Command-line_interface", code = true, description = "Command-line workflows for automation and developer productivity." },
+  { text = "Docker", url = "https://www.docker.com/", code = true, description = "Containerized environments for reproducible local and cloud runs." },
+  { text = "Kubernetes", url = "https://kubernetes.io/", code = true, description = "Container orchestration for scaling services and jobs." },
+  { text = "Node", url = "https://nodejs.org/", code = true, description = "JavaScript runtime for APIs, tooling, and web services." },
+  { text = "PostgreSQL", url = "https://www.postgresql.org/", code = true, description = "Relational database for transactional and analytical workloads." },
+  { text = "Azure", url = "https://azure.microsoft.com/", code = true, description = "Cloud platform services for deployment and infrastructure management." },
+]
 
 [skills.interests]
 label = "Interests"
-items = ["Typography", "Graphic Design", "UI/UX Design", "Rhythm Games"]
+items = [
+  { text = "Typography", url = "https://en.wikipedia.org/wiki/Typography", icon = "mingcute:book-6-line", description = "Type systems, hierarchy, and readability in interface design." },
+  { text = "Graphic Design", url = "https://en.wikipedia.org/wiki/Graphic_design", icon = "mingcute:star-fill", description = "Visual storytelling through layout, color, and composition." },
+  { text = "UI/UX Design", url = "https://en.wikipedia.org/wiki/User_experience_design", icon = "mingcute:target-line", description = "Interaction patterns focused on clarity, usability, and flow." },
+  { text = "Rhythm Games", url = "https://en.wikipedia.org/wiki/Rhythm_game", icon = "mingcute:medal-line", description = "Hobby focused on timing accuracy and music-game mechanics." },
+]
 
 [awards.award-1]
 name = "National Scholarship"

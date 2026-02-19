@@ -1,13 +1,12 @@
 import fs from "node:fs/promises"
 import path from "node:path"
-import yaml from "js-yaml"
 import { parse as parseToml } from "smol-toml"
 import { appConfig } from "@/lib/config/app-config"
 import type { CVData, Locale } from '@/lib/types/cv'
 
 export async function getCVLastUpdated(locale: Locale = appConfig.cvData.fallbackLocale): Promise<string> {
   try {
-    const filePath = getCVSourceFilePath(locale)
+    const filePath = await resolveCVSourceFilePath(locale)
     const stats = await fs.stat(filePath)
     return stats.mtime.toISOString()
   } catch (error) {
@@ -16,30 +15,29 @@ export async function getCVLastUpdated(locale: Locale = appConfig.cvData.fallbac
   }
 }
 
-export async function getCVData(locale: Locale = "zh"): Promise<CVData> {
+export async function getCVData(locale: Locale = appConfig.cvData.fallbackLocale): Promise<CVData> {
+  let baseData: CVData
   try {
-    if (appConfig.cvData.source === "toml") {
-      return await getCVDataFromToml()
-    }
-    return await getCVDataFromYaml(locale)
-  } catch (error) {
-    console.error(`Error loading CV data for locale ${locale}:`, error)
-    // Fallback to YAML data if TOML loading fails
-    if (appConfig.cvData.source === "toml") {
-      try {
-        return await getCVDataFromYaml(locale)
-      } catch (yamlError) {
-        console.error(`Error loading fallback YAML data for locale ${locale}:`, yamlError)
-      }
-    }
-    // Fallback to default locale if current locale fails
-    if (locale !== appConfig.cvData.fallbackLocale) {
-      console.warn(`Falling back to default locale '${appConfig.cvData.fallbackLocale}'`)
-      return getCVData(appConfig.cvData.fallbackLocale)
-    }
-    // Return sample data as last resort
+    baseData = await getCVDataFromDefaultToml()
+  } catch (defaultTomlError) {
+    console.error(`Error loading default TOML data:`, defaultTomlError)
     return getSampleData()
   }
+
+  const localeOverride = await tryGetLocalizedTomlOverride(locale)
+  if (localeOverride) {
+    return mergeCVData(baseData, localeOverride)
+  }
+
+  if (locale !== appConfig.cvData.fallbackLocale) {
+    console.warn(`Falling back to default locale '${appConfig.cvData.fallbackLocale}'`)
+    const fallbackOverride = await tryGetLocalizedTomlOverride(appConfig.cvData.fallbackLocale)
+    if (fallbackOverride) {
+      return mergeCVData(baseData, fallbackOverride)
+    }
+  }
+
+  return baseData
 }
 
 type TomlContact = {
@@ -49,9 +47,16 @@ type TomlContact = {
 }
 
 type TomlCVData = {
+  sectionConfig?: {
+    education?: {
+      splitExpectedLine?: boolean
+    }
+  }
   profile?: {
     original_name?: string
     en_name?: string
+    furigana_name?: string
+    furigana?: string
     location_label?: string
     summary?: string
     contacts?: TomlContact[]
@@ -106,7 +111,17 @@ type TomlCVData = {
     string,
     {
       label?: string
-      items?: string[]
+      items?: Array<
+        | string
+        | {
+            text?: string
+            name?: string
+            icon?: string
+            url?: string
+            code?: boolean
+            description?: string
+          }
+      >
     }
   >
   awards?: Record<
@@ -120,35 +135,135 @@ type TomlCVData = {
   >
 }
 
-async function getCVDataFromToml(): Promise<CVData> {
-  const filePath = path.isAbsolute(appConfig.cvData.tomlFilePath)
-    ? appConfig.cvData.tomlFilePath
-    : path.join(process.cwd(), appConfig.cvData.tomlFilePath)
-  const fileContents = await fs.readFile(filePath, "utf8")
+async function getCVDataFromDefaultToml(): Promise<CVData> {
+  const fileContents = await fs.readFile(getDefaultTomlFilePath(), "utf8")
   const parsedData = parseToml(fileContents) as TomlCVData
   return mapTomlToCVData(parsedData)
 }
 
-async function getCVDataFromYaml(locale: Locale): Promise<CVData> {
-  const fileName = appConfig.cvData.fallbackYamlTemplate.replace("{locale}", locale)
-  const filePath = path.join(process.cwd(), appConfig.cvData.fallbackYamlDir, fileName)
-  const fileContents = await fs.readFile(filePath, "utf8")
-  const data = yaml.load(fileContents) as CVData
-
-  if (!data || typeof data !== "object") {
-    throw new Error(`Invalid CV data structure for locale: ${locale}`)
-  }
-  return data
+type DeepPartial<T> = {
+  [K in keyof T]?: T[K] extends Array<infer U>
+    ? Array<DeepPartial<U>>
+    : T[K] extends Record<string, unknown>
+      ? DeepPartial<T[K]>
+      : T[K]
 }
 
-function getCVSourceFilePath(locale: Locale): string {
-  if (appConfig.cvData.source === "toml") {
-    return path.isAbsolute(appConfig.cvData.tomlFilePath)
-      ? appConfig.cvData.tomlFilePath
-      : path.join(process.cwd(), appConfig.cvData.tomlFilePath)
+async function getCVDataFromLocalizedToml(locale: Locale): Promise<DeepPartial<CVData>> {
+  const fileContents = await fs.readFile(getLocalizedTomlFilePath(locale), "utf8")
+  return parseToml(fileContents) as DeepPartial<CVData>
+}
+
+async function tryGetLocalizedTomlOverride(locale: Locale): Promise<DeepPartial<CVData> | null> {
+  const filePath = getLocalizedTomlFilePath(locale)
+  try {
+    await fs.access(filePath)
+  } catch {
+    return null
   }
-  const fileName = appConfig.cvData.fallbackYamlTemplate.replace("{locale}", locale)
-  return path.join(process.cwd(), appConfig.cvData.fallbackYamlDir, fileName)
+
+  try {
+    return await getCVDataFromLocalizedToml(locale)
+  } catch (error) {
+    console.error(`Error loading localized TOML override for locale ${locale}:`, error)
+    return null
+  }
+}
+
+async function resolveCVSourceFilePath(locale: Locale): Promise<string> {
+  if (locale === appConfig.cvData.defaultSourceLocale) {
+    return getDefaultTomlFilePath()
+  }
+
+  const localizedPath = getLocalizedTomlFilePath(locale)
+  try {
+    await fs.access(localizedPath)
+    return localizedPath
+  } catch {
+    return getDefaultTomlFilePath()
+  }
+}
+
+function getDefaultTomlFilePath(): string {
+  return path.isAbsolute(appConfig.cvData.defaultTomlFilePath)
+    ? appConfig.cvData.defaultTomlFilePath
+    : path.join(process.cwd(), appConfig.cvData.defaultTomlFilePath)
+}
+
+function getLocalizedTomlFilePath(locale: Locale): string {
+  const fileName = appConfig.cvData.localizedTomlTemplate.replace("{locale}", locale)
+  const fileDir = path.isAbsolute(appConfig.cvData.localizedTomlDir)
+    ? appConfig.cvData.localizedTomlDir
+    : path.join(process.cwd(), appConfig.cvData.localizedTomlDir)
+  return path.join(fileDir, fileName)
+}
+
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value)
+}
+
+function mergeObject<T extends Record<string, unknown>>(base: T, override: DeepPartial<T>): T {
+  const merged = { ...base }
+
+  for (const key of Object.keys(override) as Array<keyof T>) {
+    const overrideValue = override[key]
+    if (overrideValue === undefined) continue
+
+    const baseValue = merged[key]
+    if (isPlainObject(baseValue) && isPlainObject(overrideValue)) {
+      merged[key] = mergeObject(
+        baseValue as Record<string, unknown>,
+        overrideValue as DeepPartial<Record<string, unknown>>,
+      ) as T[keyof T]
+      continue
+    }
+
+    merged[key] = overrideValue as T[keyof T]
+  }
+
+  return merged
+}
+
+function mergeArrayByIndex<T extends Record<string, unknown>>(
+  base: T[],
+  override?: Array<DeepPartial<T>>,
+): T[] {
+  if (!override || override.length === 0) return base
+
+  return base.map((item, index) => {
+    const overrideItem = override[index]
+    if (!overrideItem) return item
+    return mergeObject(item, overrideItem)
+  })
+}
+
+function mergeCVData(base: CVData, override: DeepPartial<CVData>): CVData {
+  const merged: CVData = {
+    ...base,
+    hero: override.hero ? mergeObject(base.hero, override.hero) : base.hero,
+    education: mergeArrayByIndex(base.education, override.education),
+    publications: mergeArrayByIndex(base.publications, override.publications),
+    experience: mergeArrayByIndex(base.experience, override.experience),
+    awards: mergeArrayByIndex(base.awards, override.awards),
+    skills: {
+      categories: override.skills?.categories ?? base.skills.categories,
+      skills: mergeArrayByIndex(base.skills.skills, override.skills?.skills),
+    },
+  }
+
+  const baseNews = base.news ?? []
+  const mergedNews = mergeArrayByIndex(baseNews, override.news)
+  if (base.news || override.news) {
+    merged.news = mergedNews
+  }
+
+  const baseTalks = base.talks ?? []
+  const mergedTalks = mergeArrayByIndex(baseTalks, override.talks)
+  if (base.talks || override.talks) {
+    merged.talks = mergedTalks
+  }
+
+  return merged
 }
 
 function mapTomlToCVData(source: TomlCVData): CVData {
@@ -164,6 +279,8 @@ function mapTomlToCVData(source: TomlCVData): CVData {
     hero: {
       name: cleanText(profile.original_name ?? profile.en_name ?? "Unknown"),
       enName: cleanText(profile.en_name ?? profile.original_name ?? "Unknown"),
+      furiganaName: cleanText(profile.furigana_name ?? ""),
+      furigana: cleanText(profile.furigana ?? ""),
       avatar: "/avatar-256.png",
       location: cleanText(profile.location_label ?? ""),
       age: "",
@@ -184,6 +301,11 @@ function mapTomlToCVData(source: TomlCVData): CVData {
         highlights: details,
       }
     }),
+    sectionConfig: {
+      education: {
+        splitExpectedLine: source.sectionConfig?.education?.splitExpectedLine ?? true,
+      },
+    },
     experience: experienceEntries.map((item) => ({
       position: cleanText(item.project ?? item.role ?? ""),
       company: cleanText(item.org ?? ""),
@@ -228,14 +350,33 @@ function mapTomlToCVData(source: TomlCVData): CVData {
         .filter(Boolean),
       skills: skillEntries.flatMap((item) => {
         const category = cleanText(item.label ?? "")
-        return (item.items ?? [])
-          .map(cleanText)
-          .filter(Boolean)
-          .map((name) => ({
-            name,
-            category,
-            description: "",
-          }))
+        return (item.items ?? []).flatMap((skill) => {
+          if (typeof skill === "string") {
+            const text = cleanText(skill)
+            if (!text) return []
+            return [
+              {
+                text,
+                category,
+                description: "",
+              },
+            ]
+          }
+
+          const text = cleanText(skill.text ?? skill.name ?? "")
+          if (!text) return []
+
+          return [
+            {
+              text,
+              category,
+              icon: cleanText(skill.icon ?? ""),
+              url: cleanText(skill.url ?? ""),
+              code: Boolean(skill.code),
+              description: cleanText(skill.description ?? ""),
+            },
+          ]
+        })
       }),
     },
     talks: [],
@@ -357,6 +498,11 @@ function getSampleData(): CVData {
         ],
       },
     ],
+    sectionConfig: {
+      education: {
+        splitExpectedLine: true,
+      },
+    },
     education: [
       {
         institution: "Sample University",
@@ -400,7 +546,7 @@ function getSampleData(): CVData {
       categories: ["Programming", "Research", "Communication"],
       skills: [
         {
-          name: "Sample Skill",
+          text: "Sample Skill",
           category: "Programming",
           description: "Sample skill description",
         },

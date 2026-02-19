@@ -22,10 +22,11 @@ minimal-cv/
 │   ├── layout/           # Layout-related components
 │   ├── sections/         # CV section components
 │   └── ui/              # Reusable UI components
-├── data/                 # CV data in YAML format
-│   ├── cv.en.yaml       # English CV data
-│   ├── cv.zh.yaml       # Chinese CV data
-│   └── cv.ja.yaml       # Japanese CV data
+├── data/                 # CV data in TOML format
+│   ├── cv.toml          # Default CV data source
+│   ├── cv.en.toml       # English CV data
+│   ├── cv.zh.toml       # Chinese CV data
+│   └── cv.ja.toml       # Japanese CV data
 ├── lib/                  # Utility functions and types
 │   ├── types/           # TypeScript type definitions
 │   └── i18n-utils.ts    # Internationalization utilities
@@ -66,17 +67,18 @@ pnpm dev
 
 ### CV Data
 
-Update the YAML files in the `data/` directory:
+Update the TOML files in the `data/` directory:
 
-- `cv.en.yaml` - English version
-- `cv.zh.yaml` - Chinese version  
-- `cv.ja.yaml` - Japanese version
+- `cv.toml` - default source
+- `cv.en.toml` - English version
+- `cv.zh.toml` - Chinese version  
+- `cv.ja.toml` - Japanese version
 
 All files should follow the same structure defined in `lib/types/cv.ts`.
 
 ### Adding New Languages
 
-1. Create a new CV data file: `data/cv.[locale].yaml`
+1. Create a new CV data file: `data/cv.[locale].toml`
 2. Add translation messages: `messages/[locale].json`
 3. Update the locale configuration in `i18n.ts`
 
@@ -125,7 +127,7 @@ The site can be deployed to:
 - **UI Components**: shadcn/ui
 - **Internationalization**: next-intl
 - **Icons**: Lucide React
-- **Data Format**: YAML
+- **Data Format**: TOML
 
 ## 🤝 Contributing
 

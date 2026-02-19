@@ -65,6 +65,7 @@ export type NavigationMessages = {
   }
   label: {
     supervisor: string
+    expected: string
     present: string
     duration: string
     location: string

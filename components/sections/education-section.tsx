@@ -3,25 +3,19 @@
 import { Icon } from '@iconify/react'
 import { useSectionTranslations, useLabelTranslations } from '@/hooks/use-translations'
 import { formatToYearMonth } from '@/lib/date-format'
-
-interface EducationItem {
-  institution: string
-  area: string
-  degree: string
-  startDate: string
-  endDate: string
-  summary?: string
-  highlights: string[]
-  supervisor?: string
-}
+import type { EducationItem, EducationSectionConfig } from '@/lib/types/cv'
 
 interface EducationSectionProps {
   data: EducationItem[]
+  config?: EducationSectionConfig
 }
 
-export function EducationSection({ data }: EducationSectionProps) {
+const EXPECTED_FALLBACK_TOKENS = ['expected', '预计', '預計', '予定', '예정'] as const
+
+export function EducationSection({ data, config }: EducationSectionProps) {
   const tSection = useSectionTranslations()
   const tLabel = useLabelTranslations()
+  const splitExpectedLine = config?.splitExpectedLine ?? true
 
   const renderYearMonthWithSup = (value: string) => {
     const formatted = formatToYearMonth(value)
@@ -37,11 +31,26 @@ export function EducationSection({ data }: EducationSectionProps) {
   
   if (!data || data.length === 0) return null
 
+  const normalizeExpectedToken = (value: string) => value.trim().toLowerCase()
+
   const splitExpectedLabel = (value: string): { main: string; expected?: string } => {
+    if (!splitExpectedLine) {
+      return { main: value.trim() }
+    }
+
     const trimmed = value.trim()
-    const match = trimmed.match(/^(.*)\s+\((Expected)\)$/i)
+    const match = trimmed.match(/^(.*?)[\s\u3000]*([\(（])\s*(.+?)\s*([\)）])$/)
     if (!match) return { main: trimmed }
-    return { main: match[1].trim(), expected: `(${match[2]})` }
+
+    const rawExpectedToken = normalizeExpectedToken(match[3])
+    const localizedExpectedToken = normalizeExpectedToken(tLabel('expected'))
+    const expectedTokens = new Set<string>([localizedExpectedToken, ...EXPECTED_FALLBACK_TOKENS])
+
+    if (!expectedTokens.has(rawExpectedToken)) {
+      return { main: trimmed }
+    }
+
+    return { main: match[1].trim(), expected: `(${tLabel('expected')})` }
   }
 
   return (

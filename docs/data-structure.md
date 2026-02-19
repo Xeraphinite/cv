@@ -4,11 +4,12 @@ This document describes the structure and format of the CV data files used in th
 
 ## Overview
 
-The CV data is stored in YAML format in the `data/` directory. Each language has its own file:
+The CV data is stored in TOML format in the `data/` directory. Each language has its own file:
 
-- `cv.en.yaml` - English
-- `cv.zh.yaml` - Chinese (Simplified)
-- `cv.ja.yaml` - Japanese
+- `cv.toml` - default source
+- `cv.en.toml` - English
+- `cv.zh.toml` - Chinese (Simplified)
+- `cv.ja.toml` - Japanese
 
 All files must follow the same structure defined by the TypeScript types in `lib/types/cv.ts`.
 
@@ -18,7 +19,7 @@ All files must follow the same structure defined by the TypeScript types in `lib
 
 The hero section contains personal information and social links.
 
-```yaml
+```toml
 hero:
   name: "Your Name"
   enName: "English Name" # Optional, for non-English versions
@@ -43,7 +44,7 @@ hero:
 
 List of educational background in reverse chronological order.
 
-```yaml
+```toml
 education:
   - institution: "University Name"
     area: "Field of Study"
@@ -61,7 +62,7 @@ education:
 
 Academic publications, papers, and patents.
 
-```yaml
+```toml
 publications:
   - title: "Publication Title"
     authors: ["Author 1", "Author 2", "Author 3"]
@@ -81,7 +82,7 @@ publications:
 
 Work experience and research projects.
 
-```yaml
+```toml
 experience:
   - position: "Job Title or Project Name"
     company: "Company/Institution Name"
@@ -98,7 +99,7 @@ experience:
 
 Academic and professional awards.
 
-```yaml
+```toml
 awards:
   - name: "Award Name"
     institute: "Awarding Institution"
@@ -110,7 +111,7 @@ awards:
 
 Technical and soft skills organized by categories.
 
-```yaml
+```toml
 skills:
   categories:
     - "Programming"
@@ -127,7 +128,7 @@ skills:
 
 Conference talks, presentations, and lectures.
 
-```yaml
+```toml
 talks:
   - title: "Talk Title"
     event: "Conference/Event Name"
@@ -189,6 +190,6 @@ The data is validated against TypeScript types. Common validation errors:
 ## Examples
 
 See the existing files for complete examples:
-- [English CV Data](../data/cv.en.yaml)
-- [Chinese CV Data](../data/cv.zh.yaml)
-- [Japanese CV Data](../data/cv.ja.yaml) 
+- [English CV Data](../data/cv.en.toml)
+- [Chinese CV Data](../data/cv.zh.toml)
+- [Japanese CV Data](../data/cv.ja.toml) 

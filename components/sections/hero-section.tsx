@@ -13,6 +13,8 @@ interface HeroSectionProps {
   data: {
     name: string
     enName?: string
+    furiganaName?: string
+    furigana?: string
     avatar: string
     location: string
     age: string | number
@@ -127,14 +129,71 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 
   const formatNameWithRuby = () => {
     if (locale === 'ja') {
-      return (
-        <ruby className="paper-ruby">
-          {data.name}
-          <rt>{data.enName ?? data.name}</rt>
-        </ruby>
-      )
+      const segmentationTemplate = data.furiganaName || data.name
+      const templateSegments = segmentationTemplate.split('|').map((segment) => segment.trim()).filter(Boolean)
+      const rubySegments = (data.furigana || '').split('|').map((segment) => segment.trim()).filter(Boolean)
+      const localizedNameChars = Array.from(data.name)
+      const templateSegmentLengths = templateSegments.map((segment) => Array.from(segment).length)
+      const canMapTemplateToLocalizedName =
+        templateSegments.length > 1 && templateSegmentLengths.reduce((sum, length) => sum + length, 0) === localizedNameChars.length
+
+      const baseSegments = canMapTemplateToLocalizedName
+        ? templateSegmentLengths.reduce<string[]>((segments, length, index) => {
+            const start = templateSegmentLengths.slice(0, index).reduce((sum, part) => sum + part, 0)
+            segments.push(localizedNameChars.slice(start, start + length).join(''))
+            return segments
+          }, [])
+        : templateSegments
+
+      const hasSegmentedRuby = rubySegments.length > 0 && rubySegments.length === baseSegments.length
+
+      if (hasSegmentedRuby) {
+        return (
+          <span aria-label={data.name} className="paper-ruby-group">
+            {baseSegments.map((baseSegment, index) => (
+              <ruby key={`${baseSegment}-${index}`} className="paper-ruby">
+                {baseSegment}
+                <rt>{rubySegments[index]}</rt>
+              </ruby>
+            ))}
+          </span>
+        )
+      }
+
+      if (data.furigana) {
+        const fallbackBase = data.furiganaName || data.name
+        return (
+          <ruby className="paper-ruby">
+            {fallbackBase}
+            <rt>{data.furigana}</rt>
+          </ruby>
+        )
+      }
+
+      return data.name
     }
+
     return data.name
+  }
+
+  const getPrimaryName = () => {
+    if (locale === 'en') {
+      return data.enName || data.name
+    }
+    return formatNameWithRuby()
+  }
+
+  const getSecondaryName = () => {
+    if (locale === 'en') {
+      if (data.enName && data.name && data.enName !== data.name) {
+        return data.name
+      }
+      return undefined
+    }
+    if (data.enName && data.enName !== data.name) {
+      return data.enName
+    }
+    return undefined
   }
 
   const formatAge = (ageString: string | number) => {
@@ -169,6 +228,9 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
     }
   }
 
+  const primaryName = getPrimaryName()
+  const secondaryName = getSecondaryName()
+
   return (
     <header className="pt-0 pb-6 sm:pb-8">
       <div className="paper-card">
@@ -188,10 +250,10 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
           </div>
 
           <div className="min-w-0">
-            <h1 className={`${typographyClasses.title} mb-2`}>{formatNameWithRuby()}</h1>
+            <h1 className={`${typographyClasses.title} mb-2`}>{primaryName}</h1>
 
-            {locale !== 'ja' && data.enName && (
-              <h2 className={`${typographyClasses.subtitle} text-muted-foreground/80`}>{data.enName}</h2>
+            {secondaryName && (
+              <h2 className={`${typographyClasses.subtitle} text-muted-foreground/80`}>{secondaryName}</h2>
             )}
 
             {data.description && (

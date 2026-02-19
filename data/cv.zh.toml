@@ -1,0 +1,250 @@
+[hero]
+name = "郑恪悠"
+enName = "Keyou (Key) Zheng"
+location = "广东广州"
+age = ""
+bio = "博士申请者，新手研究员，初级设计工程师"
+
+[[education]]
+institution = "广东工业大学"
+area = "机械工程"
+degree = "工程硕士"
+startDate = "2023年9月"
+endDate = "2026年6月（预计）"
+summary = "GPA：3.62/4.0（前2.5%），导师：冷杰武教授；论文：Verifier-Driven Code-based Parametric CAD Generation with Large Language Models Agent（进行中）。"
+highlights = [
+  "GPA：3.62/4.0（前2.5%），导师：冷杰武教授；",
+  "论文：Verifier-Driven Code-based Parametric CAD Generation with Large Language Models Agent（进行中）。",
+]
+
+[[education]]
+institution = "广东财经大学"
+area = "计算机科学"
+degree = "工学学士"
+startDate = "2019年9月"
+endDate = "2023年6月"
+summary = "GPA：3.5/4.0（前5%）；毕业论文：Design and Implementation of a Mario Game Agent Based on Deep Reinforcement Learning。"
+highlights = [
+  "GPA：3.5/4.0（前5%）；",
+  "毕业论文：Design and Implementation of a Mario Game Agent Based on Deep Reinforcement Learning。",
+]
+
+[[experience]]
+position = "基于代码的 CAD 装配生成"
+company = "制造技术与装备国家重点实验室"
+location = ""
+startDate = "2025年8月"
+endDate = "至今"
+summary = "构建了可验证基准与 LLM 智能体，实现可控的代码式 CAD 生成与可执行约束评测。"
+highlights = [
+  "智能体基础设施：搭建多语言容器化代码执行沙箱，固定工具链并保证可复现运行；设计可横向扩展后端，采集多轨迹与失败样本用于大规模实验观测；并实现轻量 Web playground 以便快速调试与产物生成。",
+  "基准构建：基于公开仓库与 CAD 社区收集的 20 万人类 CAD 代码语料，结合确定性与启发式规则（如模糊去重）及 LLM 流水线，降低数据污染并控制任务难度；产出 1 万单体任务与 1700 装配任务，附带金标准工作区与可执行测试。",
+  "智能体设计：设计了通过自测与自修复生成/编辑 CAD 程序的 LLM 架构。不同于仅支持单文件的方法，该智能体可在多文件装配工作区调用特定工具（如从自然语言抽取规范的 spec 工具），形成闭环修复。",
+  "评测结果：以可执行测试作为核心指标衡量约束满足度。在装配任务上，方法达到 54.2% 通过率、41.9% 全测通过率、2.4% 无效输出率，并在几何分数保持竞争力的同时优于 GPT-5 等 LLM-only 与工具基线。",
+  "产出：一篇论文已投稿至 ICML 2026（43rd International Conference on Machine Learning）并在审。",
+]
+
+[[experience]]
+position = "人机协同 CAD 生成工作流"
+company = "制造技术与装备国家重点实验室"
+location = ""
+startDate = "2024年12月"
+endDate = "2025年5月"
+summary = "设计了用于代码式 CAD 生成的 HITL 智能体工作流，并以代码有效率与人工偏好进行评估。"
+highlights = [
+  "工作流设计：以微调 Qwen2.5-VL-7B 为骨干，融合意图澄清、有效性检查、迭代优化、记忆与安全门控等模式。",
+  "结果：在 100 个真实模型上以无效率与专家两两 Elo 评估，达到 2% 无效率与 1075.5 Elo，优于 Claude、GPT-4o 与非智能体 Qwen 基线。",
+  "产出：一篇论文发表于 Applied Soft Computing。",
+]
+
+[[publications]]
+title = "Towards Agentic Smart Design: An Industrial Large Model-driven Human-in-the-loop Agentic Workflow for Geometric Modelling"
+type = "期刊论文"
+status = "已发表"
+
+[[publications]]
+title = "AIGC-empowered Smart Manufacturing: Prospects and Challenges"
+type = "期刊论文"
+status = "已发表"
+
+[[news]]
+title = "Applied Soft Computing 论文发表"
+date = "2025.9"
+summary = "一篇论文发表于 Applied Soft Computing。"
+
+[[news]]
+title = "RCIM 论文录用并收录"
+date = "2025.6"
+summary = "一篇论文被 RCIM 录用。"
+
+[[awards]]
+name = "国家奖学金"
+institute = "中华人民共和国教育部"
+date = "2025"
+description = ""
+
+[[awards]]
+name = "学业优秀奖学金"
+institute = "广东工业大学"
+date = "2024, 2025"
+description = ""
+
+[[awards]]
+name = "新生入学奖学金"
+institute = "广东工业大学"
+date = "2023"
+description = ""
+
+[[awards]]
+name = "学业优秀奖学金"
+institute = "广东财经大学"
+date = "2020, 2021, 2022"
+description = ""
+
+[skills]
+categories = ["AI 工程", "语言", "前端", "后端与运维", "兴趣"]
+
+[[skills.skills]]
+text = "Python"
+category = "AI 工程"
+description = "用于机器学习工具与实验的主要脚本语言。"
+
+[[skills.skills]]
+text = "vLLM"
+category = "AI 工程"
+description = "用于服务与评测的高吞吐 LLM 推理引擎。"
+
+[[skills.skills]]
+text = "Unsloth"
+category = "AI 工程"
+description = "面向开源大模型的高效微调工作流。"
+
+[[skills.skills]]
+text = "TRL"
+category = "AI 工程"
+description = "用于语言模型后训练的强化学习工具集。"
+
+[[skills.skills]]
+text = "OpenHands"
+category = "AI 工程"
+description = "面向代码任务与自主工具调用的智能体框架。"
+
+[[skills.skills]]
+text = "PyTorch"
+category = "AI 工程"
+description = "建模与训练的核心深度学习框架。"
+
+[[skills.skills]]
+text = "CUDA"
+category = "AI 工程"
+description = "用于训练与推理加速的 GPU 计算栈。"
+
+[[skills.skills]]
+text = "*英语（TOEFL: 90）*"
+category = "语言"
+description = "可用于国际场景的学术与技术交流。"
+
+[[skills.skills]]
+text = "*日语（N1: 134）*"
+category = "语言"
+description = "具备高级阅读与职业沟通能力。"
+
+[[skills.skills]]
+text = "中文与粤语（母语）"
+category = "语言"
+description = "普通话与粤语母语流利。"
+
+[[skills.skills]]
+text = "韩语（基础）"
+category = "语言"
+description = "具备基础会话与入门阅读能力。"
+
+[[skills.skills]]
+text = "TypeScript"
+category = "前端"
+description = "提升前端与工具代码可维护性的类型系统。"
+
+[[skills.skills]]
+text = "JavaScript"
+category = "前端"
+description = "浏览器与运行时脚本的核心语言。"
+
+[[skills.skills]]
+text = "Next.js"
+category = "前端"
+description = "支持路由、SSG、SSR 的 React 框架。"
+
+[[skills.skills]]
+text = "Tailwind CSS"
+category = "前端"
+description = "用于快速 UI 迭代的原子化 CSS 体系。"
+
+[[skills.skills]]
+text = "Vite"
+category = "前端"
+description = "现代前端的高速构建与开发工具。"
+
+[[skills.skills]]
+text = "React"
+category = "前端"
+description = "构建交互式界面的组件化架构。"
+
+[[skills.skills]]
+text = "PWA"
+category = "前端"
+description = "为网页提供可安装等渐进式应用能力。"
+
+[[skills.skills]]
+text = "Rust"
+category = "后端与运维"
+description = "用于高性能高可靠后端工具的系统编程语言。"
+
+[[skills.skills]]
+text = "CLI"
+category = "后端与运维"
+description = "面向自动化与效率提升的命令行工作流。"
+
+[[skills.skills]]
+text = "Docker"
+category = "后端与运维"
+description = "用于本地与云端可复现运行的容器环境。"
+
+[[skills.skills]]
+text = "Kubernetes"
+category = "后端与运维"
+description = "用于服务与任务扩缩容的容器编排系统。"
+
+[[skills.skills]]
+text = "Node"
+category = "后端与运维"
+description = "用于 API、工具链与服务端开发的 JavaScript 运行时。"
+
+[[skills.skills]]
+text = "PostgreSQL"
+category = "后端与运维"
+description = "适用于事务与分析场景的关系型数据库。"
+
+[[skills.skills]]
+text = "Azure"
+category = "后端与运维"
+description = "用于部署与基础设施管理的云平台服务。"
+
+[[skills.skills]]
+text = "Typography"
+category = "兴趣"
+description = "关注界面设计中的字体系统、层级与可读性。"
+
+[[skills.skills]]
+text = "Graphic Design"
+category = "兴趣"
+description = "通过版式、色彩与构图进行视觉叙事。"
+
+[[skills.skills]]
+text = "UI/UX Design"
+category = "兴趣"
+description = "注重清晰性、可用性与流程体验的交互设计。"
+
+[[skills.skills]]
+text = "Rhythm Games"
+category = "兴趣"
+description = "以节奏与判定精度为核心的兴趣爱好。"

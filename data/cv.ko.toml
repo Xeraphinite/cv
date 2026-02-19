@@ -1,0 +1,250 @@
+[hero]
+name = "정커유"
+enName = "Keyou (Key) Zheng"
+location = "광둥성 광저우"
+age = ""
+bio = "박사과정 지원자, 주니어 연구자, 주니어 디자인 엔지니어"
+
+[[education]]
+institution = "광둥공업대학교"
+area = "기계공학"
+degree = "공학석사"
+startDate = "2023년 9월"
+endDate = "2026년 6월 (예정)"
+summary = "GPA: 3.62/4.0 (상위 2.5%), 지도교수: Jiewu Leng; 논문: Verifier-Driven Code-based Parametric CAD Generation with Large Language Models Agent (진행 중)."
+highlights = [
+  "GPA: 3.62/4.0 (상위 2.5%), 지도교수: Jiewu Leng;",
+  "논문: Verifier-Driven Code-based Parametric CAD Generation with Large Language Models Agent (진행 중).",
+]
+
+[[education]]
+institution = "광둥재경대학교"
+area = "컴퓨터과학"
+degree = "공학사"
+startDate = "2019년 9월"
+endDate = "2023년 6월"
+summary = "GPA: 3.5/4.0 (상위 5%); 졸업논문: Design and Implementation of a Mario Game Agent Based on Deep Reinforcement Learning."
+highlights = [
+  "GPA: 3.5/4.0 (상위 5%);",
+  "졸업논문: Design and Implementation of a Mario Game Agent Based on Deep Reinforcement Learning.",
+]
+
+[[experience]]
+position = "코드 기반 CAD 어셈블리 생성"
+company = "State Key Lab of Manufacturing Technology & Equipment"
+location = ""
+startDate = "2025년 8월"
+endDate = "현재"
+summary = "실행 가능한 제약 조건 하에서 제어 가능한 코드 기반 CAD 생성을 위해 검증 가능한 벤치마크와 LLM 에이전트를 구축했습니다."
+highlights = [
+  "에이전트 인프라: 고정된 툴체인과 재현 가능한 실행을 갖춘 다중 언어 컨테이너형 코드 실행 샌드박스를 구축했습니다. 대규모 실험 관측을 위해 다중 에이전트 궤적과 실패를 수집하는 수평 확장 백엔드를 설계했고, 빠른 디버깅과 산출물 생성을 위한 경량 웹 플레이그라운드도 구현했습니다.",
+  "벤치마크 구축: 공개 저장소와 CAD 커뮤니티에서 수집한 20만 건의 인간 CAD 코드 코퍼스를 바탕으로, 결정론/휴리스틱 규칙(예: 퍼지 중복 제거)과 LLM 파이프라인을 통해 데이터 오염을 줄이고 난이도를 제어했습니다. 골든 레퍼런스 워크스페이스와 실행 테스트를 포함한 단일 부품 1만 과제, 어셈블리 1700 과제를 구성했습니다.",
+  "에이전트 설계: 자체 테스트와 자체 복구를 통해 CAD 프로그램을 생성/수정하는 LLM 아키텍처를 설계했습니다. 단일 파일만 다루는 기존 방식과 달리, 어셈블리용 다중 파일 워크스페이스에서 특정 도구(예: 자연어에서 명세를 추출하는 spec 도구)를 사용해 폐루프 수정이 가능합니다.",
+  "평가 결과: 제약 충족도 계산의 핵심 지표로 실행 테스트를 사용했습니다. 어셈블리 과제에서 54.2% pass rate, 41.9% all-tests success, 2.4% invalid outputs를 기록했으며, 기하 품질을 유지하면서 GPT-5 등 LLM-only 및 도구 기반 베이스라인보다 우수했습니다.",
+  "성과: 논문 1편이 ICML 2026 (43rd International Conference on Machine Learning)에 심사 중입니다.",
+]
+
+[[experience]]
+position = "Human-in-the-loop CAD 생성 워크플로"
+company = "State Key Lab of Manufacturing Technology & Equipment"
+location = ""
+startDate = "2024년 12월"
+endDate = "2025년 5월"
+summary = "코드 기반 CAD 생성을 위한 HITL 에이전트 워크플로를 설계하고, 코드 유효성과 인간 선호로 평가했습니다."
+highlights = [
+  "워크플로 설계: 파인튜닝된 Qwen2.5-VL-7B를 백본으로 의도 명확화, 유효성 검사, 반복 개선, 메모리, 안전 게이팅을 결합했습니다.",
+  "결과: 실제 모델 100개를 무효율과 전문가 쌍대 비교 Elo로 평가해, 무효율 2%, Elo 1075.5를 달성했으며 Claude, GPT-4o, 비에이전트 Qwen 베이스라인을 상회했습니다.",
+  "성과: 논문 1편이 Applied Soft Computing에 게재되었습니다.",
+]
+
+[[publications]]
+title = "Towards Agentic Smart Design: An Industrial Large Model-driven Human-in-the-loop Agentic Workflow for Geometric Modelling"
+type = "저널 논문"
+status = "게재"
+
+[[publications]]
+title = "AIGC-empowered Smart Manufacturing: Prospects and Challenges"
+type = "저널 논문"
+status = "게재"
+
+[[news]]
+title = "Applied Soft Computing 논문 게재"
+date = "2025.9"
+summary = "Applied Soft Computing에 논문 1편이 게재되었습니다."
+
+[[news]]
+title = "RCIM 논문 채택 및 등재"
+date = "2025.6"
+summary = "RCIM에 논문 1편이 채택되었습니다."
+
+[[awards]]
+name = "국가장학금"
+institute = "중화인민공화국 교육부"
+date = "2025"
+description = ""
+
+[[awards]]
+name = "학업우수장학금"
+institute = "광둥공업대학교"
+date = "2024, 2025"
+description = ""
+
+[[awards]]
+name = "신입생 입학장학금"
+institute = "광둥공업대학교"
+date = "2023"
+description = ""
+
+[[awards]]
+name = "학업우수장학금"
+institute = "광둥재경대학교"
+date = "2020, 2021, 2022"
+description = ""
+
+[skills]
+categories = ["AI 엔지니어링", "언어", "프론트엔드", "백엔드·DevOps", "관심사"]
+
+[[skills.skills]]
+text = "Python"
+category = "AI 엔지니어링"
+description = "ML 도구와 실험을 위한 주력 스크립트 언어입니다."
+
+[[skills.skills]]
+text = "vLLM"
+category = "AI 엔지니어링"
+description = "서빙 및 평가를 위한 고처리량 LLM 추론 엔진입니다."
+
+[[skills.skills]]
+text = "Unsloth"
+category = "AI 엔지니어링"
+description = "오픈소스 LLM을 위한 효율적인 파인튜닝 워크플로입니다."
+
+[[skills.skills]]
+text = "TRL"
+category = "AI 엔지니어링"
+description = "언어 모델 후학습을 위한 강화학습 툴킷입니다."
+
+[[skills.skills]]
+text = "OpenHands"
+category = "AI 엔지니어링"
+description = "코드 작업과 자율 도구 사용을 위한 에이전트 프레임워크입니다."
+
+[[skills.skills]]
+text = "PyTorch"
+category = "AI 엔지니어링"
+description = "모델링과 학습의 핵심 딥러닝 프레임워크입니다."
+
+[[skills.skills]]
+text = "CUDA"
+category = "AI 엔지니어링"
+description = "학습과 추론 가속을 위한 GPU 컴퓨팅 스택입니다."
+
+[[skills.skills]]
+text = "*영어 (TOEFL: 90)*"
+category = "언어"
+description = "국제 환경의 학술·기술 커뮤니케이션에 대응합니다."
+
+[[skills.skills]]
+text = "*일본어 (N1: 134)*"
+category = "언어"
+description = "고급 독해와 실무 커뮤니케이션 역량을 보유합니다."
+
+[[skills.skills]]
+text = "중국어·광둥어 (모국어)"
+category = "언어"
+description = "표준중국어와 광둥어를 모국어 수준으로 구사합니다."
+
+[[skills.skills]]
+text = "한국어 (기초)"
+category = "언어"
+description = "기초 회화와 입문 독해가 가능합니다."
+
+[[skills.skills]]
+text = "TypeScript"
+category = "프론트엔드"
+description = "안전한 리팩터링을 위한 타입 기반 개발 환경을 제공합니다."
+
+[[skills.skills]]
+text = "JavaScript"
+category = "프론트엔드"
+description = "브라우저와 런타임의 핵심 웹 언어입니다."
+
+[[skills.skills]]
+text = "Next.js"
+category = "프론트엔드"
+description = "라우팅, SSG, SSR을 지원하는 React 프레임워크입니다."
+
+[[skills.skills]]
+text = "Tailwind CSS"
+category = "프론트엔드"
+description = "빠른 UI 반복을 위한 유틸리티 우선 CSS 시스템입니다."
+
+[[skills.skills]]
+text = "Vite"
+category = "프론트엔드"
+description = "현대 프론트엔드용 고속 빌드/개발 도구입니다."
+
+[[skills.skills]]
+text = "React"
+category = "프론트엔드"
+description = "인터랙티브 UI를 위한 컴포넌트 아키텍처입니다."
+
+[[skills.skills]]
+text = "PWA"
+category = "프론트엔드"
+description = "웹에 설치 가능성 등 프로그레시브 앱 기능을 제공합니다."
+
+[[skills.skills]]
+text = "Rust"
+category = "백엔드·DevOps"
+description = "고성능·고신뢰 백엔드 도구를 위한 시스템 언어입니다."
+
+[[skills.skills]]
+text = "CLI"
+category = "백엔드·DevOps"
+description = "자동화와 생산성 향상을 위한 명령줄 워크플로입니다."
+
+[[skills.skills]]
+text = "Docker"
+category = "백엔드·DevOps"
+description = "로컬/클라우드에서 재현 가능한 컨테이너 환경을 제공합니다."
+
+[[skills.skills]]
+text = "Kubernetes"
+category = "백엔드·DevOps"
+description = "서비스와 작업 스케일링을 위한 컨테이너 오케스트레이션입니다."
+
+[[skills.skills]]
+text = "Node"
+category = "백엔드·DevOps"
+description = "API, 툴링, 웹 서비스를 위한 JavaScript 런타임입니다."
+
+[[skills.skills]]
+text = "PostgreSQL"
+category = "백엔드·DevOps"
+description = "트랜잭션과 분석 워크로드를 모두 다루는 관계형 DB입니다."
+
+[[skills.skills]]
+text = "Azure"
+category = "백엔드·DevOps"
+description = "배포와 인프라 관리를 위한 클라우드 플랫폼 서비스입니다."
+
+[[skills.skills]]
+text = "Typography"
+category = "관심사"
+description = "인터페이스 디자인의 타이포 시스템, 위계, 가독성에 관심이 있습니다."
+
+[[skills.skills]]
+text = "Graphic Design"
+category = "관심사"
+description = "레이아웃, 색, 구성을 통한 시각적 스토리텔링에 관심이 있습니다."
+
+[[skills.skills]]
+text = "UI/UX Design"
+category = "관심사"
+description = "명확성, 사용성, 흐름 중심의 인터랙션 설계에 관심이 있습니다."
+
+[[skills.skills]]
+text = "Rhythm Games"
+category = "관심사"
+description = "타이밍 정확도와 음악 게임 메커닉 중심의 취미입니다."

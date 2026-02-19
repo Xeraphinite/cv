@@ -2,11 +2,12 @@
 
 import { Icon } from '@iconify/react'
 import { useTranslations } from 'next-intl'
+import { SkillItemBadge, type SkillItemBadgeData } from './skill-item-badge'
 
 interface SkillsSectionProps {
   data: {
     skills?: {
-      [category: string]: string[]
+      [category: string]: SkillItemBadgeData[]
     }
   }
 }
@@ -31,10 +32,8 @@ export function SkillsSection({ data }: SkillsSectionProps) {
                 {category}
               </h3>
               <div className="flex flex-wrap items-center gap-1.5">
-                {skills.map((skill) => (
-                  <span key={skill} className="paper-badge text-sm">
-                    {skill}
-                  </span>
+                {skills.map((skill, index) => (
+                  <SkillItemBadge key={`${category}-${skill.text}-${index}`} item={skill} />
                 ))}
               </div>
             </div>
