@@ -3,6 +3,7 @@
 import { Icon } from '@iconify/react'
 import { Badge } from '@/components/ui/badge'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
+import { MarkdownText } from '@/components/ui/markdown-text'
 import { cn } from '@/lib/utils'
 
 export interface SkillItemBadgeData {
@@ -33,7 +34,7 @@ function SkillBadgeContent({ item }: SkillItemBadgeProps) {
     <Badge
       variant="secondary"
       className={cn(
-        'h-auto rounded-full border-transparent bg-muted/60 px-3 py-1.5 text-sm font-medium text-muted-foreground transition-all hover:bg-muted/80 gap-1.5',
+        'h-auto rounded-full border border-transparent bg-muted/60 px-3 py-1.5 text-sm font-medium text-muted-foreground transition-all duration-200 gap-1.5 hover:-translate-y-0.5 hover:border-border/60 hover:bg-muted/90 hover:text-foreground hover:shadow-sm',
         item.code ? 'font-mono' : 'font-sans'
       )}
     >
@@ -79,7 +80,7 @@ export function SkillItemBadge({ item }: SkillItemBadgeProps) {
     <HoverCard openDelay={120} closeDelay={80}>
       <HoverCardTrigger asChild>{trigger}</HoverCardTrigger>
       <HoverCardContent side="top" className="w-72 p-3 font-sans text-sm leading-relaxed">
-        {item.description}
+        <MarkdownText content={item.description} />
       </HoverCardContent>
     </HoverCard>
   )

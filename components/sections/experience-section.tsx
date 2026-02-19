@@ -2,6 +2,7 @@
 
 import { Icon } from '@iconify/react'
 import { useTranslations } from 'next-intl'
+import { MarkdownText } from '@/components/ui/markdown-text'
 import { formatToYearMonth } from '@/lib/date-format'
 
 interface Experience {
@@ -60,9 +61,7 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
               </div>
 
               {experience.summary && (
-                <p className="paper-body col-start-2">
-                  {experience.summary}
-                </p>
+                <MarkdownText content={experience.summary} className="paper-body col-start-2" />
               )}
 
               {experience.highlights && experience.highlights.length > 0 && (
@@ -71,7 +70,7 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
                     {experience.highlights.map((highlight, idx) => (
                       <li key={`${experience.company}-highlight-${idx}`} className="flex items-start gap-3">
                         <div className="w-1.5 h-1.5 bg-primary/40 rounded-full mt-2 shrink-0" />
-                        <span className="paper-body">{highlight}</span>
+                        <MarkdownText content={highlight} className="paper-body" inline />
                       </li>
                     ))}
                   </ul>

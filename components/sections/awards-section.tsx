@@ -2,6 +2,7 @@
 
 import { Icon } from '@iconify/react'
 import { useTranslations } from 'next-intl'
+import { MarkdownText } from '@/components/ui/markdown-text'
 import { formatToYearMonth } from '@/lib/date-format'
 
 interface AwardItem {
@@ -38,7 +39,12 @@ export function AwardsSection({ data }: AwardsSectionProps) {
               <span className="min-w-0">
                 <span className="font-medium">{award.name}</span>
                 <span className="text-muted-foreground"> · {award.institute}</span>
-                {award.description ? <span className="text-muted-foreground"> — {award.description}</span> : null}
+                {award.description ? (
+                  <span className="text-muted-foreground">
+                    {' '}
+                    — <MarkdownText content={award.description} inline />
+                  </span>
+                ) : null}
               </span>
             </div>
           </div>

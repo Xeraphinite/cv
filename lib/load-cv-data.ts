@@ -403,12 +403,8 @@ function splitAreaAndDegree(input: string): { area: string; degree: string } {
 
 function cleanText(value: string): string {
   return value
-    .replace(/`/g, "")
-    .replace(/\*+/g, "")
-    .replace(/_+/g, "")
     .replace(/#smallcaps\("([^"]+)"\)/g, "$1")
-    .replace(/;{2,}/g, ";")
-    .replace(/\s+/g, " ")
+    .replace(/\r\n?/g, "\n")
     .trim()
 }
 

@@ -123,7 +123,7 @@ url = "https://www.sciencedirect.com/science/article/pii/S0736584525001309"
 
 
 [skills.languages]
-label = "Languages"
+label = "Natural Languages"
 items = [
   { text = "English", url = "https://www.ets.org/toefl.html", icon = "twemoji:flag-united-kingdom", description = "TOEFL iBT: 90. Academic and technical communication in international contexts." },
   { text = "Japanese", url = "https://www.jlpt.jp/e/", icon = "twemoji:flag-japan", description = "JLPT N1: 134. Advanced proficiency for reading and professional communication." },
@@ -133,7 +133,7 @@ items = [
 ]
 
 [skills.programming-languages]
-label = "Programming Languages"
+label = "Code Languages"
 items = [
   { text = "Python", url = "https://www.python.org/", code = true, description = "Primary scripting language for ML tooling and experiments." },
   { text = "Rust", url = "https://www.rust-lang.org/", code = true, description = "Systems programming for performant and reliable backend tools." },
@@ -172,7 +172,7 @@ items = [
 ]
 
 [skills.backend-development]
-label = "Backend Development"
+label = "Backend Devs"
 items = [
   { text = "Node", url = "https://nodejs.org/", code = true, description = "JavaScript runtime for APIs, tooling, and web services." },
   { text = "PostgreSQL", url = "https://www.postgresql.org/", code = true, description = "Relational database for transactional and analytical workloads." },

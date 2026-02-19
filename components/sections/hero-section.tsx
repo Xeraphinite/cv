@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl'
 import { getResponsiveImageProps } from '@/lib/image-utils'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { HeroLocation } from '@/components/sections/hero-location'
+import { MarkdownText } from '@/components/ui/markdown-text'
 import { getFontClass, getTypographyClasses } from '@/lib/utils'
 
 interface HeroSectionProps {
@@ -257,10 +258,10 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
             )}
 
             {data.description && (
-              <p className={`${typographyClasses.body} mt-3 text-primary/90`}>{data.description}</p>
+              <MarkdownText content={data.description} className={`${typographyClasses.body} mt-3 text-primary/90`} />
             )}
 
-            {data.bio && <p className={`${typographyClasses.body} mt-4 text-foreground/85`}>{data.bio}</p>}
+            {data.bio && <MarkdownText content={data.bio} className={`${typographyClasses.body} mt-4 text-foreground/85`} />}
 
             <TooltipProvider delayDuration={120}>
               <div className="mt-4 flex flex-col space-y-3">

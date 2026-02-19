@@ -8,12 +8,11 @@ export default createMiddleware({
   // Used when no locale matches
   defaultLocale,
 
-  // Always use a locale prefix (e.g. /en/about)
-  localePrefix: 'always',
+  // Use no prefix for default locale (e.g. /, /about) and prefixes for others (e.g. /en/about)
+  localePrefix: 'as-needed',
 
-  // Set the domain for locale detection
-  // This helps with better SEO and user experience
-  localeDetection: true,
+  // Keep default locale on unprefixed routes instead of auto-redirecting to browser locale
+  localeDetection: false,
 
   // Alternate links for better SEO
   alternateLinks: true

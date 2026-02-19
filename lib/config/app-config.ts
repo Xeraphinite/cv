@@ -4,20 +4,16 @@ export const appConfig = {
     namesByLocale: {
       en: "Keyou Zheng - CV",
       zh: "郑恪悠 - 简历",
-      yue: "鄭恪悠 - 履歷",
       ja: "郑恪悠 - 履歴書",
-      ko: "정커유 - 이력서",
     } as const,
   },
   intl: {
-    locales: ["en", "zh", "yue", "ja", "ko"] as const,
+    locales: ["en", "zh", "ja"] as const,
     defaultLocale: "zh" as const,
     localeLabels: {
       en: "English",
       zh: "中文",
-      yue: "粵語",
       ja: "日本語",
-      ko: "한국어",
     } as const,
   },
   cvData: {

@@ -1,4 +1,4 @@
-import { type Locale, locales } from '@/i18n'
+import { defaultLocale, type Locale, locales } from '@/i18n'
 
 /**
  * Validates if a string is a valid locale
@@ -18,7 +18,7 @@ export function getLocaleFromPathname(pathname: string): Locale | null {
     return possibleLocale
   }
   
-  return null
+  return defaultLocale
 }
 
 /**
@@ -35,11 +35,16 @@ export function createLocalizedPath(
     // Remove current locale from path
     segments.splice(1, 1)
   }
-  
-  // Add new locale
-  const newPath = `/${locale}${segments.join('') || ''}`
-  
-  return newPath
+
+  const pathWithoutLocale = segments.join('/') || '/'
+
+  // Default locale stays unprefixed
+  if (locale === defaultLocale) {
+    return pathWithoutLocale
+  }
+
+  // Non-default locales are prefixed
+  return `/${locale}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`
 }
 
 /**

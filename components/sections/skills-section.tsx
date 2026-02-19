@@ -25,10 +25,10 @@ export function SkillsSection({ data }: SkillsSectionProps) {
       </h2>
 
       <div className="paper-card">
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-4">
           {Object.entries(data.skills).map(([category, skills]) => (
-            <div key={category} className="flex flex-wrap items-center gap-2">
-              <h3 className="text-lg font-semibold text-foreground">
+            <div key={category} className="grid grid-cols-1 items-start gap-x-4 gap-y-1 md:grid-cols-[11rem_minmax(0,1fr)]">
+              <h3 className="text-xl font-semibold text-foreground md:text-right">
                 {category}
               </h3>
               <div className="flex flex-wrap items-center gap-1.5">

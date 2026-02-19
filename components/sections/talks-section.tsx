@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react'
+import { MarkdownText } from '@/components/ui/markdown-text'
 import { formatToYearMonth } from '@/lib/date-format'
 
 interface Talk {
@@ -72,7 +73,7 @@ export function TalksSection({ data }: TalksSectionProps) {
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <h3 className="paper-subtitle font-semibold text-foreground leading-tight">
-                    {talk.title}
+                    <MarkdownText content={talk.title} inline />
                   </h3>
                   <div className="flex items-center gap-2 mt-2">
                     <span className="paper-badge !bg-primary/10 !text-primary text-xs">
@@ -128,9 +129,7 @@ export function TalksSection({ data }: TalksSectionProps) {
 
               {/* Talk Description */}
               {talk.description && (
-                <p className="paper-body text-sm mt-3 pt-3">
-                  {talk.description}
-                </p>
+                <MarkdownText content={talk.description} className="paper-body text-sm mt-3 pt-3" />
               )}
             </div>
           </div>

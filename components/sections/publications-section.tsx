@@ -2,6 +2,7 @@
 
 import { Icon } from '@iconify/react'
 import { useTranslations } from 'next-intl'
+import { MarkdownText } from '@/components/ui/markdown-text'
 import { formatToYearMonth } from '@/lib/date-format'
 
 // Improved type definitions
@@ -82,11 +83,11 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
                         rel="noopener noreferrer"
                         className="no-underline hover:no-underline transition-all inline-flex items-start gap-2 group"
                       >
-                        <span>{publication.title}</span>
+                        <MarkdownText content={publication.title} inline />
                         <Icon icon="mingcute:arrow-right-up-fill" className="h-4 w-4 mt-1 opacity-50 group-hover:opacity-100 transition-opacity flex-shrink-0" />
                       </a>
                     ) : (
-                      publication.title
+                      <MarkdownText content={publication.title} inline />
                     )}
                   </h3>
                 </div>
@@ -161,7 +162,7 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
               {/* Abstract */}
               {publication.abstract && (
                 <div className="!mt-4 pt-3">
-                  <p className="paper-body text-sm break-words">{publication.abstract}</p>
+                  <MarkdownText content={publication.abstract} className="paper-body text-sm break-words" />
                 </div>
               )}
             </div>

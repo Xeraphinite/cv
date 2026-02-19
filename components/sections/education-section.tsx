@@ -2,6 +2,7 @@
 
 import { Icon } from '@iconify/react'
 import { useSectionTranslations, useLabelTranslations } from '@/hooks/use-translations'
+import { MarkdownText } from '@/components/ui/markdown-text'
 import { formatToYearMonth } from '@/lib/date-format'
 import type { EducationItem, EducationSectionConfig } from '@/lib/types/cv'
 
@@ -101,7 +102,7 @@ export function EducationSection({ data, config }: EducationSectionProps) {
                       {education.highlights.map((highlight, i) => (
                         <li key={`${education.institution}-highlight-${i}`} className="flex items-start gap-3">
                           <div className="w-1.5 h-1.5 bg-primary/40 rounded-full mt-2 shrink-0" />
-                          <span className="paper-body">{highlight}</span>
+                          <MarkdownText content={highlight} className="paper-body" inline />
                         </li>
                       ))}
                     </ul>

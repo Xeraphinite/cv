@@ -38,6 +38,20 @@ const config = {
           'Times New Roman',
           'serif'
         ],
+        'mono': [
+          'Maple Mono',
+          'Maple Mono NF',
+          'Maple Mono SC',
+          'Inconsolata',
+          'ui-monospace',
+          'SFMono-Regular',
+          'Menlo',
+          'Monaco',
+          'Consolas',
+          'Liberation Mono',
+          'Courier New',
+          'monospace'
+        ],
         
         // Chinese typography - following W3C CLREQ guidelines
         'zh-sans': [

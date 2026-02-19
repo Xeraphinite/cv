@@ -2,6 +2,7 @@
 
 import { Icon } from '@iconify/react'
 import { useTranslations } from 'next-intl'
+import { MarkdownText } from '@/components/ui/markdown-text'
 import { formatToYearDotMonth } from '@/lib/date-format'
 
 interface NewsItem {
@@ -52,10 +53,10 @@ export function NewsSection({ data }: NewsSectionProps) {
               <span className="font-sans text-base font-bold whitespace-nowrap text-muted-foreground">{formatToYearDotMonth(item.date)}</span>
               {item.url ? (
                 <a href={item.url} target="_blank" rel="noopener noreferrer" className="no-underline hover:no-underline">
-                  {item.summary || item.title || item.outlet}
+                  <MarkdownText content={item.summary || item.title || item.outlet} inline />
                 </a>
               ) : (
-                <span>{item.summary || item.title || item.outlet}</span>
+                <MarkdownText content={item.summary || item.title || item.outlet} inline />
               )}
             </div>
           </div>

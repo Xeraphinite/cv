@@ -72,7 +72,7 @@ export function HeroLocation({ location, locale }: HeroLocationProps) {
                 </MarkerLabel>
               </MapMarker>
             </Map>
-            <div className="pointer-events-none absolute bottom-3 left-3 h-1/2 w-1/2 rounded-[2rem] border border-border/60 bg-white px-5 py-4 dark:bg-background">
+            <div className="pointer-events-none absolute bottom-3 left-3 h-1/2 w-1/2 rounded-[2rem] border border-border/60 bg-white px-5 py-4">
               <div className="flex h-full flex-col items-start justify-between space-y-2">
                 <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#9f7a63]">
                   <Icon icon="mingcute:mortarboard-fill" className="h-4 w-4 text-white" />
@@ -85,7 +85,7 @@ export function HeroLocation({ location, locale }: HeroLocationProps) {
             </div>
           </div>
         ) : (
-          <div className="rounded-md border border-border/60 bg-card/60 p-3">
+          <div className="rounded-md border border-border/60 bg-white p-3">
             <div className="flex items-center gap-4">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#9f7a63]">
                 <Icon icon="mingcute:mortarboard-fill" className="h-6 w-6 text-white" />

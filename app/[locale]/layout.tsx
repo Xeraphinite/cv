@@ -15,6 +15,7 @@ import { getCVLastUpdated } from '@/lib/load-cv-data'
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const localeTyped = locale as Locale
+  const localePath = localeTyped === appConfig.intl.defaultLocale ? '/' : `/${localeTyped}`
   
   const currentTitle = appConfig.site.namesByLocale[localeTyped]
   const currentDescription = appConfig.site.namesByLocale[localeTyped]
@@ -37,9 +38,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       apple: [{ url: "/icon.png", type: "image/png" }],
     },
     alternates: {
-      canonical: `/${localeTyped}`,
+      canonical: localePath,
       languages: Object.fromEntries(
-        locales.map((loc) => [loc, `/${loc}`])
+        locales.map((loc) => [loc, loc === appConfig.intl.defaultLocale ? '/' : `/${loc}`])
       ),
     },
     openGraph: {

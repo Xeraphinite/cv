@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;600;700&display=swap');
 
 @import 'tailwindcss-uikit-colors/selector.css';
 
@@ -430,7 +429,7 @@ pre,
 kbd,
 samp,
 .code-like {
-  font-family: "Inconsolata", monospace;
+  font-family: "Maple Mono", "Maple Mono NF", "Maple Mono SC", monospace;
 }
 
 /* Additional multilingual typography enhancements */

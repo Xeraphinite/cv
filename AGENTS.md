@@ -13,6 +13,7 @@
 - In Skills badges, do not show trailing external-direction icons; keep only leading skill icon/favicon and text with a small visual gap.
 - In language skills, prefer `twemoji:*` icons over mingcute and keep score/proficiency details in hover descriptions instead of badge text.
 - Do not underline URL links (including hover/focus/visited states).
+- Use `Maple Mono` as the monospace font family for code-like text.
 
 ## Reusable Project Knowledge
   - CV data source:
@@ -30,21 +31,26 @@
   - News section is stored at `[news.*]` in TOML with fields `title`, `outlet`, `date`, `summary`, `url`, mapped to `CVData.news`.
   - News section UI format is concise: each row shows only `date` + description text, and rows are sorted newest first by `date` (supports `YYYY` and `YYYY.M`).
   - News date display uses `yyyy.mm` when month exists (year-only stays `yyyy`), and this dot format is news-only.
+  - TOML text fields preserve Markdown syntax at load time and render through `components/ui/markdown-text.tsx` in UI sections.
 - Centralized app config:
   - `lib/config/app-config.ts` contains:
     - intl locales/default/labels
     - metadata labels
     - CV data source settings
+  - Active app locales are currently `en`, `zh`, and `ja`; keep `yue`/`ko` content and implementation files in repo for future re-enable.
+  - Locale routing uses `as-needed` prefixing: default locale is served on unprefixed routes (`/`), non-default locales use prefixes (e.g. `/en`, `/ja`), and middleware locale auto-detection redirect is disabled.
 - App Router metadata:
   - In `app/` routes, do not use `next/head`; use the Metadata API and/or native `<head>` in layout files.
 - Typography policy:
-  - Keep the configured font families (`Spectral`, `Noto Serif SC`, `Rethink Sans`, `Inconsolata`).
+  - Keep the configured font families (`Spectral`, `Noto Serif SC`, `Rethink Sans`, `Maple Mono`).
   - Do not force xyndrome font-size values unless explicitly requested.
   - Tooltip text should default to `font-sans` via the shared shadcn tooltip UI component.
+  - Hover card panels should use a white background.
+  - Tooltip panels should use a white background.
 - shadcn refresh policy:
   - After `shadcn` component refreshes, keep project conventions: `Button` link variant stays non-underlined, tooltip content keeps `font-sans`, and toast/iconography should use `@iconify/react` + `mingcute:*` instead of newly introduced `lucide-react` icons.
 - Code-like text:
-  - Keep mono font for `code`/`pre` via `Inconsolata`.
+  - Keep mono font for `code`/`pre` via `Maple Mono`.
 - Awards/Honors iconography:
   - Use `mingcute:medal-fill` for section headers and `mingcute:medal-line` for compact/stat contexts.
 - Experience section styling:
@@ -57,6 +63,7 @@
   - If `icon` is omitted and `url` exists, derive a favicon from the URL host.
   - When `code = true`, render with `font-mono`; otherwise use `font-sans` text.
   - If `description` exists, show concise hover content via shadcn `HoverCard`.
+  - In main Skills section rows, use two-column alignment like resume.antfu.me: fixed-width right-aligned category label column + flexible content column.
   - Keep Interests under skills data label `Misc`, and render it as a dedicated bottom `Misc` section instead of inside the main Skills section.
 - Time/date presentation:
   - In time-related sections (Experience, Education, Projects, Awards, News), render date/time first using muted sans text (`font-sans text-base font-bold` + muted tone), followed by content.
@@ -71,6 +78,7 @@
   - Keep the hero section single-column on small/medium screens; switch to two-column split at `lg:`.
   - On non-`lg`, use the sticky mobile navigator-style `CVHeader` UX (show/hide on scroll) for controls.
   - CV page shell should be one column by default, and at `lg:` use two columns with hero as column 1 and all other sections as column 2.
+  - Right column should start with a dedicated biography block (`section#about`) rendered from `hero.bio`, before News and other sections.
   - On `lg`, first-column sticky panel should use viewport-height so the footer area sits at viewport bottom (with only small outer page margin), not content bottom.
   - On `lg`, keep no extra spacing between hero content and footer block.
   - In the hero card, keep content vertically stacked (no avatar/name same-row split on `lg`): Avatar -> Name -> Description/Bio -> Contacts.
@@ -103,6 +111,9 @@
   - Show `lastUpdated` as locale-aware relative time (e.g., today / 2 days ago) instead of absolute date.
   - `lastUpdated` should be computed from CV source file mtime via `getCVLastUpdated` in `lib/load-cv-data.ts`, not from browser page metadata.
   - Do not show a textual prefix label before relative update time (render only the relative time text with icon).
+  - Footer should include a full single-line copyright text in the form `© yyyy <owner>. All rights reserved.`.
+  - Render footer copyright text on a second line below the metadata/controls row.
+  - Keep footer bottom spacing compact (reduced bottom padding).
   - Use recency-based text tone for `lastUpdated`: freshest is darker/stronger, and it becomes dimmer as elapsed time increases.
   - Footer links should include only `LLMs.txt` (no RSS/Sitemap links).
   - Footer last-updated text, `LLMs.txt`, language control, and theme control should expose concise top-positioned shadcn `Tooltip` tips.

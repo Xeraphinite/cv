@@ -8,6 +8,7 @@ import { AwardsSection } from './awards-section'
 import { TalksSection } from './talks-section'
 import { NewsSection } from './news-section'
 import { MiscSection } from './misc-section'
+import { BioSection } from './bio-section'
 import type { SkillItemBadgeData } from './skill-item-badge'
 import { CVFooter } from '@/components/layout/cv-footer'
 import type { CVData } from '@/lib/types/cv'
@@ -78,6 +79,12 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
         </div>
 
         <div className="py-2 sm:py-4 lg:py-6">
+          {data.hero.bio && (
+            <section id="about">
+              <BioSection bio={data.hero.bio} />
+            </section>
+          )}
+
           {data.news && data.news.length > 0 && (
             <section id="news">
               <NewsSection data={data.news} />
