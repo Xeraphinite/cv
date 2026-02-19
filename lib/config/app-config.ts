@@ -9,7 +9,7 @@ export const appConfig = {
   },
   intl: {
     locales: ["en", "zh", "ja"] as const,
-    defaultLocale: "zh" as const,
+    defaultLocale: "en" as const,
     localeLabels: {
       en: "English",
       zh: "中文",

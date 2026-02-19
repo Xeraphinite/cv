@@ -38,7 +38,7 @@
     - metadata labels
     - CV data source settings
   - Active app locales are currently `en`, `zh`, and `ja`; keep `yue`/`ko` content and implementation files in repo for future re-enable.
-  - Locale routing uses `as-needed` prefixing: default locale is served on unprefixed routes (`/`), non-default locales use prefixes (e.g. `/en`, `/ja`), and middleware locale auto-detection redirect is disabled.
+  - Locale routing uses `as-needed` prefixing: default locale (`en`) is served on unprefixed routes (`/`), non-default locales use prefixes (e.g. `/zh`, `/ja`), and middleware locale auto-detection redirect is disabled.
 - App Router metadata:
   - In `app/` routes, do not use `next/head`; use the Metadata API and/or native `<head>` in layout files.
 - Typography policy:
