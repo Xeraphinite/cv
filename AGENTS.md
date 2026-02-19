@@ -66,6 +66,8 @@
   - Hero location marker must remain high-contrast and clearly visible against the map background (use stronger icon/border contrast and slightly larger marker size when needed).
   - Hero location marker visual direction should mimic Apple Maps-like treatment: visible halo/ring indicator with a clear marker chip placed near the map's top-right-center, plus a large rounded bottom-left work card.
   - State key text on hero location map should use `MarkerLabel` (not `MarkerPopup`).
+  - Hero location display should remove `Guangzhou` prefix from location text and remove `State Key` prefix from map label text.
+  - In `HeroLocation` implementation, prefer generic identifier names for map constants/labels (avoid `guangzhou*` / `state_key*` prefixes in code symbols).
   - When requested, hero location should use default map marker style (`MarkerContent` default) and position marker near top-right-center by tuning map camera center/zoom.
   - When mimicking the showcase card style, hero location bottom card should be a large rounded panel with a circular icon chip and two-line text layout (`学校` / `Guangzhou`).
   - For school-cap iconography in hero location card, use `mingcute:mortarboard-fill` (not non-existent `graduation-cap` ids).
@@ -85,3 +87,6 @@
   - On `lg`, do not show TOC in first-column bottom area.
   - On `lg`, place language and theme controls in footer immediately after `LLMs.txt`.
   - On `lg`, page shell container width should step up one Tailwind max-width class (`max-w-6xl` -> `lg:max-w-7xl`), while the left column should stay narrower (`lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)]`) and use top+bottom sticky anchoring (`lg:top-4`, `lg:bottom-4`) with near-full viewport height (`h-[calc(100vh-2rem)]`).
+- Playwright output artifacts:
+  - Save generated Playwright screenshots/artifacts under `output/playwright/` (not repo root).
+  - Keep Playwright artifacts gitignored (`output/playwright/`, `playwright-report/`, `test-results/`, and `tmp-playwright-*.png`).
