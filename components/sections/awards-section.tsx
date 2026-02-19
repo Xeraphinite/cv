@@ -18,37 +18,40 @@ interface AwardsSectionProps {
 
 export function AwardsSection({ data }: AwardsSectionProps) {
   const t = useTranslations()
-  
+
   if (!data || data.length === 0) return null
 
   return (
     <section className="paper-section">
-      <h2 className="paper-section-title">
+      <h2 className="paper-section-title !mb-1.5 sm:!mb-2 !pb-0.5 sm:!pb-1">
         <Icon icon="mingcute:medal-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
         {t('sections.awards')}
       </h2>
 
-      <div className="space-y-2">
-        {data.map((award, index) => (
-          <div
-            key={`${award.name}-${award.institute}-${index}`}
-            className="paper-body leading-relaxed text-foreground"
-          >
-            <div className="grid grid-cols-[minmax(7ch,auto)_minmax(0,1fr)] items-start gap-x-3">
-              <span className="font-sans text-base font-bold whitespace-nowrap text-muted-foreground">{formatToYearMonth(award.date)}</span>
-              <span className="min-w-0">
-                <span className="font-medium">{award.name}</span>
-                <span className="text-muted-foreground"> · {award.institute}</span>
-                {award.description ? (
-                  <span className="text-muted-foreground">
-                    {' '}
-                    — <MarkdownText content={award.description} inline />
-                  </span>
-                ) : null}
+      <div className="paper-card">
+        <div className="flex flex-col gap-2">
+          {data.map((award, index) => (
+            <div
+              key={`${award.name}-${award.institute}-${index}`}
+              className="grid grid-cols-1 items-start gap-x-4 gap-y-1 leading-relaxed text-foreground md:grid-cols-[11rem_minmax(0,1fr)]"
+            >
+              <span className="font-sans text-sm font-bold whitespace-nowrap text-muted-foreground md:text-right">
+                {formatToYearMonth(award.date)}
               </span>
+              <div className="min-w-0">
+                <p className="paper-body">
+                  <span className="font-medium">{award.name}</span>
+                  <span className="text-muted-foreground"> · {award.institute}</span>
+                </p>
+                {award.description ? (
+                  <p className="paper-body mt-1 text-sm text-muted-foreground">
+                    <MarkdownText content={award.description} inline />
+                  </p>
+                ) : null}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   )

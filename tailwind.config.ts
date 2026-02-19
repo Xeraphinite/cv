@@ -21,28 +21,21 @@ const config = {
   	},
   	extend: {
       fontFamily: {
-        // English typography - following Practical Typography guidelines
+        // Base typography defaults
         'sans': [
-          '-apple-system',
-          'BlinkMacSystemFont', 
-          'SF Pro Display',
-          'SF Pro Text',
-          'Inter',
+          'IBM Plex Sans',
           'system-ui',
           'sans-serif'
         ],
         'serif': [
-          'New York',
-          'Charter',
-          'Georgia',
-          'Times New Roman',
+          'Spectral',
+          'Noto Serif SC',
           'serif'
         ],
         'mono': [
           'Maple Mono',
           'Maple Mono NF',
           'Maple Mono SC',
-          'Inconsolata',
           'ui-monospace',
           'SFMono-Regular',
           'Menlo',
@@ -55,11 +48,9 @@ const config = {
         
         // Chinese typography - following W3C CLREQ guidelines
         'zh-sans': [
+          'IBM Plex Sans',
           '-apple-system',
           'BlinkMacSystemFont',
-          'SF Pro SC',
-          'SF Pro Text',
-          'Inter',
           'Noto Sans SC',
           'Source Han Sans SC',
           'PingFang SC',
@@ -70,8 +61,8 @@ const config = {
           'sans-serif'
         ],
         'zh-serif': [
-          'New York',
           'Noto Serif SC',
+          'Spectral',
           'Source Han Serif SC',
           'Songti SC',
           'SimSun',
@@ -83,11 +74,9 @@ const config = {
         
         // Traditional Chinese
         'zh-hant-sans': [
+          'IBM Plex Sans',
           '-apple-system',
           'BlinkMacSystemFont',
-          'SF Pro SC',
-          'SF Pro Text',
-          'Inter',
           'Noto Sans SC',
           'Source Han Sans SC',
           'PingFang SC',
@@ -98,8 +87,8 @@ const config = {
           'sans-serif'
         ],
         'zh-hant-serif': [
-          'New York',
           'Noto Serif SC',
+          'Spectral',
           'Source Han Serif SC',
           'Songti SC',
           'SimSun',
@@ -111,11 +100,9 @@ const config = {
         
         // Japanese typography - following W3C JLREQ guidelines
         'ja-sans': [
+          'IBM Plex Sans',
           '-apple-system',
           'BlinkMacSystemFont',
-          'SF Pro JP',
-          'SF Pro Text',
-          'Inter',
           'Noto Sans JP',
           'Source Han Sans JP',
           'Hiragino Kaku Gothic ProN',
@@ -130,8 +117,8 @@ const config = {
           'sans-serif'
         ],
         'ja-serif': [
-          'New York',
           'Noto Serif JP',
+          'Spectral',
           'Source Han Serif JP',
           'Hiragino Mincho ProN',
           'Hiragino Mincho Pro',
@@ -143,11 +130,9 @@ const config = {
         
         // Korean typography - following W3C KLREQ guidelines
         'ko-sans': [
+          'IBM Plex Sans',
           '-apple-system',
           'BlinkMacSystemFont',
-          'SF Pro KR',
-          'SF Pro Text',  
-          'Inter',
           'Noto Sans KR',
           'Source Han Sans KR',
           'Apple SD Gothic Neo',
@@ -158,8 +143,8 @@ const config = {
           'sans-serif'
         ],
         'ko-serif': [
-          'New York',
           'Noto Serif KR',
+          'Spectral',
           'Source Han Serif KR',
           'Nanum Myeongjo',
           'Batang',

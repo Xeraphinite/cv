@@ -75,6 +75,36 @@ details = [
   "*Outcome*: One paper was published at _Applied Soft Computing_.",
 ]
 
+[projects.project-1]
+year = "2025"
+name = "Code-based CAD Assembly Generation"
+status = "Under Review"
+description = "Built a verifiable benchmark and an LLM agent for controllable code-based CAD generation under executable constraints."
+urls = [
+  { label = "Paper (ICML 2026, under review)", url = "https://openreview.net/" },
+]
+tech = [
+  { text = "vLLM", url = "https://docs.vllm.ai/", code = true },
+  { text = "OpenHands", url = "https://docs.all-hands.dev/", code = true },
+  { text = "Docker", url = "https://www.docker.com/", code = true },
+  { text = "Kubernetes", url = "https://kubernetes.io/", code = true },
+  { text = "Laminar", url = "https://docs.lmnr.ai/", code = true },
+]
+
+[projects.project-2]
+year = "2025"
+name = "Human-in-the-loop CAD Generation Workflow"
+status = "Published"
+description = "Designed a HITL agentic workflow for code-based CAD generation, and evaluated it with code validity and human preference."
+urls = [
+  { label = "Applied Soft Computing", url = "https://www.sciencedirect.com/science/article/pii/S1568494625012335" },
+]
+tech = [
+  { text = "Qwen2.5-VL-7B", url = "https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct", code = true },
+  { text = "Python", url = "https://www.python.org/", code = true },
+  { text = "Agent Workflow", icon = "mingcute:light-fill", code = false },
+]
+
 
 [publications.publication-1]
 type = "journal"

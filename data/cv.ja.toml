@@ -57,6 +57,18 @@ highlights = [
   "成果：1 本を Applied Soft Computing に掲載。",
 ]
 
+[[projects]]
+year = "2025"
+name = "コードベース CAD アセンブリ生成"
+status = "査読中"
+description = "実行可能制約下での制御可能なコードベース CAD 生成に向け、検証可能ベンチマークと LLM エージェントを構築。"
+
+[[projects]]
+year = "2025"
+name = "Human-in-the-loop CAD 生成ワークフロー"
+status = "掲載済み"
+description = "コードベース CAD 生成向けの HITL エージェントワークフローを設計し、コード有効率と人間選好で評価。"
+
 [[publications]]
 title = "Towards Agentic Smart Design: An Industrial Large Model-driven Human-in-the-loop Agentic Workflow for Geometric Modelling"
 type = "学術論文"

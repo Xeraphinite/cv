@@ -57,6 +57,18 @@ highlights = [
   "產出：一篇論文發表於 Applied Soft Computing。",
 ]
 
+[[projects]]
+year = "2025"
+name = "基於代碼嘅 CAD 裝配生成"
+status = "審稿中"
+description = "建立咗可驗證基準同 LLM agent，實現可控嘅代碼式 CAD 生成同可執行約束評測。"
+
+[[projects]]
+year = "2025"
+name = "Human-in-the-loop CAD 生成工作流"
+status = "已發表"
+description = "設計咗用於代碼式 CAD 生成嘅 HITL agentic workflow，並用代碼有效率同人類偏好做評估。"
+
 [[publications]]
 title = "Towards Agentic Smart Design: An Industrial Large Model-driven Human-in-the-loop Agentic Workflow for Geometric Modelling"
 type = "期刊論文"

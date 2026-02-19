@@ -13,18 +13,8 @@ import type { SkillItemBadgeData } from './skill-item-badge'
 import { CVFooter } from '@/components/layout/cv-footer'
 import type { CVData } from '@/lib/types/cv'
 
-interface CVProject {
-  name: string
-  description: string
-  tech: string[]
-  url?: string
-  github?: string
-  status?: string
-  year?: number
-}
-
 interface CVProps {
-  data: (CVData & { projects?: CVProject[] }) | null
+  data: CVData | null
   locale?: string
   lastUpdated?: string
 }

@@ -34,19 +34,19 @@ function SkillBadgeContent({ item }: SkillItemBadgeProps) {
     <Badge
       variant="secondary"
       className={cn(
-        'h-auto rounded-full border border-transparent bg-muted/60 px-3 py-1.5 text-sm font-medium text-muted-foreground transition-all duration-200 gap-1.5 hover:-translate-y-0.5 hover:border-border/60 hover:bg-muted/90 hover:text-foreground hover:shadow-sm',
+        'h-auto rounded-full border border-transparent bg-muted/60 px-2 py-1 text-xs font-medium text-muted-foreground transition-all duration-200 gap-1 hover:-translate-y-0.5 hover:border-border/60 hover:bg-muted/90 hover:text-foreground hover:shadow-sm',
         item.code ? 'font-mono' : 'font-sans'
       )}
     >
       {item.icon ? (
-        <Icon icon={item.icon} className="h-3.5 w-3.5 shrink-0" />
+        <Icon icon={item.icon} className="h-3 w-3 shrink-0" />
       ) : (
         resolvedFavicon && (
           <img
             src={resolvedFavicon}
             alt=""
             aria-hidden="true"
-            className="h-3.5 w-3.5 shrink-0 rounded-sm"
+            className="h-3 w-3 shrink-0 rounded-sm"
             loading="lazy"
           />
         )

@@ -57,6 +57,18 @@ highlights = [
   "产出：一篇论文发表于 Applied Soft Computing。",
 ]
 
+[[projects]]
+year = "2025"
+name = "基于代码的 CAD 装配生成"
+status = "在审"
+description = "构建了可验证基准与 LLM 智能体，实现可控的代码式 CAD 生成与可执行约束评测。"
+
+[[projects]]
+year = "2025"
+name = "人机协同 CAD 生成工作流"
+status = "已发表"
+description = "设计了用于代码式 CAD 生成的 HITL 智能体工作流，并以代码有效率与人工偏好进行评估。"
+
 [[publications]]
 title = "Towards Agentic Smart Design: An Industrial Large Model-driven Human-in-the-loop Agentic Workflow for Geometric Modelling"
 type = "期刊论文"

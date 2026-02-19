@@ -15,13 +15,13 @@ export function MiscSection({ items }: MiscSectionProps) {
 
   return (
     <section className="paper-section">
-      <h2 className="paper-section-title">
+      <h2 className="paper-section-title !mb-1.5 sm:!mb-2 !pb-0.5 sm:!pb-1">
         <Icon icon="mingcute:more-2-fill" className="mr-3 inline-block align-[-0.12em] text-primary" />
         {t('sections.misc')}
       </h2>
 
       <div className="paper-card">
-        <div className="flex flex-wrap items-center gap-1.5">
+        <div className="flex flex-wrap items-center gap-1">
           {items.map((item, index) => (
             <SkillItemBadge key={`misc-${item.text}-${index}`} item={item} />
           ))}

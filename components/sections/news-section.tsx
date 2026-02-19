@@ -46,17 +46,17 @@ export function NewsSection({ data }: NewsSectionProps) {
         {t('sections.news')}
       </h2>
 
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         {sortedItems.map((item, index) => (
           <div key={`${item.title}-${index}`} className="paper-body leading-relaxed text-foreground">
             <div className="grid grid-cols-[minmax(6ch,auto)_minmax(0,1fr)] items-start gap-x-3">
-              <span className="font-sans text-base font-bold whitespace-nowrap text-muted-foreground">{formatToYearDotMonth(item.date)}</span>
+              <span className="font-sans text-sm font-bold whitespace-nowrap text-muted-foreground">{formatToYearDotMonth(item.date)}</span>
               {item.url ? (
                 <a href={item.url} target="_blank" rel="noopener noreferrer" className="no-underline hover:no-underline">
-                  <MarkdownText content={item.summary || item.title || item.outlet} inline />
+                  <MarkdownText content={item.summary || item.title || item.outlet} className="text-sm text-foreground/90" inline />
                 </a>
               ) : (
-                <MarkdownText content={item.summary || item.title || item.outlet} inline />
+                <MarkdownText content={item.summary || item.title || item.outlet} className="text-sm text-foreground/90" inline />
               )}
             </div>
           </div>

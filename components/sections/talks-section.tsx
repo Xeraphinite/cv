@@ -65,10 +65,10 @@ export function TalksSection({ data }: TalksSectionProps) {
         Talks & Presentations
       </h2>
 
-      <div className="space-y-6">
+      <div className="space-y-4">
         {talks.map((talk, index) => (
           <div key={`${talk.title}-${index}`} className="paper-card transition-shadow duration-300">
-            <div className="space-y-2.5">
+            <div className="space-y-2">
               {/* Talk Header */}
               <div className="flex items-start justify-between">
                 <div className="flex-1">
@@ -108,7 +108,7 @@ export function TalksSection({ data }: TalksSectionProps) {
               </div>
 
               {/* Event Information */}
-              <div className="space-y-2 !mt-3">
+              <div className="space-y-1.5 !mt-2">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <div className="font-medium text-foreground">
                     {talk.event}
@@ -118,7 +118,7 @@ export function TalksSection({ data }: TalksSectionProps) {
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-1 paper-meta">
                   <div className="flex items-center gap-2">
                     <Icon icon="mingcute:calendar-line" className="h-4 w-4" />
-                    <span className="font-sans text-base font-bold text-muted-foreground">{formatDate(talk.date)}</span>
+                    <span className="font-sans text-sm font-bold text-muted-foreground">{formatDate(talk.date)}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Icon icon="mingcute:map-pin-line" className="h-4 w-4" />
@@ -129,7 +129,7 @@ export function TalksSection({ data }: TalksSectionProps) {
 
               {/* Talk Description */}
               {talk.description && (
-                <MarkdownText content={talk.description} className="paper-body text-sm mt-3 pt-3" />
+                <MarkdownText content={talk.description} className="paper-body text-sm mt-3 pt-3 text-muted-foreground" />
               )}
             </div>
           </div>

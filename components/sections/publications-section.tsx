@@ -9,6 +9,7 @@ import { formatToYearMonth } from '@/lib/date-format'
 interface Publication {
   title: string
   authors: string[]
+  year?: string
   type: string
   status: string
   highlight?: boolean
@@ -20,7 +21,6 @@ interface Publication {
   indexing?: string[]
   impactFactor?: number
   abstract?: string
-  year?: string
   pages?: string
   volume?: string
   issue?: string
@@ -36,6 +36,21 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
   const t = useTranslations()
   
   if (!data || data.length === 0) return null
+
+  const parsePublicationYear = (value?: string): number => {
+    if (!value) return Number.NEGATIVE_INFINITY
+    const year = Number.parseInt(value, 10)
+    return Number.isFinite(year) ? year : Number.NEGATIVE_INFINITY
+  }
+
+  const sortedItems = [...data]
+    .map((item, index) => ({ item, index }))
+    .sort((a, b) => {
+      const rankDiff = parsePublicationYear(b.item.year) - parsePublicationYear(a.item.year)
+      if (rankDiff !== 0) return rankDiff
+      return a.index - b.index
+    })
+    .map(({ item }) => item)
 
   const formatAuthors = (authors: string[]) => {
     return authors.map((author, index) => {
@@ -53,12 +68,12 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
   }
 
   const formatPublicationMeta = (publication: Publication) => {
-    const parts = []
-    if (publication.year) parts.push(formatToYearMonth(publication.year))
+    const parts: string[] = []
+    if (publication.journal || publication.publishedIn) parts.push(publication.journal || publication.publishedIn || '')
     if (publication.volume) parts.push(`Vol. ${publication.volume}`)
     if (publication.issue) parts.push(`No. ${publication.issue}`)
     if (publication.pages) parts.push(`pp. ${publication.pages}`)
-    return parts.join(', ')
+    return parts.filter(Boolean).join(' · ')
   }
 
   return (
@@ -68,103 +83,64 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
         {t('sections.publications')}
       </h2>
 
-      <div className="space-y-6">
-        {data.map((publication, index) => (
-          <div key={`${publication.title}-${index}`} className="paper-card transition-shadow duration-300">
-            <div className="space-y-3">
-              {/* Header with title and featured badge */}
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex-1 min-w-0">
-                  <h3 className="paper-subtitle font-semibold text-foreground leading-tight break-words">
-                    {publication.url ? (
-                      <a
-                        href={publication.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="no-underline hover:no-underline transition-all inline-flex items-start gap-2 group"
-                      >
-                        <MarkdownText content={publication.title} inline />
-                        <Icon icon="mingcute:arrow-right-up-fill" className="h-4 w-4 mt-1 opacity-50 group-hover:opacity-100 transition-opacity flex-shrink-0" />
-                      </a>
-                    ) : (
+      <div className="space-y-1.5">
+        {sortedItems.map((publication, index) => (
+          <div key={`${publication.title}-${index}`} className="paper-body leading-relaxed text-foreground">
+            <div className="grid grid-cols-[minmax(6ch,auto)_minmax(0,1fr)] items-start gap-x-3 gap-y-1">
+              <span className="font-sans text-sm font-bold whitespace-nowrap text-muted-foreground">
+                {formatToYearMonth(publication.year)}
+              </span>
+
+              <div className="col-start-2 min-w-0">
+                <h3 className="font-sans text-sm font-semibold leading-tight">
+                  {publication.url ? (
+                    <a
+                      href={publication.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-start gap-1 no-underline hover:no-underline"
+                    >
                       <MarkdownText content={publication.title} inline />
-                    )}
-                  </h3>
-                </div>
-                
-                {publication.highlight && (
-                  <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full whitespace-nowrap">
-                    <Icon icon="mingcute:star-fill" className="h-4 w-4" />
-                    <span className="text-sm font-medium">Featured</span>
-                  </div>
-                )}
-              </div>
-              
-              {/* Authors */}
-              <div className="paper-body leading-relaxed break-words">
-                {formatAuthors(publication.authors)}
-              </div>
-              
-              {/* Publication venue and meta information */}
-              <div className="space-y-2 !mt-4">
-                {(publication.journal || publication.publishedIn) && (
-                  <div className="flex items-start gap-3 paper-meta">
-                    <Icon icon="mingcute:file-line" className="h-4 w-4 mt-1 flex-shrink-0" />
-                    <div className="break-words">
-                      <span className="italic">{publication.journal || publication.publishedIn}</span>
-                      {formatPublicationMeta(publication) && (
-                        <span className="ml-2">({formatPublicationMeta(publication)})</span>
-                      )}
-                    </div>
-                  </div>
-                )}
-                
-                {publication.doi && (
-                  <div className="flex items-start gap-3 paper-meta">
-                    <Icon icon="mingcute:award-line" className="h-4 w-4 mt-1 flex-shrink-0" />
-                    <div className="break-all">
+                      <Icon icon="mingcute:arrow-right-up-fill" className="h-4 w-4 mt-0.5 shrink-0 text-muted-foreground" />
+                    </a>
+                  ) : (
+                    <MarkdownText content={publication.title} inline />
+                  )}
+                </h3>
+
+                {publication.authors?.length ? (
+                  <p className="mt-0.5 text-sm text-muted-foreground">{formatAuthors(publication.authors)}</p>
+                ) : null}
+
+                {formatPublicationMeta(publication) ? (
+                  <p className="mt-0.5 text-sm text-muted-foreground italic">{formatPublicationMeta(publication)}</p>
+                ) : null}
+
+                <div className="mt-0.5 flex flex-wrap items-center gap-x-2 text-sm text-muted-foreground">
+                  <span>{publication.type}</span>
+                  <span>·</span>
+                  <span>{publication.status}</span>
+                  {publication.impactFactor ? (
+                    <>
+                      <span>·</span>
+                      <span className="font-mono">IF {publication.impactFactor}</span>
+                    </>
+                  ) : null}
+                  {publication.doi ? (
+                    <>
+                      <span>·</span>
                       <a
                         href={`https://doi.org/${publication.doi}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="no-underline hover:no-underline transition-colors font-medium font-mono"
+                        className="font-mono no-underline hover:no-underline"
                       >
-                        {publication.doi}
+                        DOI
                       </a>
-                    </div>
-                  </div>
-                )}
-              </div>
-              
-              {/* Badges for type, status, indexing, and impact factor */}
-              <div className="flex flex-wrap items-center gap-2 !mt-4">
-                <span className="paper-badge !bg-primary/10 !text-primary text-xs">
-                  {publication.type}
-                </span>
-                
-                <span className="paper-badge !bg-blue-500/10 !text-blue-600 text-xs">
-                  {publication.status}
-                </span>
-                
-                {publication.indexing?.map((idx) => (
-                  <span key={idx} className="paper-badge !bg-green-500/10 !text-green-600 text-xs">
-                    {idx}
-                  </span>
-                ))}
-                
-                {publication.impactFactor && (
-                  <span className="paper-badge !bg-amber-500/10 !text-amber-600 text-xs font-mono">
-                    IF: {publication.impactFactor}
-                  </span>
-                )}
-              </div>
-
-              {/* Abstract */}
-              {publication.abstract && (
-                <div className="!mt-4 pt-3">
-                  <MarkdownText content={publication.abstract} className="paper-body text-sm break-words" />
+                    </>
+                  ) : null}
                 </div>
-              )}
+              </div>
             </div>
           </div>
         ))}

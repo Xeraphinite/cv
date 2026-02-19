@@ -1,7 +1,9 @@
 /* Typography aligned with xyndrome-cv */
 @import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap');
 
 @import 'tailwindcss-uikit-colors/selector.css';
 
@@ -128,18 +130,36 @@
 .font-ja-sans,
 .font-ko-sans,
 .font-en-sans {
-  font-family: "Rethink Sans", "Noto Serif SC", sans-serif;
+  font-family: "IBM Plex Sans", "Noto Sans SC", "Noto Serif SC", sans-serif;
   font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
   line-height: 1.35;
   letter-spacing: 0;
 }
 
-.font-zh-serif,
-.font-zh-hant-serif,
-.font-ja-serif,
-.font-ko-serif,
 .font-en-serif {
   font-family: "Spectral", "Noto Serif SC", serif;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+
+.font-zh-serif,
+.font-zh-hant-serif {
+  font-family: "Noto Serif SC", "Spectral", serif;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+
+.font-ja-serif {
+  font-family: "Noto Serif JP", "Noto Serif SC", "Spectral", serif;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+
+.font-ko-serif {
+  font-family: "Noto Serif KR", "Noto Serif SC", "Spectral", serif;
   font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
   line-height: 1.45;
   letter-spacing: 0;
@@ -179,12 +199,12 @@
 
 /* Enhanced section styling with magazine-like spacing */
 .paper-section {
-  @apply mb-6 sm:mb-8 mx-0;
+  @apply mb-4 sm:mb-6 mx-0;
   position: relative;
 }
 
 .paper-section-title {
-  @apply text-2xl md:text-3xl text-foreground mb-3 sm:mb-4 pb-1.5 sm:pb-2 font-en-sans font-bold tracking-tight;
+  @apply text-xl text-foreground mb-2 sm:mb-3 pb-1 sm:pb-1.5 font-en-sans font-bold tracking-tight;
   letter-spacing: 0;
   line-height: 1.3;
   position: relative;
@@ -196,7 +216,7 @@
 
 /* Apple-inspired glass card with magazine layout */
 .paper-card {
-  @apply bg-card/90 rounded-2xl py-4 sm:py-5 px-0 mb-3 sm:mb-4;
+  @apply bg-card/90 rounded-2xl py-3 sm:py-4 px-0 mb-2 sm:mb-3;
   backdrop-filter: blur(20px);
   box-shadow: none;
   position: relative;
@@ -243,7 +263,7 @@
 }
 
 .paper-subtitle {
-  @apply text-xl md:text-2xl text-foreground font-en-sans;
+  @apply text-base text-foreground font-en-sans;
   letter-spacing: 0;
   font-weight: 600;
   line-height: 1.3;
@@ -265,7 +285,7 @@
 }
 
 .paper-body {
-  @apply text-base md:text-lg text-foreground/85 font-en-serif;
+  @apply text-sm text-foreground/85 font-en-serif;
   font-weight: 400;
   line-height: 1.45;
   letter-spacing: 0;
@@ -290,7 +310,7 @@
 }
 
 .paper-meta {
-  @apply text-sm text-muted-foreground/80 font-en-sans;
+  @apply text-xs text-muted-foreground/80 font-en-sans;
   font-weight: 500;
   letter-spacing: 0;
   line-height: 1.4;
@@ -326,7 +346,7 @@
 
 /* Refined badges with Apple aesthetics */
 .paper-badge {
-  @apply inline-flex items-center px-3 py-1.5 bg-muted/60 text-muted-foreground text-sm rounded-full font-medium;
+  @apply inline-flex items-center px-2 py-1 bg-muted/60 text-muted-foreground text-xs rounded-full font-medium;
   backdrop-filter: blur(10px);
   font-weight: 500;
   letter-spacing: -0.005em;

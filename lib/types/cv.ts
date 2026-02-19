@@ -50,6 +50,7 @@ export interface SectionConfig {
 export interface PublicationItem {
   title: string;
   authors: string[];
+  year?: string;
   type: string;
   status: string;
   indexing?: string[];
@@ -114,12 +115,42 @@ export interface NewsItem {
   url?: string;
 }
 
+export interface ProjectUrl {
+  label: string;
+  url: string;
+  icon?: string;
+}
+
+export interface ProjectPreviewImage {
+  src: string;
+  alt?: string;
+}
+
+export interface ProjectTechItem {
+  text: string;
+  icon?: string;
+  url?: string;
+  code?: boolean;
+  description?: string;
+}
+
+export interface ProjectItem {
+  name: string;
+  description: string;
+  year?: string | number;
+  status?: string;
+  previewImages?: ProjectPreviewImage[];
+  tech?: ProjectTechItem[];
+  urls?: ProjectUrl[];
+}
+
 export interface CVData {
   hero: Hero;
   education: EducationItem[];
   sectionConfig?: SectionConfig;
   publications: PublicationItem[];
   experience: ExperienceItem[];
+  projects?: ProjectItem[];
   news?: NewsItem[];
   awards: AwardItem[];
   skills: Skills;

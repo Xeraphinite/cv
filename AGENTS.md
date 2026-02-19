@@ -13,7 +13,14 @@
 - In Skills badges, do not show trailing external-direction icons; keep only leading skill icon/favicon and text with a small visual gap.
 - In language skills, prefer `twemoji:*` icons over mingcute and keep score/proficiency details in hover descriptions instead of badge text.
 - Do not underline URL links (including hover/focus/visited states).
+- Use `Spectral` as the default serif family and `IBM Plex Sans` as the default sans family across locales; keep locale-specific Noto/Source Han families as fallback.
+- For non-English serif text (`zh`, `zh-hant`, `ja`, `ko`), prefer locale-appropriate Noto Serif families as the primary serif stack.
 - Use `Maple Mono` as the monospace font family for code-like text.
+- Typography scale preference: section titles should use `text-xl`; general body text should default to `text-sm`; keep `text-xs` as the minimum size, and use `text-sm` for description/detail copy.
+- Keep badges/chips compact: prefer small pill padding (`px-2 py-1` or tighter), smaller icon size, and tighter inter-chip spacing (`gap-1` to `gap-1.5`) unless explicitly requested otherwise.
+- Keep section spacing compact by default: tighten section title bottom spacing and reduce inter-item vertical gaps (`space-y`/`gap-y`) unless explicitly requested to be roomy.
+- For Skills, Awards, Education, Experience, and Misc sections, keep section-title underline/border spacing especially tight (reduced title `mb`/`pb`).
+- In Education, keep both inter-item spacing and intra-item spacing compact by default.
 
 ## Reusable Project Knowledge
   - CV data source:
@@ -28,9 +35,10 @@
   - When `data/cv.toml` is updated, keep localized `data/cv.{locale}.toml` files in sync with the same underlying records/structure.
   - Skills `items` in TOML support both string form and object form (`text`/`name`, optional `icon`, `url`, `code`, `description`).
   - Main Skills category order should be: `Languages` -> `Programming Languages` -> `DevOps` -> `AI Engineering` -> `Web Dev & Design` -> `Backend Development`; `Misc` is rendered as a separate bottom section.
-  - News section is stored at `[news.*]` in TOML with fields `title`, `outlet`, `date`, `summary`, `url`, mapped to `CVData.news`.
-  - News section UI format is concise: each row shows only `date` + description text, and rows are sorted newest first by `date` (supports `YYYY` and `YYYY.M`).
-  - News date display uses `yyyy.mm` when month exists (year-only stays `yyyy`), and this dot format is news-only.
+- News section is stored at `[news.*]` in TOML with fields `title`, `outlet`, `date`, `summary`, `url`, mapped to `CVData.news`.
+- News section UI format is concise: each row shows only `date` + description text, and rows are sorted newest first by `date` (supports `YYYY` and `YYYY.M`).
+- News date display uses `yyyy.mm` when month exists (year-only stays `yyyy`), and this dot format is news-only.
+- Publications section should use a concise, unified reading layout: year-first left column + compact right-column metadata (title, authors, venue, status/type/DOI) without heavy card styling.
   - TOML text fields preserve Markdown syntax at load time and render through `components/ui/markdown-text.tsx` in UI sections.
 - Centralized app config:
   - `lib/config/app-config.ts` contains:
@@ -42,7 +50,8 @@
 - App Router metadata:
   - In `app/` routes, do not use `next/head`; use the Metadata API and/or native `<head>` in layout files.
 - Typography policy:
-  - Keep the configured font families (`Spectral`, `Noto Serif SC`, `Rethink Sans`, `Maple Mono`).
+  - Keep the configured font families (`Spectral`, `IBM Plex Sans`, `Noto Serif SC`, `Maple Mono`) with locale-specific CJK fallbacks.
+  - Keep English serif default on `Spectral`; keep non-English serif defaults on Noto Serif families.
   - Do not force xyndrome font-size values unless explicitly requested.
   - Tooltip text should default to `font-sans` via the shared shadcn tooltip UI component.
   - Hover card panels should use a white background.
@@ -53,6 +62,7 @@
   - Keep mono font for `code`/`pre` via `Maple Mono`.
 - Awards/Honors iconography:
   - Use `mingcute:medal-fill` for section headers and `mingcute:medal-line` for compact/stat contexts.
+  - Awards/Honors section layout should stay concise and use Skills-like two-column alignment (fixed-width right-aligned left column + flexible content column).
 - Experience section styling:
   - Use `mingcute:telescope-fill` as the Experience section header icon.
   - Show experience time in a muted time column before role/company details.
@@ -65,6 +75,12 @@
   - If `description` exists, show concise hover content via shadcn `HoverCard`.
   - In main Skills section rows, use two-column alignment like resume.antfu.me: fixed-width right-aligned category label column + flexible content column.
   - Keep Interests under skills data label `Misc`, and render it as a dedicated bottom `Misc` section instead of inside the main Skills section.
+- Projects data and presentation:
+  - Use dedicated projects data in TOML under `[projects.*]` (default source) / `[[projects]]` (localized overrides), not fallback mock data.
+  - Project fields support `year`, `name`, `status`, `description`, optional `preview_images`, optional `urls`, and optional `tech`.
+  - Render project name in sans (`font-sans`) and description in serif (`font-serif`).
+  - Render project `status` using a compact badge style.
+  - Render project tech stack with reusable `SkillItemBadge` chips (skill-item style).
 - Time/date presentation:
   - In time-related sections (Experience, Education, Projects, Awards, News), render date/time first using muted sans text (`font-sans text-base font-bold` + muted tone), followed by content.
   - Use `yyyymm` date notation when month exists; if month is not available, show year only (`yyyy`). Footer `lastUpdated` is excluded and stays relative-time.

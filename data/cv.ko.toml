@@ -57,6 +57,18 @@ highlights = [
   "성과: 논문 1편이 Applied Soft Computing에 게재되었습니다.",
 ]
 
+[[projects]]
+year = "2025"
+name = "코드 기반 CAD 어셈블리 생성"
+status = "심사 중"
+description = "실행 가능한 제약 조건 하에서 제어 가능한 코드 기반 CAD 생성을 위해 검증 가능한 벤치마크와 LLM 에이전트를 구축했습니다."
+
+[[projects]]
+year = "2025"
+name = "Human-in-the-loop CAD 생성 워크플로"
+status = "게재"
+description = "코드 기반 CAD 생성을 위한 HITL 에이전트 워크플로를 설계하고, 코드 유효성과 인간 선호로 평가했습니다."
+
 [[publications]]
 title = "Towards Agentic Smart Design: An Industrial Large Model-driven Human-in-the-loop Agentic Workflow for Geometric Modelling"
 type = "저널 논문"

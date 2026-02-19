@@ -2,7 +2,7 @@ import fs from "node:fs/promises"
 import path from "node:path"
 import { parse as parseToml } from "smol-toml"
 import { appConfig } from "@/lib/config/app-config"
-import type { CVData, Locale } from '@/lib/types/cv'
+import type { CVData, Locale, ProjectItem, ProjectPreviewImage, ProjectTechItem, ProjectUrl } from '@/lib/types/cv'
 
 export async function getCVLastUpdated(locale: Locale = appConfig.cvData.fallbackLocale): Promise<string> {
   try {
@@ -107,6 +107,41 @@ type TomlCVData = {
       url?: string
     }
   >
+  projects?: Record<
+    string,
+    {
+      name?: string
+      description?: string
+      year?: string | number
+      status?: string
+      preview_images?: Array<
+        | string
+        | {
+            src?: string
+            alt?: string
+          }
+      >
+      urls?: Array<
+        | string
+        | {
+            label?: string
+            url?: string
+            icon?: string
+          }
+      >
+      tech?: Array<
+        | string
+        | {
+            text?: string
+            name?: string
+            icon?: string
+            url?: string
+            code?: boolean
+            description?: string
+          }
+      >
+    }
+  >
   skills?: Record<
     string,
     {
@@ -202,7 +237,7 @@ function isPlainObject(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value)
 }
 
-function mergeObject<T extends Record<string, unknown>>(base: T, override: DeepPartial<T>): T {
+function mergeObject<T extends object>(base: T, override: DeepPartial<T>): T {
   const merged = { ...base }
 
   for (const key of Object.keys(override) as Array<keyof T>) {
@@ -224,7 +259,7 @@ function mergeObject<T extends Record<string, unknown>>(base: T, override: DeepP
   return merged
 }
 
-function mergeArrayByIndex<T extends Record<string, unknown>>(
+function mergeArrayByIndex<T extends object>(
   base: T[],
   override?: Array<DeepPartial<T>>,
 ): T[] {
@@ -263,6 +298,12 @@ function mergeCVData(base: CVData, override: DeepPartial<CVData>): CVData {
     merged.talks = mergedTalks
   }
 
+  const baseProjects = base.projects ?? []
+  const mergedProjects = mergeArrayByIndex(baseProjects, override.projects)
+  if (base.projects || override.projects) {
+    merged.projects = mergedProjects
+  }
+
   return merged
 }
 
@@ -271,6 +312,7 @@ function mapTomlToCVData(source: TomlCVData): CVData {
   const educationEntries = Object.values(source.education ?? {})
   const experienceEntries = Object.values(source.experience ?? {})
   const publicationEntries = Object.values(source.publications ?? {})
+  const projectEntries = Object.values(source.projects ?? {})
   const newsEntries = Object.values(source.news ?? {})
   const skillEntries = Object.values(source.skills ?? {})
   const awardEntries = Object.values(source.awards ?? {})
@@ -321,6 +363,7 @@ function mapTomlToCVData(source: TomlCVData): CVData {
       return {
         title: cleanText(item.title ?? ""),
         authors: (item.authors ?? []).map(cleanText).filter(Boolean),
+        year: cleanText(item.published ?? ""),
         type: mapPublicationType(item.type),
         status: mapPublicationStatus(item.published, item.DOI),
         indexing: parseIndexing(metadata),
@@ -330,6 +373,34 @@ function mapTomlToCVData(source: TomlCVData): CVData {
         doi: cleanText(item.DOI ?? ""),
         url: cleanText(item.pdf ?? ""),
       }
+    }),
+    projects: projectEntries.flatMap((item) => {
+      const name = cleanText(item.name ?? "")
+      if (!name) return []
+
+      const urls = (item.urls ?? [])
+        .map(mapProjectUrl)
+        .filter((projectUrl): projectUrl is ProjectUrl => Boolean(projectUrl))
+
+      const tech = (item.tech ?? [])
+        .map(mapProjectTechItem)
+        .filter((techItem): techItem is ProjectTechItem => Boolean(techItem))
+
+      const previewImages = (item.preview_images ?? [])
+        .map(mapProjectPreviewImage)
+        .filter((previewImage): previewImage is ProjectPreviewImage => Boolean(previewImage))
+
+      return [
+        {
+          name,
+          description: cleanText(item.description ?? ""),
+          year: item.year,
+          status: cleanText(item.status ?? ""),
+          tech,
+          urls,
+          previewImages,
+        } satisfies ProjectItem,
+      ]
     }),
     awards: awardEntries.map((item) => ({
       name: cleanText(item.name ?? ""),
@@ -398,6 +469,77 @@ function splitAreaAndDegree(input: string): { area: string; degree: string } {
   return {
     area: areaPart || normalized,
     degree: degreePart || normalized,
+  }
+}
+
+function mapProjectUrl(value: string | { label?: string; url?: string; icon?: string }): ProjectUrl | null {
+  if (typeof value === "string") {
+    const url = cleanText(value)
+    if (!url) return null
+    return {
+      label: "Link",
+      url,
+      icon: "mingcute:arrow-right-up-fill",
+    }
+  }
+
+  const url = cleanText(value.url ?? "")
+  if (!url) return null
+  const label = cleanText(value.label ?? "Link")
+  const icon = cleanText(value.icon ?? "")
+  return {
+    label,
+    url,
+    icon,
+  }
+}
+
+function mapProjectPreviewImage(
+  value: string | { src?: string; alt?: string },
+): ProjectPreviewImage | null {
+  if (typeof value === "string") {
+    const src = cleanText(value)
+    if (!src) return null
+    return { src, alt: "" }
+  }
+
+  const src = cleanText(value.src ?? "")
+  if (!src) return null
+  return {
+    src,
+    alt: cleanText(value.alt ?? ""),
+  }
+}
+
+function mapProjectTechItem(
+  value:
+    | string
+    | {
+        text?: string
+        name?: string
+        icon?: string
+        url?: string
+        code?: boolean
+        description?: string
+      },
+): ProjectTechItem | null {
+  if (typeof value === "string") {
+    const text = cleanText(value)
+    if (!text) return null
+    return {
+      text,
+      code: true,
+    }
+  }
+
+  const text = cleanText(value.text ?? value.name ?? "")
+  if (!text) return null
+  return {
+    text,
+    icon: cleanText(value.icon ?? ""),
+    url: cleanText(value.url ?? ""),
+    code: Boolean(value.code),
+    description: cleanText(value.description ?? ""),
   }
 }
 
@@ -520,6 +662,16 @@ function getSampleData(): CVData {
         type: "Journal Article",
         status: "Published",
         publishedIn: "Sample Journal",
+      },
+    ],
+    projects: [
+      {
+        name: "Sample Project",
+        description: "Sample project description.",
+        year: "2024",
+        status: "Active",
+        tech: [{ text: "TypeScript", code: true }],
+        urls: [{ label: "GitHub", url: "https://github.com/sample", icon: "mingcute:github-line" }],
       },
     ],
     awards: [

@@ -2,54 +2,20 @@
 
 import { Icon } from '@iconify/react'
 import { useTranslations } from 'next-intl'
+import { Badge } from '@/components/ui/badge'
+import { MarkdownText } from '@/components/ui/markdown-text'
 import { formatToYearMonth } from '@/lib/date-format'
-
-interface Project {
-  name: string
-  description: string
-  tech: string[]
-  url?: string
-  github?: string
-  status?: string
-  year?: number
-}
+import type { ProjectItem } from '@/lib/types/cv'
+import { SkillItemBadge } from './skill-item-badge'
 
 interface ProjectsSectionProps {
-  data: Project[]
+  data: ProjectItem[]
 }
 
 export function ProjectsSection({ data }: ProjectsSectionProps) {
   const t = useTranslations()
-
-  const defaultProjects: Project[] = [
-    {
-      name: "AI Research Platform",
-      description: "A comprehensive platform for managing AI research projects with data visualization and model comparison features.",
-      tech: ["Python", "TensorFlow", "React", "PostgreSQL"],
-      url: "https://example.com/ai-platform",
-      github: "https://github.com/username/ai-platform",
-      status: "Active",
-      year: 2024
-    },
-    {
-      name: "Academic Paper Analyzer",
-      description: "Natural language processing tool for analyzing academic papers and extracting key insights and citations.",
-      tech: ["Python", "NLP", "Flask", "MongoDB"],
-      github: "https://github.com/username/paper-analyzer",
-      status: "Completed",
-      year: 2023
-    },
-    {
-      name: "Research Data Visualization",
-      description: "Interactive dashboard for visualizing complex research data with real-time updates and collaborative features.",
-      tech: ["JavaScript", "D3.js", "Node.js", "MySQL"],
-      url: "https://example.com/data-viz",
-      status: "In Progress",
-      year: 2024
-    }
-  ]
-
-  const projects = data && data.length > 0 ? data : defaultProjects
+  const projects = data ?? []
+  if (projects.length === 0) return null
 
   return (
     <section className="paper-section">
@@ -58,44 +24,64 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
         {t('sections.selectedProjects')}
       </h2>
 
-      <div className="space-y-1">
+      <div className="space-y-3">
         {projects.map((project) => (
           <div key={project.name} className="paper-body leading-relaxed text-foreground">
-            <div className="grid grid-cols-[minmax(5ch,auto)_minmax(0,1fr)] items-start gap-x-3 gap-y-1">
-              <span className="font-sans text-base font-bold whitespace-nowrap text-muted-foreground">{formatToYearMonth(project.year)}</span>
-              <div className="flex flex-wrap items-baseline gap-x-2 min-w-0">
-                <span className="font-medium">{project.name}</span>
-                {project.status ? <span className="text-muted-foreground">{project.status}</span> : null}
+            <div className="grid grid-cols-[minmax(5ch,auto)_minmax(0,1fr)] items-start gap-x-3 gap-y-2">
+              <span className="font-sans text-sm font-bold whitespace-nowrap text-muted-foreground">{formatToYearMonth(project.year)}</span>
+              <div className="col-start-2 flex min-w-0 flex-wrap items-center gap-1.5">
+                <h3 className="font-sans text-sm font-semibold">{project.name}</h3>
+                {project.status ? (
+                  <Badge variant="secondary" className="rounded-full border border-border/60 bg-muted/70 px-2 py-0 font-sans text-xs font-medium text-muted-foreground">
+                    {project.status}
+                  </Badge>
+                ) : null}
               </div>
 
-              <p className="col-start-2">{project.description}</p>
-              <p className="col-start-2 font-mono text-muted-foreground">{project.tech.join(', ')}</p>
-              {(project.url || project.github) ? (
-                <div className="col-start-2 mt-1 flex items-center gap-3">
-                  {project.url ? (
+              {project.description ? (
+                <div className="col-start-2 text-sm text-foreground/90 font-serif">
+                  <MarkdownText content={project.description} />
+                </div>
+              ) : null}
+
+              {project.tech && project.tech.length > 0 ? (
+                <div className="col-start-2 flex flex-wrap gap-1">
+                  {project.tech.map((item, index) => (
+                    <SkillItemBadge key={`${project.name}-tech-${item.text}-${index}`} item={item} />
+                  ))}
+                </div>
+              ) : null}
+
+              {project.previewImages && project.previewImages.length > 0 ? (
+                <div className="col-start-2 mt-1 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                  {project.previewImages.map((image, index) => (
+                    <div key={`${project.name}-preview-${image.src}-${index}`} className="overflow-hidden rounded-lg border border-border/60 bg-card/80">
+                      <img
+                        src={image.src}
+                        alt={image.alt || `${project.name} preview ${index + 1}`}
+                        className="h-36 w-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+
+              {project.urls && project.urls.length > 0 ? (
+                <div className="col-start-2 mt-1 flex flex-wrap items-center gap-x-4 gap-y-1">
+                  {project.urls.map((link, index) => (
                     <a
-                      href={project.url}
+                      key={`${project.name}-url-${link.url}-${index}`}
+                      href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-primary no-underline hover:no-underline"
-                      title={t('actions.viewProject')}
+                      className="inline-flex items-center gap-1 text-primary no-underline hover:no-underline focus-visible:no-underline visited:no-underline"
+                      title={link.label}
                     >
-                      <Icon icon="mingcute:arrow-right-up-fill" className="h-4 w-4" />
-                      <span className="text-sm">{t('actions.viewProject')}</span>
+                      <Icon icon={link.icon || 'mingcute:arrow-right-up-fill'} className="h-4 w-4" />
+                      <span className="font-sans text-sm">{link.label || t('actions.viewMore')}</span>
                     </a>
-                  ) : null}
-                  {project.github ? (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-primary no-underline hover:no-underline"
-                      title={t('actions.viewSource')}
-                    >
-                      <Icon icon="mingcute:github-line" className="h-4 w-4" />
-                      <span className="text-sm">{t('actions.viewSource')}</span>
-                    </a>
-                  ) : null}
+                  ))}
                 </div>
               ) : null}
             </div>

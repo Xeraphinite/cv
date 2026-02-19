@@ -56,18 +56,18 @@ export function EducationSection({ data, config }: EducationSectionProps) {
 
   return (
     <section className="paper-section">
-      <h2 className="paper-section-title">
+      <h2 className="paper-section-title !mb-1.5 sm:!mb-2 !pb-0.5 sm:!pb-1">
         <Icon icon="mingcute:mortarboard-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
         {tSection('education')}
       </h2>
 
-      <div className="space-y-6">
+      <div className="space-y-2.5">
         {data.map((education, index) => {
           const endDateParts = splitExpectedLabel(education.endDate)
           return (
             <div key={`${education.institution}-${education.degree}-${index}`} className="paper-card transition-all duration-300">
-              <div className="grid grid-cols-[minmax(12ch,auto)_minmax(0,1fr)] items-start gap-x-4 gap-y-2">
-                <p className="paper-meta font-sans !text-base !font-bold leading-tight text-muted-foreground">
+              <div className="grid grid-cols-[minmax(12ch,auto)_minmax(0,1fr)] items-start gap-x-4 gap-y-1">
+                <p className="paper-meta font-sans !text-sm !font-bold leading-tight text-muted-foreground">
                   <span className="block whitespace-nowrap">
                     {renderYearMonthWithSup(education.startDate)} - {renderYearMonthWithSup(endDateParts.main)}
                   </span>
@@ -75,7 +75,7 @@ export function EducationSection({ data, config }: EducationSectionProps) {
                     <span className="block whitespace-nowrap">{endDateParts.expected}</span>
                   ) : null}
                 </p>
-                <div className="min-w-0 space-y-3">
+                <div className="min-w-0 space-y-1.5">
                   {/* Institution and Degree */}
                   <div>
                     <h3 className="paper-subtitle mb-1">
@@ -87,7 +87,7 @@ export function EducationSection({ data, config }: EducationSectionProps) {
                   </div>
 
                   {/* Duration and Supervisor */}
-                  <div className="flex flex-wrap gap-x-4 gap-y-1.5 paper-meta">
+                  <div className="flex flex-wrap gap-x-4 gap-y-1 paper-meta">
                     {education.supervisor && (
                       <div className="flex items-center gap-2">
                         <Icon icon="mingcute:user-3-line" className="h-4 w-4" />
@@ -97,12 +97,12 @@ export function EducationSection({ data, config }: EducationSectionProps) {
                   </div>
                 </div>
                 {education.highlights && education.highlights.length > 0 && (
-                  <div className="col-start-2 mt-2">
-                    <ul className="space-y-1.5">
+                  <div className="col-start-2 mt-1">
+                    <ul className="space-y-1">
                       {education.highlights.map((highlight, i) => (
                         <li key={`${education.institution}-highlight-${i}`} className="flex items-start gap-3">
                           <div className="w-1.5 h-1.5 bg-primary/40 rounded-full mt-2 shrink-0" />
-                          <MarkdownText content={highlight} className="paper-body" inline />
+                          <MarkdownText content={highlight} className="paper-body text-sm text-muted-foreground" inline />
                         </li>
                       ))}
                     </ul>

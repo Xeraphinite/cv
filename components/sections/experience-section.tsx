@@ -40,16 +40,16 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
 
   return (
     <section className="paper-section">
-      <h2 className="paper-section-title">
+      <h2 className="paper-section-title !mb-1.5 sm:!mb-2 !pb-0.5 sm:!pb-1">
         <Icon icon="mingcute:telescope-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
         {t('sections.experience')}
       </h2>
 
-      <div className="space-y-6">
+      <div className="space-y-4">
         {data.map((experience, index) => (
           <div key={`${experience.company}-${experience.position}-${index}`} className="paper-card transition-all duration-300">
-            <div className="grid grid-cols-[minmax(12ch,auto)_minmax(0,1fr)] items-start gap-x-4 gap-y-3">
-              <p className="paper-meta whitespace-nowrap font-sans !text-base !font-bold leading-tight text-muted-foreground">
+            <div className="grid grid-cols-[minmax(12ch,auto)_minmax(0,1fr)] items-start gap-x-4 gap-y-2">
+              <p className="paper-meta whitespace-nowrap font-sans !text-sm !font-bold leading-tight text-muted-foreground">
                 {renderYearMonthWithSup(experience.startDate)} - {renderYearMonthWithSup(experience.endDate || 'Present')}
               </p>
               <div className="min-w-0">
@@ -61,7 +61,7 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
               </div>
 
               {experience.summary && (
-                <MarkdownText content={experience.summary} className="paper-body col-start-2" />
+                <MarkdownText content={experience.summary} className="paper-body col-start-2 text-sm text-muted-foreground" />
               )}
 
               {experience.highlights && experience.highlights.length > 0 && (
@@ -70,7 +70,7 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
                     {experience.highlights.map((highlight, idx) => (
                       <li key={`${experience.company}-highlight-${idx}`} className="flex items-start gap-3">
                         <div className="w-1.5 h-1.5 bg-primary/40 rounded-full mt-2 shrink-0" />
-                        <MarkdownText content={highlight} className="paper-body" inline />
+                        <MarkdownText content={highlight} className="paper-body text-sm text-muted-foreground" inline />
                       </li>
                     ))}
                   </ul>
