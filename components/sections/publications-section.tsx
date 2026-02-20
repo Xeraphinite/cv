@@ -128,7 +128,7 @@ export function PublicationsSection({ data, ownerName, ownerEnName, ownerAliases
         {sortedItems.map((publication, index) => (
           <div key={`${publication.title}-${index}`} className="paper-body leading-relaxed text-foreground">
             <div className="grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[minmax(6ch,auto)_minmax(0,1fr)] items-start gap-x-3 gap-y-0.5 md:gap-y-1">
-              <span className="order-2 justify-self-end whitespace-nowrap text-right font-sans text-sm font-bold text-muted-foreground md:order-1 md:justify-self-start md:text-left">
+              <span className="order-2 justify-self-end whitespace-nowrap text-right font-sans text-sm font-bold text-foreground/80 md:order-1 md:justify-self-start md:text-left">
                 {formatToYearMonth(publication.year)}
               </span>
 

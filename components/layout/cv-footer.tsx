@@ -72,17 +72,17 @@ export function CVFooter({ className, compact = false, showLocaleThemeControls =
       }
     }
 
-    let toneClass = 'text-muted-foreground/60'
+    let toneClass = 'text-foreground/80'
     if (elapsedMs < 1000 * 60 * 30) {
       toneClass = 'text-foreground'
     } else if (elapsedMs < 1000 * 60 * 60 * 6) {
       toneClass = 'text-foreground/85'
     } else if (elapsedMs < 1000 * 60 * 60 * 24) {
-      toneClass = 'text-foreground/70'
+      toneClass = 'text-foreground/80'
     } else if (elapsedMs < 1000 * 60 * 60 * 24 * 7) {
-      toneClass = 'text-muted-foreground'
+      toneClass = 'text-foreground/80'
     } else if (elapsedMs < 1000 * 60 * 60 * 24 * 30) {
-      toneClass = 'text-muted-foreground/80'
+      toneClass = 'text-foreground/80'
     }
 
     return { relativeUpdated: text, updateToneClass: toneClass }
@@ -107,7 +107,7 @@ export function CVFooter({ className, compact = false, showLocaleThemeControls =
       <TooltipProvider delayDuration={120}>
         <div
           className={clsx(
-            'px-4 text-xs text-muted-foreground',
+            'px-4 text-xs text-foreground/80',
             compact ? 'pt-0 pb-2' : 'pt-6 pb-3'
           )}
         >
@@ -225,7 +225,7 @@ export function CVFooter({ className, compact = false, showLocaleThemeControls =
           </div>
 
           <div className="mt-2 text-center">
-            <span className="whitespace-nowrap text-muted-foreground/70">{copyrightText}</span>
+            <span className="whitespace-nowrap text-foreground/80">{copyrightText}</span>
           </div>
         </div>
       </TooltipProvider>

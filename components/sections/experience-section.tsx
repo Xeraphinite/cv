@@ -49,7 +49,7 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
         {data.map((experience, index) => (
           <div key={`${experience.company}-${experience.position}-${index}`} className="paper-card transition-all duration-300">
             <div className="grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[minmax(12ch,auto)_minmax(0,1fr)] items-start gap-x-4 gap-y-2">
-              <p className="order-2 col-start-2 row-start-1 justify-self-end text-right paper-meta whitespace-nowrap font-sans !text-sm !font-bold leading-tight text-muted-foreground md:order-1 md:col-start-1 md:justify-self-start md:text-left">
+              <p className="order-2 col-start-2 row-start-1 justify-self-end text-right paper-meta whitespace-nowrap font-sans !text-sm !font-bold leading-tight text-foreground/80 md:order-1 md:col-start-1 md:justify-self-start md:text-left">
                 {renderYearMonthWithSup(experience.startDate)} - {renderYearMonthWithSup(experience.endDate || 'Present')}
               </p>
               <div className="order-1 col-start-1 row-start-1 min-w-0 md:order-2 md:col-start-2">

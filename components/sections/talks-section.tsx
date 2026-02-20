@@ -118,7 +118,7 @@ export function TalksSection({ data }: TalksSectionProps) {
                 <div className="flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-1 paper-meta">
                   <div className="flex items-center gap-2">
                     <Icon icon="mingcute:calendar-line" className="h-4 w-4" />
-                    <span className="font-sans text-sm font-bold text-muted-foreground">{formatDate(talk.date)}</span>
+                    <span className="font-sans text-sm font-bold text-foreground/80">{formatDate(talk.date)}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Icon icon="mingcute:map-pin-line" className="h-4 w-4" />

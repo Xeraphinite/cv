@@ -4,6 +4,7 @@
 - Always use `pnpm` for package management.
 - Always update `AGENTS.md` for any reusable knowledge or user preferences that should be followed across the project.
 - For UI/layout/style changes, always validate with Playwright before finalizing.
+- For UI/layout/style changes, also run an accessibility check (axe via Playwright) before finalizing.
 
 ## User Preferences
 - Use `mingcute` icons for CV/UI iconography whenever an icon is needed.
@@ -70,6 +71,10 @@
   - Tooltip panels should use theme-aware popover surfaces (`bg-popover`/`text-popover-foreground`) so they support both light and dark mode.
 - shadcn refresh policy:
   - After `shadcn` component refreshes, keep project conventions: `Button` link variant stays non-underlined, tooltip content keeps `font-sans`, and toast/iconography should use `@iconify/react` + `mingcute:*` instead of newly introduced `lucide-react` icons.
+  - Keep `components.json` `iconLibrary` as `lucide` for shadcn CLI compatibility, then replace generated CV/layout icon usage with `@iconify/react` + `mingcute:*` per project conventions.
+- Global stylesheet source of truth:
+  - Runtime global stylesheet is `app/globals.css`; do not re-introduce `styles/globals.css`.
+  - Theme tokens consumed by Tailwind (`--background`, `--foreground`, `--chart-1..5`, `--sidebar-*`, etc.) must be defined in `app/globals.css` for both light and dark modes.
 - Code-like text:
   - Keep mono font for `code`/`pre` via `Maple Mono`.
 - Awards/Honors iconography:

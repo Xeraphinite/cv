@@ -6,6 +6,8 @@
   - [ ] hide non-essential details in mobile view;
 - [ ] Hover experience:
   - [ ] add hover effects to URLs for better interactivity;
+- [ ] consistancy:
+  - [ ] unify the date format across the CV (e.g., "Sep 2023 - Jun 2026" or "2023.9 - 2026.6");
 
 ## typography
 
@@ -30,3 +32,8 @@
 ## content
 
 - [ ] Update project
+
+## perf
+
+- [ ] Optimize lighthouse perf.
+- [ ] Setup Chrome DevTools, Lighthouse etc.

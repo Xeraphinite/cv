@@ -35,7 +35,7 @@ export function AwardsSection({ data }: AwardsSectionProps) {
               key={`${award.name}-${award.institute}-${index}`}
               className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-1 sm:gap-x-3 gap-y-1 leading-relaxed text-foreground md:grid-cols-[11rem_minmax(0,1fr)]"
             >
-              <span className="order-2 justify-self-end whitespace-nowrap text-right font-sans text-sm font-bold text-muted-foreground md:order-1 md:justify-self-start md:text-right">
+              <span className="order-2 justify-self-end whitespace-nowrap text-right font-sans text-sm font-bold text-foreground/80 md:order-1 md:justify-self-start md:text-right">
                 {formatToYearMonth(award.date)}
               </span>
               <div className="order-1 md:order-2 min-w-0 space-y-1">

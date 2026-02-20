@@ -88,7 +88,7 @@ The project uses Tailwind CSS. Customize the styling by:
 
 - Modifying component classes
 - Updating the Tailwind config in `tailwind.config.ts`
-- Adding custom CSS in `styles/globals.css`
+- Adding custom CSS in `app/globals.css`
 
 ## 🛠️ Build & Deploy
 

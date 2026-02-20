@@ -1,7 +1,12 @@
 /* Typography aligned with xyndrome-cv */
 @import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap');
 
@@ -32,6 +37,11 @@
     --border: 0 0% 95%;
     --input: 0 0% 95%;
     --ring: 0 0% 25%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
     --radius: 8px;
 
     /* Apple-inspired design tokens */
@@ -69,6 +79,11 @@
     --border: 0 0% 10%;
     --input: 0 0% 10%;
     --ring: 0 0% 82%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
 
     /* Dark mode adjustments */
     --paper-texture: 0 0% 10%;
@@ -148,11 +163,30 @@
 
 /* Typography aligned with xyndrome-cv */
 .font-zh-sans,
-.font-zh-hant-sans,
-.font-ja-sans,
-.font-ko-sans,
 .font-en-sans {
-  font-family: "IBM Plex Sans", "Noto Sans SC", "Noto Serif SC", sans-serif;
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.font-zh-sans,
+.font-zh-hant-sans {
+  font-family: "IBM Plex Sans", "Noto Sans SC", "Noto Sans TC", "Source Han Sans SC", "Source Han Sans TC", "PingFang SC", "PingFang TC", "Microsoft YaHei", "Microsoft JhengHei", system-ui, sans-serif;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.font-ja-sans {
+  font-family: "IBM Plex Sans", "Noto Sans JP", "Source Han Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.font-ko-sans {
+  font-family: "IBM Plex Sans", "Noto Sans KR", "Source Han Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "Nanum Gothic", system-ui, sans-serif;
   font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
   line-height: 1.35;
   letter-spacing: 0;
@@ -167,7 +201,7 @@
 
 .font-zh-serif,
 .font-zh-hant-serif {
-  font-family: "Noto Serif SC", "Spectral", serif;
+  font-family: "Noto Serif SC", "Noto Serif TC", "Spectral", "Source Han Serif SC", "Source Han Serif TC", "Songti SC", "PMingLiU", serif;
   font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
   line-height: 1.45;
   letter-spacing: 0;
@@ -332,7 +366,7 @@
 }
 
 .paper-meta {
-  @apply text-xs text-muted-foreground/80 font-en-sans;
+  @apply text-xs text-foreground/80 font-en-sans;
   font-weight: 500;
   letter-spacing: 0;
   line-height: 1.4;
