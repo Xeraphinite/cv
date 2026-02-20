@@ -18,11 +18,13 @@ export interface SocialLinks {
 export interface Hero {
   name: string;
   enName?: string;
+  aliases?: string[];
   furiganaName?: string;
   furigana?: string;
   avatar: string;
   location: string;
   age: string;
+  position?: string;
   bio?: string;
   description?: string;
   social: SocialLinks;

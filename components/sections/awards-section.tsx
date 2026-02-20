@@ -23,28 +23,28 @@ export function AwardsSection({ data }: AwardsSectionProps) {
 
   return (
     <section className="paper-section">
-      <h2 className="paper-section-title !mb-1.5 sm:!mb-2 !pb-0.5 sm:!pb-1">
+      <h2 className="paper-section-title">
         <Icon icon="mingcute:medal-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
         {t('sections.awards')}
       </h2>
 
       <div className="paper-card">
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 sm:gap-2">
           {data.map((award, index) => (
             <div
               key={`${award.name}-${award.institute}-${index}`}
-              className="grid grid-cols-1 items-start gap-x-4 gap-y-1 leading-relaxed text-foreground md:grid-cols-[11rem_minmax(0,1fr)]"
+              className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-1 sm:gap-x-3 gap-y-1 leading-relaxed text-foreground md:grid-cols-[11rem_minmax(0,1fr)]"
             >
-              <span className="font-sans text-sm font-bold whitespace-nowrap text-muted-foreground md:text-right">
+              <span className="order-2 justify-self-end whitespace-nowrap text-right font-sans text-sm font-bold text-muted-foreground md:order-1 md:justify-self-start md:text-right">
                 {formatToYearMonth(award.date)}
               </span>
-              <div className="min-w-0">
+              <div className="order-1 md:order-2 min-w-0 space-y-1">
                 <p className="paper-body">
                   <span className="font-medium">{award.name}</span>
                   <span className="text-muted-foreground"> · {award.institute}</span>
                 </p>
                 {award.description ? (
-                  <p className="paper-body mt-1 text-sm text-muted-foreground">
+                  <p className="paper-body text-sm text-muted-foreground">
                     <MarkdownText content={award.description} inline />
                   </p>
                 ) : null}

@@ -3,7 +3,7 @@
 import { Icon } from '@iconify/react'
 import { useTranslations } from 'next-intl'
 import { MarkdownText } from '@/components/ui/markdown-text'
-import { formatToYearDotMonth } from '@/lib/date-format'
+import { formatToYearMonth } from '@/lib/date-format'
 
 interface NewsItem {
   title: string
@@ -39,6 +39,18 @@ export function NewsSection({ data }: NewsSectionProps) {
     })
     .map(({ item }) => item)
 
+  const renderYearMonthWithSup = (value: string) => {
+    const formatted = formatToYearMonth(value)
+    const match = formatted.match(/^(\d{4})(\d{2})$/)
+    if (!match) return <>{formatted}</>
+    return (
+      <>
+        <span>{match[1]}</span>
+        <sup className="relative top-[0.04em] ml-0.5 align-super text-[0.72em] font-semibold">{match[2]}</sup>
+      </>
+    )
+  }
+
   return (
     <section className="paper-section">
       <h2 className="paper-section-title">
@@ -49,14 +61,21 @@ export function NewsSection({ data }: NewsSectionProps) {
       <div className="space-y-1.5">
         {sortedItems.map((item, index) => (
           <div key={`${item.title}-${index}`} className="paper-body leading-relaxed text-foreground">
-            <div className="grid grid-cols-[minmax(6ch,auto)_minmax(0,1fr)] items-start gap-x-3">
-              <span className="font-sans text-sm font-bold whitespace-nowrap text-muted-foreground">{formatToYearDotMonth(item.date)}</span>
+            <div className="grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[minmax(6ch,auto)_minmax(0,1fr)] items-start gap-x-3 gap-y-0.5 md:gap-y-0">
+              <span className="order-2 justify-self-end whitespace-nowrap text-right font-sans text-sm font-bold text-muted-foreground md:order-1 md:justify-self-start md:text-left">
+                {renderYearMonthWithSup(item.date)}
+              </span>
               {item.url ? (
-                <a href={item.url} target="_blank" rel="noopener noreferrer" className="no-underline hover:no-underline">
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="order-1 md:order-2 md:col-start-2 no-underline hover:no-underline"
+                >
                   <MarkdownText content={item.summary || item.title || item.outlet} className="text-sm text-foreground/90" inline />
                 </a>
               ) : (
-                <MarkdownText content={item.summary || item.title || item.outlet} className="text-sm text-foreground/90" inline />
+                <MarkdownText content={item.summary || item.title || item.outlet} className="order-1 md:order-2 md:col-start-2 text-sm text-foreground/90" inline />
               )}
             </div>
           </div>

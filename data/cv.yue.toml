@@ -3,6 +3,7 @@ name = "鄭恪悠"
 enName = "Keyou (Key) Zheng"
 location = "廣州，廣東"
 age = ""
+position = "博士申請人，新手研究員，初級設計工程師"
 bio = "博士申請人，新手研究員，初級設計工程師"
 
 [[education]]

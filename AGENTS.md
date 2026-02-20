@@ -12,21 +12,32 @@
 - Use `mingcute:arrow-right-up-fill` to denote external links.
 - In Skills badges, do not show trailing external-direction icons; keep only leading skill icon/favicon and text with a small visual gap.
 - In language skills, prefer `twemoji:*` icons over mingcute and keep score/proficiency details in hover descriptions instead of badge text.
-- Do not underline URL links (including hover/focus/visited states).
+- Inline URL links rendered in text/Markdown should use a dim dashed underline by default, switch to solid underline on hover/focus, and append trailing `mingcute:arrow-right-up-fill`; keep non-inline section links unchanged.
 - Use `Spectral` as the default serif family and `IBM Plex Sans` as the default sans family across locales; keep locale-specific Noto/Source Han families as fallback.
 - For non-English serif text (`zh`, `zh-hant`, `ja`, `ko`), prefer locale-appropriate Noto Serif families as the primary serif stack.
 - Use `Maple Mono` as the monospace font family for code-like text.
 - Typography scale preference: section titles should use `text-xl`; general body text should default to `text-sm`; keep `text-xs` as the minimum size, and use `text-sm` for description/detail copy.
+- In rendered Markdown body text, keep paragraph-to-paragraph spacing clearly separated (use roomier vertical spacing between adjacent paragraphs).
 - Keep badges/chips compact: prefer small pill padding (`px-2 py-1` or tighter), smaller icon size, and tighter inter-chip spacing (`gap-1` to `gap-1.5`) unless explicitly requested otherwise.
+- When a roomier badge layout is requested, increase chip-group spacing to around `gap-2` and allow slightly wider chip padding (e.g. `px-2.5`) for readability.
 - Keep section spacing compact by default: tighten section title bottom spacing and reduce inter-item vertical gaps (`space-y`/`gap-y`) unless explicitly requested to be roomy.
+- When roomier section spacing is requested for large devices, increase `section[id]` wrapper spacing on `lg` (e.g., `lg:[&>section]:mb-8`) while keeping smaller breakpoints unchanged.
+- On mobile (`< sm`), prefer roomier layout defaults over dense packing; prioritize readable spacing and full-width content usage.
+- For timeline-style rows (date + content), use single-column stacking on mobile and switch to two-column alignment from `md` and up.
+- In section components, use bottom spacing (`mb-*`) for vertical rhythm; avoid top margins (`mt-*`) for section content spacing.
+- Keep `.paper-card` top padding removed (`pt-0`); use bottom padding only for card vertical spacing unless explicitly requested.
+- Keep `.paper-card` content unrounded; do not apply `rounded-*` classes to paper-card containers unless explicitly requested.
+- Apply per-section spacing on `section[id]` wrappers with responsive Tailwind `mb-*` classes (e.g., `mb-4 sm:mb-5 lg:mb-6`) instead of relying on shared CSS margins.
 - For Skills, Awards, Education, Experience, and Misc sections, keep section-title underline/border spacing especially tight (reduced title `mb`/`pb`).
 - In Education, keep both inter-item spacing and intra-item spacing compact by default.
+- In Education, hide item detail/highlight bullet lists by default; show only core metadata (time, institution, degree, supervisor).
 
 ## Reusable Project Knowledge
   - CV data source:
   - Primary source is TOML at `data/cv.toml`.
   - Default content locale (`en`) should resolve to `data/cv.toml` (not `data/cv.en.toml`).
   - Loader maps TOML to app `CVData` in `lib/load-cv-data.ts`.
+  - Use `profile.position` (or localized `hero.position` override) for the left-column hero role/title line; keep `profile.summary` / `hero.bio` for the right-column `About` content.
   - Hero Japanese ruby should use `profile.furigana_name` and `profile.furigana`; when values are `|`-separated, render aligned segmented ruby per chunk.
   - Furigana rendering should keep ruby text width-aligned to its base character/chunk (use normal ruby layout with `ruby-align`, avoid absolute-positioned `rt`).
   - In Japanese locale hero, show English name (`enName`) beneath the Japanese display name.
@@ -37,8 +48,9 @@
   - Main Skills category order should be: `Languages` -> `Programming Languages` -> `DevOps` -> `AI Engineering` -> `Web Dev & Design` -> `Backend Development`; `Misc` is rendered as a separate bottom section.
 - News section is stored at `[news.*]` in TOML with fields `title`, `outlet`, `date`, `summary`, `url`, mapped to `CVData.news`.
 - News section UI format is concise: each row shows only `date` + description text, and rows are sorted newest first by `date` (supports `YYYY` and `YYYY.M`).
-- News date display uses `yyyy.mm` when month exists (year-only stays `yyyy`), and this dot format is news-only.
+- News date display should follow the same unified time format as other sections (`yyyymm` when month exists; year-only as `yyyy`).
 - Publications section should use a concise, unified reading layout: year-first left column + compact right-column metadata (title, authors, venue, status/type/DOI) without heavy card styling.
+  - Publication owner-name highlighting should match against `profile.aliases` and normalized name variants (full name and initial-based forms) so the profile author is consistently bolded.
   - TOML text fields preserve Markdown syntax at load time and render through `components/ui/markdown-text.tsx` in UI sections.
 - Centralized app config:
   - `lib/config/app-config.ts` contains:
@@ -54,8 +66,8 @@
   - Keep English serif default on `Spectral`; keep non-English serif defaults on Noto Serif families.
   - Do not force xyndrome font-size values unless explicitly requested.
   - Tooltip text should default to `font-sans` via the shared shadcn tooltip UI component.
-  - Hover card panels should use a white background.
-  - Tooltip panels should use a white background.
+  - Hover card panels should use theme-aware popover surfaces (`bg-popover`/`text-popover-foreground`) so they support both light and dark mode.
+  - Tooltip panels should use theme-aware popover surfaces (`bg-popover`/`text-popover-foreground`) so they support both light and dark mode.
 - shadcn refresh policy:
   - After `shadcn` component refreshes, keep project conventions: `Button` link variant stays non-underlined, tooltip content keeps `font-sans`, and toast/iconography should use `@iconify/react` + `mingcute:*` instead of newly introduced `lucide-react` icons.
 - Code-like text:
@@ -63,6 +75,7 @@
 - Awards/Honors iconography:
   - Use `mingcute:medal-fill` for section headers and `mingcute:medal-line` for compact/stat contexts.
   - Awards/Honors section layout should stay concise and use Skills-like two-column alignment (fixed-width right-aligned left column + flexible content column).
+  - Keep year-to-item horizontal spacing tight in Awards rows (prefer smaller `gap-x` values).
 - Experience section styling:
   - Use `mingcute:telescope-fill` as the Experience section header icon.
   - Show experience time in a muted time column before role/company details.
@@ -70,10 +83,12 @@
 - Skills item component:
   - Use reusable `SkillItemBadge` in `components/sections/skill-item-badge.tsx` for skills chips.
   - Supports `text` (required), `icon` (optional), `url` (optional), `code` (optional), and `description` (optional).
+  - Before adding/updating Skills icon IDs, verify existence via Iconify API (Icones source), e.g. `https://api.iconify.design/{collection}.json?icons={icon-name}`, and only keep IDs that resolve under `icons`.
   - If `icon` is omitted and `url` exists, derive a favicon from the URL host.
   - When `code = true`, render with `font-mono`; otherwise use `font-sans` text.
   - If `description` exists, show concise hover content via shadcn `HoverCard`.
   - In main Skills section rows, use two-column alignment like resume.antfu.me: fixed-width right-aligned category label column + flexible content column.
+  - In main Skills section rows, when badges overflow the visible row width, show a trailing `...` affordance and expand to show all badges when clicked.
   - Keep Interests under skills data label `Misc`, and render it as a dedicated bottom `Misc` section instead of inside the main Skills section.
 - Projects data and presentation:
   - Use dedicated projects data in TOML under `[projects.*]` (default source) / `[[projects]]` (localized overrides), not fallback mock data.
@@ -95,6 +110,7 @@
   - On non-`lg`, use the sticky mobile navigator-style `CVHeader` UX (show/hide on scroll) for controls.
   - CV page shell should be one column by default, and at `lg:` use two columns with hero as column 1 and all other sections as column 2.
   - Right column should start with a dedicated biography block (`section#about`) rendered from `hero.bio`, before News and other sections.
+  - The `section#about` block title should use the locale's `navigation.about` label (e.g., "About"), not a separate "Biography" label.
   - On `lg`, first-column sticky panel should use viewport-height so the footer area sits at viewport bottom (with only small outer page margin), not content bottom.
   - On `lg`, keep no extra spacing between hero content and footer block.
   - In the hero card, keep content vertically stacked (no avatar/name same-row split on `lg`): Avatar -> Name -> Description/Bio -> Contacts.

@@ -64,11 +64,11 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
           </section>
 
           <div className="hidden lg:block">
-            <CVFooter compact showLocaleThemeControls className="mt-0 block max-w-none border-t-0" lastUpdated={lastUpdated} />
+            <CVFooter compact showLocaleThemeControls className="block max-w-none border-t-0" lastUpdated={lastUpdated} />
           </div>
         </div>
 
-        <div className="py-2 sm:py-4 lg:py-6">
+        <div className="py-2 sm:py-4 lg:py-6 [&>section]:mb-4 sm:[&>section]:mb-5 lg:[&>section]:mb-8 [&>section:last-child]:mb-0">
           {data.hero.bio && (
             <section id="about">
               <BioSection bio={data.hero.bio} />
@@ -105,7 +105,12 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
 
           {data.publications.length > 0 && (
             <section id="publications">
-              <PublicationsSection data={publicationsData} ownerName={data.hero.name} ownerEnName={data.hero.enName} />
+              <PublicationsSection
+                data={publicationsData}
+                ownerName={data.hero.name}
+                ownerEnName={data.hero.enName}
+                ownerAliases={data.hero.aliases}
+              />
             </section>
           )}
 

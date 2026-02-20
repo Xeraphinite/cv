@@ -30,9 +30,10 @@ interface PublicationsSectionProps {
   data: Publication[]
   ownerName?: string
   ownerEnName?: string
+  ownerAliases?: string[]
 }
 
-export function PublicationsSection({ data, ownerName, ownerEnName }: PublicationsSectionProps) {
+export function PublicationsSection({ data, ownerName, ownerEnName, ownerAliases = [] }: PublicationsSectionProps) {
   const t = useTranslations()
   
   if (!data || data.length === 0) return null
@@ -52,11 +53,51 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
     })
     .map(({ item }) => item)
 
+  const normalizeName = (value: string) => value
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/\p{Diacritic}/gu, '')
+    .replace(/[^\p{L}\p{N}]+/gu, '')
+
+  const buildNameVariants = (value?: string) => {
+    if (!value) return []
+    const trimmed = value.trim()
+    if (!trimmed) return []
+
+    const withoutParen = trimmed.replace(/\s*\([^)]*\)\s*/g, ' ').replace(/\s+/g, ' ').trim()
+    const tokens = withoutParen
+      .replace(/[.*]/g, '')
+      .split(/[\s,]+/)
+      .map((token) => token.trim())
+      .filter(Boolean)
+
+    const variants = new Set<string>([trimmed, withoutParen])
+    if (tokens.length >= 2) {
+      const first = tokens[0]
+      const last = tokens[tokens.length - 1]
+      variants.add(`${first} ${last}`)
+      variants.add(`${last} ${first}`)
+      variants.add(`${last} ${first.charAt(0)}`)
+      variants.add(`${first} ${last.charAt(0)}`)
+    }
+
+    return Array.from(variants).map(normalizeName).filter(Boolean)
+  }
+
+  const ownerNameVariants = new Set<string>([
+    ...buildNameVariants(ownerName),
+    ...buildNameVariants(ownerEnName),
+    ...ownerAliases.flatMap((alias) => buildNameVariants(alias)),
+  ])
+
+  const isOwnerAuthor = (author: string) => {
+    const variants = buildNameVariants(author)
+    return variants.some((variant) => ownerNameVariants.has(variant))
+  }
+
   const formatAuthors = (authors: string[]) => {
     return authors.map((author, index) => {
-      // Check if this author is the owner (either Chinese or English name)
-      const isOwner = author === ownerName || author === ownerEnName || 
-                     (ownerName && author.includes?.(ownerName)) || (ownerEnName && author.includes?.(ownerEnName))
+      const isOwner = isOwnerAuthor(author)
       
       return (
         <span key={author} className={isOwner ? "font-bold text-foreground " : "text-muted-foreground "}>
@@ -86,22 +127,25 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
       <div className="space-y-1.5">
         {sortedItems.map((publication, index) => (
           <div key={`${publication.title}-${index}`} className="paper-body leading-relaxed text-foreground">
-            <div className="grid grid-cols-[minmax(6ch,auto)_minmax(0,1fr)] items-start gap-x-3 gap-y-1">
-              <span className="font-sans text-sm font-bold whitespace-nowrap text-muted-foreground">
+            <div className="grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[minmax(6ch,auto)_minmax(0,1fr)] items-start gap-x-3 gap-y-0.5 md:gap-y-1">
+              <span className="order-2 justify-self-end whitespace-nowrap text-right font-sans text-sm font-bold text-muted-foreground md:order-1 md:justify-self-start md:text-left">
                 {formatToYearMonth(publication.year)}
               </span>
 
-              <div className="col-start-2 min-w-0">
+              <div className="order-1 md:order-2 md:col-start-2 min-w-0 space-y-0.5">
                 <h3 className="font-sans text-sm font-semibold leading-tight">
                   {publication.url ? (
                     <a
                       href={publication.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-start gap-1 no-underline hover:no-underline"
+                      className="group no-underline hover:no-underline"
                     >
-                      <MarkdownText content={publication.title} inline />
-                      <Icon icon="mingcute:arrow-right-up-fill" className="h-4 w-4 mt-0.5 shrink-0 text-muted-foreground" />
+                      <MarkdownText content={publication.title} className="inline" inline />
+                      <Icon
+                        icon="mingcute:arrow-right-up-fill"
+                        className="ml-1 inline h-3.5 w-3.5 align-[-0.08em] text-muted-foreground transition-transform transition-colors duration-150 group-hover:translate-x-0.5 group-hover:text-foreground"
+                      />
                     </a>
                   ) : (
                     <MarkdownText content={publication.title} inline />
@@ -109,14 +153,14 @@ export function PublicationsSection({ data, ownerName, ownerEnName }: Publicatio
                 </h3>
 
                 {publication.authors?.length ? (
-                  <p className="mt-0.5 text-sm text-muted-foreground">{formatAuthors(publication.authors)}</p>
+                  <p className="text-sm text-muted-foreground">{formatAuthors(publication.authors)}</p>
                 ) : null}
 
                 {formatPublicationMeta(publication) ? (
-                  <p className="mt-0.5 text-sm text-muted-foreground italic">{formatPublicationMeta(publication)}</p>
+                  <p className="text-sm text-muted-foreground italic">{formatPublicationMeta(publication)}</p>
                 ) : null}
 
-                <div className="mt-0.5 flex flex-wrap items-center gap-x-2 text-sm text-muted-foreground">
+                <div className="flex flex-wrap items-center gap-x-2 text-sm text-muted-foreground">
                   <span>{publication.type}</span>
                   <span>·</span>
                   <span>{publication.status}</span>

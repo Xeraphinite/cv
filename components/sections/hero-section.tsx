@@ -19,6 +19,7 @@ interface HeroSectionProps {
     avatar: string
     location: string
     age: string | number
+    position?: string
     bio?: string
     description?: string
     social: {
@@ -197,6 +198,35 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
     return undefined
   }
 
+  const renderWrappedPosition = (position: string) => {
+    const parts = position
+      .split(',')
+      .map((part) => part.trim())
+      .filter(Boolean)
+
+    if (parts.length <= 1) {
+      return (
+        <MarkdownText content={position} className={`${typographyClasses.body} !text-base !font-bold text-foreground/85`} />
+      )
+    }
+
+    return (
+      <p className={`${typographyClasses.body} !text-base !font-bold text-foreground/85`}>
+        <span className="inline-flex flex-wrap gap-x-1">
+          {parts.map((part, index) => {
+            const suffix = index < parts.length - 1 ? ',' : ''
+            return (
+              <span key={`${part}-${index}`} className="whitespace-nowrap">
+                {part}
+                {suffix}
+              </span>
+            )
+          })}
+        </span>
+      </p>
+    )
+  }
+
   const formatAge = (ageString: string | number) => {
     if (typeof ageString === 'string' && ageString.includes('-')) {
       const [year, month] = ageString.split('-')
@@ -250,21 +280,23 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
             />
           </div>
 
-          <div className="min-w-0">
-            <h1 className={`${typographyClasses.title} mb-2`}>{primaryName}</h1>
+          <div className="min-w-0 space-y-4">
+            <div>
+              <h1 className={`${typographyClasses.title} mb-2`}>{primaryName}</h1>
 
-            {secondaryName && (
-              <h2 className={`${typographyClasses.subtitle} text-muted-foreground/80`}>{secondaryName}</h2>
-            )}
+              {secondaryName && (
+                <h2 className={`${typographyClasses.subtitle} text-muted-foreground/80`}>{secondaryName}</h2>
+              )}
+            </div>
 
             {data.description && (
-              <MarkdownText content={data.description} className={`${typographyClasses.body} mt-3 text-primary/90`} />
+              <MarkdownText content={data.description} className={`${typographyClasses.body} text-primary/90`} />
             )}
 
-            {data.bio && <MarkdownText content={data.bio} className={`${typographyClasses.body} mt-4 text-foreground/85`} />}
+            {data.position && renderWrappedPosition(data.position)}
 
             <TooltipProvider delayDuration={120}>
-              <div className="mt-4 flex flex-col space-y-3">
+              <div className="flex flex-col space-y-3">
                 {data.location && (
                   <HeroLocation location={data.location} locale={locale} />
                 )}

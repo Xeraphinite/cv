@@ -3,6 +3,7 @@ name = "정커유"
 enName = "Keyou (Key) Zheng"
 location = "광둥성 광저우"
 age = ""
+position = "박사과정 지원자, 주니어 연구자, 주니어 디자인 엔지니어"
 bio = "박사과정 지원자, 주니어 연구자, 주니어 디자인 엔지니어"
 
 [[education]]

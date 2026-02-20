@@ -55,9 +55,11 @@ type TomlCVData = {
   profile?: {
     original_name?: string
     en_name?: string
+    aliases?: string[]
     furigana_name?: string
     furigana?: string
     location_label?: string
+    position?: string
     summary?: string
     contacts?: TomlContact[]
   }
@@ -321,11 +323,13 @@ function mapTomlToCVData(source: TomlCVData): CVData {
     hero: {
       name: cleanText(profile.original_name ?? profile.en_name ?? "Unknown"),
       enName: cleanText(profile.en_name ?? profile.original_name ?? "Unknown"),
+      aliases: (profile.aliases ?? []).map(cleanText).filter(Boolean),
       furiganaName: cleanText(profile.furigana_name ?? ""),
       furigana: cleanText(profile.furigana ?? ""),
       avatar: "/avatar-256.png",
       location: cleanText(profile.location_label ?? ""),
       age: "",
+      position: cleanText(profile.position ?? ""),
       bio: cleanText(profile.summary ?? ""),
       social: mapContactsToSocial(profile.contacts ?? []),
     },
@@ -616,6 +620,7 @@ function getSampleData(): CVData {
       avatar: "/placeholder.svg?height=128&width=128",
       location: "Sample Location",
       age: "1990-01",
+      position: "Sample Position",
       bio: "Sample bio text for demonstration purposes.",
       social: {
         github: "https://github.com/sample",

@@ -65,17 +65,17 @@ export function TalksSection({ data }: TalksSectionProps) {
         Talks & Presentations
       </h2>
 
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {talks.map((talk, index) => (
           <div key={`${talk.title}-${index}`} className="paper-card transition-shadow duration-300">
-            <div className="space-y-2">
+            <div className="space-y-1.5 sm:space-y-2">
               {/* Talk Header */}
-              <div className="flex items-start justify-between">
+              <div className="mb-1.5 sm:mb-2 flex items-start justify-between">
                 <div className="flex-1">
-                  <h3 className="paper-subtitle font-semibold text-foreground leading-tight">
+                  <h3 className="paper-subtitle mb-1.5 sm:mb-2 font-semibold leading-tight text-foreground">
                     <MarkdownText content={talk.title} inline />
                   </h3>
-                  <div className="flex items-center gap-2 mt-2">
+                  <div className="flex items-center gap-2">
                     <span className="paper-badge !bg-primary/10 !text-primary text-xs">
                       {talk.type ?? 'Talk'}
                     </span>
@@ -108,14 +108,14 @@ export function TalksSection({ data }: TalksSectionProps) {
               </div>
 
               {/* Event Information */}
-              <div className="space-y-1.5 !mt-2">
+              <div className="mb-2 sm:mb-3 space-y-1">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <div className="font-medium text-foreground">
                     {talk.event}
                   </div>
                 </div>
                 
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 paper-meta">
+                <div className="flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-1 paper-meta">
                   <div className="flex items-center gap-2">
                     <Icon icon="mingcute:calendar-line" className="h-4 w-4" />
                     <span className="font-sans text-sm font-bold text-muted-foreground">{formatDate(talk.date)}</span>
@@ -129,7 +129,7 @@ export function TalksSection({ data }: TalksSectionProps) {
 
               {/* Talk Description */}
               {talk.description && (
-                <MarkdownText content={talk.description} className="paper-body text-sm mt-3 pt-3 text-muted-foreground" />
+                <MarkdownText content={talk.description} className="paper-body border-t border-border/40 pt-3 text-sm text-muted-foreground" />
               )}
             </div>
           </div>

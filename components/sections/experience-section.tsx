@@ -40,7 +40,7 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
 
   return (
     <section className="paper-section">
-      <h2 className="paper-section-title !mb-1.5 sm:!mb-2 !pb-0.5 sm:!pb-1">
+      <h2 className="paper-section-title">
         <Icon icon="mingcute:telescope-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
         {t('sections.experience')}
       </h2>
@@ -48,28 +48,28 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
       <div className="space-y-4">
         {data.map((experience, index) => (
           <div key={`${experience.company}-${experience.position}-${index}`} className="paper-card transition-all duration-300">
-            <div className="grid grid-cols-[minmax(12ch,auto)_minmax(0,1fr)] items-start gap-x-4 gap-y-2">
-              <p className="paper-meta whitespace-nowrap font-sans !text-sm !font-bold leading-tight text-muted-foreground">
+            <div className="grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[minmax(12ch,auto)_minmax(0,1fr)] items-start gap-x-4 gap-y-2">
+              <p className="order-2 col-start-2 row-start-1 justify-self-end text-right paper-meta whitespace-nowrap font-sans !text-sm !font-bold leading-tight text-muted-foreground md:order-1 md:col-start-1 md:justify-self-start md:text-left">
                 {renderYearMonthWithSup(experience.startDate)} - {renderYearMonthWithSup(experience.endDate || 'Present')}
               </p>
-              <div className="min-w-0">
-                <h3 className="paper-subtitle">{experience.position}</h3>
-                <div className="flex items-center gap-2 paper-body mt-1">
+              <div className="order-1 col-start-1 row-start-1 min-w-0 md:order-2 md:col-start-2">
+                <h3 className="paper-subtitle mb-1">{experience.position}</h3>
+                <div className="paper-body flex items-center gap-2">
                   <Icon icon="mingcute:at-fill" className="h-4 w-4 text-muted-foreground" />
                   <span>{experience.company}</span>
                 </div>
               </div>
 
               {experience.summary && (
-                <MarkdownText content={experience.summary} className="paper-body col-start-2 text-sm text-muted-foreground" />
+                <MarkdownText content={experience.summary} className="paper-body col-span-2 md:col-span-1 md:col-start-2 text-sm text-muted-foreground" />
               )}
 
               {experience.highlights && experience.highlights.length > 0 && (
-                <div className="col-start-2">
+                <div className="col-span-2 md:col-span-1 md:col-start-2">
                   <ul className="space-y-1.5">
                     {experience.highlights.map((highlight, idx) => (
                       <li key={`${experience.company}-highlight-${idx}`} className="flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 bg-primary/40 rounded-full mt-2 shrink-0" />
+                        <div className="relative top-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/40" />
                         <MarkdownText content={highlight} className="paper-body text-sm text-muted-foreground" inline />
                       </li>
                     ))}

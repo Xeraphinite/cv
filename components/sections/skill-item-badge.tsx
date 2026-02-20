@@ -34,7 +34,7 @@ function SkillBadgeContent({ item }: SkillItemBadgeProps) {
     <Badge
       variant="secondary"
       className={cn(
-        'h-auto rounded-full border border-transparent bg-muted/60 px-2 py-1 text-xs font-medium text-muted-foreground transition-all duration-200 gap-1 hover:-translate-y-0.5 hover:border-border/60 hover:bg-muted/90 hover:text-foreground hover:shadow-sm',
+        'h-auto shrink-0 whitespace-nowrap rounded-full border border-transparent bg-muted/60 px-2.5 py-1 text-xs font-medium text-muted-foreground transition-all duration-200 gap-1.5 hover:-translate-y-0.5 hover:border-border/60 hover:bg-muted/90 hover:text-foreground hover:shadow-sm',
         item.code ? 'font-mono' : 'font-sans'
       )}
     >
@@ -62,12 +62,12 @@ export function SkillItemBadge({ item }: SkillItemBadgeProps) {
       href={item.url}
       target="_blank"
       rel="noreferrer"
-      className="inline-flex no-underline hover:no-underline focus-visible:no-underline visited:no-underline"
+      className="inline-flex shrink-0 whitespace-nowrap no-underline hover:no-underline focus-visible:no-underline visited:no-underline"
     >
       <SkillBadgeContent item={item} />
     </a>
   ) : (
-    <span className="inline-flex">
+    <span className="inline-flex shrink-0 whitespace-nowrap">
       <SkillBadgeContent item={item} />
     </span>
   )

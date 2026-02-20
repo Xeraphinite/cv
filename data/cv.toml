@@ -8,7 +8,16 @@ en_name = "Keyou (Key) Zheng"
 aliases = ["Zheng K."]
 location_label = "Guangzhou, Guangdong"
 show_icons = false
-summary = "Ph.D Applicant, Novice Researcher, Junior Design Engineer"
+position = "Ph.D Applicant, Novice Researcher, Junior Design Engineer"
+summary = """
+Hi, I'm **Keyou (Key) Zheng** - a graduate student, novice researcher, and junior design engineer. My current work sits at the intersection of large language models, parametric CAD, and HCI, with a focus on turning human design intent into reliable, machine-executable code.
+
+In graduate research, I build agentic workflows that close the loop between generation and verification. The system interprets compiler and geometry feedback from CAD environments, then iteratively repairs code toward engineering-valid results rather than surface-level correctness.
+
+My undergraduate training in computer science gave me strong technical fundamentals, while broad self-directed reading in design and human-centered computing shaped how I think about tools. I care about systems that are both technically rigorous and genuinely usable.
+
+Beyond the lab, I keep building through open-source projects, interface design practice, and writing. I value typography, clear interaction, and maintainable code, and I aim to grow into a crafter who can deliver thoughtful work across software, design, and research.
+"""
 contacts = [
   { icon = "email", label = "`keyouzheng0915@gmail.com`", url = "mailto:keyouzheng0915@gmail.com" },
   { icon = "website", label = "`keyzh.pages.dev`", url = "https://keyzh.pages.dev" },
@@ -30,20 +39,11 @@ splitExpectedLine = true
 institution = "Guangdong University of Technology"
 degree = "Mechanical Engineering, MEng."
 date = "Sep 2023 - Jun 2026 (Expected)"
-details = [
-  "*GPA:* 3.62/4.0 (Top 2.5%), Supervised by Prof. #smallcaps(\"Jiewu Leng\");",
-  "*Dissertation:* _Verifier-Driven Code-based Parametric CAD Generation with Large Language Models Agent_ (Ongoing).",
-]
 
-# Github: #link-with-icon(icon: github-line-icon, url:\"https://github.com/Xeraphinite/Mario-RL\", text:`Mario-RL`)
 [education.education-2]
 institution = "Guangdong University of Finance and Economics"
 degree = "Computer Science, BEng."
 date = "Sep 2019 - Jun 2023"
-details = [
-  "*GPA*: 3.5/4.0 (Top 5%);",
-  "*Thesis:* _Design and Implementation of a Mario Game Agent Based on Deep Reinforcement Learning_.",
-]
 
 
 [experience.exp-1]
@@ -114,7 +114,14 @@ published = "2025"
 metadata = "JCR Q1, IF: 6.6"
 DOI = "10.1016/j.asoc.2025.113920"
 pdf = "https://www.sciencedirect.com/science/article/pii/S1568494625012335"
-authors = ["Zheng K.", "Zhong Y.", "Su X.", "Leng J.*", "Liu Q.", "Chen X"]
+authors = [
+  "Keyou Zheng",
+  "Yuanwei Zhong",
+  "Xuyang Su",
+  "Jiewu Leng",
+  "Qiang Liu",
+  "Xin Chen",
+]
 tldr = ""
 
 [publications.publication-2]
@@ -126,14 +133,14 @@ metadata = "JCR Q1, IF: 11.4"
 DOI = "10.1016/j.rcim.2025.103076"
 pdf = "https://www.sciencedirect.com/science/article/pii/S0736584525001309"
 authors = [
-  "Leng J.",
-  "Zheng K.",
-  "Li R.",
-  "Chen C.",
-  "Wang B.",
-  "Liu Q.*",
-  "Chen X.",
-  "Shen W",
+  "Jiewu Leng",
+  "Keyou Zheng",
+  "Rongjie Li",
+  "Chong Chen",
+  "Baicun Wang",
+  "Qiang Liu",
+  "Xin Chen",
+  "Weiming Shen",
 ]
 tldr = ""
 
@@ -141,8 +148,8 @@ tldr = ""
 title = "Applied Soft Computing paper published"
 outlet = "Applied Soft Computing"
 date = "2025.9"
-summary = "One paper was published in Applied Soft Computing!"
-url = "https://www.sciencedirect.com/science/article/pii/S1568494625012335"
+summary = "One paper was published in [Applied Soft Computing](https://www.sciencedirect.com/science/article/pii/S1568494625012335)!"
+url = ""
 
 [news.news-2]
 title = "RCIM paper accepted and indexed"

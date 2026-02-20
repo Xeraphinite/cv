@@ -1,5 +1,6 @@
 'use client'
 
+import { Icon } from '@iconify/react'
 import ReactMarkdown, { type Components } from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { cn } from '@/lib/utils'
@@ -10,7 +11,7 @@ interface MarkdownTextProps {
   inline?: boolean
 }
 
-const LINK_CLASS_NAME = 'no-underline hover:no-underline focus-visible:no-underline visited:no-underline'
+const LINK_CLASS_NAME = 'inline-url-link'
 
 function getComponents(inline: boolean): Components {
   return {
@@ -23,7 +24,12 @@ function getComponents(inline: boolean): Components {
           target={isExternal ? '_blank' : target}
           rel={isExternal ? 'noopener noreferrer' : rel}
           {...props}
-        />
+        >
+          <span className="inline-flex items-center gap-1">
+            <span className="inline-url-link-text">{props.children}</span>
+            <Icon aria-hidden="true" icon="mingcute:arrow-right-up-fill" className="inline-url-link-icon h-3 w-3 shrink-0" />
+          </span>
+        </a>
       )
     },
     p: ({ children }) => (inline ? <span>{children}</span> : <p>{children}</p>),
@@ -38,9 +44,10 @@ export function MarkdownText({ content, className, inline = false }: MarkdownTex
   if (!content?.trim()) return null
 
   const Wrapper = inline ? 'span' : 'div'
+  const blockSpacingClass = inline ? '' : '[&_p+p]:mt-4'
 
   return (
-    <Wrapper className={cn(className)}>
+    <Wrapper className={cn(blockSpacingClass, className)}>
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={getComponents(inline)}>
         {content}
       </ReactMarkdown>
