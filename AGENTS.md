@@ -75,6 +75,7 @@
 - Global stylesheet source of truth:
   - Runtime global stylesheet is `app/globals.css`; do not re-introduce `styles/globals.css`.
   - Theme tokens consumed by Tailwind (`--background`, `--foreground`, `--chart-1..5`, `--sidebar-*`, etc.) must be defined in `app/globals.css` for both light and dark modes.
+  - Do not use CSS `@import` for Google Fonts in `app/globals.css`; load primary web fonts with `next/font` in `app/[locale]/layout.tsx` and reference via CSS variables.
 - Code-like text:
   - Keep mono font for `code`/`pre` via `Maple Mono`.
 - Awards/Honors iconography:

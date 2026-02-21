@@ -13,20 +13,10 @@ export default async function Home({
   const lastUpdated = await getCVLastUpdated(localeTyped)
 
   return (
-    <>
-      {/* Preload critical images for better LCP */}
-      <link
-        rel="preload"
-        as="image"
-        href={cvData.hero.avatar}
-        fetchPriority="high"
-      />
-      
-      <main className="min-h-screen bg-background">
-        <div className="flex justify-center p-0">
-          <CV data={cvData} locale={locale} lastUpdated={lastUpdated} />
-        </div>
-      </main>
-    </>
+    <main className="min-h-screen bg-background">
+      <div className="flex justify-center p-0">
+        <CV data={cvData} locale={locale} lastUpdated={lastUpdated} />
+      </div>
+    </main>
   )
 }

@@ -3,6 +3,7 @@ import "../globals.css"
 import { notFound } from 'next/navigation'
 import { getMessages } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
+import { IBM_Plex_Sans, Spectral } from 'next/font/google'
 import { getDirection } from '@/lib/i18n-utils'
 import { type Locale, locales } from '@/i18n'
 import { appConfig } from '@/lib/config/app-config'
@@ -11,6 +12,20 @@ import { CVFooter } from '@/components/layout/cv-footer'
 import { ThemeProvider } from "@/components/theme-provider"
 import { LocaleDetector } from '@/components/layout/locale-detector'
 import { getCVLastUpdated } from '@/lib/load-cv-data'
+
+const spectral = Spectral({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+  variable: '--font-spectral',
+})
+
+const ibmPlexSans = IBM_Plex_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-ibm-plex-sans',
+})
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
@@ -92,11 +107,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={localeTyped} dir={direction} suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-      </head>
-      <body>
+      <body className={`${spectral.variable} ${ibmPlexSans.variable}`}>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider 
             attribute="class" 
