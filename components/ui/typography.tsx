@@ -165,7 +165,7 @@ export function Quote({ children, author, locale, className }: QuoteProps) {
   const typographyClasses = getTypographyClasses(locale)
   
   return (
-    <blockquote className={cn(typographyClasses.body, 'border-l-4 border-primary/20 pl-6 italic', className)}>
+    <blockquote className={cn(typographyClasses.body, 'border-primary/20 border-l-4 pl-6 italic', className)}>
       {children}
       {author && (
         <footer className={cn(typographyClasses.meta, 'mt-2 not-italic')}>

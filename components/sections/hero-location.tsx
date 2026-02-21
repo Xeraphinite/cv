@@ -63,8 +63,8 @@ export function HeroLocation({ location, locale }: HeroLocationProps) {
                 <Icon icon="mingcute:mortarboard-fill" className="h-6 w-6 text-white" />
               </div>
               <div className="space-y-1">
-                <p className="text-lg leading-none text-foreground">学校</p>
-                <p className="text-sm leading-none text-muted-foreground">Guangdong</p>
+                <p className="text-foreground text-lg leading-none">学校</p>
+                <p className="text-muted-foreground text-sm leading-none">Guangdong</p>
               </div>
             </div>
           </div>

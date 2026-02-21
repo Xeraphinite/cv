@@ -68,7 +68,7 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
           </div>
         </div>
 
-        <div className="py-2 sm:py-4 lg:py-6 [&>section]:mb-4 sm:[&>section]:mb-5 lg:[&>section]:mb-8 [&>section:last-child]:mb-0">
+        <div className="py-2 sm:py-4 lg:py-6 [&>section:last-child]:mb-0 [&>section]:mb-4 sm:[&>section]:mb-5 lg:[&>section]:mb-8">
           {data.hero.bio && (
             <section id="about">
               <BioSection bio={data.hero.bio} />

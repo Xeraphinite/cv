@@ -56,7 +56,7 @@ export function CVControls({ bare = false, className, showHome = true }: CVContr
       <div className="flex items-center justify-between gap-2">
         {showHome ? (
           <Link href="/" className="flex items-center" aria-label="Home">
-            <Button variant="ghost" size="sm" className="h-8 w-8 p-0 hover:bg-muted/50">
+            <Button variant="ghost" size="sm" className="h-8 w-8 p-0 hover:bg-muted/50" aria-label="Home">
               <Icon icon="mingcute:home-1-line" className="h-4 w-4" />
             </Button>
           </Link>

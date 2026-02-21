@@ -100,14 +100,14 @@ export function CVFooter({ className, compact = false, showLocaleThemeControls =
   return (
     <footer
       className={clsx(
-        'mx-auto mt-12 max-w-2xl border-t border-border/30 bg-background/60 backdrop-blur-sm',
+        'mx-auto mt-12 max-w-2xl border-border/30 border-t bg-background/60 backdrop-blur-sm',
         className
       )}
     >
       <TooltipProvider delayDuration={120}>
         <div
           className={clsx(
-            'px-4 text-xs text-foreground/80',
+            'px-4 text-foreground/80 text-xs',
             compact ? 'pt-0 pb-2' : 'pt-6 pb-3'
           )}
         >

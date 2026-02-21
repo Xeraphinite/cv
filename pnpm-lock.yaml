@@ -181,8 +181,8 @@ importers:
         version: 3.25.67
     devDependencies:
       '@biomejs/biome':
-        specifier: 2.0.1
-        version: 2.0.1
+        specifier: 2.4.2
+        version: 2.4.2
       '@iconify-json/academicons':
         specifier: ^1.2.2
         version: 1.2.2
@@ -201,6 +201,9 @@ importers:
       '@types/react-dom':
         specifier: ^19
         version: 19.1.6(@types/react@19.1.8)
+      axe-core:
+        specifier: ^4.11.1
+        version: 4.11.1
       playwright:
         specifier: ^1.58.2
         version: 1.58.2
@@ -230,55 +233,55 @@ packages:
     resolution: {integrity: sha512-vbavdySgbTTrmFE+EsiqUTzlOr5bzlnJtUv9PynGCAKvfQqjIXbvFdumPM/GxMDfyuGMJaJAU6TO4zc1Jf1i8Q==}
     engines: {node: '>=6.9.0'}
 
-  '@biomejs/biome@2.0.1':
-    resolution: {integrity: sha512-x8z4AkHU5sEBJCu8MJF1A/SlNuLc+XvFKrx5huVZ2M4i6ABrgCU4CPB8ft3IIKqWrgGx/0fElOgFAbpYx3YYdQ==}
+  '@biomejs/biome@2.4.2':
+    resolution: {integrity: sha512-vVE/FqLxNLbvYnFDYg3Xfrh1UdFhmPT5i+yPT9GE2nTUgI4rkqo5krw5wK19YHBd7aE7J6r91RRmb8RWwkjy6w==}
     engines: {node: '>=14.21.3'}
     hasBin: true
 
-  '@biomejs/cli-darwin-arm64@2.0.1':
-    resolution: {integrity: sha512-n4EKhYSGkGStIa3NnRfd4lMqpyH3zNrIMQMFRtkIxzBKE/gIGyh1WGh04SlE88TQW/w/dJ0PfngxKybWcSnZ0g==}
+  '@biomejs/cli-darwin-arm64@2.4.2':
+    resolution: {integrity: sha512-3pEcKCP/1POKyaZZhXcxFl3+d9njmeAihZ17k8lL/1vk+6e0Cbf0yPzKItFiT+5Yh6TQA4uKvnlqe0oVZwRxCA==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [darwin]
 
-  '@biomejs/cli-darwin-x64@2.0.1':
-    resolution: {integrity: sha512-ZJqCAoXd0/FH8GiGGWYj7z0iZ2UeG/SKTBbNitrXbFtUlhMiVcbTpLmU2Id3d1+GI4DspZTIsdn1wvJgh7GITw==}
+  '@biomejs/cli-darwin-x64@2.4.2':
+    resolution: {integrity: sha512-P7hK1jLVny+0R9UwyGcECxO6sjETxfPyBm/1dmFjnDOHgdDPjPqozByunrwh4xPKld8sxOr5eAsSqal5uKgeBg==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [darwin]
 
-  '@biomejs/cli-linux-arm64-musl@2.0.1':
-    resolution: {integrity: sha512-6Hp9XGEc7h8VnoCxGyOFpo8JTZ3bTLmtTWcAbpcxGafqEnLn4VLtc9jqGvifB8JGvua1coM/68JD1WgemIkblA==}
+  '@biomejs/cli-linux-arm64-musl@2.4.2':
+    resolution: {integrity: sha512-/x04YK9+7erw6tYEcJv9WXoBHcULI/wMOvNdAyE9S3JStZZ9yJyV67sWAI+90UHuDo/BDhq0d96LDqGlSVv7WA==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [linux]
 
-  '@biomejs/cli-linux-arm64@2.0.1':
-    resolution: {integrity: sha512-UhPGF07fM0tjM9rWNTu/3YDTVuXEjdgkPz6EM0Txl0Urh+7xVmXI6vSju3Iuy0huz4BDQFF842uWJZE/aQx29g==}
+  '@biomejs/cli-linux-arm64@2.4.2':
+    resolution: {integrity: sha512-DI3Mi7GT2zYNgUTDEbSjl3e1KhoP76OjQdm8JpvZYZWtVDRyLd3w8llSr2TWk1z+U3P44kUBWY3X7H9MD1/DGQ==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [linux]
 
-  '@biomejs/cli-linux-x64-musl@2.0.1':
-    resolution: {integrity: sha512-avMAe7WJLfGkzcoanYBZIyhQ3Vq29Km2RJejIitsEewXqdO39KL3HLJQs6ZNAcIeAo3n31Auuna22WIxlIdZUw==}
+  '@biomejs/cli-linux-x64-musl@2.4.2':
+    resolution: {integrity: sha512-wbBmTkeAoAYbOQ33f6sfKG7pcRSydQiF+dTYOBjJsnXO2mWEOQHllKlC2YVnedqZFERp2WZhFUoO7TNRwnwEHQ==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [linux]
 
-  '@biomejs/cli-linux-x64@2.0.1':
-    resolution: {integrity: sha512-d8B1hWBm9Eu0xMgcovlahTnFUJJK5SkskrgubhtbswbS9HsZPp8QUxfIMA75Kzgb/6so0bP60UPTclhCRzEg6Q==}
+  '@biomejs/cli-linux-x64@2.4.2':
+    resolution: {integrity: sha512-GK2ErnrKpWFigYP68cXiCHK4RTL4IUWhK92AFS3U28X/nuAL5+hTuy6hyobc8JZRSt+upXt1nXChK+tuHHx4mA==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [linux]
 
-  '@biomejs/cli-win32-arm64@2.0.1':
-    resolution: {integrity: sha512-KgFdVITwFZ7R9H5viW5dFW+dQbqDzB9NqqZ0u8zKQ/Gh815zEqQF23Cvd9JKGafiIPjGKQ2CFQIyJaMbLGIrqw==}
+  '@biomejs/cli-win32-arm64@2.4.2':
+    resolution: {integrity: sha512-k2uqwLYrNNxnaoiW3RJxoMGnbKda8FuCmtYG3cOtVljs3CzWxaTR+AoXwKGHscC9thax9R4kOrtWqWN0+KdPTw==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [win32]
 
-  '@biomejs/cli-win32-x64@2.0.1':
-    resolution: {integrity: sha512-psas4NrCIlLIUb+KgJ47vT5OJM77StOeoGZMD36vJvtDBlmAy4bxQwz0448gC28H77aASXxj+7eKd4nyrLsvWg==}
+  '@biomejs/cli-win32-x64@2.4.2':
+    resolution: {integrity: sha512-9ma7C4g8Sq3cBlRJD2yrsHXB1mnnEBdpy7PhvFrylQWQb4PoyCmPucdX7frvsSBQuFtIiKCrolPl/8tCZrKvgQ==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [win32]
@@ -1798,6 +1801,10 @@ packages:
     peerDependencies:
       postcss: ^8.1.0
 
+  axe-core@4.11.1:
+    resolution: {integrity: sha512-BASOg+YwO2C+346x3LZOeoovTIoTrRqEsqMa6fmfAV0P+U9mFr9NsyOEpiYvFjbc64NMrSswhV50WdXzdb/Z5A==}
+    engines: {node: '>=4'}
+
   bail@2.0.2:
     resolution: {integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==}
 
@@ -3027,39 +3034,39 @@ snapshots:
 
   '@babel/runtime@7.27.6': {}
 
-  '@biomejs/biome@2.0.1':
+  '@biomejs/biome@2.4.2':
     optionalDependencies:
-      '@biomejs/cli-darwin-arm64': 2.0.1
-      '@biomejs/cli-darwin-x64': 2.0.1
-      '@biomejs/cli-linux-arm64': 2.0.1
-      '@biomejs/cli-linux-arm64-musl': 2.0.1
-      '@biomejs/cli-linux-x64': 2.0.1
-      '@biomejs/cli-linux-x64-musl': 2.0.1
-      '@biomejs/cli-win32-arm64': 2.0.1
-      '@biomejs/cli-win32-x64': 2.0.1
+      '@biomejs/cli-darwin-arm64': 2.4.2
+      '@biomejs/cli-darwin-x64': 2.4.2
+      '@biomejs/cli-linux-arm64': 2.4.2
+      '@biomejs/cli-linux-arm64-musl': 2.4.2
+      '@biomejs/cli-linux-x64': 2.4.2
+      '@biomejs/cli-linux-x64-musl': 2.4.2
+      '@biomejs/cli-win32-arm64': 2.4.2
+      '@biomejs/cli-win32-x64': 2.4.2
 
-  '@biomejs/cli-darwin-arm64@2.0.1':
+  '@biomejs/cli-darwin-arm64@2.4.2':
     optional: true
 
-  '@biomejs/cli-darwin-x64@2.0.1':
+  '@biomejs/cli-darwin-x64@2.4.2':
     optional: true
 
-  '@biomejs/cli-linux-arm64-musl@2.0.1':
+  '@biomejs/cli-linux-arm64-musl@2.4.2':
     optional: true
 
-  '@biomejs/cli-linux-arm64@2.0.1':
+  '@biomejs/cli-linux-arm64@2.4.2':
     optional: true
 
-  '@biomejs/cli-linux-x64-musl@2.0.1':
+  '@biomejs/cli-linux-x64-musl@2.4.2':
     optional: true
 
-  '@biomejs/cli-linux-x64@2.0.1':
+  '@biomejs/cli-linux-x64@2.4.2':
     optional: true
 
-  '@biomejs/cli-win32-arm64@2.0.1':
+  '@biomejs/cli-win32-arm64@2.4.2':
     optional: true
 
-  '@biomejs/cli-win32-x64@2.0.1':
+  '@biomejs/cli-win32-x64@2.4.2':
     optional: true
 
   '@cloudflare/kv-asset-handler@0.4.2': {}
@@ -4419,6 +4426,8 @@ snapshots:
       picocolors: 1.1.1
       postcss: 8.5.6
       postcss-value-parser: 4.2.0
+
+  axe-core@4.11.1: {}
 
   bail@2.0.2: {}
 

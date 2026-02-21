@@ -266,7 +266,7 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
     <header className="pt-0 pb-6 sm:pb-8">
       <div className="paper-card">
         <div className="grid grid-cols-1 gap-6">
-          <div className="relative h-28 w-28 sm:h-32 sm:w-32 paper-avatar">
+          <div className="paper-avatar relative h-28 w-28 sm:h-32 sm:w-32">
             <Image
               src={data.avatar || '/placeholder-user.jpg'}
               alt={`${data.name} - ${data.enName ?? data.name}`}
@@ -372,7 +372,7 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 
                 {data.age && (
                   <HoverTip tip={t('content.yearsOld')}>
-                    <span className={`inline-flex items-center gap-2 paper-contact-link ${typographyClasses.meta}`}>
+                    <span className={`paper-contact-link inline-flex items-center gap-2 ${typographyClasses.meta}`}>
                       <Icon icon="mingcute:calendar-line" className="h-4 w-4 text-primary/70" />
                       <span className={`font-medium ${fontClass}`}>{formatAge(data.age)}</span>
                     </span>

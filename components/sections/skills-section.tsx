@@ -49,7 +49,7 @@ function SkillsCategoryRow({ category, skills }: SkillsCategoryRowProps) {
       key={category}
       className="flex flex-nowrap items-start gap-3 md:grid md:grid-cols-[11rem_minmax(0,1fr)] md:items-start md:gap-x-4 md:gap-y-1"
     >
-      <h3 className="shrink-0 whitespace-nowrap text-sm font-semibold text-foreground md:text-right">{category}</h3>
+      <h3 className="shrink-0 whitespace-nowrap font-semibold text-foreground text-sm md:text-right">{category}</h3>
       <div ref={viewportRef} className="relative min-w-0">
         <div
           ref={skillTrackRef}
@@ -67,12 +67,12 @@ function SkillsCategoryRow({ category, skills }: SkillsCategoryRowProps) {
           <button
             type="button"
             onClick={() => setIsExpanded(true)}
-            className="absolute right-0 top-0 inline-flex h-full items-center bg-gradient-to-l from-background via-background/95 to-transparent pl-6"
+            className="absolute top-0 right-0 inline-flex h-full items-center bg-gradient-to-l from-background via-background/95 to-transparent pl-6"
             aria-label={`Show more ${category} skills`}
           >
             <Badge
               variant="secondary"
-              className="h-auto rounded-full border border-border/50 bg-muted px-2 py-1 text-xs font-medium text-foreground/90"
+              className="h-auto rounded-full border border-border/50 bg-muted px-2 py-1 font-medium text-foreground/90 text-xs"
             >
               ...
             </Badge>

@@ -61,7 +61,7 @@ export function TalksSection({ data }: TalksSectionProps) {
   return (
     <section className="paper-section">
       <h2 className="paper-section-title">
-        <Icon icon="mingcute:mic-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
+        <Icon icon="mingcute:mic-fill" className="mr-3 inline-block size-[1em] align-[-0.12em] text-primary" />
         Talks & Presentations
       </h2>
 
@@ -70,9 +70,9 @@ export function TalksSection({ data }: TalksSectionProps) {
           <div key={`${talk.title}-${index}`} className="paper-card transition-shadow duration-300">
             <div className="space-y-1.5 sm:space-y-2">
               {/* Talk Header */}
-              <div className="mb-1.5 sm:mb-2 flex items-start justify-between">
+              <div className="mb-1.5 flex items-start justify-between sm:mb-2">
                 <div className="flex-1">
-                  <h3 className="paper-subtitle mb-1.5 sm:mb-2 font-semibold leading-tight text-foreground">
+                  <h3 className="paper-subtitle mb-1.5 font-semibold text-foreground leading-tight sm:mb-2">
                     <MarkdownText content={talk.title} inline />
                   </h3>
                   <div className="flex items-center gap-2">
@@ -81,13 +81,13 @@ export function TalksSection({ data }: TalksSectionProps) {
                     </span>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 ml-4">
+                <div className="ml-4 flex items-center gap-2">
                   {talk.url && (
                     <a
                       href={talk.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-1.5 rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                      className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                       title="View Event"
                     >
                       <Icon icon="mingcute:arrow-right-up-fill" className="h-4 w-4" />
@@ -98,7 +98,7 @@ export function TalksSection({ data }: TalksSectionProps) {
                       href={talk.slides}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-1.5 rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                      className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                       title="View Slides"
                     >
                       <Icon icon="mingcute:arrow-right-up-fill" className="h-4 w-4" />
@@ -108,17 +108,17 @@ export function TalksSection({ data }: TalksSectionProps) {
               </div>
 
               {/* Event Information */}
-              <div className="mb-2 sm:mb-3 space-y-1">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <div className="mb-2 space-y-1 sm:mb-3">
+                <div className="flex items-center gap-2 text-muted-foreground text-sm">
                   <div className="font-medium text-foreground">
                     {talk.event}
                   </div>
                 </div>
                 
-                <div className="flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-1 paper-meta">
+                <div className="paper-meta flex flex-wrap items-center gap-x-3 gap-y-1 sm:gap-x-4">
                   <div className="flex items-center gap-2">
                     <Icon icon="mingcute:calendar-line" className="h-4 w-4" />
-                    <span className="font-sans text-sm font-bold text-foreground/80">{formatDate(talk.date)}</span>
+                    <span className="font-bold font-sans text-foreground/80 text-sm">{formatDate(talk.date)}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Icon icon="mingcute:map-pin-line" className="h-4 w-4" />
@@ -129,7 +129,7 @@ export function TalksSection({ data }: TalksSectionProps) {
 
               {/* Talk Description */}
               {talk.description && (
-                <MarkdownText content={talk.description} className="paper-body border-t border-border/40 pt-3 text-sm text-muted-foreground" />
+                <MarkdownText content={talk.description} className="paper-body border-border/40 border-t pt-3 text-muted-foreground text-sm" />
               )}
             </div>
           </div>

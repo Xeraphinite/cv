@@ -69,21 +69,21 @@ export function LocaleDetector() {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-10 h-10 bg-primary/10 rounded-xl">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
               <Icon icon="mingcute:globe-line" className="h-5 w-5 text-primary" />
             </div>
             <div>
               <DialogTitle className="text-left">
                 Language Preference Detected
               </DialogTitle>
-              <DialogDescription className="text-left mt-1">
+              <DialogDescription className="mt-1 text-left">
                 We detected that you might prefer {localeLabels[detectedLocale]}. Would you like to switch?
               </DialogDescription>
             </div>
           </div>
         </DialogHeader>
         
-        <div className="flex flex-col gap-3 mt-4">
+        <div className="mt-4 flex flex-col gap-3">
           <Button
             onClick={() => handleLocaleSelect(detectedLocale)}
             className="w-full justify-start gap-3"
@@ -104,7 +104,7 @@ export function LocaleDetector() {
           </Button>
         </div>
         
-        <div className="text-xs text-muted-foreground mt-4 text-center">
+        <div className="mt-4 text-center text-muted-foreground text-xs">
           You can always change the language using the switcher in the header.
         </div>
       </DialogContent>

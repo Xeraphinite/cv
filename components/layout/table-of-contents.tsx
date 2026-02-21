@@ -138,7 +138,7 @@ export function TableOfContents({ className }: TableOfContentsProps) {
           <Button
             variant="ghost"
             size="sm"
-            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium hover:bg-muted/50"
+            className="flex items-center gap-2 px-3 py-1.5 font-medium text-sm hover:bg-muted/50"
             aria-label="Table of contents"
           >
             <span className="max-w-32 truncate">{currentSectionData?.title || sections[0]?.title}</span>

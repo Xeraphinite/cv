@@ -101,19 +101,19 @@ export function ProfileSection({ data }: ProfileSectionProps) {
   return (
     <section className="paper-section">
       <h2 className="paper-section-title">
-        <Icon icon="mingcute:star-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
+        <Icon icon="mingcute:star-fill" className="mr-3 inline-block size-[1em] align-[-0.12em] text-primary" />
         Profile Highlights
       </h2>
 
       <div className="paper-card">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           {highlightItems.map((item) => (
-            <div key={item.label} className="flex flex-col items-center text-center p-2 rounded-lg transition-all duration-200 hover:bg-muted/80">
-              <div className="flex items-center justify-center w-12 h-12 mb-3 rounded-full bg-primary/10 text-primary">
+            <div key={item.label} className="flex flex-col items-center rounded-lg p-2 text-center transition-all duration-200 hover:bg-muted/80">
+              <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
                 <Icon icon={item.icon} className="h-6 w-6" />
               </div>
               <div className="space-y-1">
-                <div className="text-2xl font-bold text-foreground">
+                <div className="font-bold text-2xl text-foreground">
                   {item.value}
                 </div>
                 <div className="paper-meta">
@@ -134,7 +134,7 @@ export function ResearchInterestsSection({ data }: ResearchInterestsSectionProps
   return (
     <section className="paper-section">
       <h2 className="paper-section-title">
-        <Icon icon="mingcute:brain-line" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
+        <Icon icon="mingcute:brain-line" className="mr-3 inline-block size-[1em] align-[-0.12em] text-primary" />
         Research Interests
       </h2>
 

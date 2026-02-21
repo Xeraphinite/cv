@@ -26,7 +26,7 @@ export function HeroLocationMap({ workplaceLabel }: HeroLocationMapProps) {
       >
         <MapMarker longitude={MAP_MARKER_COORDINATES[0]} latitude={MAP_MARKER_COORDINATES[1]}>
           <MarkerContent />
-          <MarkerLabel position="bottom" className="relative top-2 text-xs text-foreground/85">
+          <MarkerLabel position="bottom" className="relative top-2 text-foreground/85 text-xs">
             {workplaceLabel}
           </MarkerLabel>
         </MapMarker>
@@ -37,8 +37,8 @@ export function HeroLocationMap({ workplaceLabel }: HeroLocationMapProps) {
             <Icon icon="mingcute:mortarboard-fill" className="h-4 w-4 text-white" />
           </div>
           <div className="space-y-1">
-            <p className="text-base leading-none text-foreground font-bold">学校</p>
-            <p className="text-sm leading-none text-muted-foreground">Guangdong</p>
+            <p className="font-bold text-base text-foreground leading-none">学校</p>
+            <p className="text-muted-foreground text-sm leading-none">Guangdong</p>
           </div>
         </div>
       </div>

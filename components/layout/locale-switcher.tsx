@@ -26,11 +26,11 @@ export default function LocaleSwitcher() {
   
   return (
     <div className="fixed top-6 right-6 z-50">
-      <div className="bg-white/90 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl p-2">
+      <div className="rounded-2xl border border-white/20 bg-white/90 p-2 shadow-2xl backdrop-blur-md">
         <div className="flex items-center gap-1">
           <div className="flex items-center gap-2 px-3 py-1">
             <Icon icon="mingcute:translate-2-line" className="h-4 w-4 text-slate-600" />
-            <span className="text-sm font-medium text-slate-600">
+            <span className="font-medium text-slate-600 text-sm">
               {t('language')}
             </span>
           </div>
@@ -45,7 +45,7 @@ export default function LocaleSwitcher() {
                   {/* Regular link for non-JS environments */}
                   <Link
                     href={href}
-                    className={`block px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-105 ${ isActive ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800' } ${isPending ? 'opacity-50 pointer-events-none' : ''}`}
+                    className={`block rounded-xl px-3 py-2 font-medium text-sm transition-all duration-200 hover:scale-105 ${ isActive ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800' } ${isPending ? 'pointer-events-none opacity-50' : ''}`}
                     title={`Switch to ${localeLabels[locale]}`}
                     aria-label={`Switch to ${localeLabels[locale]}`}
                     onClick={(e) => {
@@ -66,7 +66,7 @@ export default function LocaleSwitcher() {
       
       {/* Debug info in development */}
       {process.env.NODE_ENV === 'development' && (
-        <div className="mt-2 text-xs text-gray-500 bg-white/80 p-2 rounded">
+        <div className="mt-2 rounded bg-white/80 p-2 text-gray-500 text-xs">
           Current: {currentLocale} | Path: {pathname}
         </div>
       )}

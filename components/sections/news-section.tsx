@@ -46,7 +46,7 @@ export function NewsSection({ data }: NewsSectionProps) {
     return (
       <>
         <span>{match[1]}</span>
-        <sup className="relative top-[0.04em] ml-0.5 align-super text-[0.72em] font-semibold">{match[2]}</sup>
+        <sup className="relative top-[0.04em] ml-0.5 align-super font-semibold text-[0.72em]">{match[2]}</sup>
       </>
     )
   }
@@ -54,15 +54,15 @@ export function NewsSection({ data }: NewsSectionProps) {
   return (
     <section className="paper-section">
       <h2 className="paper-section-title">
-        <Icon icon="mingcute:news-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
+        <Icon icon="mingcute:news-fill" className="mr-3 inline-block size-[1em] align-[-0.12em] text-primary" />
         {t('sections.news')}
       </h2>
 
       <div className="space-y-1.5">
         {sortedItems.map((item, index) => (
-          <div key={`${item.title}-${index}`} className="paper-body leading-relaxed text-foreground">
-            <div className="grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[minmax(6ch,auto)_minmax(0,1fr)] items-start gap-x-3 gap-y-0.5 md:gap-y-0">
-              <span className="order-2 justify-self-end whitespace-nowrap text-right font-sans text-sm font-bold text-foreground/80 md:order-1 md:justify-self-start md:text-left">
+          <div key={`${item.title}-${index}`} className="paper-body text-foreground leading-relaxed">
+            <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-0.5 md:grid-cols-[minmax(6ch,auto)_minmax(0,1fr)] md:gap-y-0">
+              <span className="order-2 justify-self-end whitespace-nowrap text-right font-bold font-sans text-foreground/80 text-sm md:order-1 md:justify-self-start md:text-left">
                 {renderYearMonthWithSup(item.date)}
               </span>
               {item.url ? (
@@ -70,12 +70,12 @@ export function NewsSection({ data }: NewsSectionProps) {
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="order-1 md:order-2 md:col-start-2 no-underline hover:no-underline"
+                  className="order-1 no-underline hover:no-underline md:order-2 md:col-start-2"
                 >
-                  <MarkdownText content={item.summary || item.title || item.outlet} className="text-sm text-foreground/90" inline />
+                  <MarkdownText content={item.summary || item.title || item.outlet} className="text-foreground/90 text-sm" inline />
                 </a>
               ) : (
-                <MarkdownText content={item.summary || item.title || item.outlet} className="order-1 md:order-2 md:col-start-2 text-sm text-foreground/90" inline />
+                <MarkdownText content={item.summary || item.title || item.outlet} className="order-1 text-foreground/90 text-sm md:order-2 md:col-start-2" inline />
               )}
             </div>
           </div>

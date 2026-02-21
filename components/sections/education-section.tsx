@@ -24,7 +24,7 @@ export function EducationSection({ data, config }: EducationSectionProps) {
     return (
       <>
         <span>{match[1]}</span>
-        <sup className="relative top-[0.04em] ml-0.5 align-super text-[0.7em] font-semibold">{match[2]}</sup>
+        <sup className="relative top-[0.04em] ml-0.5 align-super font-semibold text-[0.7em]">{match[2]}</sup>
       </>
     )
   }
@@ -56,7 +56,7 @@ export function EducationSection({ data, config }: EducationSectionProps) {
   return (
     <section className="paper-section">
       <h2 className="paper-section-title">
-        <Icon icon="mingcute:mortarboard-fill" className="size-[1em] mr-3 inline-block align-[-0.12em] text-primary" />
+        <Icon icon="mingcute:mortarboard-fill" className="mr-3 inline-block size-[1em] align-[-0.12em] text-primary" />
         {tSection('education')}
       </h2>
 
@@ -65,8 +65,8 @@ export function EducationSection({ data, config }: EducationSectionProps) {
           const endDateParts = splitExpectedLabel(education.endDate)
           return (
             <div key={`${education.institution}-${education.degree}-${index}`} className="paper-card transition-all duration-300">
-              <div className="grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[minmax(12ch,auto)_minmax(0,1fr)] items-start gap-x-4 gap-y-1.5 md:gap-y-1">
-                <p className="order-2 justify-self-end text-right paper-meta font-sans !text-sm !font-bold leading-tight text-foreground/80 md:order-1 md:justify-self-start md:text-left">
+              <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-4 gap-y-1.5 md:grid-cols-[minmax(12ch,auto)_minmax(0,1fr)] md:gap-y-1">
+                <p className="paper-meta !text-sm !font-bold order-2 justify-self-end text-right font-sans text-foreground/80 leading-tight md:order-1 md:justify-self-start md:text-left">
                   <span className="block whitespace-nowrap">
                     {renderYearMonthWithSup(education.startDate)} - {renderYearMonthWithSup(endDateParts.main)}
                   </span>
@@ -86,7 +86,7 @@ export function EducationSection({ data, config }: EducationSectionProps) {
                   </div>
 
                   {/* Duration and Supervisor */}
-                  <div className="flex flex-wrap gap-x-4 gap-y-1 paper-meta">
+                  <div className="paper-meta flex flex-wrap gap-x-4 gap-y-1">
                     {education.supervisor && (
                       <div className="flex items-center gap-2">
                         <Icon icon="mingcute:user-3-line" className="h-4 w-4" />
