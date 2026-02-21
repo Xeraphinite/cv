@@ -72,7 +72,7 @@ function SkillsCategoryRow({ category, skills }: SkillsCategoryRowProps) {
           >
             <Badge
               variant="secondary"
-              className="h-auto rounded-full border border-border/50 bg-muted/80 px-2 py-1 text-xs font-medium text-muted-foreground"
+              className="h-auto rounded-full border border-border/50 bg-muted px-2 py-1 text-xs font-medium text-foreground/90"
             >
               ...
             </Badge>

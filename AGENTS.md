@@ -66,6 +66,7 @@
   - Keep the configured font families (`Spectral`, `IBM Plex Sans`, `Noto Serif SC`, `Maple Mono`) with locale-specific CJK fallbacks.
   - Keep English serif default on `Spectral`; keep non-English serif defaults on Noto Serif families.
   - Do not force xyndrome font-size values unless explicitly requested.
+  - Keep readable WCAG-friendly contrast for muted UI text: avoid using `text-muted-foreground` on compact badges/chips and dense metadata rows over muted backgrounds; prefer stronger `text-foreground/80+` tones there.
   - Tooltip text should default to `font-sans` via the shared shadcn tooltip UI component.
   - Hover card panels should use theme-aware popover surfaces (`bg-popover`/`text-popover-foreground`) so they support both light and dark mode.
   - Tooltip panels should use theme-aware popover surfaces (`bg-popover`/`text-popover-foreground`) so they support both light and dark mode.

@@ -34,7 +34,7 @@ function SkillBadgeContent({ item }: SkillItemBadgeProps) {
     <Badge
       variant="secondary"
       className={cn(
-        'h-auto shrink-0 whitespace-nowrap rounded-full border border-transparent bg-muted/60 px-2.5 py-1 text-xs font-medium text-muted-foreground transition-all duration-200 gap-1.5 hover:-translate-y-0.5 hover:border-border/60 hover:bg-muted/90 hover:text-foreground hover:shadow-sm',
+        'h-auto shrink-0 whitespace-nowrap rounded-full border border-transparent bg-muted/80 px-2.5 py-1 text-xs font-medium text-foreground/90 transition-all duration-200 gap-1.5 hover:-translate-y-0.5 hover:border-border/60 hover:bg-muted hover:text-foreground hover:shadow-sm',
         item.code ? 'font-mono' : 'font-sans'
       )}
     >

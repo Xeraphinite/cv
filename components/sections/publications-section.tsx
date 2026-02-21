@@ -100,7 +100,7 @@ export function PublicationsSection({ data, ownerName, ownerEnName, ownerAliases
       const isOwner = isOwnerAuthor(author)
       
       return (
-        <span key={author} className={isOwner ? "font-bold text-foreground " : "text-muted-foreground "}>
+        <span key={author} className={isOwner ? "font-bold text-foreground " : "text-foreground/80 "}>
           {author}
           {index < authors.length - 1 && ", "}
         </span>
@@ -144,7 +144,7 @@ export function PublicationsSection({ data, ownerName, ownerEnName, ownerAliases
                       <MarkdownText content={publication.title} className="inline" inline />
                       <Icon
                         icon="mingcute:arrow-right-up-fill"
-                        className="ml-1 inline h-3.5 w-3.5 align-[-0.08em] text-muted-foreground transition-transform transition-colors duration-150 group-hover:translate-x-0.5 group-hover:text-foreground"
+                        className="ml-1 inline h-3.5 w-3.5 align-[-0.08em] text-foreground/70 transition-transform transition-colors duration-150 group-hover:translate-x-0.5 group-hover:text-foreground"
                       />
                     </a>
                   ) : (
@@ -153,14 +153,14 @@ export function PublicationsSection({ data, ownerName, ownerEnName, ownerAliases
                 </h3>
 
                 {publication.authors?.length ? (
-                  <p className="text-sm text-muted-foreground">{formatAuthors(publication.authors)}</p>
+                  <p className="text-sm text-foreground/80">{formatAuthors(publication.authors)}</p>
                 ) : null}
 
                 {formatPublicationMeta(publication) ? (
-                  <p className="text-sm text-muted-foreground italic">{formatPublicationMeta(publication)}</p>
+                  <p className="text-sm text-foreground/80 italic">{formatPublicationMeta(publication)}</p>
                 ) : null}
 
-                <div className="flex flex-wrap items-center gap-x-2 text-sm text-muted-foreground">
+                <div className="flex flex-wrap items-center gap-x-2 text-sm text-foreground/80">
                   <span>{publication.type}</span>
                   <span>·</span>
                   <span>{publication.status}</span>

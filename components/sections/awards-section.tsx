@@ -41,10 +41,10 @@ export function AwardsSection({ data }: AwardsSectionProps) {
               <div className="order-1 md:order-2 min-w-0 space-y-1">
                 <p className="paper-body">
                   <span className="font-medium">{award.name}</span>
-                  <span className="text-muted-foreground"> · {award.institute}</span>
+                  <span className="text-foreground/80"> · {award.institute}</span>
                 </p>
                 {award.description ? (
-                  <p className="paper-body text-sm text-muted-foreground">
+                  <p className="paper-body text-sm text-foreground/80">
                     <MarkdownText content={award.description} inline />
                   </p>
                 ) : null}

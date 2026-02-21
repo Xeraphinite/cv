@@ -32,7 +32,7 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
               <div className="order-1 col-start-1 row-start-1 md:order-2 md:col-start-2 flex min-w-0 flex-wrap items-center gap-2">
                 <h3 className="font-sans text-sm font-semibold">{project.name}</h3>
                 {project.status ? (
-                  <Badge variant="secondary" className="rounded-full border border-border/60 bg-muted/70 px-2 py-0 font-sans text-xs font-medium text-muted-foreground">
+                  <Badge variant="secondary" className="rounded-full border border-border/60 bg-muted/80 px-2 py-0 font-sans text-xs font-medium text-foreground/85 hover:bg-secondary/80">
                     {project.status}
                   </Badge>
                 ) : null}
