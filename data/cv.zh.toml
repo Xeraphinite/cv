@@ -88,7 +88,8 @@ summary = "一篇论文发表于 Applied Soft Computing。"
 [[news]]
 title = "RCIM 论文录用并收录"
 date = "2025.6"
-summary = "一篇论文被 RCIM 录用。"
+summary = "一篇论文被 [Robotics and Computer-Integrated Manufacturing](https://www.sciencedirect.com/science/article/pii/S0736584525001309) 录用。"
+url = ""
 
 [[awards]]
 name = "国家奖学金"

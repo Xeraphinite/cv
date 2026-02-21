@@ -155,8 +155,8 @@ url = ""
 title = "RCIM paper accepted and indexed"
 outlet = "Robotics and Computer-Integrated Manufacturing"
 date = "2025.6"
-summary = "One paper was accepted by RCIM!"
-url = "https://www.sciencedirect.com/science/article/pii/S0736584525001309"
+summary = "One paper was accepted by [Robotics and Computer-Integrated Manufacturing](https://www.sciencedirect.com/science/article/pii/S0736584525001309)!"
+url = ""
 
 
 [skills.languages]

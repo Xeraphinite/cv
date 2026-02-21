@@ -1,28 +1,31 @@
-'use client'
+"use client";
 
-import { Icon } from '@iconify/react'
-import { useTranslations } from 'next-intl'
-import { MarkdownText } from '@/components/ui/markdown-text'
+import { Icon } from "@iconify/react";
+import { useTranslations } from "next-intl";
+import { MarkdownText } from "@/components/ui/markdown-text";
 
 interface BioSectionProps {
-  bio?: string
+	bio?: string;
 }
 
 export function BioSection({ bio }: BioSectionProps) {
-  const t = useTranslations()
+	const t = useTranslations();
 
-  if (!bio?.trim()) return null
+	if (!bio?.trim()) return null;
 
-  return (
-    <section className="paper-section">
-      <h2 className="paper-section-title">
-        <Icon icon="mingcute:user-3-line" className="mr-3 inline-block size-[1em] align-[-0.12em] text-primary" />
-        {t('navigation.about')}
-      </h2>
+	return (
+		<section className="paper-section">
+			<h2 className="paper-section-title">
+				<Icon
+					icon="mingcute:user-3-line"
+					className="mr-3 inline-block size-[1em] align-[-0.12em] text-primary"
+				/>
+				{t("navigation.about")}
+			</h2>
 
-      <div className="paper-body text-foreground leading-relaxed">
-        <MarkdownText content={bio} />
-      </div>
-    </section>
-  )
+			<div className="paper-body text-foreground leading-relaxed">
+				<MarkdownText className="text-base" content={bio} />
+			</div>
+		</section>
+	);
 }

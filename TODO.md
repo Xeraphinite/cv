@@ -17,6 +17,7 @@
 
 - [ ] Update `zh-CN`, `ja-JP` translations and typograhpy;
 - [ ] Add `zh-yue` and `ko-KR` translations;
+- [ ] Add language detector.
 
 ## visual
 
@@ -27,13 +28,14 @@
 
 - [ ] Update README.md with new project name, description, and usage instructions;
 - [ ] Add documentation for contributing, customization, and deployment;
+- [ ] Migrate Cloudflare deployment from `@cloudflare/next-on-pages` to OpenNext (`@opennextjs/cloudflare`) on Workers; use free `*.workers.dev` domain (or bind custom domain on Worker);
 - [ ] Create a changelog to track updates and changes;
 
 ## content
 
-- [ ] Update project
+- [ ] Update project content
 
 ## perf
 
-- [ ] Optimize lighthouse perf.
+- [x] Optimize lighthouse perf.
 - [ ] Setup Chrome DevTools, Lighthouse etc.

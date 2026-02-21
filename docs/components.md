@@ -44,17 +44,6 @@ Language switching component for internationalization.
 - Automatic locale detection from URL
 - Fallback to default locale
 
-### LocaleDetector (`components/layout/locale-detector.tsx`)
-
-Client-side locale detection and automatic redirection.
-
-**Props**: None
-
-**Features**:
-- Browser language detection
-- Automatic redirection to preferred language
-- Fallback handling
-
 ## Section Components
 
 ### CV (`components/sections/cv.tsx`)

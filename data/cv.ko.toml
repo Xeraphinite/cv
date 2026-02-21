@@ -88,7 +88,8 @@ summary = "Applied Soft Computing에 논문 1편이 게재되었습니다."
 [[news]]
 title = "RCIM 논문 채택 및 등재"
 date = "2025.6"
-summary = "RCIM에 논문 1편이 채택되었습니다."
+summary = "논문 1편이 [Robotics and Computer-Integrated Manufacturing](https://www.sciencedirect.com/science/article/pii/S0736584525001309)에 채택되었습니다."
+url = ""
 
 [[awards]]
 name = "국가장학금"

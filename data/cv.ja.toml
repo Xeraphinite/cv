@@ -88,7 +88,8 @@ summary = "Applied Soft Computing に論文 1 本が掲載されました。"
 [[news]]
 title = "RCIM 論文採択・収録"
 date = "2025.6"
-summary = "RCIM に論文 1 本が採択されました。"
+summary = "論文 1 本が [Robotics and Computer-Integrated Manufacturing](https://www.sciencedirect.com/science/article/pii/S0736584525001309) に採択されました。"
+url = ""
 
 [[awards]]
 name = "国家奨学金"

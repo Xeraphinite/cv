@@ -51,6 +51,11 @@
 - News section is stored at `[news.*]` in TOML with fields `title`, `outlet`, `date`, `summary`, `url`, mapped to `CVData.news`.
 - News section UI format is concise: each row shows only `date` + description text, and rows are sorted newest first by `date` (supports `YYYY` and `YYYY.M`).
 - News date display should follow the same unified time format as other sections (`yyyymm` when month exists; year-only as `yyyy`).
+- Keep the News section title icon (`mingcute:news-fill`) in the header.
+- In News rows, do not append trailing external-link icons for URL links.
+- Use `text-base` for About section content and News row description content.
+- Use `text-base` for Selected Projects title, Publications title, and Awards main item line.
+- For News items that need custom link labels, put links directly in `summary` Markdown and leave `url` empty.
 - Publications section should use a concise, unified reading layout: year-first left column + compact right-column metadata (title, authors, venue, status/type/DOI) without heavy card styling.
   - Publication owner-name highlighting should match against `profile.aliases` and normalized name variants (full name and initial-based forms) so the profile author is consistently bolded.
   - TOML text fields preserve Markdown syntax at load time and render through `components/ui/markdown-text.tsx` in UI sections.
@@ -61,6 +66,7 @@
     - CV data source settings
   - Active app locales are currently `en`, `zh`, and `ja`; keep `yue`/`ko` content and implementation files in repo for future re-enable.
   - Locale routing uses `as-needed` prefixing: default locale (`en`) is served on unprefixed routes (`/`), non-default locales use prefixes (e.g. `/zh`, `/ja`), and middleware locale auto-detection redirect is disabled.
+  - Do not use client-side locale detector prompts/modals or browser-language auto-switch; locale changes should happen only through explicit user actions (e.g., locale switcher/path).
 - App Router metadata:
   - In `app/` routes, do not use `next/head`; use the Metadata API and/or native `<head>` in layout files.
 - Typography policy:
