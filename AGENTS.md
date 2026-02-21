@@ -5,7 +5,7 @@
 - Always update `AGENTS.md` for any reusable knowledge or user preferences that should be followed across the project.
 - For UI/layout/style changes, always validate with Playwright before finalizing.
 - For UI/layout/style changes, also run an accessibility check (axe via Playwright) before finalizing.
-- CI/CD workflows live in `.github/workflows/`; CI must run `pnpm lint` and `pnpm build`, and Cloudflare CD deploys via `pnpm cf:deploy` on `main` when Cloudflare secrets are configured.
+- Use local Git pre-commit hooks (`husky` + `lint-staged`) instead of project CI/CD workflows; pre-commit must run Biome Tailwind class sorting/dedup lint and Biome formatting on staged files.
 
 ## User Preferences
 - Use `mingcute` icons for CV/UI iconography whenever an icon is needed.
