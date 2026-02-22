@@ -1,70 +1,75 @@
 {
-  "common": {
-    "language": "語言",
-    "loading": "載入中...",
-    "error": "錯誤",
-    "lastUpdated": "最後更新"
-  },
-  "navigation": {
-    "home": "主頁",
-    "about": "關於",
-    "contact": "聯絡"
-  },
-  "sections": {
-    "education": "教育背景",
-    "experience": "工作經驗",
-    "skills": "技能",
-    "awards": "獎項榮譽",
-    "publications": "學術發表",
-    "news": "新聞動態",
-    "misc": "雜項",
-    "talks": "演講發表",
-    "profileHighlights": "個人亮點",
-    "biography": "個人簡介",
-    "researchInterests": "研究興趣",
-    "selectedProjects": "精選項目",
-    "technicalSkills": "技術技能"
-  },
-  "labels": {
-    "supervisor": "導師",
-    "present": "現在",
-    "duration": "期間",
-    "location": "地點",
-    "position": "職位",
-    "company": "公司",
-    "date": "日期",
-    "description": "描述",
-    "in": "喺",
-    "expected": "預計",
-    "keyAchievements": "主要成就",
-    "publishedIn": "發表於",
-    "doi": "DOI",
-    "abstract": "摘要",
-    "featured": "精選",
-    "impactFactor": "影響因子",
-    "status": "狀態",
-    "type": "類型",
-    "venue": "場地",
-    "event": "活動",
-    "slides": "幻燈片"
-  },
-  "actions": {
-    "viewMore": "睇更多",
-    "download": "下載",
-    "print": "列印",
-    "share": "分享",
-    "downloadPDF": "下載PDF",
-    "viewProject": "睇項目",
-    "viewSource": "睇源碼",
-    "viewEvent": "睇活動",
-    "viewSlides": "睇幻燈片"
-  },
-  "content": {
-    "contact": "聯絡",
-    "yearsOld": "歲",
-    "publications": "發表",
-    "awards": "獎項",
-    "projects": "項目",
-    "gpa": "平均績點"
-  }
-} 
+	"common": {
+		"language": "語言",
+		"loading": "載入中...",
+		"error": "錯誤",
+		"lastUpdated": "最後更新"
+	},
+	"navigation": {
+		"home": "主頁",
+		"about": "關於",
+		"contact": "聯絡"
+	},
+	"sections": {
+		"education": "教育背景",
+		"experience": "工作經驗",
+		"skills": "技能",
+		"awards": "獎項榮譽",
+		"publications": "學術發表",
+		"news": "新聞動態",
+		"misc": "雜項",
+		"talks": "演講發表",
+		"profileHighlights": "個人亮點",
+		"biography": "個人簡介",
+		"researchInterests": "研究興趣",
+		"selectedProjects": "精選項目",
+		"technicalSkills": "技術技能"
+	},
+	"labels": {
+		"supervisor": "導師",
+		"present": "現在",
+		"duration": "期間",
+		"location": "地點",
+		"position": "職位",
+		"company": "公司",
+		"date": "日期",
+		"description": "描述",
+		"in": "喺",
+		"expected": "預計",
+		"keyAchievements": "主要成就",
+		"publishedIn": "發表於",
+		"doi": "DOI",
+		"abstract": "摘要",
+		"featured": "精選",
+		"impactFactor": "影響因子",
+		"status": "狀態",
+		"type": "類型",
+		"venue": "場地",
+		"event": "活動",
+		"slides": "幻燈片"
+	},
+	"actions": {
+		"viewMore": "睇更多",
+		"download": "下載",
+		"print": "列印",
+		"share": "分享",
+		"downloadPDF": "下載PDF",
+		"viewProject": "睇項目",
+		"viewSource": "睇源碼",
+		"viewEvent": "睇活動",
+		"viewSlides": "睇幻燈片"
+	},
+	"content": {
+		"contact": "聯絡",
+		"yearsOld": "歲",
+		"publications": "發表",
+		"awards": "獎項",
+		"projects": "項目",
+		"gpa": "平均績點"
+	},
+	"footer": {
+		"llmsTxt": "LLMs.txt",
+		"accessibilityStatement": "無障礙聲明",
+		"theme": "主題"
+	}
+}

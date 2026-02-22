@@ -116,8 +116,15 @@ export function CVFooter({
 	const footerLinks = [
 		{
 			href: "/llms.txt",
-			label: "LLMs.txt",
+			label: t("footer.llmsTxt"),
 			icon: "mingcute:ai-line",
+			isExternal: true,
+		},
+		{
+			href: createLocalizedPath("/accessibility", currentLocale || "en"),
+			label: t("footer.accessibilityStatement"),
+			icon: "mingcute:wheelchair-line",
+			isExternal: false,
 		},
 	];
 	const copyrightYear = useMemo(() => {
@@ -166,14 +173,25 @@ export function CVFooter({
 							{footerLinks.map((link) => (
 								<Tooltip key={link.href}>
 									<TooltipTrigger asChild>
-										<a
-											href={link.href}
-											className="flex items-center gap-1 transition-colors hover:text-foreground"
-											title={link.label}
-										>
-											<Icon icon={link.icon} className="h-3 w-3" />
-											<span>{link.label}</span>
-										</a>
+										{link.isExternal ? (
+											<a
+												href={link.href}
+												className="flex items-center gap-1 transition-colors hover:text-foreground"
+												title={link.label}
+											>
+												<Icon icon={link.icon} className="h-3 w-3" />
+												<span>{link.label}</span>
+											</a>
+										) : (
+											<Link
+												href={link.href}
+												className="flex items-center gap-1 transition-colors hover:text-foreground"
+												title={link.label}
+											>
+												<Icon icon={link.icon} className="h-3 w-3" />
+												<span>{link.label}</span>
+											</Link>
+										)}
 									</TooltipTrigger>
 									<TooltipContent side="top">
 										<span>{link.label}</span>
@@ -254,7 +272,7 @@ export function CVFooter({
 												</DropdownMenuTrigger>
 											</TooltipTrigger>
 											<TooltipContent side="top">
-												<span>Theme</span>
+												<span>{t("footer.theme")}</span>
 											</TooltipContent>
 										</Tooltip>
 										<DropdownMenuContent

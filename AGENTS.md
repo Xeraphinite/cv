@@ -62,7 +62,7 @@
 - Publications section should use a concise, unified reading layout: year-first left column + compact right-column metadata (title, authors, venue, status/type/DOI) without heavy card styling.
   - Publication owner-name highlighting should match against `profile.aliases` and normalized name variants (full name and initial-based forms) so the profile author is consistently bolded.
   - TOML text fields preserve Markdown syntax at load time and render through `components/ui/markdown-text.tsx` in UI sections.
-  - In `components/ui/markdown-text.tsx`, do not forward `react-markdown` internal props such as `node` to DOM elements (it causes unstable SSR/client markup and hydration mismatches).
+  - Keep `components/ui/markdown-text.tsx` on the lightweight in-house renderer path (links/lists/inline emphasis+code); avoid re-introducing heavy markdown parsers into the client bundle unless explicitly requested.
   - When rendering text via `MarkdownText`, do not wrap the same content with an outer `<a>` if the markdown may already contain links; avoid nested anchors to prevent SSR/client hydration mismatches.
   - For components rendered during SSR, do not use non-deterministic values (`Math.random()`, render-time `Date.now()`) in render paths; derive values from server props or use deterministic constants.
 - Centralized app config:
@@ -133,6 +133,7 @@
 - CV page shell should be one column by default, and at `lg:` use two columns with hero as column 1 and all other sections as column 2.
 - In the CV page shell, keep second-column overall vertical padding at `py-2 sm:py-4 lg:py-6`.
   - Right column should start with a dedicated biography block (`section#about`) rendered from `hero.bio`, before News and other sections.
+  - Right column section order should be: `about` -> `news` -> `projects` -> `publications` -> `experience` -> `skills` -> `awards` -> `misc`.
   - The `section#about` block title should use the locale's `navigation.about` label (e.g., "About"), not a separate "Biography" label.
   - On `lg`, first-column sticky panel should use viewport-height so the footer area sits at viewport bottom (with only small outer page margin), not content bottom.
   - On `lg`, keep no extra spacing between hero content and footer block.
@@ -170,11 +171,14 @@
   - Render footer copyright text on a second line below the metadata/controls row.
   - Keep footer bottom spacing compact (reduced bottom padding).
   - Use recency-based text tone for `lastUpdated`: freshest is darker/stronger, and it becomes dimmer as elapsed time increases.
-  - Footer links should include only `LLMs.txt` (no RSS/Sitemap links).
-  - Footer last-updated text, `LLMs.txt`, language control, and theme control should expose concise top-positioned shadcn `Tooltip` tips.
+  - Footer links should include `LLMs.txt` and an `Accessibility` statement link (no RSS/Sitemap links).
+  - Footer last-updated text, `LLMs.txt`, `Accessibility` link, language control, and theme control should expose concise top-positioned shadcn `Tooltip` tips.
   - On `lg`, do not show TOC in first-column bottom area.
   - On `lg`, place language and theme controls in footer immediately after `LLMs.txt`.
   - On `lg`, page shell container width should step up one Tailwind max-width class (`max-w-6xl` -> `lg:max-w-7xl`), while the left column should stay narrower (`lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)]`) and use top+bottom sticky anchoring (`lg:top-4`, `lg:bottom-4`) with near-full viewport height (`h-[calc(100vh-2rem)]`).
+- Accessibility statement page:
+  - Use a simple inline language switcher inspired by `muan.co` (text links with slash separators and `aria-current` on active locale), instead of a dropdown control.
+  - Statement body content should be authored in Markdown files under `data/accessibility/` (`statement.md` default, locale overrides like `statement.zh.md`, `statement.ja.md`) rather than hardcoded JSX.
 - Playwright output artifacts:
   - Save generated Playwright screenshots/artifacts under `output/playwright/` (not repo root).
   - Keep Playwright artifacts gitignored (`output/playwright/`, `playwright-report/`, `test-results/`, and `tmp-playwright-*.png`).

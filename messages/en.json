@@ -1,70 +1,75 @@
 {
-  "common": {
-    "language": "Language",
-    "loading": "Loading...",
-    "error": "Error",
-    "lastUpdated": "Updated"
-  },
-  "navigation": {
-    "home": "Home",
-    "about": "About",
-    "contact": "Contact"
-  },
-  "sections": {
-    "education": "Education",
-    "experience": "Experience",
-    "skills": "Skills",
-    "awards": "Awards & Honors",
-    "publications": "Publications",
-    "news": "News",
-    "misc": "Misc",
-    "talks": "Talks & Presentations",
-    "profileHighlights": "Profile Highlights",
-    "biography": "Biography",
-    "researchInterests": "Research Interests",
-    "selectedProjects": "Selected Projects",
-    "technicalSkills": "Technical Skills"
-  },
-  "labels": {
-    "supervisor": "Supervisor",
-    "present": "Present",
-    "duration": "Duration",
-    "location": "Location",
-    "position": "Position",
-    "company": "Company",
-    "date": "Date",
-    "description": "Description",
-    "in": "in",
-    "expected": "Expected",
-    "keyAchievements": "Key Achievements",
-    "publishedIn": "Published in",
-    "doi": "DOI",
-    "abstract": "Abstract",
-    "featured": "Featured",
-    "impactFactor": "Impact Factor",
-    "status": "Status",
-    "type": "Type",
-    "venue": "Venue",
-    "event": "Event",
-    "slides": "Slides"
-  },
-  "actions": {
-    "viewMore": "View More",
-    "download": "Download",
-    "print": "Print",
-    "share": "Share",
-    "downloadPDF": "Download PDF",
-    "viewProject": "View Project",
-    "viewSource": "View Source",
-    "viewEvent": "View Event",
-    "viewSlides": "View Slides"
-  },
-  "content": {
-    "contact": "Contact",
-    "yearsOld": "years old",
-    "publications": "Publications",
-    "awards": "Awards",
-    "projects": "Projects",
-    "gpa": "GPA"
-  }
-} 
+	"common": {
+		"language": "Language",
+		"loading": "Loading...",
+		"error": "Error",
+		"lastUpdated": "Updated"
+	},
+	"footer": {
+		"llmsTxt": "LLMs.txt",
+		"accessibilityStatement": "Accessibility",
+		"theme": "Theme"
+	},
+	"navigation": {
+		"home": "Home",
+		"about": "About",
+		"contact": "Contact"
+	},
+	"sections": {
+		"education": "Education",
+		"experience": "Experience",
+		"skills": "Skills",
+		"awards": "Awards & Honors",
+		"publications": "Publications",
+		"news": "News",
+		"misc": "Misc",
+		"talks": "Talks & Presentations",
+		"profileHighlights": "Profile Highlights",
+		"biography": "Biography",
+		"researchInterests": "Research Interests",
+		"selectedProjects": "Selected Projects",
+		"technicalSkills": "Technical Skills"
+	},
+	"labels": {
+		"supervisor": "Supervisor",
+		"present": "Present",
+		"duration": "Duration",
+		"location": "Location",
+		"position": "Position",
+		"company": "Company",
+		"date": "Date",
+		"description": "Description",
+		"in": "in",
+		"expected": "Expected",
+		"keyAchievements": "Key Achievements",
+		"publishedIn": "Published in",
+		"doi": "DOI",
+		"abstract": "Abstract",
+		"featured": "Featured",
+		"impactFactor": "Impact Factor",
+		"status": "Status",
+		"type": "Type",
+		"venue": "Venue",
+		"event": "Event",
+		"slides": "Slides"
+	},
+	"actions": {
+		"viewMore": "View More",
+		"download": "Download",
+		"print": "Print",
+		"share": "Share",
+		"downloadPDF": "Download PDF",
+		"viewProject": "View Project",
+		"viewSource": "View Source",
+		"viewEvent": "View Event",
+		"viewSlides": "View Slides"
+	},
+	"content": {
+		"contact": "Contact",
+		"yearsOld": "years old",
+		"publications": "Publications",
+		"awards": "Awards",
+		"projects": "Projects",
+		"gpa": "GPA"
+	}
+}

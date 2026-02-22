@@ -1,11 +1,9 @@
 import { HeroSection } from "./hero-section";
-import { EducationSection } from "./education-section";
 import { ExperienceSection } from "./experience-section";
 import { SkillsSection } from "./skills-section";
 import { ProjectsSection } from "./projects-section";
 import { PublicationsSection } from "./publications-section";
 import { AwardsSection } from "./awards-section";
-import { TalksSection } from "./talks-section";
 import { NewsSection } from "./news-section";
 import { MiscSection } from "./misc-section";
 import { BioSection } from "./bio-section";
@@ -93,11 +91,17 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
 						</section>
 					)}
 
-					{data.education.length > 0 && (
-						<section id="education">
-							<EducationSection
-								data={data.education}
-								config={data.sectionConfig?.education}
+					<section id="projects">
+						<ProjectsSection data={projectsData} />
+					</section>
+
+					{data.publications.length > 0 && (
+						<section id="publications">
+							<PublicationsSection
+								data={publicationsData}
+								ownerName={data.hero.name}
+								ownerEnName={data.hero.enName}
+								ownerAliases={data.hero.aliases}
 							/>
 						</section>
 					)}
@@ -114,30 +118,9 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
 						</section>
 					)}
 
-					<section id="projects">
-						<ProjectsSection data={projectsData} />
-					</section>
-
-					{data.publications.length > 0 && (
-						<section id="publications">
-							<PublicationsSection
-								data={publicationsData}
-								ownerName={data.hero.name}
-								ownerEnName={data.hero.enName}
-								ownerAliases={data.hero.aliases}
-							/>
-						</section>
-					)}
-
 					{data.awards.length > 0 && (
 						<section id="awards">
 							<AwardsSection data={data.awards} />
-						</section>
-					)}
-
-					{data.talks && data.talks.length > 0 && (
-						<section id="talks">
-							<TalksSection data={data.talks} />
 						</section>
 					)}
 
