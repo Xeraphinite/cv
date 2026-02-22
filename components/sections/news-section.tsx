@@ -17,14 +17,25 @@ interface NewsSectionProps {
 	data: NewsItem[];
 }
 
+function containsMarkdownLink(content: string): boolean {
+	return (
+		/\[[^\]]+\]\((?:https?:\/\/|\/)[^)]+\)/.test(content) ||
+		/<a\s/i.test(content)
+	);
+}
+
 export function NewsSection({ data }: NewsSectionProps) {
 	const t = useTranslations();
 
-	if (!data || data.length === 0) return null;
+	if (!data || data.length === 0) {
+		return null;
+	}
 
 	const parseNewsDate = (value: string): number => {
 		const match = value.trim().match(/^(\d{4})(?:[.\-/](\d{1,2}))?/);
-		if (!match) return Number.NEGATIVE_INFINITY;
+		if (!match) {
+			return Number.NEGATIVE_INFINITY;
+		}
 		const year = Number.parseInt(match[1], 10);
 		const month = match[2] ? Number.parseInt(match[2], 10) : 0;
 		return year * 100 + month;
@@ -34,7 +45,9 @@ export function NewsSection({ data }: NewsSectionProps) {
 		.map((item, index) => ({ item, index }))
 		.sort((a, b) => {
 			const rankDiff = parseNewsDate(b.item.date) - parseNewsDate(a.item.date);
-			if (rankDiff !== 0) return rankDiff;
+			if (rankDiff !== 0) {
+				return rankDiff;
+			}
 			return a.index - b.index;
 		})
 		.map(({ item }) => item);
@@ -42,7 +55,9 @@ export function NewsSection({ data }: NewsSectionProps) {
 	const renderYearMonthWithSup = (value: string) => {
 		const formatted = formatToYearMonth(value);
 		const match = formatted.match(/^(\d{4})(\d{2})$/);
-		if (!match) return <>{formatted}</>;
+		if (!match) {
+			return <>{formatted}</>;
+		}
 		return (
 			<>
 				<span>{match[1]}</span>
@@ -63,7 +78,7 @@ export function NewsSection({ data }: NewsSectionProps) {
 				{t("sections.news")}
 			</h2>
 
-			<div className="space-y-1.5">
+			<div className="[&>*:not(:last-child)]:mb-1.5">
 				{sortedItems.map((item, index) => (
 					<div
 						key={`${item.title}-${index}`}
@@ -73,7 +88,10 @@ export function NewsSection({ data }: NewsSectionProps) {
 							<span className="order-2 justify-self-end whitespace-nowrap text-right font-bold font-sans text-foreground/80 text-sm md:order-1 md:justify-self-start md:text-left">
 								{renderYearMonthWithSup(item.date)}
 							</span>
-							{item.url ? (
+							{item.url &&
+							!containsMarkdownLink(
+								item.summary || item.title || item.outlet,
+							) ? (
 								<a
 									href={item.url}
 									target="_blank"

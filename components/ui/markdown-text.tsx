@@ -16,7 +16,7 @@ const LINK_CLASS_NAME = "inline-url-link";
 
 function getComponents(inline: boolean, showLinkIcon: boolean): Components {
 	return {
-		a: ({ href, className, rel, target, ...props }) => {
+		a: ({ node: _node, href, className, rel, target, title, children }) => {
 			const isExternal = typeof href === "string" && /^https?:\/\//.test(href);
 			return (
 				<a
@@ -24,10 +24,10 @@ function getComponents(inline: boolean, showLinkIcon: boolean): Components {
 					className={cn(LINK_CLASS_NAME, className)}
 					target={isExternal ? "_blank" : target}
 					rel={isExternal ? "noopener noreferrer" : rel}
-					{...props}
+					title={title}
 				>
 					<span className="inline-flex items-center gap-1">
-						<span className="inline-url-link-text">{props.children}</span>
+						<span className="inline-url-link-text">{children}</span>
 						{showLinkIcon ? (
 							<Icon
 								aria-hidden="true"
@@ -58,7 +58,9 @@ export function MarkdownText({
 	inline = false,
 	showLinkIcon = true,
 }: MarkdownTextProps) {
-	if (!content?.trim()) return null;
+	if (!content?.trim()) {
+		return null;
+	}
 
 	const Wrapper = inline ? "span" : "div";
 	const blockSpacingClass = inline ? "" : "[&_p+p]:mt-4";

@@ -27,7 +27,7 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
 				{t("sections.selectedProjects")}
 			</h2>
 
-			<div className="space-y-3">
+			<div className="flex flex-col gap-y-2">
 				{projects.map((project) => (
 					<div
 						key={project.name}

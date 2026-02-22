@@ -116,6 +116,7 @@ export default async function LocaleLayout({
 	const messages = await getMessages({ locale: localeTyped });
 	const direction = getDirection(localeTyped);
 	const lastUpdated = await getCVLastUpdated(localeTyped);
+	const renderedAt = new Date().toISOString();
 
 	return (
 		<html lang={localeTyped} dir={direction} suppressHydrationWarning>
@@ -124,7 +125,11 @@ export default async function LocaleLayout({
 					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
 						<CVHeader />
 						{children}
-						<CVFooter className="lg:hidden" lastUpdated={lastUpdated} />
+						<CVFooter
+							className="lg:hidden"
+							lastUpdated={lastUpdated}
+							renderedAt={renderedAt}
+						/>
 					</ThemeProvider>
 				</NextIntlClientProvider>
 			</body>

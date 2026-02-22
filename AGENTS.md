@@ -22,15 +22,18 @@
 - In rendered Markdown body text, keep paragraph-to-paragraph spacing clearly separated (use roomier vertical spacing between adjacent paragraphs).
 - Keep badges/chips compact: prefer small pill padding (`px-2 py-1` or tighter), smaller icon size, and tighter inter-chip spacing (`gap-1` to `gap-1.5`) unless explicitly requested otherwise.
 - When a roomier badge layout is requested, increase chip-group spacing to around `gap-2` and allow slightly wider chip padding (e.g. `px-2.5`) for readability.
-- Keep section spacing compact by default: tighten section title bottom spacing and reduce inter-item vertical gaps (`space-y`/`gap-y`) unless explicitly requested to be roomy.
+- Keep section spacing compact by default: prefer margin-based vertical rhythm (`mb-*`) and reduce inter-item vertical gaps unless explicitly requested to be roomy.
 - When roomier section spacing is requested for large devices, increase `section[id]` wrapper spacing on `lg` (e.g., `lg:[&>section]:mb-8`) while keeping smaller breakpoints unchanged.
 - On mobile (`< sm`), prefer roomier layout defaults over dense packing; prioritize readable spacing and full-width content usage.
 - For timeline-style rows (date + content), use single-column stacking on mobile and switch to two-column alignment from `md` and up.
 - In section components, use bottom spacing (`mb-*`) for vertical rhythm; avoid top margins (`mt-*`) for section content spacing.
-- Keep `.paper-card` top padding removed (`pt-0`); use bottom padding only for card vertical spacing unless explicitly requested.
+- In-section item lists should use unified `gap-y-2` spacing by default.
+- Within a given section component, keep one spacing strategy consistently (either `gap-y-*` or child-margin selectors) and avoid flipping between equivalent patterns across edits to reduce hydration mismatch risk during dev.
+- Keep `.paper-card` top and bottom padding removed by default (`pt-0 pb-0`); use margin for section/item spacing unless explicitly requested otherwise.
 - Keep `.paper-card` content unrounded; do not apply `rounded-*` classes to paper-card containers unless explicitly requested.
 - Apply per-section spacing on `section[id]` wrappers with responsive Tailwind `mb-*` classes (e.g., `mb-4 sm:mb-5 lg:mb-6`) instead of relying on shared CSS margins.
 - For Skills, Awards, Education, Experience, and Misc sections, keep section-title underline/border spacing especially tight (reduced title `mb`/`pb`).
+- In Awards rows, keep award name text at `text-base` and institution text at `text-sm` (`14px`).
 - In Education, keep both inter-item spacing and intra-item spacing compact by default.
 - In Education, hide item detail/highlight bullet lists by default; show only core metadata (time, institution, degree, supervisor).
 
@@ -59,6 +62,9 @@
 - Publications section should use a concise, unified reading layout: year-first left column + compact right-column metadata (title, authors, venue, status/type/DOI) without heavy card styling.
   - Publication owner-name highlighting should match against `profile.aliases` and normalized name variants (full name and initial-based forms) so the profile author is consistently bolded.
   - TOML text fields preserve Markdown syntax at load time and render through `components/ui/markdown-text.tsx` in UI sections.
+  - In `components/ui/markdown-text.tsx`, do not forward `react-markdown` internal props such as `node` to DOM elements (it causes unstable SSR/client markup and hydration mismatches).
+  - When rendering text via `MarkdownText`, do not wrap the same content with an outer `<a>` if the markdown may already contain links; avoid nested anchors to prevent SSR/client hydration mismatches.
+  - For components rendered during SSR, do not use non-deterministic values (`Math.random()`, render-time `Date.now()`) in render paths; derive values from server props or use deterministic constants.
 - Centralized app config:
   - `lib/config/app-config.ts` contains:
     - intl locales/default/labels
@@ -88,8 +94,10 @@
   - Keep mono font for `code`/`pre` via `Maple Mono`.
 - Awards/Honors iconography:
   - Use `mingcute:medal-fill` for section headers and `mingcute:medal-line` for compact/stat contexts.
-  - Awards/Honors section layout should stay concise and use Skills-like two-column alignment (fixed-width right-aligned left column + flexible content column).
-  - Keep year-to-item horizontal spacing tight in Awards rows (prefer smaller `gap-x` values).
+- Awards/Honors section layout should stay concise and use Skills-like two-column alignment (fixed-width right-aligned left column + flexible content column).
+- Keep year-to-item horizontal spacing tight in Awards rows (prefer smaller `gap-x` values).
+- Awards rows should follow the same per-item card/grid layout pattern as Education (per-item `paper-card` + matching time/content alignment rhythm).
+- Awards date rendering should mirror Education style: show ranges as `start - end` with normalized hyphen spacing and superscript month when month exists.
 - Experience section styling:
   - Use `mingcute:telescope-fill` as the Experience section header icon.
   - Show experience time in a muted time column before role/company details.
@@ -122,7 +130,8 @@
 - Hero layout breakpoint:
   - Keep the hero section single-column on small/medium screens; switch to two-column split at `lg:`.
   - On non-`lg`, use the sticky mobile navigator-style `CVHeader` UX (show/hide on scroll) for controls.
-  - CV page shell should be one column by default, and at `lg:` use two columns with hero as column 1 and all other sections as column 2.
+- CV page shell should be one column by default, and at `lg:` use two columns with hero as column 1 and all other sections as column 2.
+- In the CV page shell, keep second-column overall vertical padding at `py-2 sm:py-4 lg:py-6`.
   - Right column should start with a dedicated biography block (`section#about`) rendered from `hero.bio`, before News and other sections.
   - The `section#about` block title should use the locale's `navigation.about` label (e.g., "About"), not a separate "Biography" label.
   - On `lg`, first-column sticky panel should use viewport-height so the footer area sits at viewport bottom (with only small outer page margin), not content bottom.
@@ -132,7 +141,7 @@
   - Contacts in hero should be one item per line (icon + value), with values wrapping instead of truncating.
   - Left-column hero contact items should use shadcn `Tooltip` for concise hover tips, positioned at the top of each trigger.
   - Do not add left padding/inset for contact rows; icon should not reserve extra left spacing.
-  - Use `space-y` on the hero contacts list for vertical separation between contact rows.
+- Use margin-based spacing on the hero contacts list for vertical separation between contact rows.
   - Contact hover background should wrap only real content (`w-fit`/`self-start`) with rounded corners; inner padding should apply on hover only.
   - Hero location text should use locale-aware serif font.
   - Hero location uses a dedicated `HeroLocation` component; for `Guangzhou, Guangdong`, hovering the location reveals a mapcn-style hover card with a marker rich popup showing current workplace.

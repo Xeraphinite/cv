@@ -33,6 +33,13 @@ interface PublicationsSectionProps {
 	ownerAliases?: string[];
 }
 
+function containsMarkdownLink(content: string): boolean {
+	return (
+		/\[[^\]]+\]\((?:https?:\/\/|\/)[^)]+\)/.test(content) ||
+		/<a\s/i.test(content)
+	);
+}
+
 export function PublicationsSection({
 	data,
 	ownerName,
@@ -41,10 +48,14 @@ export function PublicationsSection({
 }: PublicationsSectionProps) {
 	const t = useTranslations();
 
-	if (!data || data.length === 0) return null;
+	if (!data || data.length === 0) {
+		return null;
+	}
 
 	const parsePublicationYear = (value?: string): number => {
-		if (!value) return Number.NEGATIVE_INFINITY;
+		if (!value) {
+			return Number.NEGATIVE_INFINITY;
+		}
 		const year = Number.parseInt(value, 10);
 		return Number.isFinite(year) ? year : Number.NEGATIVE_INFINITY;
 	};
@@ -54,7 +65,9 @@ export function PublicationsSection({
 		.sort((a, b) => {
 			const rankDiff =
 				parsePublicationYear(b.item.year) - parsePublicationYear(a.item.year);
-			if (rankDiff !== 0) return rankDiff;
+			if (rankDiff !== 0) {
+				return rankDiff;
+			}
 			return a.index - b.index;
 		})
 		.map(({ item }) => item);
@@ -67,9 +80,13 @@ export function PublicationsSection({
 			.replace(/[^\p{L}\p{N}]+/gu, "");
 
 	const buildNameVariants = (value?: string) => {
-		if (!value) return [];
+		if (!value) {
+			return [];
+		}
 		const trimmed = value.trim();
-		if (!trimmed) return [];
+		if (!trimmed) {
+			return [];
+		}
 
 		const withoutParen = trimmed
 			.replace(/\s*\([^)]*\)\s*/g, " ")
@@ -125,11 +142,18 @@ export function PublicationsSection({
 
 	const formatPublicationMeta = (publication: Publication) => {
 		const parts: string[] = [];
-		if (publication.journal || publication.publishedIn)
+		if (publication.journal || publication.publishedIn) {
 			parts.push(publication.journal || publication.publishedIn || "");
-		if (publication.volume) parts.push(`Vol. ${publication.volume}`);
-		if (publication.issue) parts.push(`No. ${publication.issue}`);
-		if (publication.pages) parts.push(`pp. ${publication.pages}`);
+		}
+		if (publication.volume) {
+			parts.push(`Vol. ${publication.volume}`);
+		}
+		if (publication.issue) {
+			parts.push(`No. ${publication.issue}`);
+		}
+		if (publication.pages) {
+			parts.push(`pp. ${publication.pages}`);
+		}
 		return parts.filter(Boolean).join(" · ");
 	};
 
@@ -143,20 +167,21 @@ export function PublicationsSection({
 				{t("sections.publications")}
 			</h2>
 
-			<div className="space-y-1.5">
+			<div className="flex flex-col gap-y-2">
 				{sortedItems.map((publication, index) => (
 					<div
 						key={`${publication.title}-${index}`}
 						className="paper-body text-foreground leading-relaxed"
 					>
-						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-0.5 md:grid-cols-[minmax(6ch,auto)_minmax(0,1fr)] md:gap-y-1">
+						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-3 md:grid-cols-[minmax(6ch,auto)_minmax(0,1fr)] md:gap-y-1">
 							<span className="order-2 justify-self-end whitespace-nowrap text-right font-bold font-sans text-foreground/80 text-sm md:order-1 md:justify-self-start md:text-left">
 								{formatToYearMonth(publication.year)}
 							</span>
 
-							<div className="order-1 min-w-0 space-y-0.5 md:order-2 md:col-start-2">
+							<div className="order-1 min-w-0 md:order-2 md:col-start-2 [&>*:not(:last-child)]:mb-0.5">
 								<h3 className="font-sans font-semibold text-base leading-tight">
-									{publication.url ? (
+									{publication.url &&
+									!containsMarkdownLink(publication.title) ? (
 										<a
 											href={publication.url}
 											target="_blank"

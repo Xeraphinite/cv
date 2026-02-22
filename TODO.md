@@ -39,3 +39,7 @@
 
 - [x] Optimize lighthouse perf.
 - [ ] Setup Chrome DevTools, Lighthouse etc.
+
+## misc
+
+- [ ] Remove `!` important flag...
