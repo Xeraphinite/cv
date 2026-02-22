@@ -75,6 +75,8 @@
   - Do not use client-side locale detector prompts/modals or browser-language auto-switch; locale changes should happen only through explicit user actions (e.g., locale switcher/path).
 - App Router metadata:
   - In `app/` routes, do not use `next/head`; use the Metadata API and/or native `<head>` in layout files.
+  - Route groups are split for deployment/runtime constraints: keep CV pages under `app/(cv)/[locale]` and accessibility pages under `app/(a11y)/[locale]/accessibility`.
+  - For Cloudflare Pages builds using `@cloudflare/next-on-pages@1`, keep `/[locale]/accessibility` on Edge runtime (`app/(a11y)/[locale]/layout.tsx`) and keep markdown as bundled imports (`.md` via webpack `asset/source` + `types/markdown.d.ts`) to avoid non-edge route failures.
 - Typography policy:
   - Keep the configured font families (`Spectral`, `IBM Plex Sans`, `Noto Serif SC`, `Maple Mono`) with locale-specific CJK fallbacks.
   - Keep English serif default on `Spectral`; keep non-English serif defaults on Noto Serif families.
@@ -89,7 +91,7 @@
 - Global stylesheet source of truth:
   - Runtime global stylesheet is `app/globals.css`; do not re-introduce `styles/globals.css`.
   - Theme tokens consumed by Tailwind (`--background`, `--foreground`, `--chart-1..5`, `--sidebar-*`, etc.) must be defined in `app/globals.css` for both light and dark modes.
-  - Do not use CSS `@import` for Google Fonts in `app/globals.css`; load primary web fonts with `next/font` in `app/[locale]/layout.tsx` and reference via CSS variables.
+  - Do not use CSS `@import` for Google Fonts in `app/globals.css`; load primary web fonts with `next/font` in locale root layouts (currently `app/(cv)/[locale]/layout.tsx` and `app/(a11y)/[locale]/layout.tsx`) and reference via CSS variables.
 - Code-like text:
   - Keep mono font for `code`/`pre` via `Maple Mono`.
 - Awards/Honors iconography:

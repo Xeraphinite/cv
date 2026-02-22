@@ -1,11 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { readFile } from "node:fs/promises";
-import path from "node:path";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { appConfig } from "@/lib/config/app-config";
 import { type Locale, localeLabels, locales } from "@/i18n";
 import { createLocalizedPath } from "@/lib/i18n-utils";
+import statementDefault from "@/data/accessibility/statement.md";
+import statementJa from "@/data/accessibility/statement.ja.md";
+import statementZh from "@/data/accessibility/statement.zh.md";
 
 const statementTitles: Record<Locale, string> = {
 	en: "Accessibility Statement",
@@ -13,33 +14,14 @@ const statementTitles: Record<Locale, string> = {
 	ja: "アクセシビリティ声明",
 };
 
-const ACCESSIBILITY_MARKDOWN_DIR = path.join(
-	process.cwd(),
-	"data",
-	"accessibility",
-);
-const DEFAULT_STATEMENT_FILE = "statement.md";
+const accessibilityStatements: Record<Locale, string> = {
+	en: statementDefault,
+	zh: statementZh,
+	ja: statementJa,
+};
 
-async function loadAccessibilityStatement(locale: Locale): Promise<string> {
-	const candidates =
-		locale === appConfig.intl.defaultLocale
-			? [DEFAULT_STATEMENT_FILE]
-			: [`statement.${locale}.md`, DEFAULT_STATEMENT_FILE];
-
-	for (const fileName of candidates) {
-		try {
-			return await readFile(
-				path.join(ACCESSIBILITY_MARKDOWN_DIR, fileName),
-				"utf-8",
-			);
-		} catch {
-			// Try next fallback file.
-		}
-	}
-
-	throw new Error(
-		`Accessibility statement markdown not found for locale "${locale}"`,
-	);
+function loadAccessibilityStatement(locale: Locale): string {
+	return accessibilityStatements[locale] ?? statementDefault;
 }
 
 export async function generateMetadata({
@@ -71,7 +53,7 @@ export default async function AccessibilityStatementPage({
 		localeTyped === appConfig.intl.defaultLocale
 			? "/accessibility"
 			: `/${localeTyped}/accessibility`;
-	const statementMarkdown = await loadAccessibilityStatement(localeTyped);
+	const statementMarkdown = loadAccessibilityStatement(localeTyped);
 
 	return (
 		<main className="min-h-screen bg-background">
