@@ -4,7 +4,15 @@ enName = "Keyou (Key) Zheng"
 location = "广东广州"
 age = ""
 position = "博士申请者，新手研究员，初级设计工程师"
-bio = "博士申请者，新手研究员，初级设计工程师"
+bio = """
+你好，我是 **Keyou (Key) Zheng**。我是一名研究生、新手研究员和初级设计工程师。当前工作位于大语言模型、参数化 CAD 与人机交互的交叉点，重点是把人类设计意图转化为可靠、可由机器执行的代码。
+
+在研究生阶段，我构建了连接“生成-验证”的智能体工作流闭环。系统会解析 CAD 环境中的编译与几何反馈，并迭代修复代码，使结果达到工程可用标准，而不仅是表面正确。
+
+本科计算机科学训练为我提供了扎实的技术基础，而在设计与人本计算方向持续的自学，塑造了我对工具系统的理解。我关注技术严谨性与真实可用性的统一。
+
+在实验室之外，我持续通过开源项目、界面设计实践与写作进行构建。我重视排版、清晰交互和可维护代码，并希望成长为能够在软件、设计与研究之间交付高质量成果的实践者。
+"""
 
 [[education]]
 institution = "广东工业大学"
@@ -38,11 +46,11 @@ startDate = "2025年8月"
 endDate = "至今"
 summary = "构建了可验证基准与 LLM 智能体，实现可控的代码式 CAD 生成与可执行约束评测。"
 highlights = [
-  "智能体基础设施：搭建多语言容器化代码执行沙箱，固定工具链并保证可复现运行；设计可横向扩展后端，采集多轨迹与失败样本用于大规模实验观测；并实现轻量 Web playground 以便快速调试与产物生成。",
+  "智能体基础设施：搭建多语言容器化代码执行沙箱，固定工具链并保证可复现运行；设计可横向扩展后端，采集多轨迹与失败样本用于大规模实验可观测；并实现轻量 Web playground 以便快速调试与产物生成。",
   "基准构建：基于公开仓库与 CAD 社区收集的 20 万人类 CAD 代码语料，结合确定性与启发式规则（如模糊去重）及 LLM 流水线，降低数据污染并控制任务难度；产出 1 万单体任务与 1700 装配任务，附带金标准工作区与可执行测试。",
   "智能体设计：设计了通过自测与自修复生成/编辑 CAD 程序的 LLM 架构。不同于仅支持单文件的方法，该智能体可在多文件装配工作区调用特定工具（如从自然语言抽取规范的 spec 工具），形成闭环修复。",
   "评测结果：以可执行测试作为核心指标衡量约束满足度。在装配任务上，方法达到 54.2% 通过率、41.9% 全测通过率、2.4% 无效输出率，并在几何分数保持竞争力的同时优于 GPT-5 等 LLM-only 与工具基线。",
-  "产出：一篇论文已投稿至 ICML 2026（43rd International Conference on Machine Learning）并在审。",
+  "产出：一篇论文已投稿至 ICML 2026（第 43 届 International Conference on Machine Learning）并在审。",
 ]
 
 [[experience]]
@@ -63,30 +71,65 @@ year = "2025"
 name = "基于代码的 CAD 装配生成"
 status = "在审"
 description = "构建了可验证基准与 LLM 智能体，实现可控的代码式 CAD 生成与可执行约束评测。"
+urls = [
+  { label = "论文（ICML 2026，在审）", url = "https://openreview.net/" },
+]
+tech = [
+  { text = "vLLM", url = "https://docs.vllm.ai/", code = true },
+  { text = "OpenHands", url = "https://docs.all-hands.dev/", code = true },
+  { text = "Docker", url = "https://www.docker.com/", code = true },
+  { text = "Kubernetes", url = "https://kubernetes.io/", code = true },
+  { text = "Laminar", url = "https://docs.lmnr.ai/", code = true },
+]
 
 [[projects]]
 year = "2025"
 name = "人机协同 CAD 生成工作流"
 status = "已发表"
 description = "设计了用于代码式 CAD 生成的 HITL 智能体工作流，并以代码有效率与人工偏好进行评估。"
+urls = [
+  { label = "Applied Soft Computing", url = "https://www.sciencedirect.com/science/article/pii/S1568494625012335" },
+]
+tech = [
+  { text = "Qwen2.5-VL-7B", url = "https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct", code = true },
+  { text = "Python", url = "https://www.python.org/", code = true },
+  { text = "Agent Workflow", icon = "mingcute:light-fill", code = false },
+]
 
 [[publications]]
 title = "Towards Agentic Smart Design: An Industrial Large Model-driven Human-in-the-loop Agentic Workflow for Geometric Modelling"
+authors = ["Keyou Zheng", "Yuanwei Zhong", "Xuyang Su", "Jiewu Leng", "Qiang Liu", "Xin Chen"]
+year = "2025"
 type = "期刊论文"
 status = "已发表"
+indexing = ["JCR Q1"]
+impactFactor = 6.6
+publishedIn = "Applied Soft Computing"
+doi = "10.1016/j.asoc.2025.113920"
+url = "https://www.sciencedirect.com/science/article/pii/S1568494625012335"
 
 [[publications]]
 title = "AIGC-empowered Smart Manufacturing: Prospects and Challenges"
+authors = ["Jiewu Leng", "Keyou Zheng", "Rongjie Li", "Chong Chen", "Baicun Wang", "Qiang Liu", "Xin Chen", "Weiming Shen"]
+year = "2026"
 type = "期刊论文"
 status = "已发表"
+indexing = ["JCR Q1"]
+impactFactor = 11.4
+publishedIn = "Robotics and Computer-Integrated Manufacturing"
+doi = "10.1016/j.rcim.2025.103076"
+url = "https://www.sciencedirect.com/science/article/pii/S0736584525001309"
 
 [[news]]
 title = "Applied Soft Computing 论文发表"
+outlet = "Applied Soft Computing"
 date = "2025.9"
-summary = "一篇论文发表于 Applied Soft Computing。"
+summary = "一篇论文发表于 [Applied Soft Computing](https://www.sciencedirect.com/science/article/pii/S1568494625012335)。"
+url = ""
 
 [[news]]
 title = "RCIM 论文录用并收录"
+outlet = "Robotics and Computer-Integrated Manufacturing"
 date = "2025.6"
 summary = "一篇论文被 [Robotics and Computer-Integrated Manufacturing](https://www.sciencedirect.com/science/article/pii/S0736584525001309) 录用。"
 url = ""
@@ -100,7 +143,7 @@ description = ""
 [[awards]]
 name = "学业优秀奖学金"
 institute = "广东工业大学"
-date = "2024, 2025"
+date = "2024-2025"
 description = ""
 
 [[awards]]
@@ -112,153 +155,218 @@ description = ""
 [[awards]]
 name = "学业优秀奖学金"
 institute = "广东财经大学"
-date = "2020, 2021, 2022"
+date = "2020-2022"
 description = ""
 
 [skills]
-categories = ["AI 工程", "语言", "前端", "后端与运维", "兴趣"]
+categories = ["语言", "编程语言", "DevOps", "AI 工程", "Web 开发与设计", "后端开发", "Misc"]
+
+[[skills.skills]]
+text = "英语"
+category = "语言"
+url = "https://www.ets.org/toefl.html"
+icon = "twemoji:flag-united-kingdom"
+description = "TOEFL iBT: 90。可用于国际场景的学术与技术交流。"
+
+[[skills.skills]]
+text = "日语"
+category = "语言"
+url = "https://www.jlpt.jp/e/"
+icon = "twemoji:flag-japan"
+description = "JLPT N1: 134。具备高级阅读与职业沟通能力。"
+
+[[skills.skills]]
+text = "中文"
+category = "语言"
+url = "https://en.wikipedia.org/wiki/Mandarin_Chinese"
+icon = "twemoji:flag-china"
+description = "普通话母语水平。"
+
+[[skills.skills]]
+text = "粤语"
+category = "语言"
+url = "https://en.wikipedia.org/wiki/Cantonese"
+icon = "twemoji:flag-hong-kong-sar-china"
+description = "粤语母语水平。"
+
+[[skills.skills]]
+text = "韩语"
+category = "语言"
+url = "https://www.topik.go.kr/usr/cmm/index.do"
+icon = "twemoji:flag-south-korea"
+description = "具备基础会话与入门阅读能力。"
 
 [[skills.skills]]
 text = "Python"
-category = "AI 工程"
+category = "编程语言"
+url = "https://www.python.org/"
+code = true
 description = "用于机器学习工具与实验的主要脚本语言。"
+
+[[skills.skills]]
+text = "Rust"
+category = "编程语言"
+url = "https://www.rust-lang.org/"
+code = true
+description = "用于高性能高可靠后端工具的系统编程语言。"
+
+[[skills.skills]]
+text = "JavaScript"
+category = "编程语言"
+url = "https://developer.mozilla.org/docs/Web/JavaScript"
+code = true
+description = "浏览器与运行时脚本的核心语言。"
+
+[[skills.skills]]
+text = "TypeScript"
+category = "编程语言"
+url = "https://www.typescriptlang.org/"
+code = true
+description = "提升前端与工具代码可维护性的类型系统。"
+
+[[skills.skills]]
+text = "CLI"
+category = "DevOps"
+url = "https://en.wikipedia.org/wiki/Command-line_interface"
+code = true
+description = "面向自动化与效率提升的命令行工作流。"
+
+[[skills.skills]]
+text = "Docker"
+category = "DevOps"
+url = "https://www.docker.com/"
+code = true
+description = "在本地与云端保证可复现运行的容器环境。"
+
+[[skills.skills]]
+text = "Kubernetes"
+category = "DevOps"
+url = "https://kubernetes.io/"
+code = true
+description = "用于服务与任务扩展的容器编排系统。"
+
+[[skills.skills]]
+text = "Azure"
+category = "DevOps"
+url = "https://azure.microsoft.com/"
+code = true
+description = "用于部署与基础设施管理的云平台服务。"
 
 [[skills.skills]]
 text = "vLLM"
 category = "AI 工程"
+url = "https://docs.vllm.ai/"
+code = true
 description = "用于服务与评测的高吞吐 LLM 推理引擎。"
 
 [[skills.skills]]
 text = "Unsloth"
 category = "AI 工程"
+url = "https://unsloth.ai/"
+code = true
 description = "面向开源大模型的高效微调工作流。"
 
 [[skills.skills]]
 text = "TRL"
 category = "AI 工程"
+url = "https://huggingface.co/docs/trl/index"
+code = true
 description = "用于语言模型后训练的强化学习工具集。"
 
 [[skills.skills]]
 text = "OpenHands"
 category = "AI 工程"
+url = "https://docs.all-hands.dev/"
+code = true
 description = "面向代码任务与自主工具调用的智能体框架。"
 
 [[skills.skills]]
 text = "PyTorch"
 category = "AI 工程"
+url = "https://pytorch.org/"
+code = true
 description = "建模与训练的核心深度学习框架。"
 
 [[skills.skills]]
 text = "CUDA"
 category = "AI 工程"
+url = "https://developer.nvidia.com/cuda-toolkit"
+code = true
 description = "用于训练与推理加速的 GPU 计算栈。"
 
 [[skills.skills]]
-text = "*英语（TOEFL: 90）*"
-category = "语言"
-description = "可用于国际场景的学术与技术交流。"
-
-[[skills.skills]]
-text = "*日语（N1: 134）*"
-category = "语言"
-description = "具备高级阅读与职业沟通能力。"
-
-[[skills.skills]]
-text = "中文与粤语（母语）"
-category = "语言"
-description = "普通话与粤语母语流利。"
-
-[[skills.skills]]
-text = "韩语（基础）"
-category = "语言"
-description = "具备基础会话与入门阅读能力。"
-
-[[skills.skills]]
-text = "TypeScript"
-category = "前端"
-description = "提升前端与工具代码可维护性的类型系统。"
-
-[[skills.skills]]
-text = "JavaScript"
-category = "前端"
-description = "浏览器与运行时脚本的核心语言。"
-
-[[skills.skills]]
 text = "Next.js"
-category = "前端"
+category = "Web 开发与设计"
+url = "https://nextjs.org/"
+code = true
 description = "支持路由、SSG、SSR 的 React 框架。"
 
 [[skills.skills]]
+text = "React"
+category = "Web 开发与设计"
+url = "https://react.dev/"
+code = true
+description = "构建交互式界面的组件化架构。"
+
+[[skills.skills]]
 text = "Tailwind CSS"
-category = "前端"
+category = "Web 开发与设计"
+url = "https://tailwindcss.com/"
+code = true
 description = "用于快速 UI 迭代的原子化 CSS 体系。"
 
 [[skills.skills]]
 text = "Vite"
-category = "前端"
+category = "Web 开发与设计"
+url = "https://vite.dev/"
+code = true
 description = "现代前端的高速构建与开发工具。"
 
 [[skills.skills]]
-text = "React"
-category = "前端"
-description = "构建交互式界面的组件化架构。"
-
-[[skills.skills]]
 text = "PWA"
-category = "前端"
+category = "Web 开发与设计"
+url = "https://web.dev/explore/progressive-web-apps"
+code = true
 description = "为网页提供可安装等渐进式应用能力。"
 
 [[skills.skills]]
-text = "Rust"
-category = "后端与运维"
-description = "用于高性能高可靠后端工具的系统编程语言。"
-
-[[skills.skills]]
-text = "CLI"
-category = "后端与运维"
-description = "面向自动化与效率提升的命令行工作流。"
-
-[[skills.skills]]
-text = "Docker"
-category = "后端与运维"
-description = "用于本地与云端可复现运行的容器环境。"
-
-[[skills.skills]]
-text = "Kubernetes"
-category = "后端与运维"
-description = "用于服务与任务扩缩容的容器编排系统。"
-
-[[skills.skills]]
 text = "Node"
-category = "后端与运维"
-description = "用于 API、工具链与服务端开发的 JavaScript 运行时。"
+category = "后端开发"
+url = "https://nodejs.org/"
+code = true
+description = "用于 API、工具与 Web 服务的 JavaScript 运行时。"
 
 [[skills.skills]]
 text = "PostgreSQL"
-category = "后端与运维"
+category = "后端开发"
+url = "https://www.postgresql.org/"
+code = true
 description = "适用于事务与分析场景的关系型数据库。"
 
 [[skills.skills]]
-text = "Azure"
-category = "后端与运维"
-description = "用于部署与基础设施管理的云平台服务。"
-
-[[skills.skills]]
 text = "Typography"
-category = "兴趣"
-description = "关注界面设计中的字体系统、层级与可读性。"
+category = "Misc"
+url = "https://en.wikipedia.org/wiki/Typography"
+icon = "mingcute:book-6-line"
+description = "界面中的字体系統、层级与可读性设计。"
 
 [[skills.skills]]
 text = "Graphic Design"
-category = "兴趣"
-description = "通过版式、色彩与构图进行视觉叙事。"
+category = "Misc"
+url = "https://en.wikipedia.org/wiki/Graphic_design"
+icon = "mingcute:star-fill"
+description = "通过版式、色彩与构图进行视觉表达。"
 
 [[skills.skills]]
 text = "UI/UX Design"
-category = "兴趣"
-description = "注重清晰性、可用性与流程体验的交互设计。"
+category = "Misc"
+url = "https://en.wikipedia.org/wiki/User_experience_design"
+icon = "mingcute:target-line"
+description = "关注清晰性、可用性与流程连贯性的体验设计。"
 
 [[skills.skills]]
 text = "Rhythm Games"
-category = "兴趣"
-description = "以节奏与判定精度为核心的兴趣爱好。"
+category = "Misc"
+url = "https://en.wikipedia.org/wiki/Rhythm_game"
+icon = "mingcute:medal-line"
+description = "以节奏判定精度和音乐游戏机制为核心的兴趣。"

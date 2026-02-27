@@ -4,7 +4,15 @@ enName = "Keyou (Key) Zheng"
 location = "広州・広東"
 age = ""
 position = "博士課程志願者、若手研究者、ジュニア設計エンジニア"
-bio = "博士課程志願者、若手研究者、ジュニア設計エンジニア"
+bio = """
+こんにちは、**Keyou (Key) Zheng** です。私は大学院生であり、若手研究者であり、ジュニア設計エンジニアでもあります。現在の研究は大規模言語モデル、パラメトリック CAD、HCI の交差領域にあり、人間の設計意図を信頼可能で機械実行可能なコードへ変換することに取り組んでいます。
+
+大学院では、生成と検証を閉ループでつなぐエージェント型ワークフローを構築しています。CAD 環境から得られるコンパイラおよび幾何フィードバックを解釈し、表面的な正しさではなく工学的に妥当な結果へ向けてコードを反復的に修復します。
+
+学部での計算機科学の訓練により強固な技術基盤を得る一方、デザインと人間中心コンピューティングの継続的な独学を通じてツールへの考え方を磨いてきました。技術的厳密性と実用性を両立するシステムを重視しています。
+
+研究室の外でも、オープンソース開発、インターフェース設計の実践、執筆を継続しています。タイポグラフィ、明快なインタラクション、保守しやすいコードを大切にし、ソフトウェア・デザイン・研究を横断して価値を届ける作り手として成長することを目指しています。
+"""
 
 [[education]]
 institution = "広東工業大学"
@@ -63,32 +71,67 @@ year = "2025"
 name = "コードベース CAD アセンブリ生成"
 status = "査読中"
 description = "実行可能制約下での制御可能なコードベース CAD 生成に向け、検証可能ベンチマークと LLM エージェントを構築。"
+urls = [
+  { label = "論文（ICML 2026、査読中）", url = "https://openreview.net/" },
+]
+tech = [
+  { text = "vLLM", url = "https://docs.vllm.ai/", code = true },
+  { text = "OpenHands", url = "https://docs.all-hands.dev/", code = true },
+  { text = "Docker", url = "https://www.docker.com/", code = true },
+  { text = "Kubernetes", url = "https://kubernetes.io/", code = true },
+  { text = "Laminar", url = "https://docs.lmnr.ai/", code = true },
+]
 
 [[projects]]
 year = "2025"
 name = "Human-in-the-loop CAD 生成ワークフロー"
 status = "掲載済み"
 description = "コードベース CAD 生成向けの HITL エージェントワークフローを設計し、コード有効率と人間選好で評価。"
+urls = [
+  { label = "Applied Soft Computing", url = "https://www.sciencedirect.com/science/article/pii/S1568494625012335" },
+]
+tech = [
+  { text = "Qwen2.5-VL-7B", url = "https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct", code = true },
+  { text = "Python", url = "https://www.python.org/", code = true },
+  { text = "Agent Workflow", icon = "mingcute:light-fill", code = false },
+]
 
 [[publications]]
 title = "Towards Agentic Smart Design: An Industrial Large Model-driven Human-in-the-loop Agentic Workflow for Geometric Modelling"
-type = "学術論文"
+authors = ["Keyou Zheng", "Yuanwei Zhong", "Xuyang Su", "Jiewu Leng", "Qiang Liu", "Xin Chen"]
+year = "2025"
+type = "論文"
 status = "掲載済み"
+indexing = ["JCR Q1"]
+impactFactor = 6.6
+publishedIn = "Applied Soft Computing"
+doi = "10.1016/j.asoc.2025.113920"
+url = "https://www.sciencedirect.com/science/article/pii/S1568494625012335"
 
 [[publications]]
 title = "AIGC-empowered Smart Manufacturing: Prospects and Challenges"
-type = "学術論文"
+authors = ["Jiewu Leng", "Keyou Zheng", "Rongjie Li", "Chong Chen", "Baicun Wang", "Qiang Liu", "Xin Chen", "Weiming Shen"]
+year = "2026"
+type = "論文"
 status = "掲載済み"
+indexing = ["JCR Q1"]
+impactFactor = 11.4
+publishedIn = "Robotics and Computer-Integrated Manufacturing"
+doi = "10.1016/j.rcim.2025.103076"
+url = "https://www.sciencedirect.com/science/article/pii/S0736584525001309"
 
 [[news]]
 title = "Applied Soft Computing 論文掲載"
+outlet = "Applied Soft Computing"
 date = "2025.9"
-summary = "Applied Soft Computing に論文 1 本が掲載されました。"
+summary = "[Applied Soft Computing](https://www.sciencedirect.com/science/article/pii/S1568494625012335) に論文 1 本が掲載されました。"
+url = ""
 
 [[news]]
 title = "RCIM 論文採択・収録"
+outlet = "Robotics and Computer-Integrated Manufacturing"
 date = "2025.6"
-summary = "論文 1 本が [Robotics and Computer-Integrated Manufacturing](https://www.sciencedirect.com/science/article/pii/S0736584525001309) に採択されました。"
+summary = "[Robotics and Computer-Integrated Manufacturing](https://www.sciencedirect.com/science/article/pii/S0736584525001309) に論文 1 本が採択されました。"
 url = ""
 
 [[awards]]
@@ -100,7 +143,7 @@ description = ""
 [[awards]]
 name = "学業優秀奨学金"
 institute = "広東工業大学"
-date = "2024, 2025"
+date = "2024-2025"
 description = ""
 
 [[awards]]
@@ -112,153 +155,218 @@ description = ""
 [[awards]]
 name = "学業優秀奨学金"
 institute = "広東財経大学"
-date = "2020, 2021, 2022"
+date = "2020-2022"
 description = ""
 
 [skills]
-categories = ["AIエンジニアリング", "言語", "フロントエンド", "バックエンド・DevOps", "興味"]
+categories = ["言語", "プログラミング言語", "DevOps", "AI エンジニアリング", "Web 開発・デザイン", "バックエンド開発", "Misc"]
+
+[[skills.skills]]
+text = "英語"
+category = "言語"
+url = "https://www.ets.org/toefl.html"
+icon = "twemoji:flag-united-kingdom"
+description = "TOEFL iBT: 90。国際文脈での学術・技術コミュニケーション。"
+
+[[skills.skills]]
+text = "日本語"
+category = "言語"
+url = "https://www.jlpt.jp/e/"
+icon = "twemoji:flag-japan"
+description = "JLPT N1: 134。高度な読解力と実務コミュニケーション能力。"
+
+[[skills.skills]]
+text = "中国語"
+category = "言語"
+url = "https://en.wikipedia.org/wiki/Mandarin_Chinese"
+icon = "twemoji:flag-china"
+description = "中国語（普通話）の母語話者。"
+
+[[skills.skills]]
+text = "広東語"
+category = "言語"
+url = "https://en.wikipedia.org/wiki/Cantonese"
+icon = "twemoji:flag-hong-kong-sar-china"
+description = "広東語の母語話者。"
+
+[[skills.skills]]
+text = "韓国語"
+category = "言語"
+url = "https://www.topik.go.kr/usr/cmm/index.do"
+icon = "twemoji:flag-south-korea"
+description = "基礎会話と初級読解。"
 
 [[skills.skills]]
 text = "Python"
-category = "AIエンジニアリング"
+category = "プログラミング言語"
+url = "https://www.python.org/"
+code = true
 description = "機械学習ツールと実験の主力スクリプト言語。"
 
 [[skills.skills]]
+text = "Rust"
+category = "プログラミング言語"
+url = "https://www.rust-lang.org/"
+code = true
+description = "高性能・高信頼なバックエンドツール向けシステム言語。"
+
+[[skills.skills]]
+text = "JavaScript"
+category = "プログラミング言語"
+url = "https://developer.mozilla.org/docs/Web/JavaScript"
+code = true
+description = "ブラウザとランタイム双方の中核 Web 言語。"
+
+[[skills.skills]]
+text = "TypeScript"
+category = "プログラミング言語"
+url = "https://www.typescriptlang.org/"
+code = true
+description = "安全なリファクタリングを支える型付き開発。"
+
+[[skills.skills]]
+text = "CLI"
+category = "DevOps"
+url = "https://en.wikipedia.org/wiki/Command-line_interface"
+code = true
+description = "自動化と開発生産性向上のためのコマンドライン運用。"
+
+[[skills.skills]]
+text = "Docker"
+category = "DevOps"
+url = "https://www.docker.com/"
+code = true
+description = "ローカルとクラウドで再現性を担保するコンテナ環境。"
+
+[[skills.skills]]
+text = "Kubernetes"
+category = "DevOps"
+url = "https://kubernetes.io/"
+code = true
+description = "サービスとジョブのスケールに向けたコンテナオーケストレーション。"
+
+[[skills.skills]]
+text = "Azure"
+category = "DevOps"
+url = "https://azure.microsoft.com/"
+code = true
+description = "デプロイとインフラ管理のためのクラウドサービス。"
+
+[[skills.skills]]
 text = "vLLM"
-category = "AIエンジニアリング"
+category = "AI エンジニアリング"
+url = "https://docs.vllm.ai/"
+code = true
 description = "配信・評価向けの高スループット LLM 推論エンジン。"
 
 [[skills.skills]]
 text = "Unsloth"
-category = "AIエンジニアリング"
+category = "AI エンジニアリング"
+url = "https://unsloth.ai/"
+code = true
 description = "オープンソース LLM 向けの効率的な微調整ワークフロー。"
 
 [[skills.skills]]
 text = "TRL"
-category = "AIエンジニアリング"
+category = "AI エンジニアリング"
+url = "https://huggingface.co/docs/trl/index"
+code = true
 description = "言語モデルの事後学習向け強化学習ツールキット。"
 
 [[skills.skills]]
 text = "OpenHands"
-category = "AIエンジニアリング"
+category = "AI エンジニアリング"
+url = "https://docs.all-hands.dev/"
+code = true
 description = "コードタスクと自律的ツール利用のためのエージェント基盤。"
 
 [[skills.skills]]
 text = "PyTorch"
-category = "AIエンジニアリング"
+category = "AI エンジニアリング"
+url = "https://pytorch.org/"
+code = true
 description = "モデリングと学習の中核となる深層学習フレームワーク。"
 
 [[skills.skills]]
 text = "CUDA"
-category = "AIエンジニアリング"
+category = "AI エンジニアリング"
+url = "https://developer.nvidia.com/cuda-toolkit"
+code = true
 description = "学習・推論を高速化する GPU 計算スタック。"
 
 [[skills.skills]]
-text = "*英語（TOEFL: 90）*"
-category = "言語"
-description = "国際的な学術・技術コミュニケーションに対応。"
-
-[[skills.skills]]
-text = "*日本語（N1: 134）*"
-category = "言語"
-description = "高度な読解と実務コミュニケーション能力。"
-
-[[skills.skills]]
-text = "中国語・広東語（母語）"
-category = "言語"
-description = "標準中国語と広東語を母語として運用。"
-
-[[skills.skills]]
-text = "韓国語（基礎）"
-category = "言語"
-description = "基礎会話と初級読解が可能。"
-
-[[skills.skills]]
-text = "TypeScript"
-category = "フロントエンド"
-description = "安全なリファクタリングを支える型付き開発。"
-
-[[skills.skills]]
-text = "JavaScript"
-category = "フロントエンド"
-description = "ブラウザ/ランタイム双方の中核言語。"
-
-[[skills.skills]]
 text = "Next.js"
-category = "フロントエンド"
+category = "Web 開発・デザイン"
+url = "https://nextjs.org/"
+code = true
 description = "ルーティング・SSG・SSR を備えた React フレームワーク。"
 
 [[skills.skills]]
+text = "React"
+category = "Web 開発・デザイン"
+url = "https://react.dev/"
+code = true
+description = "対話的 UI を構築するためのコンポーネントアーキテクチャ。"
+
+[[skills.skills]]
 text = "Tailwind CSS"
-category = "フロントエンド"
+category = "Web 開発・デザイン"
+url = "https://tailwindcss.com/"
+code = true
 description = "高速 UI 反復に適したユーティリティファースト CSS。"
 
 [[skills.skills]]
 text = "Vite"
-category = "フロントエンド"
+category = "Web 開発・デザイン"
+url = "https://vite.dev/"
+code = true
 description = "モダンフロントエンド向け高速ビルド/開発ツール。"
 
 [[skills.skills]]
-text = "React"
-category = "フロントエンド"
-description = "対話的 UI を構築するためのコンポーネントアーキテクチャ。"
-
-[[skills.skills]]
 text = "PWA"
-category = "フロントエンド"
+category = "Web 開発・デザイン"
+url = "https://web.dev/explore/progressive-web-apps"
+code = true
 description = "Web にインストール可能性などのプログレッシブ機能を提供。"
 
 [[skills.skills]]
-text = "Rust"
-category = "バックエンド・DevOps"
-description = "高性能・高信頼バックエンドツール向けシステム言語。"
-
-[[skills.skills]]
-text = "CLI"
-category = "バックエンド・DevOps"
-description = "自動化と生産性向上のためのコマンドライン運用。"
-
-[[skills.skills]]
-text = "Docker"
-category = "バックエンド・DevOps"
-description = "ローカル/クラウドで再現性を担保するコンテナ環境。"
-
-[[skills.skills]]
-text = "Kubernetes"
-category = "バックエンド・DevOps"
-description = "サービス・ジョブのスケーリング向けコンテナオーケストレーション。"
-
-[[skills.skills]]
 text = "Node"
-category = "バックエンド・DevOps"
+category = "バックエンド開発"
+url = "https://nodejs.org/"
+code = true
 description = "API・ツール・Web サービス向け JavaScript ランタイム。"
 
 [[skills.skills]]
 text = "PostgreSQL"
-category = "バックエンド・DevOps"
-description = "トランザクション/分析の両面に適したリレーショナル DB。"
-
-[[skills.skills]]
-text = "Azure"
-category = "バックエンド・DevOps"
-description = "デプロイとインフラ管理のためのクラウドサービス。"
+category = "バックエンド開発"
+url = "https://www.postgresql.org/"
+code = true
+description = "トランザクション処理と分析の双方に適したリレーショナル DB。"
 
 [[skills.skills]]
 text = "Typography"
-category = "興味"
-description = "UI における書体設計、階層、可読性への関心。"
+category = "Misc"
+url = "https://en.wikipedia.org/wiki/Typography"
+icon = "mingcute:book-6-line"
+description = "インターフェース設計における書体設計、階層、可読性。"
 
 [[skills.skills]]
 text = "Graphic Design"
-category = "興味"
+category = "Misc"
+url = "https://en.wikipedia.org/wiki/Graphic_design"
+icon = "mingcute:star-fill"
 description = "レイアウト・色彩・構図によるビジュアル表現。"
 
 [[skills.skills]]
 text = "UI/UX Design"
-category = "興味"
-description = "明快さ・使いやすさ・導線を重視した体験設計。"
+category = "Misc"
+url = "https://en.wikipedia.org/wiki/User_experience_design"
+icon = "mingcute:target-line"
+description = "明快さ、使いやすさ、導線を重視した体験設計。"
 
 [[skills.skills]]
 text = "Rhythm Games"
-category = "興味"
+category = "Misc"
+url = "https://en.wikipedia.org/wiki/Rhythm_game"
+icon = "mingcute:medal-line"
 description = "タイミング精度と音楽ゲーム性を重視する趣味。"

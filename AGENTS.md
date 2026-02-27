@@ -49,6 +49,7 @@
   - In English locale hero, always show the original-script name on the top line and show the English name beneath it when both are available.
   - Localized CV data files use TOML overrides at `data/cv.{locale}.toml` and should only contain locale-specific fields.
   - When `data/cv.toml` is updated, keep localized `data/cv.{locale}.toml` files in sync with the same underlying records/structure.
+  - For `data/cv.ja.toml` and `data/cv.zh.toml`, keep record structure and item parity aligned with English (`data/cv.toml`) via translation (same meaning), not by copying raw English text.
   - Skills `items` in TOML support both string form and object form (`text`/`name`, optional `icon`, `url`, `code`, `description`).
   - Main Skills category order should be: `Languages` -> `Programming Languages` -> `DevOps` -> `AI Engineering` -> `Web Dev & Design` -> `Backend Development`; `Misc` is rendered as a separate bottom section.
 - News section is stored at `[news.*]` in TOML with fields `title`, `outlet`, `date`, `summary`, `url`, mapped to `CVData.news`.
