@@ -171,10 +171,12 @@
   - `lastUpdated` should be computed from CV source file mtime via `getCVLastUpdated` in `lib/load-cv-data.ts`, not from browser page metadata.
   - Do not show a textual prefix label before relative update time (render only the relative time text with icon).
   - Footer should include a full single-line copyright text in the form `© yyyy <owner>. All rights reserved.`.
-  - Render footer copyright text on a second line below the metadata/controls row.
+  - Render footer in exactly 3 lines: (1) last update time + visitor numbers + locale/theme toggles, (2) `LLMs.txt` + Accessibility + Privacy, (3) copyright text.
+  - In footer line 2, each item (`LLMs.txt`, Accessibility, Privacy) should use a clear leading icon (mingcute set), not text-only entries.
+  - Privacy page content should contain the full analytics claim, explicitly stating that Umami is used for visitor analytics.
   - Keep footer bottom spacing compact (reduced bottom padding).
   - Use recency-based text tone for `lastUpdated`: freshest is darker/stronger, and it becomes dimmer as elapsed time increases.
-  - Footer links should include `LLMs.txt` and an `Accessibility` statement link (no RSS/Sitemap links).
+  - Footer links should include `LLMs.txt` (no RSS/Sitemap links).
   - Footer last-updated text, `LLMs.txt`, `Accessibility` link, language control, and theme control should expose concise top-positioned shadcn `Tooltip` tips.
   - On `lg`, do not show TOC in first-column bottom area.
   - On `lg`, place language and theme controls in footer immediately after `LLMs.txt`.
@@ -182,6 +184,11 @@
 - Accessibility statement page:
   - Use a simple inline language switcher inspired by `muan.co` (text links with slash separators and `aria-current` on active locale), instead of a dropdown control.
   - Statement body content should be authored in Markdown files under `data/accessibility/` (`statement.md` default, locale overrides like `statement.zh.md`, `statement.ja.md`) rather than hardcoded JSX.
+- Privacy statement page:
+  - Privacy statement body content should be authored in Markdown files under `data/privacy/` (`statement.md` default, locale overrides like `statement.zh.md`, `statement.ja.md`) rather than hardcoded JSX.
+- Umami visitor count integration:
+  - Footer visitor count must use real Umami aggregated stats via server route `app/api/umami/visitors/route.ts` (no mock/static numbers).
+  - Use `UMAMI_API_KEY` + `UMAMI_WEBSITE_ID` server env vars (optional `UMAMI_API_BASE_URL`, default `https://api.umami.is/v1`), and only expose simple formatted numbers in UI.
 - Playwright output artifacts:
   - Save generated Playwright screenshots/artifacts under `output/playwright/` (not repo root).
   - Keep Playwright artifacts gitignored (`output/playwright/`, `playwright-report/`, `test-results/`, and `tmp-playwright-*.png`).

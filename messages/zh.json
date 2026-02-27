@@ -70,6 +70,9 @@
 	"footer": {
 		"llmsTxt": "LLMs.txt",
 		"accessibilityStatement": "无障碍声明",
-		"theme": "主题"
+		"privacyStatement": "隐私说明",
+		"theme": "主题",
+		"visitorNumbers": "访客数量",
+		"visitorNumbersUnavailable": "访客数量不可用"
 	}
 }

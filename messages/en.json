@@ -8,7 +8,10 @@
 	"footer": {
 		"llmsTxt": "LLMs.txt",
 		"accessibilityStatement": "Accessibility",
-		"theme": "Theme"
+		"privacyStatement": "Privacy",
+		"theme": "Theme",
+		"visitorNumbers": "Visitor numbers",
+		"visitorNumbersUnavailable": "Visitor numbers unavailable"
 	},
 	"navigation": {
 		"home": "Home",
