@@ -86,10 +86,10 @@ export function HeroLocation({ location, locale }: HeroLocationProps) {
 								/>
 							</div>
 							<div>
-								<p className="mb-1 text-foreground text-lg leading-none">
+								<p className="mb-1 text-foreground text-xl leading-none">
 									学校
 								</p>
-								<p className="text-muted-foreground text-sm leading-none">
+								<p className="text-base text-muted-foreground leading-none">
 									Guangdong
 								</p>
 							</div>

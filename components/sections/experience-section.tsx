@@ -57,7 +57,7 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
 						className="paper-card transition-all duration-300"
 					>
 						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-4 gap-y-2 md:grid-cols-[minmax(12ch,auto)_minmax(0,1fr)]">
-							<p className="paper-meta !text-sm !font-bold order-2 col-start-2 row-start-1 justify-self-end whitespace-nowrap text-right font-sans text-foreground/80 leading-tight md:order-1 md:col-start-1 md:justify-self-start md:text-left">
+							<p className="paper-meta !text-base !font-bold order-2 col-start-2 row-start-1 justify-self-end whitespace-nowrap text-right font-sans text-foreground/80 leading-tight md:order-1 md:col-start-1 md:justify-self-start md:text-left">
 								{renderYearMonthWithSup(experience.startDate)} -{" "}
 								{renderYearMonthWithSup(experience.endDate || "Present")}
 							</p>
@@ -75,7 +75,7 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
 							{experience.summary && (
 								<MarkdownText
 									content={experience.summary}
-									className="paper-body col-span-2 text-muted-foreground text-sm md:col-span-1 md:col-start-2"
+									className="paper-body col-span-2 text-base text-muted-foreground md:col-span-1 md:col-start-2"
 								/>
 							)}
 
@@ -90,7 +90,7 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
 												<div className="relative top-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/40" />
 												<MarkdownText
 													content={highlight}
-													className="paper-body text-muted-foreground text-sm"
+													className="paper-body text-base text-muted-foreground"
 													inline
 												/>
 											</li>

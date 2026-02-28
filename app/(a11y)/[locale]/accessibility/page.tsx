@@ -67,7 +67,7 @@ export default async function AccessibilityStatementPage({
 							<h1 className="paper-section-title">{title}</h1>
 							<nav
 								aria-label="Language"
-								className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 font-sans text-foreground/80 text-sm"
+								className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 font-sans text-base text-foreground/80"
 							>
 								{locales.map((supportedLocale, index) => {
 									const href = createLocalizedPath(
@@ -100,10 +100,10 @@ export default async function AccessibilityStatementPage({
 							</nav>
 						</div>
 
-						<div className="space-y-4 text-foreground/85 text-sm leading-relaxed">
+						<div className="space-y-4 text-base text-foreground/85 leading-relaxed">
 							<MarkdownText
 								content={statementMarkdown}
-								className="[&_h2:first-child]:mt-0 [&_h2]:mt-4 [&_h2]:font-sans [&_h2]:font-semibold [&_h2]:text-base [&_h2]:text-foreground [&_li+li]:mt-1 [&_ul]:mt-2"
+								className="[&_h2:first-child]:mt-0 [&_h2]:mt-4 [&_h2]:font-sans [&_h2]:font-semibold [&_h2]:text-foreground [&_h2]:text-lg [&_li+li]:mt-1 [&_ul]:mt-2"
 							/>
 						</div>
 					</section>
@@ -112,7 +112,7 @@ export default async function AccessibilityStatementPage({
 				<div className="mb-3 sm:mb-4">
 					<Link
 						href={homePath}
-						className="font-sans text-foreground/80 text-sm underline decoration-dashed underline-offset-2 hover:text-foreground hover:decoration-solid"
+						className="font-sans text-base text-foreground/80 underline decoration-dashed underline-offset-2 hover:text-foreground hover:decoration-solid"
 					>
 						Back to CV
 					</Link>

@@ -109,6 +109,7 @@ export function CVFooter({
 		"/accessibility",
 		currentLocale || "en",
 	);
+	const llmsHref = createLocalizedPath("/llms.txt", currentLocale || "en");
 	const privacyHref = createLocalizedPath("/privacy", currentLocale || "en");
 	const copyrightYear = useMemo(() => {
 		const currentDate = new Date(now);
@@ -126,6 +127,7 @@ export function CVFooter({
 
 		return new Intl.NumberFormat(currentLocale || "en").format(visitorCount);
 	}, [currentLocale, visitorCount, visitorCountLoaded]);
+	const currentLocaleLabel = localeLabels[currentLocale || "en"];
 
 	useEffect(() => {
 		setNow(Date.now());
@@ -176,15 +178,15 @@ export function CVFooter({
 	return (
 		<footer
 			className={clsx(
-				"mx-auto mt-12 max-w-2xl border-border/30 border-t bg-background/60 backdrop-blur-sm",
+				"mx-auto mt-14 max-w-2xl border-border/30 border-t bg-background/60 backdrop-blur-sm sm:mt-12",
 				className,
 			)}
 		>
 			<TooltipProvider delayDuration={120}>
 				<div
 					className={clsx(
-						"px-4 text-foreground/80 text-xs",
-						compact ? "pt-0 pb-2" : "pt-6 pb-3",
+						"px-4 text-base text-foreground/80",
+						compact ? "pt-0 pb-2" : "pt-7 pb-5 sm:pt-6 sm:pb-3",
 					)}
 				>
 					<div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
@@ -243,18 +245,21 @@ export function CVFooter({
 												<Button
 													variant="ghost"
 													size="sm"
-													className="h-7 w-7 p-0 hover:bg-muted/50"
+													className="h-7 flex-row gap-1.5 px-2 hover:bg-muted/50"
 													aria-label={t("common.language")}
 												>
 													<Icon
 														icon={languageFlags[currentLocale || "en"]}
 														className="h-3.5 w-3.5"
 													/>
+													<span className="font-sans text-sm">
+														{currentLocale?.toUpperCase() || "EN"}
+													</span>
 												</Button>
 											</DropdownMenuTrigger>
 										</TooltipTrigger>
 										<TooltipContent side="top">
-											<span>{t("common.language")}</span>
+											<span>{`${t("common.language")}: ${currentLocaleLabel}`}</span>
 										</TooltipContent>
 									</Tooltip>
 									<DropdownMenuContent
@@ -296,18 +301,21 @@ export function CVFooter({
 												<Button
 													variant="ghost"
 													size="sm"
-													className="h-7 w-7 p-0 hover:bg-muted/50"
+													className="h-7 flex-row gap-1.5 px-2 hover:bg-muted/50"
 													aria-label="Theme"
 												>
 													<Icon
 														icon={currentThemeOption.icon}
 														className="h-3.5 w-3.5"
 													/>
+													<span className="font-sans text-sm">
+														{currentThemeOption.label}
+													</span>
 												</Button>
 											</DropdownMenuTrigger>
 										</TooltipTrigger>
 										<TooltipContent side="top">
-											<span>{t("footer.theme")}</span>
+											<span>{`${t("footer.theme")}: ${currentThemeOption.label}`}</span>
 										</TooltipContent>
 									</Tooltip>
 									<DropdownMenuContent
@@ -343,13 +351,13 @@ export function CVFooter({
 					<div className="mt-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-foreground/75">
 						<Tooltip>
 							<TooltipTrigger asChild>
-								<a
-									href="/llms.txt"
+								<Link
+									href={llmsHref}
 									className="inline-flex items-center gap-1 transition-colors hover:text-foreground"
 								>
 									<Icon icon="mingcute:ai-line" className="h-3 w-3" />
 									<span>{t("footer.llmsTxt")}</span>
-								</a>
+								</Link>
 							</TooltipTrigger>
 							<TooltipContent side="top">
 								<span>{t("footer.llmsTxt")}</span>

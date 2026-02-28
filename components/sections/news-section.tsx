@@ -85,7 +85,7 @@ export function NewsSection({ data }: NewsSectionProps) {
 						className="paper-body text-foreground leading-relaxed"
 					>
 						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-0.5 md:grid-cols-[minmax(6ch,auto)_minmax(0,1fr)] md:gap-y-0">
-							<span className="order-2 justify-self-end whitespace-nowrap text-right font-bold font-sans text-foreground/80 text-sm md:order-1 md:justify-self-start md:text-left">
+							<span className="order-2 justify-self-end whitespace-nowrap text-right font-bold font-sans text-base text-foreground/80 md:order-1 md:justify-self-start md:text-left">
 								{renderYearMonthWithSup(item.date)}
 							</span>
 							{item.url &&
@@ -100,7 +100,7 @@ export function NewsSection({ data }: NewsSectionProps) {
 								>
 									<MarkdownText
 										content={item.summary || item.title || item.outlet}
-										className="text-base text-foreground/90"
+										className="text-foreground/90 text-lg"
 										inline
 										showLinkIcon={false}
 									/>
@@ -108,7 +108,7 @@ export function NewsSection({ data }: NewsSectionProps) {
 							) : (
 								<MarkdownText
 									content={item.summary || item.title || item.outlet}
-									className="order-1 text-base text-foreground/90 md:order-2 md:col-start-2"
+									className="order-1 text-foreground/90 text-lg md:order-2 md:col-start-2"
 									inline
 									showLinkIcon={false}
 								/>

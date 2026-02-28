@@ -24,7 +24,7 @@ export function BioSection({ bio }: BioSectionProps) {
 			</h2>
 
 			<div className="paper-body text-foreground leading-relaxed">
-				<MarkdownText className="text-base" content={bio} />
+				<MarkdownText className="[&_p]:text-lg" content={bio} />
 			</div>
 		</section>
 	);

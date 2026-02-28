@@ -56,7 +56,7 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
 	}));
 
 	return (
-		<div className="paper-container">
+		<div className="paper-container pt-4 pb-6 sm:pt-0 sm:pb-0 lg:pt-4 lg:pb-6">
 			<div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)] lg:gap-10">
 				<div className="lg:sticky lg:top-4 lg:bottom-4 lg:flex lg:h-[calc(100vh-2rem)] lg:flex-col">
 					<section
@@ -76,7 +76,7 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
 					</div>
 				</div>
 
-				<div className="py-2 sm:py-4 lg:py-6 [&>section:last-child]:mb-0 [&>section]:mb-4 sm:[&>section]:mb-5 lg:[&>section]:mb-8">
+				<div className="sm:py-4 lg:py-6 [&>section:last-child]:mb-0 [&>section]:mb-7 sm:[&>section]:mb-8 lg:[&>section]:mb-12">
 					{data.hero.bio && (
 						<section id="about">
 							<BioSection bio={data.hero.bio} />

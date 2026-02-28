@@ -62,7 +62,7 @@ export default async function AccessibilityLocaleLayout({
 				<NextIntlClientProvider messages={messages}>
 					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
 						{children}
-						<CVFooter className="lg:hidden" />
+						<CVFooter className="lg:hidden" showLocaleThemeControls />
 					</ThemeProvider>
 				</NextIntlClientProvider>
 			</body>

@@ -70,7 +70,7 @@ function createMarkdownComponents(
 		inline ? (
 			<Fragment>{children}</Fragment>
 		) : (
-			<p {...props} className={cn("leading-relaxed", className)}>
+			<p {...props} className={cn("text-base leading-relaxed", className)}>
 				{children}
 			</p>
 		);
@@ -94,7 +94,7 @@ function createMarkdownComponents(
 			<pre
 				{...props}
 				className={cn(
-					"overflow-x-auto rounded-md bg-muted/60 p-3 font-mono text-sm",
+					"overflow-x-auto rounded-md bg-muted/60 p-3 font-mono text-base",
 					className,
 				)}
 			/>

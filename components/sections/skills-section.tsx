@@ -49,7 +49,7 @@ function SkillsCategoryRow({ category, skills }: SkillsCategoryRowProps) {
 			key={category}
 			className="flex flex-nowrap items-start gap-3 md:grid md:grid-cols-[11rem_minmax(0,1fr)] md:items-start md:gap-x-4 md:gap-y-1"
 		>
-			<h3 className="shrink-0 whitespace-nowrap font-semibold text-foreground text-sm md:text-right">
+			<h3 className="shrink-0 whitespace-nowrap font-semibold text-base text-foreground md:text-right">
 				{category}
 			</h3>
 			<div ref={viewportRef} className="relative min-w-0">
@@ -79,7 +79,7 @@ function SkillsCategoryRow({ category, skills }: SkillsCategoryRowProps) {
 					>
 						<Badge
 							variant="secondary"
-							className="h-auto rounded-full border border-border/50 bg-muted px-2 py-1 font-medium text-foreground/90 text-xs"
+							className="h-auto rounded-full border border-border/50 bg-muted px-2 py-1 font-medium text-foreground/90 text-sm"
 						>
 							...
 						</Badge>

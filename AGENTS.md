@@ -18,13 +18,17 @@
 - Use `Spectral` as the default serif family and `IBM Plex Sans` as the default sans family across locales; keep locale-specific Noto/Source Han families as fallback.
 - For non-English serif text (`zh`, `zh-hant`, `ja`, `ko`), prefer locale-appropriate Noto Serif families as the primary serif stack.
 - Use `Maple Mono` as the monospace font family for code-like text.
-- Typography scale preference: section titles should use `text-xl`; general body text should default to `text-sm`; keep `text-xs` as the minimum size, and use `text-sm` for description/detail copy.
+- Typography scale preference: section titles should use `text-2xl`; general body text should default to `text-base`; keep `text-sm` as the minimum size, and use `text-base` for description/detail copy.
 - In rendered Markdown body text, keep paragraph-to-paragraph spacing clearly separated (use roomier vertical spacing between adjacent paragraphs).
 - Keep badges/chips compact: prefer small pill padding (`px-2 py-1` or tighter), smaller icon size, and tighter inter-chip spacing (`gap-1` to `gap-1.5`) unless explicitly requested otherwise.
 - When a roomier badge layout is requested, increase chip-group spacing to around `gap-2` and allow slightly wider chip padding (e.g. `px-2.5`) for readability.
 - Keep section spacing compact by default: prefer margin-based vertical rhythm (`mb-*`) and reduce inter-item vertical gaps unless explicitly requested to be roomy.
+- When overall roomier section spacing is requested, increase shared `section[id]` wrapper spacing across breakpoints together (for example `mb-6 sm:mb-7 lg:mb-10`) before changing section-internal gaps.
 - When roomier section spacing is requested for large devices, increase `section[id]` wrapper spacing on `lg` (e.g., `lg:[&>section]:mb-8`) while keeping smaller breakpoints unchanged.
 - On mobile (`< sm`), prefer roomier layout defaults over dense packing; prioritize readable spacing and full-width content usage.
+- When overall mobile spacing is requested for the whole site, prefer adjusting shared page-shell/body gutters before adding section-level padding overrides.
+- When overall CV top/bottom spacing is requested for mobile or `lg`, adjust the top-level shell in `components/sections/cv.tsx` instead of per-section spacing.
+- For mobile spacing requests involving the sticky header or footer, adjust `components/layout/cv-header.tsx` and `components/layout/cv-footer.tsx` vertical spacing directly instead of compensating inside content sections.
 - For timeline-style rows (date + content), use single-column stacking on mobile and switch to two-column alignment from `md` and up.
 - In section components, use bottom spacing (`mb-*`) for vertical rhythm; avoid top margins (`mt-*`) for section content spacing.
 - In-section item lists should use unified `gap-y-2` spacing by default.
@@ -64,6 +68,7 @@
   - Publication owner-name highlighting should match against `profile.aliases` and normalized name variants (full name and initial-based forms) so the profile author is consistently bolded.
   - TOML text fields preserve Markdown syntax at load time and render through `components/ui/markdown-text.tsx` in UI sections.
   - `components/ui/markdown-text.tsx` uses the MDX runtime (`@mdx-js/react` + `@mdx-js/mdx`) for Markdown rendering; preserve the existing inline-link styling and paragraph spacing when updating it.
+  - `components/ui/markdown-text.tsx` block paragraph text should default to `text-base` so rendered Markdown matches the main content size unless a caller explicitly overrides it.
   - When rendering text via `MarkdownText`, do not wrap the same content with an outer `<a>` if the markdown may already contain links; avoid nested anchors to prevent SSR/client hydration mismatches.
   - For components rendered during SSR, do not use non-deterministic values (`Math.random()`, render-time `Date.now()`) in render paths; derive values from server props or use deterministic constants.
 - Centralized app config:
@@ -166,7 +171,8 @@
   - Do not hardcode TOC items in header/components.
   - Build TOC from rendered `main section[id]` elements and section headings so it stays in sync with shown sections.
   - TOC trigger should not show a leading icon; keep label text and chevron only.
-  - Do not render the sticky/mobile TOC header in locale layouts; keep navigation controls out of the top header and preserve the existing `CVFooter` styling.
+- Do not render the sticky/mobile TOC header in locale layouts; keep navigation controls out of the top header and preserve the existing `CVFooter` styling.
+- Mobile locale/theme controls live in `CVFooter`; do not keep parallel `CVControls`/TOC header UI unless explicitly requested.
 - Footer behavior:
   - Show `lastUpdated` as locale-aware relative time (e.g., today / 2 days ago) instead of absolute date.
   - `lastUpdated` should be computed from CV source file mtime via `getCVLastUpdated` in `lib/load-cv-data.ts`, not from browser page metadata.
@@ -178,8 +184,11 @@
   - Privacy page content should contain the full analytics claim, explicitly stating that Umami is used for visitor analytics.
   - Keep footer bottom spacing compact (reduced bottom padding).
   - Use recency-based text tone for `lastUpdated`: freshest is darker/stronger, and it becomes dimmer as elapsed time increases.
-  - Footer links should include `LLMs.txt` (no RSS/Sitemap links).
-  - Footer last-updated text, `LLMs.txt`, `Accessibility` link, language control, and theme control should expose concise top-positioned shadcn `Tooltip` tips.
+- Footer links should include `LLMs.txt` (no RSS/Sitemap links).
+- `LLMs.txt` is generated via App Router route handlers (`app/llms.txt/route.ts` and `app/[locale]/llms.txt/route.ts`), not a static `public/llms.txt` file; keep content sourced from localized CV data so `/llms.txt`, `/zh/llms.txt`, and `/ja/llms.txt` stay in sync.
+- Footer last-updated text, `LLMs.txt`, `Accessibility` link, language control, and theme control should expose concise top-positioned shadcn `Tooltip` tips.
+- Footer language and theme controls should show the current selection as visible label text on the trigger, not via a separate indicator dot.
+  - Mobile/footer layout mounts should use the same `CVFooter` controls configuration as desktop, including locale and theme controls.
   - On `lg`, do not show TOC in first-column bottom area.
   - On `lg`, place language and theme controls in footer immediately after `LLMs.txt`.
   - On `lg`, page shell container width should step up one Tailwind max-width class (`max-w-6xl` -> `lg:max-w-7xl`), while the left column should stay narrower (`lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)]`) and use top+bottom sticky anchoring (`lg:top-4`, `lg:bottom-4`) with near-full viewport height (`h-[calc(100vh-2rem)]`).

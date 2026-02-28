@@ -34,17 +34,17 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
 						className="paper-body text-foreground leading-relaxed"
 					>
 						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-2 md:grid-cols-[minmax(5ch,auto)_minmax(0,1fr)]">
-							<span className="order-2 col-start-2 row-start-1 justify-self-end whitespace-nowrap text-right font-bold font-sans text-foreground/80 text-sm md:order-1 md:col-start-1 md:justify-self-start md:text-left">
+							<span className="order-2 col-start-2 row-start-1 justify-self-end whitespace-nowrap text-right font-bold font-sans text-base text-foreground/80 md:order-1 md:col-start-1 md:justify-self-start md:text-left">
 								{formatToYearMonth(project.year)}
 							</span>
 							<div className="order-1 col-start-1 row-start-1 flex min-w-0 flex-wrap items-center gap-2 md:order-2 md:col-start-2">
-								<h3 className="font-sans font-semibold text-base">
+								<h3 className="font-sans font-semibold text-lg">
 									{project.name}
 								</h3>
 								{project.status ? (
 									<Badge
 										variant="secondary"
-										className="rounded-full border border-border/60 bg-muted/80 px-2 py-0 font-medium font-sans text-foreground/85 text-xs hover:bg-secondary/80"
+										className="rounded-full border border-border/60 bg-muted/80 px-2 py-0 font-medium font-sans text-foreground/85 text-sm hover:bg-secondary/80"
 									>
 										{project.status}
 									</Badge>
@@ -52,7 +52,7 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
 							</div>
 
 							{project.description ? (
-								<div className="col-span-2 font-serif text-foreground/90 text-sm md:col-span-1 md:col-start-2">
+								<div className="col-span-2 font-serif text-base text-foreground/90 md:col-span-1 md:col-start-2">
 									<MarkdownText content={project.description} />
 								</div>
 							) : null}
@@ -103,7 +103,7 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
 												icon={link.icon || "mingcute:arrow-right-up-fill"}
 												className="h-4 w-4"
 											/>
-											<span className="font-sans text-sm">
+											<span className="font-sans text-base">
 												{link.label || t("actions.viewMore")}
 											</span>
 										</a>

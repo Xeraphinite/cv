@@ -90,7 +90,7 @@ export function EducationSection({ data, config }: EducationSectionProps) {
 							className="paper-card transition-all duration-300"
 						>
 							<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-4 gap-y-1.5 md:grid-cols-[minmax(12ch,auto)_minmax(0,1fr)] md:gap-y-1">
-								<p className="paper-meta !text-sm !font-bold order-2 justify-self-end text-right font-sans text-foreground/80 leading-tight md:order-1 md:justify-self-start md:text-left">
+								<p className="paper-meta !text-base !font-bold order-2 justify-self-end text-right font-sans text-foreground/80 leading-tight md:order-1 md:justify-self-start md:text-left">
 									<span className="block whitespace-nowrap">
 										{renderYearMonthWithSup(education.startDate)}
 										<span className="mx-1">-</span>

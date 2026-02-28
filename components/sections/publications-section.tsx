@@ -174,12 +174,12 @@ export function PublicationsSection({
 						className="paper-body text-foreground leading-relaxed"
 					>
 						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-3 md:grid-cols-[minmax(6ch,auto)_minmax(0,1fr)] md:gap-y-1">
-							<span className="order-2 justify-self-end whitespace-nowrap text-right font-bold font-sans text-foreground/80 text-sm md:order-1 md:justify-self-start md:text-left">
+							<span className="order-2 justify-self-end whitespace-nowrap text-right font-bold font-sans text-base text-foreground/80 md:order-1 md:justify-self-start md:text-left">
 								{formatToYearMonth(publication.year)}
 							</span>
 
 							<div className="order-1 min-w-0 md:order-2 md:col-start-2 [&>*:not(:last-child)]:mb-0.5">
-								<h3 className="font-sans font-semibold text-base leading-tight">
+								<h3 className="font-sans font-semibold text-lg leading-tight">
 									{publication.url &&
 									!containsMarkdownLink(publication.title) ? (
 										<a
@@ -204,18 +204,18 @@ export function PublicationsSection({
 								</h3>
 
 								{publication.authors?.length ? (
-									<p className="text-foreground/80 text-sm">
+									<p className="text-base text-foreground/80">
 										{formatAuthors(publication.authors)}
 									</p>
 								) : null}
 
 								{formatPublicationMeta(publication) ? (
-									<p className="text-foreground/80 text-sm italic">
+									<p className="text-base text-foreground/80 italic">
 										{formatPublicationMeta(publication)}
 									</p>
 								) : null}
 
-								<div className="flex flex-wrap items-center gap-x-2 text-foreground/80 text-sm">
+								<div className="flex flex-wrap items-center gap-x-2 text-base text-foreground/80">
 									<span>{publication.type}</span>
 									<span>·</span>
 									<span>{publication.status}</span>

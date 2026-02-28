@@ -136,7 +136,11 @@ export default async function LocaleLayout({
 				<NextIntlClientProvider messages={messages}>
 					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
 						{children}
-						<CVFooter className="lg:hidden" lastUpdated={lastUpdated} />
+						<CVFooter
+							className="lg:hidden"
+							lastUpdated={lastUpdated}
+							showLocaleThemeControls
+						/>
 					</ThemeProvider>
 				</NextIntlClientProvider>
 			</body>

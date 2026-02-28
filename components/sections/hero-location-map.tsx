@@ -40,7 +40,7 @@ export function HeroLocationMap({ workplaceLabel }: HeroLocationMapProps) {
 					<MarkerContent />
 					<MarkerLabel
 						position="bottom"
-						className="relative top-2 text-foreground/85 text-xs"
+						className="relative top-2 text-base text-foreground/85"
 					>
 						{workplaceLabel}
 					</MarkerLabel>
@@ -55,10 +55,10 @@ export function HeroLocationMap({ workplaceLabel }: HeroLocationMapProps) {
 						/>
 					</div>
 					<div className="mb-4">
-						<p className="mb-1 font-bold text-base text-foreground leading-none">
+						<p className="mb-1 font-bold text-foreground text-lg leading-none">
 							学校
 						</p>
-						<p className="text-muted-foreground text-sm leading-none">
+						<p className="text-base text-muted-foreground leading-none">
 							Guangdong
 						</p>
 					</div>
