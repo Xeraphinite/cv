@@ -8,6 +8,7 @@ type UmamiStatsResponse = {
 };
 
 type UmamiActiveResponse = {
+	visitors?: number;
 	x?: number;
 };
 
@@ -68,9 +69,12 @@ export async function GET() {
 				? Math.max(0, statsResult.value.visitors)
 				: null;
 		const activeVisitors =
-			activeResult.status === "fulfilled" &&
-			typeof activeResult.value.x === "number"
-				? Math.max(0, activeResult.value.x)
+			activeResult.status === "fulfilled"
+				? typeof activeResult.value.visitors === "number"
+					? Math.max(0, activeResult.value.visitors)
+					: typeof activeResult.value.x === "number"
+						? Math.max(0, activeResult.value.x)
+						: null
 				: null;
 
 		return NextResponse.json(

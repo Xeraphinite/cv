@@ -36,6 +36,7 @@
 - In section components, use bottom spacing (`mb-*`) for vertical rhythm; avoid top margins (`mt-*`) for section content spacing.
 - In-section item lists should use unified `gap-y-2` spacing by default.
 - Within a given section component, keep one spacing strategy consistently (either `gap-y-*` or child-margin selectors) and avoid flipping between equivalent patterns across edits to reduce hydration mismatch risk during dev.
+- Keep CV content row alignment breakpoint-agnostic by default; avoid desktop-only (`md`/`lg`) order/column alignment logic in section item content unless explicitly requested.
 - Keep `.paper-card` top and bottom padding removed by default (`pt-0 pb-0`); use margin for section/item spacing unless explicitly requested otherwise.
 - Keep `.paper-card` content unrounded; do not apply `rounded-*` classes to paper-card containers unless explicitly requested.
 - Apply per-section spacing on `section[id]` wrappers with responsive Tailwind `mb-*` classes (e.g., `mb-4 sm:mb-5 lg:mb-6`) instead of relying on shared CSS margins.
@@ -207,6 +208,8 @@
 - Umami visitor count integration:
   - Footer visitor count must use real Umami aggregated stats via server route `app/api/umami/visitors/route.ts` (no mock/static numbers).
   - Footer online-now indicator should come from the same Umami route via the website `active` API and render as a compact live count beside total visitors.
+  - Footer Umami badges are centralized in `components/layout/umami-indicators.tsx`; keep count-fetching/rendering logic there instead of duplicating it in `CVFooter`.
+  - In footer UI logic, treat online-users indicator availability independently from total visitors (show unavailable when active visitor count is unavailable after loading).
   - Use `UMAMI_API_KEY` + `UMAMI_WEBSITE_ID` server env vars (optional `UMAMI_API_BASE_URL`, default `https://api.umami.is/v1`), and only expose simple formatted numbers in UI.
 - Playwright output artifacts:
   - Save generated Playwright screenshots/artifacts under `output/playwright/` (not repo root).
