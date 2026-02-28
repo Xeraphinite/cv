@@ -19,7 +19,6 @@ interface CVProps {
 
 export function CV({ data, locale, lastUpdated }: CVProps) {
 	if (!data) return null;
-	const renderedAt = new Date().toISOString();
 
 	const mappedSkills: Record<string, SkillItemBadgeData[]> = {};
 
@@ -73,7 +72,6 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
 							showLocaleThemeControls
 							className="block max-w-none border-t-0"
 							lastUpdated={lastUpdated}
-							renderedAt={renderedAt}
 						/>
 					</div>
 				</div>

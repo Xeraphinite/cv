@@ -28,7 +28,6 @@ interface CVFooterProps {
 	compact?: boolean;
 	showLocaleThemeControls?: boolean;
 	lastUpdated?: string;
-	renderedAt?: string;
 }
 
 const themeOptions = [
@@ -50,7 +49,6 @@ export function CVFooter({
 	compact = false,
 	showLocaleThemeControls = false,
 	lastUpdated,
-	renderedAt,
 }: CVFooterProps) {
 	const { theme, setTheme } = useTheme();
 	const t = useTranslations();
@@ -59,28 +57,19 @@ export function CVFooter({
 	const currentThemeOption =
 		themeOptions.find((option) => option.value === theme) || themeOptions[2];
 	const umamiShareUrl = process.env.NEXT_PUBLIC_UMAMI_SHARE_URL;
-	const hasUmamiTracking = Boolean(process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID);
 	const [visitorCount, setVisitorCount] = useState<number | null>(null);
 	const [visitorCountLoaded, setVisitorCountLoaded] = useState(false);
+	const [now, setNow] = useState(() => Date.now());
 
 	const { relativeUpdated, updateToneClass } = useMemo(() => {
 		const locale = currentLocale || "en";
 		const parsedUpdatedAt = lastUpdated ? new Date(lastUpdated) : null;
-		const parsedRenderedAt = renderedAt ? new Date(renderedAt) : null;
-		const fallbackReference =
-			parsedUpdatedAt && !Number.isNaN(parsedUpdatedAt.getTime())
-				? parsedUpdatedAt
-				: new Date(0);
-		const referenceDate =
-			parsedRenderedAt && !Number.isNaN(parsedRenderedAt.getTime())
-				? parsedRenderedAt
-				: fallbackReference;
 		const safeDate =
 			parsedUpdatedAt && !Number.isNaN(parsedUpdatedAt.getTime())
 				? parsedUpdatedAt
-				: referenceDate;
-		const diffMs = safeDate.getTime() - referenceDate.getTime();
-		const elapsedMs = Math.max(0, referenceDate.getTime() - safeDate.getTime());
+				: new Date(now);
+		const diffMs = safeDate.getTime() - now;
+		const elapsedMs = Math.max(0, now - safeDate.getTime());
 
 		const ranges: Array<[Intl.RelativeTimeFormatUnit, number]> = [
 			["year", 1000 * 60 * 60 * 24 * 365],
@@ -115,42 +104,44 @@ export function CVFooter({
 		}
 
 		return { relativeUpdated: text, updateToneClass: toneClass };
-	}, [currentLocale, lastUpdated, renderedAt]);
+	}, [currentLocale, lastUpdated, now]);
 	const accessibilityHref = createLocalizedPath(
 		"/accessibility",
 		currentLocale || "en",
 	);
 	const privacyHref = createLocalizedPath("/privacy", currentLocale || "en");
 	const copyrightYear = useMemo(() => {
-		const parsedRenderedAt = renderedAt ? new Date(renderedAt) : null;
-		if (parsedRenderedAt && !Number.isNaN(parsedRenderedAt.getTime())) {
-			return parsedRenderedAt.getFullYear();
-		}
+		const currentDate = new Date(now);
+		if (!Number.isNaN(currentDate.getTime())) return currentDate.getFullYear();
 		const parsedUpdatedAt = lastUpdated ? new Date(lastUpdated) : null;
 		if (parsedUpdatedAt && !Number.isNaN(parsedUpdatedAt.getTime())) {
 			return parsedUpdatedAt.getFullYear();
 		}
 		return 2026;
-	}, [lastUpdated, renderedAt]);
+	}, [lastUpdated, now]);
 	const copyrightText = `© ${copyrightYear} Xeraphinite. All rights reserved.`;
 	const visitorCountDisplay = useMemo(() => {
-		if (!hasUmamiTracking) return "--";
 		if (!visitorCountLoaded) return "...";
 		if (visitorCount === null) return "--";
 
 		return new Intl.NumberFormat(currentLocale || "en").format(visitorCount);
-	}, [currentLocale, hasUmamiTracking, visitorCount, visitorCountLoaded]);
+	}, [currentLocale, visitorCount, visitorCountLoaded]);
+
+	useEffect(() => {
+		setNow(Date.now());
+		const interval = window.setInterval(() => {
+			setNow(Date.now());
+		}, 60_000);
+
+		return () => {
+			window.clearInterval(interval);
+		};
+	}, []);
 
 	useEffect(() => {
 		let cancelled = false;
 
 		async function loadVisitorCount() {
-			if (!hasUmamiTracking) {
-				setVisitorCountLoaded(true);
-				setVisitorCount(null);
-				return;
-			}
-
 			try {
 				const response = await fetch("/api/umami/visitors", {
 					cache: "no-store",
@@ -180,7 +171,7 @@ export function CVFooter({
 		return () => {
 			cancelled = true;
 		};
-	}, [hasUmamiTracking]);
+	}, []);
 
 	return (
 		<footer

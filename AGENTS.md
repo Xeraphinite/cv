@@ -169,6 +169,7 @@
 - Footer behavior:
   - Show `lastUpdated` as locale-aware relative time (e.g., today / 2 days ago) instead of absolute date.
   - `lastUpdated` should be computed from CV source file mtime via `getCVLastUpdated` in `lib/load-cv-data.ts`, not from browser page metadata.
+  - Footer relative update text should be recalculated client-side from the visitor's current time after hydration and continue refreshing; do not anchor it to a static server render timestamp.
   - Do not show a textual prefix label before relative update time (render only the relative time text with icon).
   - Footer should include a full single-line copyright text in the form `© yyyy <owner>. All rights reserved.`.
   - Render footer in exactly 3 lines: (1) last update time + visitor numbers + locale/theme toggles, (2) `LLMs.txt` + Accessibility + Privacy, (3) copyright text.

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { IBM_Plex_Sans, Spectral } from "next/font/google";
+import Script from "next/script";
 import { CVHeader } from "@/components/layout/cv-header";
 import { CVFooter } from "@/components/layout/cv-footer";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -42,16 +43,28 @@ export default async function AccessibilityLocaleLayout({
 
 	const messages = await getMessages({ locale: localeTyped });
 	const direction = getDirection(localeTyped);
-	const renderedAt = new Date().toISOString();
+	const umamiWebsiteId =
+		process.env.UMAMI_WEBSITE_ID || process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
+	const umamiScriptUrl =
+		process.env.UMAMI_SCRIPT_URL ||
+		process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL ||
+		"https://cloud.umami.is/script.js";
 
 	return (
 		<html lang={localeTyped} dir={direction} suppressHydrationWarning>
 			<body className={`${spectral.variable} ${ibmPlexSans.variable}`}>
+				{umamiWebsiteId ? (
+					<Script
+						src={umamiScriptUrl}
+						data-website-id={umamiWebsiteId}
+						strategy="afterInteractive"
+					/>
+				) : null}
 				<NextIntlClientProvider messages={messages}>
 					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
 						<CVHeader />
 						{children}
-						<CVFooter className="lg:hidden" renderedAt={renderedAt} />
+						<CVFooter className="lg:hidden" />
 					</ThemeProvider>
 				</NextIntlClientProvider>
 			</body>
