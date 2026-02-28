@@ -63,7 +63,7 @@
 - Publications section should use a concise, unified reading layout: year-first left column + compact right-column metadata (title, authors, venue, status/type/DOI) without heavy card styling.
   - Publication owner-name highlighting should match against `profile.aliases` and normalized name variants (full name and initial-based forms) so the profile author is consistently bolded.
   - TOML text fields preserve Markdown syntax at load time and render through `components/ui/markdown-text.tsx` in UI sections.
-  - Keep `components/ui/markdown-text.tsx` on the lightweight in-house renderer path (links/lists/inline emphasis+code); avoid re-introducing heavy markdown parsers into the client bundle unless explicitly requested.
+  - `components/ui/markdown-text.tsx` uses the MDX runtime (`@mdx-js/react` + `@mdx-js/mdx`) for Markdown rendering; preserve the existing inline-link styling and paragraph spacing when updating it.
   - When rendering text via `MarkdownText`, do not wrap the same content with an outer `<a>` if the markdown may already contain links; avoid nested anchors to prevent SSR/client hydration mismatches.
   - For components rendered during SSR, do not use non-deterministic values (`Math.random()`, render-time `Date.now()`) in render paths; derive values from server props or use deterministic constants.
 - Centralized app config:
@@ -166,6 +166,7 @@
   - Do not hardcode TOC items in header/components.
   - Build TOC from rendered `main section[id]` elements and section headings so it stays in sync with shown sections.
   - TOC trigger should not show a leading icon; keep label text and chevron only.
+  - Do not render the sticky/mobile TOC header in locale layouts; keep navigation controls out of the top header and preserve the existing `CVFooter` styling.
 - Footer behavior:
   - Show `lastUpdated` as locale-aware relative time (e.g., today / 2 days ago) instead of absolute date.
   - `lastUpdated` should be computed from CV source file mtime via `getCVLastUpdated` in `lib/load-cv-data.ts`, not from browser page metadata.

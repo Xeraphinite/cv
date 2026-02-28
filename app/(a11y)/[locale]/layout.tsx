@@ -5,7 +5,6 @@ import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { IBM_Plex_Sans, Spectral } from "next/font/google";
 import Script from "next/script";
-import { CVHeader } from "@/components/layout/cv-header";
 import { CVFooter } from "@/components/layout/cv-footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { type Locale, locales } from "@/i18n";
@@ -62,7 +61,6 @@ export default async function AccessibilityLocaleLayout({
 				) : null}
 				<NextIntlClientProvider messages={messages}>
 					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-						<CVHeader />
 						{children}
 						<CVFooter className="lg:hidden" />
 					</ThemeProvider>

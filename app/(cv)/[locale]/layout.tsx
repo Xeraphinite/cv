@@ -8,7 +8,6 @@ import Script from "next/script";
 import { getDirection } from "@/lib/i18n-utils";
 import { type Locale, locales } from "@/i18n";
 import { appConfig } from "@/lib/config/app-config";
-import { CVHeader } from "@/components/layout/cv-header";
 import { CVFooter } from "@/components/layout/cv-footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { getCVLastUpdated } from "@/lib/load-cv-data";
@@ -136,7 +135,6 @@ export default async function LocaleLayout({
 				) : null}
 				<NextIntlClientProvider messages={messages}>
 					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-						<CVHeader />
 						{children}
 						<CVFooter className="lg:hidden" lastUpdated={lastUpdated} />
 					</ThemeProvider>
