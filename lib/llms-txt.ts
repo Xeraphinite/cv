@@ -1,6 +1,6 @@
 import { defaultLocale, type Locale, locales } from "@/i18n";
 import { appConfig } from "@/lib/config/app-config";
-import { getCVData } from "@/lib/load-cv-data";
+import { getBundledCVData } from "@/lib/load-cv-data-edge";
 
 const llmsLabels = {
 	en: {
@@ -108,7 +108,7 @@ function formatPublicationLine(item: {
 export async function buildLlmsText(inputLocale?: string) {
 	const locale = normalizeLocale(inputLocale);
 	const labels = llmsLabels[locale];
-	const cv = await getCVData(locale);
+	const cv = await getBundledCVData(locale);
 	const displayName = compact(cv.hero.enName || cv.hero.name) || "Unknown";
 	const aliases = cv.hero.aliases?.map(compact).filter(Boolean) ?? [];
 	const website = compact(

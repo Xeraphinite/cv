@@ -1,5 +1,7 @@
-import { defaultLocale, type Locale, locales } from "@/i18n";
+import { type Locale, locales } from "@/i18n";
 import { buildLlmsText, createLlmsTextResponse } from "@/lib/llms-txt";
+
+export const runtime = "edge";
 
 export async function GET(
 	_request: Request,
@@ -13,10 +15,4 @@ export async function GET(
 
 	const body = await buildLlmsText(locale);
 	return createLlmsTextResponse(body);
-}
-
-export async function generateStaticParams() {
-	return locales
-		.filter((locale) => locale !== defaultLocale)
-		.map((locale) => ({ locale }));
 }

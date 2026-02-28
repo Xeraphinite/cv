@@ -42,7 +42,7 @@ const nextConfig = {
 	},
 	webpack(config) {
 		config.module.rules.push({
-			test: /\.md$/,
+			test: /\.(md|toml)$/,
 			type: "asset/source",
 		});
 

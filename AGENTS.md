@@ -83,6 +83,7 @@
   - In `app/` routes, do not use `next/head`; use the Metadata API and/or native `<head>` in layout files.
   - Route groups are split for deployment/runtime constraints: keep CV pages under `app/(cv)/[locale]` and accessibility pages under `app/(a11y)/[locale]/accessibility`.
   - For Cloudflare Pages builds using `@cloudflare/next-on-pages@1`, keep `/[locale]/accessibility` on Edge runtime (`app/(a11y)/[locale]/layout.tsx`) and keep markdown as bundled imports (`.md` via webpack `asset/source` + `types/markdown.d.ts`) to avoid non-edge route failures.
+  - For Cloudflare Pages builds using `@cloudflare/next-on-pages@1`, App Router route handlers that are not fully static, including `llms.txt` handlers, must export `runtime = "edge"` or the build will fail during prerender config validation.
 - Typography policy:
   - Keep the configured font families (`Spectral`, `IBM Plex Sans`, `Noto Serif SC`, `Maple Mono`) with locale-specific CJK fallbacks.
   - Keep English serif default on `Spectral`; keep non-English serif defaults on Noto Serif families.
