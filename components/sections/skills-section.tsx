@@ -25,6 +25,7 @@ function SkillsCategoryRow({ category, skills }: SkillsCategoryRowProps) {
 	const [isOverflowing, setIsOverflowing] = useState(false);
 	const viewportRef = useRef<HTMLDivElement | null>(null);
 	const skillTrackRef = useRef<HTMLDivElement | null>(null);
+	const useSerifBadges = skills.some((skill) => skill.fontFamily === "serif");
 
 	useEffect(() => {
 		const viewport = viewportRef.current;
@@ -47,9 +48,9 @@ function SkillsCategoryRow({ category, skills }: SkillsCategoryRowProps) {
 	return (
 		<div
 			key={category}
-			className="flex flex-nowrap items-start gap-3 md:grid md:grid-cols-[11rem_minmax(0,1fr)] md:items-start md:gap-x-4 md:gap-y-1"
+			className="grid grid-cols-1 items-start gap-x-4 gap-y-1.5 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-y-1"
 		>
-			<h3 className="shrink-0 whitespace-nowrap font-semibold text-base text-foreground md:text-right">
+			<h3 className="shrink-0 whitespace-nowrap font-sans font-semibold text-foreground text-lg md:text-right">
 				{category}
 			</h3>
 			<div ref={viewportRef} className="relative min-w-0">
@@ -59,7 +60,8 @@ function SkillsCategoryRow({ category, skills }: SkillsCategoryRowProps) {
 						"flex items-center gap-2",
 						isExpanded
 							? "flex-wrap"
-							: "min-w-max flex-nowrap overflow-hidden whitespace-nowrap md:min-w-0",
+							: "min-w-max flex-nowrap overflow-hidden whitespace-nowrap",
+						useSerifBadges ? "items-baseline" : undefined,
 					)}
 				>
 					{skills.map((skill, index) => (
@@ -79,7 +81,7 @@ function SkillsCategoryRow({ category, skills }: SkillsCategoryRowProps) {
 					>
 						<Badge
 							variant="secondary"
-							className="h-auto rounded-full border border-border/50 bg-muted px-2 py-1 font-medium text-foreground/90 text-sm"
+							className="h-auto rounded-full border border-border/50 bg-muted px-2.5 py-1.5 font-medium text-foreground/90 text-sm"
 						>
 							...
 						</Badge>
@@ -95,6 +97,8 @@ export function SkillsSection({ data }: SkillsSectionProps) {
 
 	if (!data || !data.skills || Object.keys(data.skills).length === 0)
 		return null;
+
+	const [languageCategory] = Object.keys(data.skills);
 
 	return (
 		<section className="paper-section">
@@ -112,7 +116,11 @@ export function SkillsSection({ data }: SkillsSectionProps) {
 						<SkillsCategoryRow
 							key={category}
 							category={category}
-							skills={skills}
+							skills={skills.map((skill, index) => ({
+								...skill,
+								fontFamily:
+									category === languageCategory ? "serif" : skill.fontFamily,
+							}))}
 						/>
 					))}
 				</div>

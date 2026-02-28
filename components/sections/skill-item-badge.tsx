@@ -16,6 +16,7 @@ export interface SkillItemBadgeData {
 	url?: string;
 	code?: boolean;
 	description?: string;
+	fontFamily?: "sans" | "serif";
 }
 
 interface SkillItemBadgeProps {
@@ -38,19 +39,23 @@ function SkillBadgeContent({ item }: SkillItemBadgeProps) {
 		<Badge
 			variant="secondary"
 			className={cn(
-				"h-auto shrink-0 gap-1.5 whitespace-nowrap rounded-full border border-transparent bg-muted/80 px-2.5 py-1 font-medium text-foreground/90 text-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-border/60 hover:bg-muted hover:text-foreground hover:shadow-sm",
-				item.code ? "font-mono" : "font-sans",
+				"h-auto shrink-0 gap-2 whitespace-nowrap rounded-full border border-transparent bg-muted/80 px-3 py-1.5 font-medium text-base text-foreground/90 transition-all duration-200 hover:-translate-y-0.5 hover:border-border/60 hover:bg-muted hover:text-foreground hover:shadow-sm",
+				item.code
+					? "font-mono"
+					: item.fontFamily === "serif"
+						? "font-serif"
+						: "font-sans",
 			)}
 		>
 			{item.icon ? (
-				<Icon icon={item.icon} className="h-3 w-3 shrink-0" />
+				<Icon icon={item.icon} className="h-3.5 w-3.5 shrink-0" />
 			) : (
 				resolvedFavicon && (
 					<img
 						src={resolvedFavicon}
 						alt=""
 						aria-hidden="true"
-						className="h-3 w-3 shrink-0 rounded-sm"
+						className="h-3.5 w-3.5 shrink-0 rounded-sm"
 						loading="lazy"
 					/>
 				)

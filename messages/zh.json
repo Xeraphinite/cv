@@ -72,7 +72,9 @@
 		"accessibilityStatement": "无障碍声明",
 		"privacyStatement": "隐私说明",
 		"theme": "主题",
+		"onlineNow": "在线人数",
 		"visitorNumbers": "访客数量",
+		"onlineNowUnavailable": "在线人数不可用",
 		"visitorNumbersUnavailable": "访客数量不可用"
 	}
 }

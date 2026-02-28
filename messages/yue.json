@@ -72,7 +72,9 @@
 		"accessibilityStatement": "無障礙聲明",
 		"privacyStatement": "私隱聲明",
 		"theme": "主題",
+		"onlineNow": "在線人數",
 		"visitorNumbers": "訪客數量",
+		"onlineNowUnavailable": "在線人數不可用",
 		"visitorNumbersUnavailable": "訪客數量不可用"
 	}
 }

@@ -58,6 +58,9 @@ export function CVFooter({
 		themeOptions.find((option) => option.value === theme) || themeOptions[2];
 	const umamiShareUrl = process.env.NEXT_PUBLIC_UMAMI_SHARE_URL;
 	const [visitorCount, setVisitorCount] = useState<number | null>(null);
+	const [activeVisitorCount, setActiveVisitorCount] = useState<number | null>(
+		null,
+	);
 	const [visitorCountLoaded, setVisitorCountLoaded] = useState(false);
 	const [now, setNow] = useState(() => Date.now());
 
@@ -127,6 +130,14 @@ export function CVFooter({
 
 		return new Intl.NumberFormat(currentLocale || "en").format(visitorCount);
 	}, [currentLocale, visitorCount, visitorCountLoaded]);
+	const activeVisitorCountDisplay = useMemo(() => {
+		if (!visitorCountLoaded) return "...";
+		if (activeVisitorCount === null) return "--";
+
+		return new Intl.NumberFormat(currentLocale || "en").format(
+			activeVisitorCount,
+		);
+	}, [activeVisitorCount, currentLocale, visitorCountLoaded]);
 	const currentLocaleLabel = localeLabels[currentLocale || "en"];
 
 	useEffect(() => {
@@ -152,15 +163,24 @@ export function CVFooter({
 					throw new Error(`HTTP ${response.status}`);
 				}
 
-				const payload = (await response.json()) as { visitors?: number };
+				const payload = (await response.json()) as {
+					visitors?: number;
+					activeVisitors?: number;
+				};
 				if (cancelled) return;
 
 				setVisitorCount(
 					typeof payload.visitors === "number" ? payload.visitors : null,
 				);
+				setActiveVisitorCount(
+					typeof payload.activeVisitors === "number"
+						? payload.activeVisitors
+						: null,
+				);
 			} catch {
 				if (cancelled) return;
 				setVisitorCount(null);
+				setActiveVisitorCount(null);
 			} finally {
 				if (!cancelled) {
 					setVisitorCountLoaded(true);
@@ -233,6 +253,82 @@ export function CVFooter({
 							</TooltipTrigger>
 							<TooltipContent side="top">
 								<span>{t("footer.visitorNumbers")}</span>
+							</TooltipContent>
+						</Tooltip>
+
+						<Tooltip>
+							<TooltipTrigger asChild>
+								{umamiShareUrl ? (
+									<a
+										href={umamiShareUrl}
+										target="_blank"
+										rel="noreferrer"
+										className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground"
+									>
+										<span className="relative flex h-2.5 w-2.5">
+											<span
+												className={clsx(
+													"absolute inline-flex h-full w-full rounded-full",
+													activeVisitorCount === null || !visitorCountLoaded
+														? "bg-muted-foreground/20"
+														: "bg-emerald-500/55",
+													activeVisitorCount !== null &&
+														visitorCountLoaded &&
+														"animate-ping",
+												)}
+											/>
+											<span
+												className={clsx(
+													"relative inline-flex h-2.5 w-2.5 rounded-full border",
+													activeVisitorCount === null || !visitorCountLoaded
+														? "border-muted-foreground/25 bg-muted-foreground/35"
+														: "border-emerald-600/35 bg-emerald-500",
+												)}
+											/>
+										</span>
+										<span className="font-sans tabular-nums">
+											{activeVisitorCountDisplay}
+										</span>
+										<Icon
+											icon="mingcute:arrow-right-up-fill"
+											className="h-3 w-3"
+										/>
+									</a>
+								) : (
+									<span className="inline-flex items-center gap-1.5 text-foreground/70">
+										<span className="relative flex h-2.5 w-2.5">
+											<span
+												className={clsx(
+													"absolute inline-flex h-full w-full rounded-full",
+													activeVisitorCount === null || !visitorCountLoaded
+														? "bg-muted-foreground/20"
+														: "bg-emerald-500/55",
+													activeVisitorCount !== null &&
+														visitorCountLoaded &&
+														"animate-ping",
+												)}
+											/>
+											<span
+												className={clsx(
+													"relative inline-flex h-2.5 w-2.5 rounded-full border",
+													activeVisitorCount === null || !visitorCountLoaded
+														? "border-muted-foreground/25 bg-muted-foreground/35"
+														: "border-emerald-600/35 bg-emerald-500",
+												)}
+											/>
+										</span>
+										<span className="font-sans tabular-nums">
+											{activeVisitorCountDisplay}
+										</span>
+									</span>
+								)}
+							</TooltipTrigger>
+							<TooltipContent side="top">
+								<span>
+									{visitorCountLoaded && activeVisitorCount === null
+										? t("footer.onlineNowUnavailable")
+										: t("footer.onlineNow")}
+								</span>
 							</TooltipContent>
 						</Tooltip>
 

@@ -10,7 +10,9 @@
 		"accessibilityStatement": "Accessibility",
 		"privacyStatement": "Privacy",
 		"theme": "Theme",
+		"onlineNow": "Online now",
 		"visitorNumbers": "Visitor numbers",
+		"onlineNowUnavailable": "Online indicator unavailable",
 		"visitorNumbersUnavailable": "Visitor numbers unavailable"
 	},
 	"navigation": {

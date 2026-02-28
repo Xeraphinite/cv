@@ -8,7 +8,7 @@
   - [ ] add hover effects to URLs for better interactivity;
   - [ ] map hover support;
 - [ ] consistancy:
-  - [ ] unify the date format across the CV (e.g., "Sep 2023 - Jun 2026" or "2023.9 - 2026.6");
+  - [x] unify the date format across the CV (e.g., "Sep 2023 - Jun 2026" or "2023.9 - 2026.6");
 
 ## typography
 
@@ -38,9 +38,10 @@
 
 ## perf
 
-- [x] Optimize lighthouse perf.
+- [ ] Optimize lighthouse perf.
 - [ ] Setup Chrome DevTools, Lighthouse etc.
 
 ## misc
 
-- [ ] Remove `!` important flag...
+- [ ] Remove `!` important flag in CSS.
+- [ ] Email disconfusion?

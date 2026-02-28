@@ -72,7 +72,9 @@
 		"accessibilityStatement": "アクセシビリティ",
 		"privacyStatement": "プライバシー",
 		"theme": "テーマ",
+		"onlineNow": "現在オンライン",
 		"visitorNumbers": "訪問者数",
+		"onlineNowUnavailable": "オンライン人数は利用できません",
 		"visitorNumbersUnavailable": "訪問者数は利用できません"
 	}
 }

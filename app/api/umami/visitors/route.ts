@@ -7,6 +7,10 @@ type UmamiStatsResponse = {
 	visitors?: number;
 };
 
+type UmamiActiveResponse = {
+	x?: number;
+};
+
 function getUmamiConfig() {
 	const apiBase = process.env.UMAMI_API_BASE_URL || "https://api.umami.is/v1";
 	const apiKey = process.env.UMAMI_API_KEY;
@@ -16,41 +20,61 @@ function getUmamiConfig() {
 	return { apiBase, apiKey, websiteId };
 }
 
+async function fetchUmamiJson<T>(url: string, apiKey: string) {
+	const response = await fetch(url, {
+		headers: {
+			Authorization: `Bearer ${apiKey}`,
+			"x-umami-api-key": apiKey,
+		},
+		cache: "no-store",
+	});
+
+	if (!response.ok) {
+		throw new Error(`Umami request failed: ${response.status}`);
+	}
+
+	return (await response.json()) as T;
+}
+
 export async function GET() {
 	const { apiBase, apiKey, websiteId } = getUmamiConfig();
 
 	if (!apiKey || !websiteId) {
-		return NextResponse.json({ visitors: null }, { status: 200 });
+		return NextResponse.json(
+			{ visitors: null, activeVisitors: null },
+			{ status: 200 },
+		);
 	}
 
 	const startAt = 0;
 	const endAt = Date.now();
-	const url = new URL(
+	const statsUrl = new URL(
 		`${apiBase.replace(/\/$/, "")}/websites/${websiteId}/stats`,
 	);
-	url.searchParams.set("startAt", String(startAt));
-	url.searchParams.set("endAt", String(endAt));
+	statsUrl.searchParams.set("startAt", String(startAt));
+	statsUrl.searchParams.set("endAt", String(endAt));
+	const activeUrl = new URL(
+		`${apiBase.replace(/\/$/, "")}/websites/${websiteId}/active`,
+	);
 
 	try {
-		const response = await fetch(url.toString(), {
-			headers: {
-				Authorization: `Bearer ${apiKey}`,
-			},
-			cache: "no-store",
-		});
-
-		if (!response.ok) {
-			return NextResponse.json({ visitors: null }, { status: 200 });
-		}
-
-		const payload = (await response.json()) as UmamiStatsResponse;
+		const [statsResult, activeResult] = await Promise.allSettled([
+			fetchUmamiJson<UmamiStatsResponse>(statsUrl.toString(), apiKey),
+			fetchUmamiJson<UmamiActiveResponse>(activeUrl.toString(), apiKey),
+		]);
 		const visitors =
-			typeof payload.visitors === "number"
-				? Math.max(0, payload.visitors)
+			statsResult.status === "fulfilled" &&
+			typeof statsResult.value.visitors === "number"
+				? Math.max(0, statsResult.value.visitors)
+				: null;
+		const activeVisitors =
+			activeResult.status === "fulfilled" &&
+			typeof activeResult.value.x === "number"
+				? Math.max(0, activeResult.value.x)
 				: null;
 
 		return NextResponse.json(
-			{ visitors },
+			{ visitors, activeVisitors },
 			{
 				status: 200,
 				headers: {
@@ -59,6 +83,9 @@ export async function GET() {
 			},
 		);
 	} catch {
-		return NextResponse.json({ visitors: null }, { status: 200 });
+		return NextResponse.json(
+			{ visitors: null, activeVisitors: null },
+			{ status: 200 },
+		);
 	}
 }

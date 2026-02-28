@@ -2,7 +2,10 @@
 
 ## Devops
 - Always use `pnpm` for package management.
+- Run the local Next.js dev server with Turbopack via `pnpm dev` -> `next dev --turbopack`.
 - Always update `AGENTS.md` for any reusable knowledge or user preferences that should be followed across the project.
+- For Next.js work in this repo, initialize the `next-devtools` MCP server first and follow its `init` guidance before making changes when the server is available.
+- For browser inspection, layout debugging, console or network investigation, or visual verification work in this repo, prefer the `chrome-devtools` MCP server when it is available.
 - For UI/layout/style changes, always validate with Playwright before finalizing.
 - For UI/layout/style changes, also run an accessibility check (axe via Playwright) before finalizing.
 - Use local Git pre-commit hooks (`husky` + `lint-staged`) instead of project CI/CD workflows; pre-commit must run Biome Tailwind class sorting/dedup lint and Biome formatting on staged files.
@@ -117,8 +120,11 @@
   - Before adding/updating Skills icon IDs, verify existence via Iconify API (Icones source), e.g. `https://api.iconify.design/{collection}.json?icons={icon-name}`, and only keep IDs that resolve under `icons`.
   - If `icon` is omitted and `url` exists, derive a favicon from the URL host.
   - When `code = true`, render with `font-mono`; otherwise use `font-sans` text.
+  - Language-skill badges in the main Skills section should use `font-serif`; non-language skill badges stay sans unless explicitly requested otherwise.
   - If `description` exists, show concise hover content via shadcn `HoverCard`.
   - In main Skills section rows, use two-column alignment like resume.antfu.me: fixed-width right-aligned category label column + flexible content column.
+  - In main Skills section rows, keep the same two-column category-plus-badges layout on mobile and larger screens; category labels use `font-sans text-lg`.
+  - Skill badges in the shared `SkillItemBadge` component should use roomier chip padding, slightly larger icons, and `text-base` unless a future request explicitly changes the typography scale.
   - In main Skills section rows, when badges overflow the visible row width, show a trailing `...` affordance and expand to show all badges when clicked.
   - Keep Interests under skills data label `Misc`, and render it as a dedicated bottom `Misc` section instead of inside the main Skills section.
 - Projects data and presentation:
@@ -200,6 +206,7 @@
   - Privacy statement body content should be authored in Markdown files under `data/privacy/` (`statement.md` default, locale overrides like `statement.zh.md`, `statement.ja.md`) rather than hardcoded JSX.
 - Umami visitor count integration:
   - Footer visitor count must use real Umami aggregated stats via server route `app/api/umami/visitors/route.ts` (no mock/static numbers).
+  - Footer online-now indicator should come from the same Umami route via the website `active` API and render as a compact live count beside total visitors.
   - Use `UMAMI_API_KEY` + `UMAMI_WEBSITE_ID` server env vars (optional `UMAMI_API_BASE_URL`, default `https://api.umami.is/v1`), and only expose simple formatted numbers in UI.
 - Playwright output artifacts:
   - Save generated Playwright screenshots/artifacts under `output/playwright/` (not repo root).

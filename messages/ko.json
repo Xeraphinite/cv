@@ -72,7 +72,9 @@
 		"accessibilityStatement": "접근성 성명서",
 		"privacyStatement": "개인정보 안내",
 		"theme": "테마",
+		"onlineNow": "현재 접속 중",
 		"visitorNumbers": "방문자 수",
+		"onlineNowUnavailable": "현재 접속 인원을 사용할 수 없음",
 		"visitorNumbersUnavailable": "방문자 수를 사용할 수 없음"
 	}
 }
