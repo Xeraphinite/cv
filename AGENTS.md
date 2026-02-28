@@ -18,8 +18,10 @@
 - In Skills badges, do not show trailing external-direction icons; keep only leading skill icon/favicon and text with a small visual gap.
 - In language skills, prefer `twemoji:*` icons over mingcute and keep score/proficiency details in hover descriptions instead of badge text.
 - Inline URL links rendered in text/Markdown should use a dim dashed underline by default, switch to solid underline on hover/focus, and append trailing `mingcute:arrow-right-up-fill`; keep non-inline section links unchanged.
-- Use `Spectral` as the default serif family and `IBM Plex Sans` as the default sans family across locales; keep locale-specific Noto/Source Han families as fallback.
+- Use `Spectral` as the default serif family and `IBM Plex Sans` as the default sans family for English/default (`en`) content.
+- For CJK/international content, use locale-specific `Noto Serif` variants for serif text and keep `IBM Plex Sans` as the sans family.
 - For non-English serif text (`zh`, `zh-hant`, `ja`, `ko`), prefer locale-appropriate Noto Serif families as the primary serif stack.
+- Do not use `Noto Serif SC` as a cross-locale serif fallback; map locale-specific serif variants (`Noto Serif CJK SC`/`TC`/`JP`/`KR`) per language class.
 - Use `Maple Mono` as the monospace font family for code-like text.
 - Typography scale preference: section titles should use `text-2xl`; general body text should default to `text-base`; keep `text-sm` as the minimum size, and use `text-base` for description/detail copy.
 - In rendered Markdown body text, keep paragraph-to-paragraph spacing clearly separated (use roomier vertical spacing between adjacent paragraphs).
@@ -80,6 +82,7 @@
     - intl locales/default/labels
     - metadata labels
     - CV data source settings
+  - Always pass `locale` to `NextIntlClientProvider` in locale layouts; client-side locale-aware typography/hooks (for example `useLocale()` in markdown rendering) depend on it and otherwise fall back to default locale behavior.
   - Active app locales are currently `en`, `zh`, and `ja`; keep `yue`/`ko` content and implementation files in repo for future re-enable.
   - Locale routing uses `as-needed` prefixing: default locale (`en`) is served on unprefixed routes (`/`), non-default locales use prefixes (e.g. `/zh`, `/ja`), and middleware locale auto-detection redirect is disabled.
   - Do not use client-side locale detector prompts/modals or browser-language auto-switch; locale changes should happen only through explicit user actions (e.g., locale switcher/path).
@@ -89,7 +92,7 @@
   - For Cloudflare Pages builds using `@cloudflare/next-on-pages@1`, keep `/[locale]/accessibility` on Edge runtime (`app/(a11y)/[locale]/layout.tsx`) and keep markdown as bundled imports (`.md` via webpack `asset/source` + `types/markdown.d.ts`) to avoid non-edge route failures.
   - For Cloudflare Pages builds using `@cloudflare/next-on-pages@1`, App Router route handlers that are not fully static, including `llms.txt` handlers, must export `runtime = "edge"` or the build will fail during prerender config validation.
 - Typography policy:
-  - Keep the configured font families (`Spectral`, `IBM Plex Sans`, `Noto Serif SC`, `Maple Mono`) with locale-specific CJK fallbacks.
+  - Keep the configured font families (`Spectral`, `IBM Plex Sans`, locale-specific `Noto Serif` variants, `Maple Mono`) with locale-specific CJK fallbacks.
   - Keep English serif default on `Spectral`; keep non-English serif defaults on Noto Serif families.
   - Do not force xyndrome font-size values unless explicitly requested.
   - Keep readable WCAG-friendly contrast for muted UI text: avoid using `text-muted-foreground` on compact badges/chips and dense metadata rows over muted backgrounds; prefer stronger `text-foreground/80+` tones there.
@@ -99,10 +102,12 @@
 - shadcn refresh policy:
   - After `shadcn` component refreshes, keep project conventions: `Button` link variant stays non-underlined, tooltip content keeps `font-sans`, and toast/iconography should use `@iconify/react` + `mingcute:*` instead of newly introduced `lucide-react` icons.
   - Keep `components.json` `iconLibrary` as `lucide` for shadcn CLI compatibility, then replace generated CV/layout icon usage with `@iconify/react` + `mingcute:*` per project conventions.
+  - Keep hook utilities single-sourced under `hooks/`; do not maintain duplicate copies under `components/ui/` (for example `use-mobile` and `use-toast`).
 - Global stylesheet source of truth:
   - Runtime global stylesheet is `app/globals.css`; do not re-introduce `styles/globals.css`.
   - Theme tokens consumed by Tailwind (`--background`, `--foreground`, `--chart-1..5`, `--sidebar-*`, etc.) must be defined in `app/globals.css` for both light and dark modes.
   - Do not use CSS `@import` for Google Fonts in `app/globals.css`; load primary web fonts with `next/font` in locale root layouts (currently `app/(cv)/[locale]/layout.tsx` and `app/(a11y)/[locale]/layout.tsx`) and reference via CSS variables.
+  - In section components, avoid Tailwind `!` utility modifiers in `className`; use semantic helper classes in `app/globals.css` (for example `paper-meta-*`, `paper-body-*`, `paper-badge-*`) to preserve visual overrides.
 - Code-like text:
   - Keep mono font for `code`/`pre` via `Maple Mono`.
 - Awards/Honors iconography:
@@ -149,7 +154,7 @@
 - CV page shell should be one column by default, and at `lg:` use two columns with hero as column 1 and all other sections as column 2.
 - In the CV page shell, keep second-column overall vertical padding at `py-2 sm:py-4 lg:py-6`.
   - Right column should start with a dedicated biography block (`section#about`) rendered from `hero.bio`, before News and other sections.
-  - Right column section order should be: `about` -> `news` -> `projects` -> `publications` -> `experience` -> `skills` -> `awards` -> `misc`.
+  - Right column section order should be: `about` -> `news` -> `projects` -> `publications` -> `experience` -> `education` -> `skills` -> `awards` -> `misc`.
   - The `section#about` block title should use the locale's `navigation.about` label (e.g., "About"), not a separate "Biography" label.
   - On `lg`, first-column sticky panel should use viewport-height so the footer area sits at viewport bottom (with only small outer page margin), not content bottom.
   - On `lg`, keep no extra spacing between hero content and footer block.

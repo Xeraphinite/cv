@@ -4,6 +4,7 @@ import { MarkdownText } from "@/components/ui/markdown-text";
 import { appConfig } from "@/lib/config/app-config";
 import { type Locale, localeLabels, locales } from "@/i18n";
 import { createLocalizedPath } from "@/lib/i18n-utils";
+import { getFontClass } from "@/lib/utils";
 import statementDefault from "@/data/accessibility/statement.md";
 import statementJa from "@/data/accessibility/statement.ja.md";
 import statementZh from "@/data/accessibility/statement.zh.md";
@@ -54,6 +55,7 @@ export default async function AccessibilityStatementPage({
 			? "/accessibility"
 			: `/${localeTyped}/accessibility`;
 	const statementMarkdown = loadAccessibilityStatement(localeTyped);
+	const serifFontClass = getFontClass(localeTyped, "serif");
 
 	return (
 		<main className="min-h-screen bg-background">
@@ -100,7 +102,9 @@ export default async function AccessibilityStatementPage({
 							</nav>
 						</div>
 
-						<div className="space-y-4 text-base text-foreground/85 leading-relaxed">
+						<div
+							className={`space-y-4 text-base text-foreground/85 leading-relaxed ${serifFontClass}`}
+						>
 							<MarkdownText
 								content={statementMarkdown}
 								className="[&_h2:first-child]:mt-0 [&_h2]:mt-4 [&_h2]:font-sans [&_h2]:font-semibold [&_h2]:text-foreground [&_h2]:text-lg [&_li+li]:mt-1 [&_ul]:mt-2"

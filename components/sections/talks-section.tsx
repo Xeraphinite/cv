@@ -85,7 +85,7 @@ export function TalksSection({ data }: TalksSectionProps) {
 										<MarkdownText content={talk.title} inline />
 									</h3>
 									<div className="flex items-center gap-2">
-										<span className="paper-badge !bg-primary/10 !text-primary text-xs">
+										<span className="paper-badge paper-badge-primary text-xs">
 											{talk.type ?? "Talk"}
 										</span>
 									</div>

@@ -1,5 +1,6 @@
 import { HeroSection } from "./hero-section";
 import { ExperienceSection } from "./experience-section";
+import { EducationSection } from "./education-section";
 import { SkillsSection } from "./skills-section";
 import { ProjectsSection } from "./projects-section";
 import { PublicationsSection } from "./publications-section";
@@ -107,6 +108,15 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
 					{data.experience.length > 0 && (
 						<section id="experience">
 							<ExperienceSection data={data.experience} />
+						</section>
+					)}
+
+					{data.education.length > 0 && (
+						<section id="education">
+							<EducationSection
+								data={data.education}
+								config={data.sectionConfig?.education}
+							/>
 						</section>
 					)}
 

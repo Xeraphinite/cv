@@ -33,11 +33,11 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
 						key={project.name}
 						className="paper-body text-foreground leading-relaxed"
 					>
-						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-2 md:grid-cols-[minmax(5ch,auto)_minmax(0,1fr)]">
-							<span className="order-2 col-start-2 row-start-1 justify-self-end whitespace-nowrap text-right font-bold font-sans text-base text-foreground/80 md:order-1 md:col-start-1 md:justify-self-start md:text-left">
+						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-2">
+							<span className="order-2 col-start-2 row-start-1 justify-self-end whitespace-nowrap text-right font-bold font-sans text-base text-foreground/80">
 								{formatToYearMonth(project.year)}
 							</span>
-							<div className="order-1 col-start-1 row-start-1 flex min-w-0 flex-wrap items-center gap-2 md:order-2 md:col-start-2">
+							<div className="order-1 col-start-1 row-start-1 flex min-w-0 flex-wrap items-center gap-2">
 								<h3 className="font-sans font-semibold text-lg">
 									{project.name}
 								</h3>
@@ -52,13 +52,13 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
 							</div>
 
 							{project.description ? (
-								<div className="col-span-2 font-serif text-base text-foreground/90 md:col-span-1 md:col-start-2">
+								<div className="col-span-2 font-serif text-base text-foreground/90">
 									<MarkdownText content={project.description} />
 								</div>
 							) : null}
 
 							{project.tech && project.tech.length > 0 ? (
-								<div className="col-span-2 flex flex-wrap gap-2 md:col-span-1 md:col-start-2">
+								<div className="col-span-2 flex flex-wrap gap-2">
 									{project.tech.map((item, index) => (
 										<SkillItemBadge
 											key={`${project.name}-tech-${item.text}-${index}`}
@@ -69,7 +69,7 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
 							) : null}
 
 							{project.previewImages && project.previewImages.length > 0 ? (
-								<div className="col-span-2 mt-1 grid grid-cols-1 gap-2 sm:grid-cols-2 md:col-span-1 md:col-start-2">
+								<div className="col-span-2 mt-1 grid grid-cols-1 gap-2 sm:grid-cols-2">
 									{project.previewImages.map((image, index) => (
 										<div
 											key={`${project.name}-preview-${image.src}-${index}`}
@@ -89,7 +89,7 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
 							) : null}
 
 							{project.urls && project.urls.length > 0 ? (
-								<div className="col-span-2 mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 md:col-span-1 md:col-start-2">
+								<div className="col-span-2 mt-1 flex flex-wrap items-center gap-x-4 gap-y-1">
 									{project.urls.map((link, index) => (
 										<a
 											key={`${project.name}-url-${link.url}-${index}`}

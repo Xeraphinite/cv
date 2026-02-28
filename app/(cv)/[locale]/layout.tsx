@@ -26,6 +26,9 @@ const ibmPlexSans = IBM_Plex_Sans({
 	variable: "--font-ibm-plex-sans",
 });
 
+const notoSerifCjkStylesheet =
+	"https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&display=swap";
+
 export async function generateMetadata({
 	params,
 }: {
@@ -125,6 +128,15 @@ export default async function LocaleLayout({
 
 	return (
 		<html lang={localeTyped} dir={direction} suppressHydrationWarning>
+			<head>
+				<link href="https://fonts.googleapis.com" rel="preconnect" />
+				<link
+					crossOrigin=""
+					href="https://fonts.gstatic.com"
+					rel="preconnect"
+				/>
+				<link href={notoSerifCjkStylesheet} rel="stylesheet" />
+			</head>
 			<body className={`${spectral.variable} ${ibmPlexSans.variable}`}>
 				{umamiWebsiteId ? (
 					<Script
@@ -133,7 +145,7 @@ export default async function LocaleLayout({
 						strategy="afterInteractive"
 					/>
 				) : null}
-				<NextIntlClientProvider messages={messages}>
+				<NextIntlClientProvider locale={localeTyped} messages={messages}>
 					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
 						{children}
 						<CVFooter

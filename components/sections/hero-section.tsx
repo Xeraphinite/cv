@@ -228,14 +228,14 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 			return (
 				<MarkdownText
 					content={position}
-					className={`${typographyClasses.body} !text-lg !font-bold text-foreground/85`}
+					className={`${typographyClasses.body} paper-body-emphasis text-foreground/85`}
 				/>
 			);
 		}
 
 		return (
 			<p
-				className={`${typographyClasses.body} !text-lg !font-bold text-foreground/85`}
+				className={`${typographyClasses.body} paper-body-emphasis text-foreground/85`}
 			>
 				<span className="inline-flex flex-wrap gap-x-1">
 					{parts.map((part, index) => {

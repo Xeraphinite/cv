@@ -3,6 +3,7 @@
 import { evaluateSync } from "@mdx-js/mdx";
 import { Icon } from "@iconify/react";
 import { useMDXComponents } from "@mdx-js/react";
+import { useLocale } from "next-intl";
 import type { MDXComponents } from "mdx/types.js";
 import type {
 	AnchorHTMLAttributes,
@@ -13,7 +14,7 @@ import { useMemo } from "react";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
-import { cn } from "@/lib/utils";
+import { cn, getFontClass } from "@/lib/utils";
 
 interface MarkdownTextProps {
 	content?: string;
@@ -61,6 +62,7 @@ function MarkdownAnchor({
 function createMarkdownComponents(
 	inline: boolean,
 	showLinkIcon: boolean,
+	serifFontClass: string,
 ): MDXComponents {
 	const Paragraph = ({
 		children,
@@ -70,7 +72,10 @@ function createMarkdownComponents(
 		inline ? (
 			<Fragment>{children}</Fragment>
 		) : (
-			<p {...props} className={cn("text-base leading-relaxed", className)}>
+			<p
+				{...props}
+				className={cn("text-base leading-relaxed", serifFontClass, className)}
+			>
 				{children}
 			</p>
 		);
@@ -79,13 +84,19 @@ function createMarkdownComponents(
 		a: (props) => <MarkdownAnchor {...props} showLinkIcon={showLinkIcon} />,
 		p: Paragraph,
 		ul: ({ className, ...props }) => (
-			<ul {...props} className={cn("list-disc pl-5", className)} />
+			<ul
+				{...props}
+				className={cn("list-disc pl-5", serifFontClass, className)}
+			/>
 		),
 		ol: ({ className, ...props }) => (
-			<ol {...props} className={cn("list-decimal pl-5", className)} />
+			<ol
+				{...props}
+				className={cn("list-decimal pl-5", serifFontClass, className)}
+			/>
 		),
 		li: ({ className, ...props }) => (
-			<li {...props} className={cn(className)} />
+			<li {...props} className={cn(serifFontClass, className)} />
 		),
 		code: ({ className, ...props }) => (
 			<code {...props} className={cn("font-mono", className)} />
@@ -128,11 +139,13 @@ export function MarkdownText({
 	inline = false,
 	showLinkIcon = true,
 }: MarkdownTextProps) {
+	const locale = useLocale();
 	const normalizedContent = content?.replace(/\r\n?/g, "\n").trim();
+	const serifFontClass = getFontClass(locale, "serif");
 	const components = useMDXComponents(
 		useMemo(
-			() => createMarkdownComponents(inline, showLinkIcon),
-			[inline, showLinkIcon],
+			() => createMarkdownComponents(inline, showLinkIcon, serifFontClass),
+			[inline, serifFontClass, showLinkIcon],
 		),
 	);
 	const Content = useMemo(
@@ -151,7 +164,14 @@ export function MarkdownText({
 		: "[&_ol+*]:mt-4 [&_p+p]:mt-4 [&_ul+*]:mt-4";
 
 	return (
-		<Wrapper className={cn(blockSpacingClass, className)}>
+		<Wrapper
+			className={cn(
+				"markdown-text-root",
+				blockSpacingClass,
+				serifFontClass,
+				className,
+			)}
+		>
 			{Content ? <Content components={components} /> : normalizedContent}
 		</Wrapper>
 	);

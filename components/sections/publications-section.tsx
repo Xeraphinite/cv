@@ -173,13 +173,13 @@ export function PublicationsSection({
 						key={`${publication.title}-${index}`}
 						className="paper-body text-foreground leading-relaxed"
 					>
-						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-3 md:grid-cols-[minmax(6ch,auto)_minmax(0,1fr)] md:gap-y-1">
-							<span className="order-2 justify-self-end whitespace-nowrap text-right font-bold font-sans text-base text-foreground/80 md:order-1 md:justify-self-start md:text-left">
+						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-3 md:gap-y-1">
+							<span className="order-2 justify-self-end whitespace-nowrap text-right font-bold font-sans text-base text-foreground/80">
 								{formatToYearMonth(publication.year)}
 							</span>
 
-							<div className="order-1 min-w-0 md:order-2 md:col-start-2 [&>*:not(:last-child)]:mb-0.5">
-								<h3 className="font-sans font-semibold text-lg leading-tight">
+							<div className="order-1 min-w-0 [&>*:not(:last-child)]:mb-0.5">
+								<h3 className="text-lg leading-tight">
 									{publication.url &&
 									!containsMarkdownLink(publication.title) ? (
 										<a
@@ -190,12 +190,12 @@ export function PublicationsSection({
 										>
 											<MarkdownText
 												content={publication.title}
-												className="inline"
+												className="inline font-sans font-semibold"
 												inline
 											/>
 											<Icon
 												icon="mingcute:arrow-right-up-fill"
-												className="ml-1 inline h-3.5 w-3.5 align-[-0.08em] text-foreground/70 transition-colors transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-foreground"
+												className="ml-1 inline h-3.5 w-3.5 align-[-0.08em] text-foreground/70 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-foreground"
 											/>
 										</a>
 									) : (

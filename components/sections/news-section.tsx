@@ -84,8 +84,8 @@ export function NewsSection({ data }: NewsSectionProps) {
 						key={`${item.title}-${index}`}
 						className="paper-body text-foreground leading-relaxed"
 					>
-						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-0.5 md:grid-cols-[minmax(6ch,auto)_minmax(0,1fr)] md:gap-y-0">
-							<span className="order-2 justify-self-end whitespace-nowrap text-right font-bold font-sans text-base text-foreground/80 md:order-1 md:justify-self-start md:text-left">
+						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-0.5 md:gap-y-0">
+							<span className="order-2 justify-self-end whitespace-nowrap text-right font-bold font-sans text-base text-foreground/80">
 								{renderYearMonthWithSup(item.date)}
 							</span>
 							{item.url &&
@@ -96,7 +96,7 @@ export function NewsSection({ data }: NewsSectionProps) {
 									href={item.url}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="order-1 no-underline hover:no-underline md:order-2 md:col-start-2"
+									className="order-1 no-underline hover:no-underline"
 								>
 									<MarkdownText
 										content={item.summary || item.title || item.outlet}
@@ -108,7 +108,7 @@ export function NewsSection({ data }: NewsSectionProps) {
 							) : (
 								<MarkdownText
 									content={item.summary || item.title || item.outlet}
-									className="order-1 text-foreground/90 text-lg md:order-2 md:col-start-2"
+									className="order-1 text-foreground/90 text-lg"
 									inline
 									showLinkIcon={false}
 								/>
