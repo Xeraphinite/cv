@@ -29,17 +29,16 @@
 
 - [ ] Update README.md with new project name, description, and usage instructions;
 - [ ] Add documentation for contributing, customization, and deployment;
-- [ ] Migrate Cloudflare deployment from `@cloudflare/next-on-pages` to OpenNext (`@opennextjs/cloudflare`) on Workers; use free `*.workers.dev` domain (or bind custom domain on Worker);
+- [x] Migrate Cloudflare deployment from `@cloudflare/next-on-pages` to OpenNext (`@opennextjs/cloudflare`) on Workers (Do not use OpenNext since the unsupported status...);
 - [ ] Create a changelog to track updates and changes;
 
 ## content
 
-- [ ] Update project content
+- [ ] Update project contents.
 
 ## perf
 
-- [ ] Optimize lighthouse perf.
-- [ ] Setup Chrome DevTools, Lighthouse etc.
+- [x] Optimize lighthouse perf.
 
 ## code practices
 
@@ -55,3 +54,7 @@
 
 - [x] Remove `!` important flag in CSS.
 - [ ] Email disconfusion?
+
+## Agents
+
+- [ ] Tools: Setup Next DevTools, Chrome DevTools, Playwright, etc.

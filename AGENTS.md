@@ -1,231 +1,232 @@
 # AGENTS.md
 
-## Devops
-- Always use `pnpm` for package management.
-- Run the local Next.js dev server via `pnpm dev` -> `next dev` on Next.js 16+.
-- Always update `AGENTS.md` for any reusable knowledge or user preferences that should be followed across the project.
-- Keep workspace-local VS Code MCP config in `.vscode/mcp.json` using `next-devtools-mcp@latest` when this project needs Next MCP discovery.
-- For Next.js work in this repo, initialize the `next-devtools` MCP server first and follow its `init` guidance before making changes when the server is available.
-- For browser inspection, layout debugging, console or network investigation, or visual verification work in this repo, prefer the `chrome-devtools` MCP server when it is available.
-- For UI/layout/style changes, always validate with Playwright before finalizing.
-- For UI/layout/style changes, also run an accessibility check (axe via Playwright) before finalizing.
-- Use local Git pre-commit hooks (`husky` + `lint-staged`) instead of project CI/CD workflows; pre-commit must run Biome Tailwind class sorting/dedup lint and Biome formatting on staged files.
+## Workflow
 
-## User Preferences
-- Use `mingcute` icons for CV/UI iconography whenever an icon is needed.
+### Tooling
+- Always use `pnpm`.
+- Run the local Next.js dev server with `pnpm dev` on Next.js 16+.
+- Update `AGENTS.md` whenever a reusable project convention or user preference changes.
+- Prefer local Git hooks (`husky` + `lint-staged`) over CI-only enforcement; staged files should run Biome formatting and Tailwind class sorting/dedup lint.
+
+### MCP / Browser Validation
+- Keep workspace-local VS Code MCP config in `.vscode/mcp.json` using `next-devtools-mcp@latest` when this project needs Next MCP discovery.
+- For Next.js work in this repo, initialize `next-devtools` first and follow its `init` guidance when the server is available.
+- For browser inspection, layout debugging, console/network investigation, or visual verification, prefer `chrome-devtools` when available.
+- For UI/layout/style changes, validate with Playwright before finalizing.
+- For UI/layout/style changes, also run an accessibility check via Playwright before finalizing.
+
+## UI Conventions
+
+### Iconography
+- Use `mingcute` icons for CV/UI iconography.
 - Prefer `@iconify/react` with icon IDs in the form `mingcute:*`.
 - Do not introduce new `lucide-react` icons in CV/layout features unless explicitly requested.
-- Use `mingcute:arrow-right-up-fill` to denote external links.
-- In Skills badges, do not show trailing external-direction icons; keep only leading skill icon/favicon and text with a small visual gap.
-- In language skills, prefer `twemoji:*` icons over mingcute and keep score/proficiency details in hover descriptions instead of badge text.
-- Inline URL links rendered in text/Markdown should use a dim dashed underline by default, switch to solid underline on hover/focus, and append trailing `mingcute:arrow-right-up-fill`; keep non-inline section links unchanged.
-- Use `Spectral` as the default serif family and `IBM Plex Sans` as the default sans family for English/default (`en`) content.
-- For CJK/international content, use locale-specific `Noto Serif` variants for serif text and keep `IBM Plex Sans` as the sans family.
-- For non-English serif text (`zh`, `zh-hant`, `ja`, `ko`), prefer locale-appropriate Noto Serif families as the primary serif stack.
-- Do not use `Noto Serif SC` as a cross-locale serif fallback; map locale-specific serif variants (`Noto Serif CJK SC`/`TC`/`JP`/`KR`) per language class.
-- Use `Maple Mono` as the monospace font family for code-like text.
-- Typography scale preference: section titles should use `text-2xl`; general body text should default to `text-base`; keep `text-sm` as the minimum size, and use `text-base` for description/detail copy.
-- In rendered Markdown body text, keep paragraph-to-paragraph spacing clearly separated (use roomier vertical spacing between adjacent paragraphs).
-- Keep badges/chips compact: prefer small pill padding (`px-2 py-1` or tighter), smaller icon size, and tighter inter-chip spacing (`gap-1` to `gap-1.5`) unless explicitly requested otherwise.
-- When a roomier badge layout is requested, increase chip-group spacing to around `gap-2` and allow slightly wider chip padding (e.g. `px-2.5`) for readability.
-- Keep section spacing compact by default: prefer margin-based vertical rhythm (`mb-*`) and reduce inter-item vertical gaps unless explicitly requested to be roomy.
-- When overall roomier section spacing is requested, increase shared `section[id]` wrapper spacing across breakpoints together (for example `mb-6 sm:mb-7 lg:mb-10`) before changing section-internal gaps.
-- When roomier section spacing is requested for large devices, increase `section[id]` wrapper spacing on `lg` (e.g., `lg:[&>section]:mb-8`) while keeping smaller breakpoints unchanged.
-- On mobile (`< sm`), prefer roomier layout defaults over dense packing; prioritize readable spacing and full-width content usage.
-- When overall mobile spacing is requested for the whole site, prefer adjusting shared page-shell/body gutters before adding section-level padding overrides.
-- When overall CV top/bottom spacing is requested for mobile or `lg`, adjust the top-level shell in `components/sections/cv.tsx` instead of per-section spacing.
-- For mobile spacing requests involving the sticky header or footer, adjust `components/layout/cv-header.tsx` and `components/layout/cv-footer.tsx` vertical spacing directly instead of compensating inside content sections.
-- For timeline-style rows (date + content), use single-column stacking on mobile and switch to two-column alignment from `md` and up.
-- In section components, use bottom spacing (`mb-*`) for vertical rhythm; avoid top margins (`mt-*`) for section content spacing.
-- In-section item lists should use unified `gap-y-2` spacing by default.
-- Within a given section component, keep one spacing strategy consistently (either `gap-y-*` or child-margin selectors) and avoid flipping between equivalent patterns across edits to reduce hydration mismatch risk during dev.
-- Keep CV content row alignment breakpoint-agnostic by default; avoid desktop-only (`md`/`lg`) order/column alignment logic in section item content unless explicitly requested.
-- Keep `.paper-card` top and bottom padding removed by default (`pt-0 pb-0`); use margin for section/item spacing unless explicitly requested otherwise.
-- Keep `.paper-card` content unrounded; do not apply `rounded-*` classes to paper-card containers unless explicitly requested.
-- Apply per-section spacing on `section[id]` wrappers with responsive Tailwind `mb-*` classes (e.g., `mb-4 sm:mb-5 lg:mb-6`) instead of relying on shared CSS margins.
-- For Skills, Awards, Education, Experience, and Misc sections, keep section-title underline/border spacing especially tight (reduced title `mb`/`pb`).
-- In Awards rows, keep award name text at `text-base` and institution text at `text-sm` (`14px`).
-- In Education, keep both inter-item spacing and intra-item spacing compact by default.
-- In Education, hide item detail/highlight bullet lists by default; show only core metadata (time, institution, degree, supervisor).
+- Use `mingcute:arrow-right-up-fill` for external links.
+- Use `mingcute:news-fill` for the News section header.
+- Use `mingcute:medal-fill` for Awards section headers and `mingcute:medal-line` for compact/stat contexts.
+- Use `mingcute:telescope-fill` for the Experience section header.
+- Use `mingcute:at-fill` in Experience item meta.
+- Use `mingcute:mortarboard-fill` for school-cap iconography in hero location UI.
 
-## Reusable Project Knowledge
-  - CV data source:
-  - Primary source is TOML at `data/cv.toml`.
-  - Default content locale (`en`) should resolve to `data/cv.toml` (not `data/cv.en.toml`).
-  - Loader maps TOML to app `CVData` in `lib/load-cv-data.ts`.
-  - Use `profile.position` (or localized `hero.position` override) for the left-column hero role/title line; keep `profile.summary` / `hero.bio` for the right-column `About` content.
-  - Hero Japanese ruby should use `profile.furigana_name` and `profile.furigana`; when values are `|`-separated, render aligned segmented ruby per chunk.
-  - Furigana rendering should keep ruby text width-aligned to its base character/chunk (use normal ruby layout with `ruby-align`, avoid absolute-positioned `rt`).
-  - In Japanese locale hero, show English name (`enName`) beneath the Japanese display name.
-  - In English locale hero, always show the original-script name on the top line and show the English name beneath it when both are available.
-  - Localized CV data files use TOML overrides at `data/cv.{locale}.toml` and should only contain locale-specific fields.
-  - When `data/cv.toml` is updated, keep localized `data/cv.{locale}.toml` files in sync with the same underlying records/structure.
-  - For `data/cv.ja.toml` and `data/cv.zh.toml`, keep record structure and item parity aligned with English (`data/cv.toml`) via translation (same meaning), not by copying raw English text.
-  - Skills `items` in TOML support both string form and object form (`text`/`name`, optional `icon`, `url`, `code`, `description`).
-  - Main Skills category order should be: `Languages` -> `Programming Languages` -> `DevOps` -> `AI Engineering` -> `Web Dev & Design` -> `Backend Development`; `Misc` is rendered as a separate bottom section.
-- News section is stored at `[news.*]` in TOML with fields `title`, `outlet`, `date`, `summary`, `url`, mapped to `CVData.news`.
-- News section UI format is concise: each row shows only `date` + description text, and rows are sorted newest first by `date` (supports `YYYY` and `YYYY.M`).
-- News date display should follow the same unified time format as other sections (`yyyymm` when month exists; year-only as `yyyy`).
-- Keep the News section title icon (`mingcute:news-fill`) in the header.
-- In News rows, do not append trailing external-link icons for URL links.
-- Use `text-base` for About section content and News row description content.
-- Use `text-base` for Selected Projects title, Publications title, and Awards main item line.
-- For News items that need custom link labels, put links directly in `summary` Markdown and leave `url` empty.
-- Publications section should use a concise, unified reading layout: year-first left column + compact right-column metadata (title, authors, venue, status/type/DOI) without heavy card styling.
-  - Publication owner-name highlighting should match against `profile.aliases` and normalized name variants (full name and initial-based forms) so the profile author is consistently bolded.
-  - TOML text fields preserve Markdown syntax at load time and render through `components/ui/markdown-text.tsx` in UI sections.
-  - `components/ui/markdown-text.tsx` uses the MDX runtime (`@mdx-js/react` + `@mdx-js/mdx`) for Markdown rendering; preserve the existing inline-link styling and paragraph spacing when updating it.
-  - `components/ui/markdown-text.tsx` block paragraph text should default to `text-base` so rendered Markdown matches the main content size unless a caller explicitly overrides it.
-  - When rendering text via `MarkdownText`, do not wrap the same content with an outer `<a>` if the markdown may already contain links; avoid nested anchors to prevent SSR/client hydration mismatches.
-  - For components rendered during SSR, do not use non-deterministic values (`Math.random()`, render-time `Date.now()`) in render paths; derive values from server props or use deterministic constants.
-- Centralized app config:
-  - `lib/config/app-config.ts` contains:
-    - intl locales/default/labels
-    - metadata labels
-    - CV data source settings
-  - Always pass `locale` to `NextIntlClientProvider` in locale layouts; client-side locale-aware typography/hooks (for example `useLocale()` in markdown rendering) depend on it and otherwise fall back to default locale behavior.
-  - Active app locales are currently `en`, `zh`, and `ja`; keep `yue`/`ko` content and implementation files in repo for future re-enable.
-  - Locale routing uses `as-needed` prefixing: default locale (`en`) is served on unprefixed routes (`/`), non-default locales use prefixes (e.g. `/zh`, `/ja`), and middleware locale auto-detection redirect is disabled.
-  - Do not use client-side locale detector prompts/modals or browser-language auto-switch; locale changes should happen only through explicit user actions (e.g., locale switcher/path).
-- App Router metadata:
-  - In `app/` routes, do not use `next/head`; use the Metadata API and/or native `<head>` in layout files.
-  - Route groups are split for deployment/runtime constraints: keep CV pages under `app/(cv)/[locale]` and accessibility pages under `app/(a11y)/[locale]/accessibility`.
-  - Cloudflare deploys in this repo currently target Cloudflare Pages via `@cloudflare/next-on-pages@1` to preserve the `pages.dev` domain workflow.
-  - Keep Cloudflare Pages build/deploy scripts aligned with the legacy Pages adapter: `npx @cloudflare/next-on-pages@1` and `wrangler pages deploy .vercel/output/static`.
-  - For Cloudflare Pages builds using `@cloudflare/next-on-pages@1`, keep `/[locale]/accessibility` on Edge runtime (`app/(a11y)/[locale]/layout.tsx`) and keep markdown as bundled imports (`.md` via webpack `asset/source` + `types/markdown.d.ts`) to avoid non-edge route failures.
-  - For Cloudflare Pages builds using `@cloudflare/next-on-pages@1`, App Router route handlers that are not fully static, including `llms.txt` handlers, must export `runtime = "edge"` or the build will fail during prerender config validation.
-  - For Cloudflare Pages builds using `@cloudflare/next-on-pages@1`, keep locale routing in root `middleware.ts` instead of `proxy.ts`; the adapter still validates `_middleware` and can fail on Next 16 `proxy.ts` setups even when local Next builds pass.
-- Typography policy:
-  - Keep the configured font families (`Spectral`, `IBM Plex Sans`, locale-specific `Noto Serif` variants, `Maple Mono`) with locale-specific CJK fallbacks.
-  - Keep English serif default on `Spectral`; keep non-English serif defaults on Noto Serif families.
-  - Do not force xyndrome font-size values unless explicitly requested.
-  - Keep readable WCAG-friendly contrast for muted UI text: avoid using `text-muted-foreground` on compact badges/chips and dense metadata rows over muted backgrounds; prefer stronger `text-foreground/80+` tones there.
-  - Tooltip text should default to `font-sans` via the shared shadcn tooltip UI component.
-  - Hover card panels should use theme-aware popover surfaces (`bg-popover`/`text-popover-foreground`) so they support both light and dark mode.
-  - Tooltip panels should use theme-aware popover surfaces (`bg-popover`/`text-popover-foreground`) so they support both light and dark mode.
-- shadcn refresh policy:
-  - After `shadcn` component refreshes, keep project conventions: `Button` link variant stays non-underlined, tooltip content keeps `font-sans`, and toast/iconography should use `@iconify/react` + `mingcute:*` instead of newly introduced `lucide-react` icons.
-  - Keep `components.json` `iconLibrary` as `lucide` for shadcn CLI compatibility, then replace generated CV/layout icon usage with `@iconify/react` + `mingcute:*` per project conventions.
-  - Keep hook utilities single-sourced under `hooks/`; do not maintain duplicate copies under `components/ui/` (for example `use-mobile` and `use-toast`).
-- Global stylesheet source of truth:
-  - Runtime global stylesheet is `app/globals.css`; do not re-introduce `styles/globals.css`.
-  - Theme tokens consumed by Tailwind (`--background`, `--foreground`, `--chart-1..5`, `--sidebar-*`, etc.) must be defined in `app/globals.css` for both light and dark modes.
-  - Do not use CSS `@import` for Google Fonts in `app/globals.css`; load primary web fonts with `next/font` in locale root layouts (currently `app/(cv)/[locale]/layout.tsx` and `app/(a11y)/[locale]/layout.tsx`) and reference via CSS variables.
-  - In section components, avoid Tailwind `!` utility modifiers in `className`; use semantic helper classes in `app/globals.css` (for example `paper-meta-*`, `paper-body-*`, `paper-badge-*`) to preserve visual overrides.
-- Turbopack markdown imports:
-  - When importing `.md` files as source strings in Next.js dev (`pnpm dev` with Turbopack), keep a Turbopack rule mapped to `raw-loader` with `as: "*.js"`; webpack-only `asset/source` is not sufficient for Turbopack.
-  - When importing `.toml` files as raw source strings in Next.js dev (`pnpm dev` with Turbopack), keep a matching Turbopack `raw-loader` rule with `as: "*.js"`; webpack-only `asset/source` is not sufficient for Turbopack.
-  - On Next.js `16.x` in this repo, keep those loader rules under top-level `turbopack.rules`; `experimental.turbo` and the Next config `eslint` key are no longer valid.
-  - While this repo still uses a custom webpack raw-source rule for `.md`/`.toml` build imports, keep `pnpm build` on `next build --webpack`; Next.js 16 default Turbopack builds will reject custom webpack config.
-- Code-like text:
-  - Keep mono font for `code`/`pre` via `Maple Mono`.
-- Awards/Honors iconography:
-  - Use `mingcute:medal-fill` for section headers and `mingcute:medal-line` for compact/stat contexts.
-- Awards/Honors section layout should stay concise and use Skills-like two-column alignment (fixed-width right-aligned left column + flexible content column).
-- Keep year-to-item horizontal spacing tight in Awards rows (prefer smaller `gap-x` values).
-- Awards rows should follow the same per-item card/grid layout pattern as Education (per-item `paper-card` + matching time/content alignment rhythm).
-- Awards date rendering should mirror Education style: show ranges as `start - end` with normalized hyphen spacing and superscript month when month exists.
-- Experience section styling:
-  - Use `mingcute:telescope-fill` as the Experience section header icon.
-  - Show experience time in a muted time column before role/company details.
-  - In Experience item meta, use `mingcute:at-fill` and show only org/company (omit location text).
-- Skills item component:
-  - Use reusable `SkillItemBadge` in `components/sections/skill-item-badge.tsx` for skills chips.
-  - Supports `text` (required), `icon` (optional), `url` (optional), `code` (optional), and `description` (optional).
-  - Before adding/updating Skills icon IDs, verify existence via Iconify API (Icones source), e.g. `https://api.iconify.design/{collection}.json?icons={icon-name}`, and only keep IDs that resolve under `icons`.
-  - If `icon` is omitted and `url` exists, derive a favicon from the URL host.
-  - When `code = true`, render with `font-mono`; otherwise use `font-sans` text.
-  - Language-skill badges in the main Skills section should use `font-serif`; non-language skill badges stay sans unless explicitly requested otherwise.
-  - If `description` exists, show concise hover content via shadcn `HoverCard`.
-  - In main Skills section rows, use two-column alignment like resume.antfu.me: fixed-width right-aligned category label column + flexible content column.
-  - In main Skills section rows, keep the same two-column category-plus-badges layout on mobile and larger screens; category labels use `font-sans text-lg`.
-  - Skill badges in the shared `SkillItemBadge` component should use roomier chip padding, slightly larger icons, and `text-base` unless a future request explicitly changes the typography scale.
-  - In main Skills section rows, when badges overflow the visible row width, show a trailing `...` affordance and expand to show all badges when clicked.
-  - Keep Interests under skills data label `Misc`, and render it as a dedicated bottom `Misc` section instead of inside the main Skills section.
-- Projects data and presentation:
-  - Use dedicated projects data in TOML under `[projects.*]` (default source) / `[[projects]]` (localized overrides), not fallback mock data.
-  - Project fields support `year`, `name`, `status`, `description`, optional `preview_images`, optional `urls`, and optional `tech`.
-  - Render project name in sans (`font-sans`) and description in serif (`font-serif`).
-  - Render project `status` using a compact badge style.
-  - Render project tech stack with reusable `SkillItemBadge` chips (skill-item style).
-- Time/date presentation:
-  - In time-related sections (Experience, Education, Projects, Awards, News), render date/time first using muted sans text (`font-sans text-base font-bold` + muted tone), followed by content.
-  - Use `yyyymm` date notation when month exists; if month is not available, show year only (`yyyy`). Footer `lastUpdated` is excluded and stays relative-time.
-  - Date parsing for normalization should support both CJK and Korean markers (`年/月` and `년/월`) so locale-specific source strings still render as unified `yyyymm`.
-  - In Experience and Education only, render month (`mm`) as superscript in `yyyymm`, with `top-[0.04em]` for subtle lowering.
-  - Avoid calendar/date icons for section row timestamps.
-  - In two-column time layouts, keep all non-time content aligned to the second column (`col-start-2`) so descriptions/highlights sit under titles, not under time.
-  - Education expected-suffix line split is controlled by CV data config `sectionConfig.education.splitExpectedLine` (default true).
-  - When expected-suffix split is enabled, use locale-aware text from `messages/*` key `labels.expected`, accept both ASCII/Full-width parentheses in source dates, and render a normalized ASCII `(${label})` display for cross-locale visual consistency.
-- Hero layout breakpoint:
-  - Keep the hero section single-column on small/medium screens; switch to two-column split at `lg:`.
-  - On non-`lg`, use the sticky mobile navigator-style `CVHeader` UX (show/hide on scroll) for controls.
-- CV page shell should be one column by default, and at `lg:` use two columns with hero as column 1 and all other sections as column 2.
-- In the CV page shell, keep second-column overall vertical padding at `py-2 sm:py-4 lg:py-6`.
-  - Right column should start with a dedicated biography block (`section#about`) rendered from `hero.bio`, before News and other sections.
-  - Right column section order should be: `about` -> `news` -> `projects` -> `publications` -> `experience` -> `education` -> `skills` -> `awards` -> `misc`.
-  - The `section#about` block title should use the locale's `navigation.about` label (e.g., "About"), not a separate "Biography" label.
-  - On `lg`, first-column sticky panel should use viewport-height so the footer area sits at viewport bottom (with only small outer page margin), not content bottom.
-  - On `lg`, keep no extra spacing between hero content and footer block.
-  - In the hero card, keep content vertically stacked (no avatar/name same-row split on `lg`): Avatar -> Name -> Description/Bio -> Contacts.
-  - Remove top spacing above avatar/icon in hero wrapper so the avatar aligns flush with the content top.
-  - Contacts in hero should be one item per line (icon + value), with values wrapping instead of truncating.
-  - Left-column hero contact items should use shadcn `Tooltip` for concise hover tips, positioned at the top of each trigger.
-  - Do not add left padding/inset for contact rows; icon should not reserve extra left spacing.
-- Use margin-based spacing on the hero contacts list for vertical separation between contact rows.
-  - Contact hover background should wrap only real content (`w-fit`/`self-start`) with rounded corners; inner padding should apply on hover only.
-  - Hero location text should use locale-aware serif font.
-  - Hero location uses a dedicated `HeroLocation` component; for `Guangzhou, Guangdong`, hovering the location reveals a mapcn-style hover card with a marker rich popup showing current workplace.
-  - Hero location hover map should hide the map attribution/open-contributors text, and the current workplace popup should anchor above the marker (not below).
-  - In hero location map card: keep mouse-wheel zoom enabled, use `mingcute:location-fill` in a rounded-square marker, keep marker popup open by default with plain State Key text (no shadow/backdrop styling), and render a persistent bottom overlay square sized to half width + half height of the map with icon + `Work` label only; the square uses white background in light mode with a slightly larger icon, and default camera should place the marker near the top-right-center area.
-  - Hero location marker must remain high-contrast and clearly visible against the map background (use stronger icon/border contrast and slightly larger marker size when needed).
-  - Hero location marker visual direction should mimic Apple Maps-like treatment: visible halo/ring indicator with a clear marker chip placed near the map's top-right-center, plus a large rounded bottom-left work card.
-  - State key text on hero location map should use `MarkerLabel` (not `MarkerPopup`).
-  - Hero location display should remove `Guangzhou` prefix from location text and remove `State Key` prefix from map label text.
-  - In `HeroLocation` implementation, prefer generic identifier names for map constants/labels (avoid `guangzhou*` / `state_key*` prefixes in code symbols).
-  - In hero location rendering, do not transform display strings via prefix replacement; `displayLocation` and map label text should use original source text.
-  - When requested, hero location should use default map marker style (`MarkerContent` default) and position marker near top-right-center by tuning map camera center/zoom.
-  - When mimicking the showcase card style, hero location bottom card should be a large rounded panel with a circular icon chip and two-line text layout (`学校` / `Guangzhou`).
-  - For school-cap iconography in hero location card, use `mingcute:mortarboard-fill` (not non-existent `graduation-cap` ids).
-- Print styling policy:
-  - Do not use Tailwind `print:*` variants or `@media print` overrides in runtime app styles/components.
-- TOC behavior:
-  - Do not hardcode TOC items in header/components.
-  - Build TOC from rendered `main section[id]` elements and section headings so it stays in sync with shown sections.
-  - TOC trigger should not show a leading icon; keep label text and chevron only.
-- Do not render the sticky/mobile TOC header in locale layouts; keep navigation controls out of the top header and preserve the existing `CVFooter` styling.
-- Mobile locale/theme controls live in `CVFooter`; do not keep parallel `CVControls`/TOC header UI unless explicitly requested.
-- Footer behavior:
-  - Show `lastUpdated` as locale-aware relative time (e.g., today / 2 days ago) instead of absolute date.
-  - `lastUpdated` should be computed from CV source file mtime via `getCVLastUpdated` in `lib/load-cv-data.ts`, not from browser page metadata.
-  - Footer relative update text should be recalculated client-side from the visitor's current time after hydration and continue refreshing; do not anchor it to a static server render timestamp.
-  - Do not show a textual prefix label before relative update time (render only the relative time text with icon).
-  - Footer body text should stay one step smaller than the default body copy (`text-sm` rather than `text-base`) unless explicitly requested otherwise.
-  - Footer should include a full single-line copyright text in the form `© yyyy <owner>. All rights reserved.`.
-  - Render footer in exactly 3 lines: (1) last update time + visitor numbers + locale/theme toggles, (2) `LLMs.txt` + Accessibility + Privacy, (3) copyright text.
-  - In footer line 2, each item (`LLMs.txt`, Accessibility, Privacy) should use a clear leading icon (mingcute set), not text-only entries.
-  - Privacy page content should contain the full analytics claim, explicitly stating that Umami is used for visitor analytics.
-  - Keep footer bottom spacing compact (reduced bottom padding).
-  - Use recency-based text tone for `lastUpdated`: freshest is darker/stronger, and it becomes dimmer as elapsed time increases.
-- Footer links should include `LLMs.txt` (no RSS/Sitemap links).
-- `LLMs.txt` is generated via App Router route handlers (`app/llms.txt/route.ts` and `app/[locale]/llms.txt/route.ts`), not a static `public/llms.txt` file; keep content sourced from localized CV data so `/llms.txt`, `/zh/llms.txt`, and `/ja/llms.txt` stay in sync.
-- Footer last-updated text, `LLMs.txt`, `Accessibility` link, language control, and theme control should expose concise top-positioned shadcn `Tooltip` tips.
-- Footer language and theme controls should show the current selection as visible label text on the trigger, not via a separate indicator dot.
-  - Mobile/footer layout mounts should use the same `CVFooter` controls configuration as desktop, including locale and theme controls.
-  - On `lg`, do not show TOC in first-column bottom area.
-  - On `lg`, place language and theme controls in footer immediately after `LLMs.txt`.
-  - On `lg`, page shell container width should step up one Tailwind max-width class (`max-w-6xl` -> `lg:max-w-7xl`), while the left column should stay narrower (`lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)]`) and use top+bottom sticky anchoring (`lg:top-4`, `lg:bottom-4`) with near-full viewport height (`h-[calc(100vh-2rem)]`).
-- Accessibility statement page:
-  - Use a simple inline language switcher inspired by `muan.co` (text links with slash separators and `aria-current` on active locale), instead of a dropdown control.
-  - Statement body content should be authored in Markdown files under `data/accessibility/` (`statement.md` default, locale overrides like `statement.zh.md`, `statement.ja.md`) rather than hardcoded JSX.
-- Privacy statement page:
-  - Privacy statement body content should be authored in Markdown files under `data/privacy/` (`statement.md` default, locale overrides like `statement.zh.md`, `statement.ja.md`) rather than hardcoded JSX.
-- Umami visitor count integration:
-  - Footer visitor count must use real Umami aggregated stats via server route `app/api/umami/visitors/route.ts` (no mock/static numbers).
-  - Footer online-now indicator should come from the same Umami route via the website `active` API and render as a compact live count beside total visitors.
-  - Footer Umami badges are centralized in `components/layout/umami-indicators.tsx`; keep count-fetching/rendering logic there instead of duplicating it in `CVFooter`.
-  - In footer UI logic, treat online-users indicator availability independently from total visitors (show unavailable when active visitor count is unavailable after loading).
-  - Use `UMAMI_API_KEY` + `UMAMI_WEBSITE_ID` server env vars (optional `UMAMI_API_BASE_URL`, default `https://api.umami.is/v1`), and only expose simple formatted numbers in UI.
-- Playwright output artifacts:
-  - Save generated Playwright screenshots/artifacts under `output/playwright/` (not repo root).
-  - Keep Playwright artifacts gitignored (`output/playwright/`, `playwright-report/`, `test-results/`, and `tmp-playwright-*.png`).
+### Typography
+- Use `Spectral` as the default serif family and `IBM Plex Sans` as the default sans family for English (`en`) content.
+- For non-English serif text (`zh`, `zh-hant`, `ja`, `ko`), use locale-appropriate `Noto Serif` variants as the primary serif stack.
+- Do not use `Noto Serif SC` as a cross-locale serif fallback; map locale-specific serif variants (`CJK SC` / `TC` / `JP` / `KR`) per language.
+- Use `Maple Mono` for code-like text.
+- Keep section titles at `text-2xl`.
+- Default body and description/detail copy to `text-base`; keep `text-sm` as the minimum size.
+- In rendered Markdown, keep clear paragraph-to-paragraph spacing.
+- Keep readable contrast for muted UI text; avoid overly faint muted text on badges or dense metadata.
+- Tooltip text should default to `font-sans`.
+- Hover card and tooltip panels should use theme-aware popover surfaces.
+
+### Links, Chips, and Cards
+- Inline URL links rendered in text/Markdown should use a dim dashed underline by default, switch to solid underline on hover/focus, and append trailing `mingcute:arrow-right-up-fill`.
+- Keep non-inline section links unchanged.
+- Keep badges/chips compact by default: small pill padding, small icons, and tight inter-chip spacing.
+- When a roomier badge layout is explicitly requested, increase chip-group gap and slightly widen chip padding.
+- Keep `.paper-card` top and bottom padding removed by default (`pt-0 pb-0`).
+- Keep `.paper-card` content unrounded unless explicitly requested otherwise.
+- In section components, avoid Tailwind `!` modifiers; prefer semantic helper classes in `app/globals.css`.
+
+### Spacing and Layout Rhythm
+- Keep section spacing compact by default and use margin-based vertical rhythm.
+- Use bottom spacing (`mb-*`) for section content rhythm; avoid `mt-*` for equivalent spacing.
+- Apply per-section spacing on `section[id]` wrappers with responsive `mb-*` classes instead of shared CSS margins.
+- In-section item lists should use a unified `gap-y-2` by default.
+- Within a section component, keep one spacing strategy consistently instead of mixing equivalent patterns.
+- On mobile (`< sm`), favor readable spacing and full-width content usage over dense packing.
+- If overall mobile spacing needs to change, adjust shared page-shell/body gutters before per-section overrides.
+- If overall CV top/bottom spacing needs to change, adjust the top-level shell in `components/sections/cv.tsx`.
+- If mobile spacing changes involve the sticky header or footer, adjust `components/layout/cv-header.tsx` and `components/layout/cv-footer.tsx` directly.
+- For timeline-style rows, stack on mobile and switch to two-column alignment from `md` upward.
+
+## CV Data And Rendering
+
+### Data Sources
+- Primary CV data source is `data/cv.toml`.
+- Default content locale (`en`) resolves to `data/cv.toml`, not `data/cv.en.toml`.
+- Localized overrides live in `data/cv.{locale}.toml` and should contain locale-specific overrides only.
+- When `data/cv.toml` changes, keep localized files aligned to the same record structure and item parity.
+- For `data/cv.ja.toml` and `data/cv.zh.toml`, keep parity with English by translation, not by copying raw English text.
+- `lib/load-cv-data.ts` maps TOML into `CVData`.
+- TOML text fields preserve Markdown and render through `components/ui/markdown-text.tsx`.
+
+### Hero / Profile Data
+- Use `profile.position` or localized `hero.position` for the left-column hero role/title.
+- Use `profile.summary` / `hero.bio` for the right-column About content.
+- In Japanese hero content, use `profile.furigana_name` and `profile.furigana`; when values are `|`-separated, render segmented ruby aligned to each base chunk.
+- Keep furigana in normal ruby layout; do not fake it with absolutely positioned `rt`.
+- In Japanese locale hero, show the English name beneath the Japanese display name.
+- In English locale hero, show the original-script name first and the English name beneath when both exist.
+
+### Structured Content Rules
+- Skills `items` support string form or object form with `text`/`name`, optional `icon`, `url`, `code`, and `description`.
+- Main Skills category order is `Languages` -> `Programming Languages` -> `DevOps` -> `AI Engineering` -> `Web Dev & Design` -> `Backend Development`; `Misc` renders as a separate bottom section.
+- News data lives under `[news.*]` with `title`, `outlet`, `date`, `summary`, and `url`, mapped to `CVData.news`.
+- Projects data lives under `[projects.*]` / `[[projects]]`; do not fall back to mock data.
+- Project fields support `year`, `name`, `status`, `description`, optional `preview_images`, optional `urls`, and optional `tech`.
+
+## App Architecture
+
+### Config And Routing
+- `lib/config/app-config.ts` is the centralized source for locales, metadata labels, and CV data source settings.
+- Always pass `locale` to `NextIntlClientProvider` in locale layouts.
+- Active locales are `en`, `zh`, and `ja`; keep `yue` / `ko` files in the repo for future re-enable.
+- Locale routing uses `as-needed` prefixing: `en` is unprefixed, non-default locales are prefixed, and middleware auto-detection redirect is disabled.
+- Do not use client-side locale auto-switch prompts or browser-language detection.
+
+### App Router / Runtime
+- In `app/` routes, do not use `next/head`; use the Metadata API and/or native `<head>` in layouts.
+- Keep CV pages under `app/(cv)/[locale]`.
+- Keep accessibility pages under `app/(a11y)/[locale]/accessibility`.
+- `app/globals.css` is the runtime global stylesheet source of truth; do not reintroduce `styles/globals.css`.
+- Theme tokens consumed by Tailwind must be defined in `app/globals.css` for both light and dark modes.
+- Load primary fonts with `next/font` in locale root layouts; do not use CSS `@import` for Google Fonts in `app/globals.css`.
+- For SSR-rendered components, do not use render-time nondeterministic values such as `Math.random()` or `Date.now()`.
+
+### Next.js / Cloudflare Constraints
+- Cloudflare deploys in this repo target Cloudflare Pages via `@cloudflare/next-on-pages@1`.
+- Keep Cloudflare Pages build/deploy scripts aligned with that adapter: `npx @cloudflare/next-on-pages@1` and `wrangler pages deploy .vercel/output/static`.
+- For Cloudflare Pages builds, keep `/[locale]/accessibility` on Edge runtime in `app/(a11y)/[locale]/layout.tsx`.
+- For Cloudflare Pages builds, non-static App Router route handlers, including `llms.txt`, must export `runtime = "edge"`.
+- For Cloudflare Pages builds, keep locale routing in root `middleware.ts`, not `proxy.ts`.
+
+### Markdown / TOML Loading
+- `components/ui/markdown-text.tsx` uses the MDX runtime (`@mdx-js/react` + `@mdx-js/mdx`); preserve current inline-link styling and paragraph spacing.
+- `MarkdownText` block paragraphs should default to `text-base`.
+- Do not wrap `MarkdownText` content in an outer `<a>` when the markdown may already contain links.
+- For `.md` and `.toml` raw imports in Next.js dev with Turbopack, keep `raw-loader` rules mapped with `as: "*.js"`.
+- On Next.js 16 in this repo, keep those rules under top-level `turbopack.rules`.
+- Keep `pnpm build` on `next build --webpack` while the repo still relies on custom webpack raw-source rules for `.md` / `.toml`.
+- Keep route-sensitive public assets at the `public/` root (`icon.png`, `rss.xml`, `sitemap.xml`); group general assets under subfolders such as `public/images/*`, `public/files/*`, and `public/data/*`.
+
+## Section And Component Rules
+
+### Shared Section Layout
+- Time-based sections should render date/time first using muted sans text, followed by content.
+- Use `yyyymm` when month exists; otherwise show `yyyy`.
+- Date parsing should support CJK and Korean year/month markers.
+- In Experience and Education, render month as superscript in `yyyymm`.
+- Avoid calendar/date icons for row timestamps.
+- In two-column time layouts, keep non-time content aligned to the second column.
+
+### About, News, Publications, Projects
+- Use `text-base` for About content and News row description content.
+- Use `text-base` for Selected Projects titles, Publications titles, and Awards main item lines.
+- News rows should show only `date` plus description text and sort newest first.
+- For News items with custom link labels, put links directly in `summary` Markdown and leave `url` empty.
+- Do not append trailing external-link icons for URL links inside News rows.
+- Publications should use a concise year-first layout with compact metadata, without heavy card styling.
+- Publication owner-name highlighting should match `profile.aliases` plus normalized full-name and initial-based variants.
+- Render project names in sans and descriptions in serif.
+- Render project status as a compact badge.
+- Render project tech stacks with `SkillItemBadge`.
+
+### Skills
+- Use `components/sections/skill-item-badge.tsx` as the shared skills chip component.
+- Before adding or updating skills icon IDs, verify them through the Iconify API and keep only IDs that resolve.
+- If a skill item omits `icon` and has `url`, derive a favicon from the URL host.
+- When `code = true`, render the badge with `font-mono`; otherwise use `font-sans`.
+- Language-skill badges in the main Skills section should use `font-serif`.
+- If `description` exists, show concise hover content via shadcn `HoverCard`.
+- Main Skills rows use a two-column layout with a fixed-width right-aligned category label and flexible badges.
+- Keep that two-column skills layout on both mobile and larger screens.
+- Category labels in main Skills rows use `font-sans text-lg`.
+- Do not show trailing external-direction icons in Skills badges.
+- Keep Interests under `Misc` and render it as a dedicated bottom section.
+
+### Education, Experience, Awards
+- For Skills, Awards, Education, Experience, and Misc sections, keep section-title underline/border spacing tight.
+- In Education, keep inter-item and intra-item spacing compact.
+- In Education, hide detail/highlight bullet lists by default; show core metadata only.
+- Education expected-suffix line splitting is controlled by `sectionConfig.education.splitExpectedLine` and uses locale text from `messages/*` key `labels.expected`.
+- Experience items should show time in a muted leading column.
+- Experience meta should show org/company only, not location.
+- Awards should use concise two-column alignment similar to Education.
+- Keep year-to-item horizontal spacing tight in Awards rows.
+- Awards rows should follow the same per-item card/grid rhythm as Education.
+- Awards date rendering should mirror Education date formatting.
+- In Awards rows, keep award name at `text-base` and institution at `text-sm`.
+
+### Hero, Shell, TOC
+- Keep the hero section single-column on small and medium screens; switch to a two-column page shell at `lg`.
+- On non-`lg`, use the sticky mobile `CVHeader` behavior for controls.
+- CV page shell is one column by default and two columns at `lg`, with hero in column 1 and all other sections in column 2.
+- Keep second-column vertical padding at `py-2 sm:py-4 lg:py-6`.
+- Right column order is `about` -> `news` -> `projects` -> `publications` -> `experience` -> `education` -> `skills` -> `awards` -> `misc`.
+- `section#about` should use the locale `navigation.about` label.
+- On `lg`, keep the first-column sticky panel near full viewport height with minimal outer margin and no extra gap between hero content and footer.
+- Hero card content stays vertically stacked: avatar, name, bio, contacts.
+- Remove extra top spacing above the avatar.
+- Hero contacts should be one item per line, wrap values instead of truncating, and use top-positioned shadcn tooltips.
+- Do not add extra left inset for contact rows.
+- Use margin-based spacing between hero contact rows.
+- Contact hover backgrounds should wrap only the actual content.
+- Hero location text should use locale-aware serif font.
+- Hero location uses a dedicated `HeroLocation` component.
+- In `HeroLocation`, prefer generic identifier names for map constants and labels.
+- Do not transform hero location display strings by prefix replacement; render source text directly.
+- For the hero location hover map, keep the marker high-contrast, keep wheel zoom enabled, hide attribution text, and position the marker near the top-right-center by tuning camera settings.
+- Build TOC items from rendered `main section[id]` headings instead of hardcoding them.
+- TOC trigger should show text and chevron only.
+- Do not render a sticky/mobile TOC header in locale layouts.
+- Keep mobile locale/theme controls in `CVFooter`; do not maintain parallel `CVControls` or TOC-header control UIs.
+
+## Footer, Secondary Pages, And Integrations
+
+### Footer
+- Show `lastUpdated` as locale-aware relative time, not an absolute date.
+- Compute `lastUpdated` from CV source file mtime via `getCVLastUpdated` in `lib/load-cv-data.ts`.
+- Recalculate footer relative time client-side after hydration and keep it refreshing.
+- Do not show a textual prefix before the relative time.
+- Footer body text should stay at `text-sm` unless explicitly requested otherwise.
+- Footer should include `© yyyy <owner>. All rights reserved.` on a single line.
+- Render the footer in exactly three lines:
+  - Line 1: last update time + visitor numbers + locale/theme toggles
+  - Line 2: `LLMs.txt` + Accessibility + Privacy
+  - Line 3: copyright
+- In footer line 2, each item should have a leading mingcute icon.
+- Keep footer bottom spacing compact.
+- Use recency-based text tone for `lastUpdated`.
+- Footer links should include `LLMs.txt`; do not add RSS or Sitemap links.
+- Footer last-updated text, `LLMs.txt`, `Accessibility`, language control, and theme control should expose concise top-positioned tooltips.
+- Footer language and theme controls should show the current selection as visible label text.
+- On `lg`, do not show TOC in the first-column bottom area.
+
+### Accessibility, Privacy, LLMs
+- `LLMs.txt` is generated by `app/llms.txt/route.ts` and `app/[locale]/llms.txt/route.ts`, not from `public/llms.txt`.
+- Keep `LLMs.txt` content sourced from localized CV data so `/llms.txt`, `/zh/llms.txt`, and `/ja/llms.txt` stay aligned.
+- Accessibility statement content lives in `data/accessibility/statement.md` with locale overrides.
+- Privacy statement content lives in `data/privacy/statement.md` with locale overrides.
+- Accessibility page language switching should use a simple inline text-link switcher with slash separators and `aria-current`.
+- Privacy content must explicitly state that Umami is used for visitor analytics.
+
+### Umami / Artifacts
+- Footer visitor counts must use real Umami aggregated stats from `app/api/umami/visitors/route.ts`.
+- Footer online-now counts should come from the same route via the website `active` API.
+- Keep Umami count-fetching/rendering centralized in `components/layout/umami-indicators.tsx`.
+- Treat total visitors and online-now availability independently in footer UI.
+- Use `UMAMI_API_KEY` and `UMAMI_WEBSITE_ID` server env vars; `UMAMI_API_BASE_URL` is optional and defaults to `https://api.umami.is/v1`.
+- Save Playwright screenshots and artifacts under `output/playwright/`.
+- Keep Playwright artifacts gitignored: `output/playwright/`, `playwright-report/`, `test-results/`, and `tmp-playwright-*.png`.
