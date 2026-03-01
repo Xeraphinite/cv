@@ -1,335 +1,141 @@
-# Enhanced Multilingual Typography
+# Typography
 
-This documentation explains the enhanced typography system implemented following W3C guidelines for Chinese (CLREQ), Japanese (JLREQ), Korean (KLREQ), and English typography best practices.
+The typography system combines `next/font`, Tailwind theme extensions, and semantic helper classes in `app/globals.css`.
 
-## Overview
+## Primary Fonts
 
-The typography system provides:
-- **Language-specific font stacks** optimized for each script
-- **Proper line heights and letter spacing** for different languages
-- **CJK text enhancements** including punctuation handling
-- **Ruby text support** for Japanese
-- **Vertical text support** for CJK languages
-- **Typography components** for easy implementation
+Loaded in `app/(cv)/[locale]/layout.tsx`:
 
-## Font Loading
+- `Spectral`
+- `IBM Plex Sans`
 
-High-quality fonts are loaded via Google Fonts CDN:
-- **Inter** - Latin text (English)
-- **Noto Sans/Serif SC** - Simplified Chinese
-- **Noto Sans/Serif TC** - Traditional Chinese
-- **Noto Sans/Serif JP** - Japanese
-- **Noto Sans/Serif KR** - Korean
+Additional CJK serif fonts are loaded through a Google Fonts stylesheet link for:
 
-## Typography Classes
+- `Noto Serif SC`
+- `Noto Serif TC`
+- `Noto Serif JP`
+- `Noto Serif KR`
 
-### Language-Specific Base Classes
+Code-like text uses `Maple Mono` via the Tailwind `mono` stack and global `code, pre, kbd, samp` styles.
 
-```css
-/* Chinese (Simplified) */
-.font-zh-sans     /* Sans-serif Chinese fonts */
-.font-zh-serif    /* Serif Chinese fonts */
+## Tailwind Font Families
 
-/* Chinese (Traditional) */
-.font-zh-hant-sans
-.font-zh-hant-serif
+Defined in `tailwind.config.ts`:
 
-/* Japanese */
-.font-ja-sans     /* Includes ruby text support */
-.font-ja-serif
+- `sans`
+- `serif`
+- `mono`
+- `zh-sans`
+- `zh-serif`
+- `zh-hant-sans`
+- `zh-hant-serif`
+- `ja-sans`
+- `ja-serif`
+- `ko-sans`
+- `ko-serif`
 
-/* Korean */
-.font-ko-sans
-.font-ko-serif
+The config also extends:
 
-/* English */
-.font-en-sans
-.font-en-serif
-```
+- `letterSpacing`
+- `lineHeight`
 
-### Typography Hierarchy
+for locale-sensitive typography tuning.
 
-```css
-/* Titles */
-.paper-title              /* Base title styling */
-.paper-title.lang-zh      /* Chinese-optimized title */
-.paper-title.lang-ja      /* Japanese-optimized title */
-.paper-title.lang-ko      /* Korean-optimized title */
+## Global Typography Classes
 
-/* Subtitles */
-.paper-subtitle           /* Base subtitle styling */
-.paper-subtitle.lang-zh   /* Chinese-optimized subtitle */
-.paper-subtitle.lang-ja   /* Japanese-optimized subtitle */
-.paper-subtitle.lang-ko   /* Korean-optimized subtitle */
+Shared helper classes live in `app/globals.css`.
 
-/* Body text */
-.paper-body               /* Base body text */
-.paper-body.lang-zh       /* Chinese-optimized body */
-.paper-body.lang-ja       /* Japanese-optimized body */
-.paper-body.lang-ko       /* Korean-optimized body */
+### Font helpers
 
-/* Meta text */
-.paper-meta               /* Base meta text */
-.paper-meta.lang-zh       /* Chinese-optimized meta */
-.paper-meta.lang-ja       /* Japanese-optimized meta */
-.paper-meta.lang-ko       /* Korean-optimized meta */
-```
+- `.font-en-sans`
+- `.font-en-serif`
+- `.font-zh-sans`
+- `.font-zh-serif`
+- `.font-zh-hant-sans`
+- `.font-zh-hant-serif`
+- `.font-ja-sans`
+- `.font-ja-serif`
+- `.font-ko-sans`
+- `.font-ko-serif`
 
-### Special Features
+### Semantic text helpers
 
-```css
-/* Ruby text for Japanese */
-.paper-ruby               /* Ruby text container */
-.paper-ruby rt            /* Ruby annotation styling */
+- `.paper-title`
+- `.paper-subtitle`
+- `.paper-body`
+- `.paper-meta`
+- `.paper-body-emphasis`
 
-/* Vertical text */
-.vertical-rl              /* Right-to-left vertical text */
-.vertical-lr              /* Left-to-right vertical text */
+Locale variants exist for several of these, for example:
 
-/* CJK enhancements */
-.cjk-punctuation          /* Proper punctuation spacing */
-.cjk-text                 /* Enhanced text selection */
+- `.paper-title.lang-ja`
+- `.paper-body.lang-zh`
+- `.paper-meta.lang-ko`
 
-/* Text justification */
-.text-justify-zh          /* Chinese text justification */
-.text-justify-ja          /* Japanese text justification */
-.text-justify-ko          /* Korean text justification */
+### Special-purpose helpers
 
-/* Emphasis styles */
-.emphasis-zh              /* Chinese emphasis (dots under) */
-.emphasis-ja              /* Japanese emphasis (sesame over) */
-.emphasis-ko              /* Korean emphasis (underline) */
-```
-
-## Utility Functions
-
-### Typography Classes Generator
-
-```typescript
-import { getTypographyClasses } from '@/lib/utils'
-
-// Get all typography classes for a locale
-const typography = getTypographyClasses('zh')
-// Returns: { title: '...', subtitle: '...', body: '...', meta: '...', emphasis: '...' }
-```
-
-### Font Class Utilities
-
-```typescript
-import { getFontClass, getLanguageClass } from '@/lib/utils'
-
-// Get font class for locale
-const fontClass = getFontClass('ja', 'sans') // 'font-ja-sans'
-
-// Get language-specific class
-const langClass = getLanguageClass('ko') // 'text-ko'
-```
-
-### Locale Detection
-
-```typescript
-import { isCJKLocale, supportsVerticalWriting } from '@/lib/utils'
-
-// Check if locale uses CJK characters
-const isCJK = isCJKLocale('zh') // true
-
-// Check if locale supports vertical writing
-const hasVertical = supportsVerticalWriting('ja') // true
-```
+- `.paper-ruby`
+- `.paper-ruby-group`
+- `.vertical-rl`
+- `.vertical-lr`
+- `.cjk-punctuation`
+- `.text-justify-zh`
+- `.text-justify-ja`
+- `.text-justify-ko`
+- `.emphasis-zh`
+- `.emphasis-ja`
+- `.emphasis-ko`
 
 ## Typography Components
 
-### Basic Typography Component
+`components/ui/typography.tsx` exports reusable helpers:
 
-```tsx
-import { Typography } from '@/components/ui/typography'
+- `Typography`
+- `Heading`
+- `Text`
+- `RubyText`
+- `VerticalText`
+- `Quote`
+- `List`
+- `ListItem`
 
-<Typography variant="title" locale="zh" className="mb-4">
-  中文标题
-</Typography>
+These components consume locale-aware helpers from `lib/utils`, including:
 
-<Typography variant="body" locale="ja" serif>
-  日本語のテキスト
-</Typography>
-```
+- `getTypographyClasses`
+- `getFontClass`
+- `isCJKLocale`
 
-### Specialized Components
+## Current Usage Pattern
 
-```tsx
-import { Heading, Text, RubyText, VerticalText } from '@/components/ui/typography'
+- English defaults to serif body text and sans metadata
+- CJK locales get locale-specific font classes and punctuation helpers
+- section titles stay at `text-2xl` in section components
+- body and description text generally stay at `text-base`
+- metadata should not drop below `text-sm`
 
-// Headings with automatic sizing
-<Heading level={1} locale="ko">한국어 제목</Heading>
+## Ruby And Vertical Text
 
-// Text with emphasis
-<Text locale="zh" emphasis>重要文本</Text>
+Japanese furigana support is implemented with real `<ruby>` and `<rt>` markup through `RubyText` and the `.paper-ruby` styles.
 
-// Ruby text for Japanese
-<RubyText ruby="かんじ">漢字</RubyText>
+Vertical writing helpers exist, but they are utility-level support rather than the default CV layout mode.
 
-// Vertical text for CJK
-<VerticalText locale="ja" direction="rl">
-  縦書きテキスト
-</VerticalText>
-```
+## Inline Links
 
-## Usage in Components
+Markdown-rendered inline URLs use the project’s dashed underline treatment:
 
-### Manual Class Application
+- dashed underline by default
+- solid underline on hover or focus
+- trailing external-link icon where appropriate
 
-```tsx
-import { getTypographyClasses } from '@/lib/utils'
+The relevant classes are:
 
-function MyComponent({ locale }: { locale: string }) {
-  const typography = getTypographyClasses(locale)
-  
-  return (
-    <div>
-      <h1 className={typography.title}>Title</h1>
-      <p className={typography.body}>Body text</p>
-    </div>
-  )
-}
-```
+- `.inline-url-link`
+- `.inline-url-link-text`
+- `.inline-url-link-icon`
 
-### Using Typography Components
+## Editing Guidance
 
-```tsx
-import { Typography } from '@/components/ui/typography'
-
-function MyComponent({ locale }: { locale: string }) {
-  return (
-    <div>
-      <Typography variant="title" locale={locale}>
-        Title
-      </Typography>
-      <Typography variant="body" locale={locale}>
-        Body text
-      </Typography>
-    </div>
-  )
-}
-```
-
-## Tailwind Configuration
-
-The typography system extends Tailwind with:
-
-```typescript
-// tailwind.config.ts
-theme: {
-  extend: {
-    fontFamily: {
-      'zh-sans': [/* Chinese font stack */],
-      'ja-sans': [/* Japanese font stack */],
-      'ko-sans': [/* Korean font stack */],
-      // ... more font families
-    },
-    letterSpacing: {
-      'zh': '-0.02em',
-      'ja': '-0.01em',
-      'ko': '-0.015em',
-      'en': '-0.01em'
-    },
-    lineHeight: {
-      'zh': '1.7',
-      'ja': '1.75', 
-      'ko': '1.6',
-      'en': '1.5'
-    }
-  }
-}
-```
-
-## Language-Specific Guidelines
-
-### Chinese (CLREQ)
-- **Line height**: 1.7 for better readability
-- **Letter spacing**: -0.02em for character cohesion
-- **Punctuation**: Proper spacing with `cjk-punctuation`
-- **Justification**: `text-justify: inter-character`
-
-### Japanese (JLREQ)
-- **Mixed scripts**: Optimized for Hiragana, Katakana, Kanji, Latin
-- **Ruby text**: Built-in support with `paper-ruby`
-- **Line height**: 1.75 for mixed script readability
-- **Vertical writing**: Supported with `vertical-rl/lr`
-
-### Korean (KLREQ)
-- **Hangul optimization**: Proper spacing for Korean characters
-- **Line height**: 1.6 for compact Korean text
-- **Letter spacing**: -0.015em for Hangul
-- **Justification**: `text-justify: inter-word`
-
-### English (Practical Typography)
-- **Font stack**: Inter, SF Pro, system fonts
-- **Line height**: 1.5 for optimal readability
-- **Letter spacing**: -0.01em for modern appearance
-
-## Best Practices
-
-1. **Always specify locale** when using typography components
-2. **Use appropriate variants** (title, subtitle, body, meta)
-3. **Consider serif fonts** for longer text content
-4. **Apply language classes** for automatic optimization
-5. **Test with real content** in each language
-6. **Use emphasis styles** appropriately for each language
-
-## Browser Support
-
-- **Modern browsers**: Full support for all features
-- **Legacy browsers**: Graceful degradation with system fonts
-- **Font loading**: Optimized with `font-display: swap`
-- **Performance**: Minimal impact with efficient font loading
-
-## Examples
-
-### Multilingual CV Section
-
-```tsx
-function CVSection({ data, locale }: { data: any, locale: string }) {
-  const typography = getTypographyClasses(locale)
-  
-  return (
-    <section>
-      <h2 className={typography.subtitle}>
-        {data.title}
-      </h2>
-      <p className={typography.body}>
-        {data.description}
-      </p>
-      <div className={typography.meta}>
-        {data.date}
-      </div>
-    </section>
-  )
-}
-```
-
-### Japanese with Ruby Text
-
-```tsx
-function JapaneseText() {
-  return (
-    <Typography variant="body" locale="ja">
-      私の名前は
-      <RubyText ruby="たなか">田中</RubyText>
-      です。
-    </Typography>
-  )
-}
-```
-
-### Chinese Vertical Text
-
-```tsx
-function ChineseVertical() {
-  return (
-    <VerticalText locale="zh" direction="rl" className="h-64">
-      中文直排文字展示
-    </VerticalText>
-  )
-}
-```
-
-This typography system ensures excellent readability and cultural appropriateness across all supported languages while maintaining design consistency. 
+- Put reusable typography behavior in `app/globals.css`.
+- Put new font-family tokens in `tailwind.config.ts`.
+- Keep locale-specific font decisions explicit instead of relying on generic cross-locale serif fallbacks.
+- Prefer the existing typography helpers over ad hoc per-component font stacks.

@@ -1,149 +1,177 @@
-# Minimal CV
+# CV
 
-A modern, responsive, and multilingual CV/Resume website built with Next.js 14, TypeScript, and Tailwind CSS.
+A multilingual CV site built with Next.js 16, React 19, Tailwind CSS, and TOML-backed content.
 
-## ✨ Features
+This repo is structured around a single resume data source with locale-specific overrides, compact section-based rendering, generated `llms.txt`, and Cloudflare Pages deployment support.
 
-- **🌍 Multilingual Support**: English, Chinese (Simplified), and Japanese
-- **📱 Responsive Design**: Optimized for all devices
-- **🎨 Modern UI**: Clean, professional layout with smooth animations
-- **📄 Print-Friendly**: Optimized for PDF generation and printing
-- **⚡ Performance**: Built with Next.js 14 App Router for optimal performance
-- **🔧 TypeScript**: Fully typed for better development experience
-- **🎯 SEO Optimized**: Meta tags, OpenGraph, and structured data
+## Overview
 
-## 🏗️ Project Structure
+- App Router project on Next.js `16.1.6`
+- Locales: `en`, `zh`, `ja`
+- Default locale is unprefixed (`/`), non-default locales are prefixed (`/zh`, `/ja`)
+- CV content comes from `data/cv.toml` plus locale overrides in `data/cv.{locale}.toml`
+- Markdown-capable TOML fields render through the MDX runtime
+- Includes localized Accessibility, Privacy, and `llms.txt` pages
+- Footer visitor stats are backed by Umami
+- Cloudflare Pages deployment is supported through `@cloudflare/next-on-pages@1`
 
+## Stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS
+- `next-intl`
+- `@iconify/react` with MingCute icons
+- Biome
+- Playwright
+- TOML via `smol-toml`
+
+## Project Structure
+
+```text
+app/
+  (cv)/[locale]/              CV routes
+  (a11y)/[locale]/            Accessibility and privacy pages
+  api/umami/visitors/route.ts Umami-backed footer stats API
+  llms.txt/                   Generated LLMs.txt routes
+components/
+  layout/                     Header, footer, locale/theme controls
+  sections/                   CV section rendering
+  ui/                         Shared UI primitives
+data/
+  cv.toml                     Default English CV source
+  cv.zh.toml                  Chinese overrides
+  cv.ja.toml                  Japanese overrides
+  accessibility/              Localized accessibility statements
+  privacy/                    Localized privacy statements
+lib/
+  config/app-config.ts        Locale and site configuration
+  load-cv-data.ts             TOML loading and CV mapping
+messages/                     `next-intl` locale messages
+public/                       Static assets
 ```
-minimal-cv/
-├── app/                    # Next.js App Router
-│   └── [locale]/          # Internationalized routes
-├── components/            # React components (organized by purpose)
-│   ├── layout/           # Layout-related components
-│   ├── sections/         # CV section components
-│   └── ui/              # Reusable UI components
-├── data/                 # CV data in TOML format
-│   ├── cv.toml          # Default CV data source
-│   ├── cv.en.toml       # English CV data
-│   ├── cv.zh.toml       # Chinese CV data
-│   └── cv.ja.toml       # Japanese CV data
-├── lib/                  # Utility functions and types
-│   ├── types/           # TypeScript type definitions
-│   └── i18n-utils.ts    # Internationalization utilities
-├── messages/            # Translation files
-└── public/              # Static assets
-```
 
-## 🚀 Getting Started
+## Development
 
-### Prerequisites
+### Requirements
 
-- Node.js 18+ 
-- pnpm (recommended) or npm
+- Node.js 18+
+- `pnpm`
 
-### Installation
+### Install
 
-1. Clone the repository:
-```bash
-git clone <your-repo-url>
-cd minimal-cv
-```
-
-2. Install dependencies:
 ```bash
 pnpm install
 ```
 
-3. Update the CV data in `data/` directory with your information
+### Start the dev server
 
-4. Run the development server:
 ```bash
 pnpm dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) to view your CV
+Open `http://localhost:3000`.
 
-## 📝 Customization
-
-### CV Data
-
-Update the TOML files in the `data/` directory:
-
-- `cv.toml` - default source
-- `cv.en.toml` - English version
-- `cv.zh.toml` - Chinese version  
-- `cv.ja.toml` - Japanese version
-
-All files should follow the same structure defined in `lib/types/cv.ts`.
-
-### Adding New Languages
-
-1. Create a new CV data file: `data/cv.[locale].toml`
-2. Add translation messages: `messages/[locale].json`
-3. Update the locale configuration in `i18n.ts`
-
-### Styling
-
-The project uses Tailwind CSS. Customize the styling by:
-
-- Modifying component classes
-- Updating the Tailwind config in `tailwind.config.ts`
-- Adding custom CSS in `app/globals.css`
-
-## 🛠️ Build & Deploy
-
-### Build for Production
+## Scripts
 
 ```bash
+pnpm dev
 pnpm build
+pnpm start
+pnpm lint
+pnpm lint:fix
+pnpm format
+pnpm check
+pnpm optimize-images
+pnpm cf:build
+pnpm cf:deploy
 ```
 
-### Export Static Site
+## Content Model
+
+### CV data
+
+- Primary source: `data/cv.toml`
+- Default content locale `en` resolves to `data/cv.toml`
+- Locale overrides live in `data/cv.zh.toml` and `data/cv.ja.toml`
+- Inactive future locales such as `yue` and `ko` can remain in the repo without being enabled
+
+Keep localized CV files aligned with the same record structure and item parity as the default file.
+
+### Other content
+
+- Accessibility statements: `data/accessibility/statement*.md`
+- Privacy statements: `data/privacy/statement*.md`
+- Translations: `messages/*.json`
+
+## Routing
+
+- `/` -> English CV
+- `/zh` -> Chinese CV
+- `/ja` -> Japanese CV
+- `/accessibility`, `/zh/accessibility`, `/ja/accessibility`
+- `/privacy`, `/zh/privacy`, `/ja/privacy`
+- `/llms.txt`, `/zh/llms.txt`, `/ja/llms.txt`
+
+Locale detection redirect is disabled. The default locale stays unprefixed.
+
+## Configuration Notes
+
+- Locale and site metadata config lives in `lib/config/app-config.ts`
+- Middleware locale routing is implemented in `middleware.ts`
+- `next.config.mjs` configures raw loading for `.md` and `.toml` in both Turbopack and webpack
+- Global runtime styles live in `app/globals.css`
+
+## Analytics Environment
+
+Footer visitor metrics use Umami through `app/api/umami/visitors/route.ts`.
+
+Required server environment variables:
 
 ```bash
-pnpm build && pnpm export
+UMAMI_API_KEY=...
+UMAMI_WEBSITE_ID=...
 ```
 
-### Deploy
+Optional:
 
-The site can be deployed to:
+```bash
+UMAMI_API_BASE_URL=https://api.umami.is/v1
+```
 
-- **Vercel** (recommended): Connect your GitHub repo
-- **Netlify**: Drag and drop the `out/` folder
-- **GitHub Pages**: Use the static export
+## Deployment
 
-## 📚 Documentation
+This repo targets Cloudflare Pages.
 
-- [Components Documentation](./docs/components.md) - Detailed component API
-- [Data Structure](./docs/data-structure.md) - CV data format specification
-- [Internationalization](./docs/i18n.md) - Adding and managing languages
-- [Customization Guide](./docs/customization.md) - Styling and theming
+Build static output for Cloudflare Pages:
 
-## 🧰 Tech Stack
+```bash
+pnpm cf:build
+```
 
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **UI Components**: shadcn/ui
-- **Internationalization**: next-intl
-- **Icons**: Lucide React
-- **Data Format**: TOML
+Deploy:
 
-## 🤝 Contributing
+```bash
+pnpm cf:deploy
+```
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'Add amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
+The deploy script uses:
 
-## 📄 License
+- `npx @cloudflare/next-on-pages@1`
+- `wrangler pages deploy .vercel/output/static`
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Docs
 
-## 🙏 Acknowledgments
+- [docs/components.md](./docs/components.md)
+- [docs/customization.md](./docs/customization.md)
+- [docs/data-structure.md](./docs/data-structure.md)
+- [docs/i18n.md](./docs/i18n.md)
+- [docs/typography.md](./docs/typography.md)
 
-- [Next.js](https://nextjs.org/) for the amazing framework
-- [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS
-- [shadcn/ui](https://ui.shadcn.com/) for the beautiful components
-- [next-intl](https://next-intl-docs.vercel.app/) for internationalization 
+## Workflow Notes
+
+- Use `pnpm` for all package management and scripts
+- Prefer updating CV content in TOML instead of hardcoding section content
+- Use Biome for formatting and Tailwind class sorting/dedup lint
+- Save Playwright artifacts under `output/playwright/`

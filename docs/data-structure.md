@@ -1,195 +1,268 @@
 # CV Data Structure
 
-This document describes the structure and format of the CV data files used in the project.
+The runtime `CVData` model is defined in `lib/types/cv.ts`. Source content is loaded from TOML by `lib/load-cv-data.ts`.
 
-## Overview
+## Source Model
 
-The CV data is stored in TOML format in the `data/` directory. Each language has its own file:
+### Default source
 
-- `cv.toml` - default source
-- `cv.en.toml` - English
-- `cv.zh.toml` - Chinese (Simplified)
-- `cv.ja.toml` - Japanese
+- `data/cv.toml`
 
-All files must follow the same structure defined by the TypeScript types in `lib/types/cv.ts`.
+This is the canonical source file for the default English content.
 
-## Data Structure
+### Locale overrides
 
-### Hero Section
+- `data/cv.zh.toml`
+- `data/cv.ja.toml`
 
-The hero section contains personal information and social links.
+Localized files are partial overrides merged onto the base data by index. Keep the same item ordering and record parity as the default source.
 
-```toml
-hero:
-  name: "Your Name"
-  enName: "English Name" # Optional, for non-English versions
-  avatar: "/path/to/avatar.png"
-  location: "City, Country"
-  age: "YYYY-MM" # Birth date in year-month format
-  bio: "Brief professional bio"
-  social:
-    github: "https://github.com/username"
-    email: "email@example.com"
-    phone: "+1 234-567-8900" # Optional
-    wechat: "wechat_id" # Optional
-    linkedin: "https://linkedin.com/in/username" # Optional
-    website: "https://yoursite.com" # Optional
-    orcid: "https://orcid.org/0000-0000-0000-0000" # Optional
-    googleScholar: "https://scholar.google.com/citations?user=xxx" # Optional
-    researchGate: "https://researchgate.net/profile/xxx" # Optional
-    twitter: "https://twitter.com/username" # Optional
+## Runtime Shape
+
+```ts
+interface CVData {
+  hero: Hero
+  education: EducationItem[]
+  sectionConfig?: SectionConfig
+  publications: PublicationItem[]
+  experience: ExperienceItem[]
+  projects?: ProjectItem[]
+  news?: NewsItem[]
+  awards: AwardItem[]
+  skills: Skills
+  talks?: TalkItem[]
+}
 ```
 
-### Education
+## TOML Input Shape
 
-List of educational background in reverse chronological order.
+The default TOML file is not a direct 1:1 dump of `CVData`. `lib/load-cv-data.ts` maps this source shape into the runtime model.
 
-```toml
-education:
-  - institution: "University Name"
-    area: "Field of Study"
-    degree: "Degree Type" # e.g., "Master", "Bachelor", "PhD"
-    supervisor: "Supervisor Name" # Optional, mainly for graduate degrees
-    startDate: "Sep 2020" # Format: "Mon YYYY" or localized equivalent
-    endDate: "Jun 2024" # Or "Present"/"现在"/"現在"
-    summary: "Optional summary" # Brief description
-    highlights:
-      - "Achievement or highlight 1"
-      - "Achievement or highlight 2"
-```
+Top-level TOML tables used today:
 
-### Publications
+- `sectionConfig`
+- `profile`
+- `education`
+- `experience`
+- `publications`
+- `news`
+- `projects`
+- `skills`
+- `awards`
 
-Academic publications, papers, and patents.
+## Sections
 
-```toml
-publications:
-  - title: "Publication Title"
-    authors: ["Author 1", "Author 2", "Author 3"]
-    type: "Journal Article" # "Journal Article", "Conference Paper", "Patent", "Preprint"
-    status: "Published" # "Published", "Under Review", "In Press", "Ongoing"
-    indexing: ["SCI", "EI"] # Optional, journal indexing
-    impactFactor: 5.2 # Optional, journal impact factor
-    publishedIn: "Journal/Conference Name"
-    abstract: "Brief abstract" # Optional
-    doi: "10.1000/example" # Optional
-    url: "https://example.com/paper" # Optional
-    highlight: true # Optional, for featured publications
-    involved: true # Optional, indicates direct involvement
-```
+### `profile`
 
-### Experience
+Used to build `hero`.
 
-Work experience and research projects.
+Supported fields:
 
 ```toml
-experience:
-  - position: "Job Title or Project Name"
-    company: "Company/Institution Name"
-    location: "City, Country" # Optional
-    startDate: "Jan 2024"
-    endDate: "Present"
-    summary: "Brief role description" # Optional
-    highlights:
-      - "Achievement or responsibility 1"
-      - "Achievement or responsibility 2"
+[profile]
+original_name = "..."
+en_name = "..."
+aliases = ["..."]
+furigana_name = "..."
+furigana = "..."
+location_label = "..."
+position = "..."
+summary = "..."
+
+[[profile.contacts]]
+icon = "email"
+label = "name@example.com"
+url = "mailto:name@example.com"
 ```
 
-### Awards
+Mapped runtime fields:
 
-Academic and professional awards.
+- `hero.name`
+- `hero.enName`
+- `hero.aliases`
+- `hero.furiganaName`
+- `hero.furigana`
+- `hero.location`
+- `hero.position`
+- `hero.bio`
+- `hero.social`
+
+Notes:
+
+- avatar is currently injected as `/images/avatar/avatar-256.png`
+- `email`, `website`, `github`, and `wechat` are the TOML contact types currently mapped into `hero.social`
+
+### `education`
+
+Source entries are keyed tables:
 
 ```toml
-awards:
-  - name: "Award Name"
-    institute: "Awarding Institution"
-    date: "2024" # Can be year or "YYYY, YYYY" for multiple years
-    description: "Award description" # Optional
+[education.master]
+institution = "..."
+degree = "Field, Degree"
+date = "2022-09 - 2025-06"
+details = ["...", "..."]
 ```
 
-### Skills
+Mapping rules:
 
-Technical and soft skills organized by categories.
+- `degree` is split on the first comma into `area` and `degree`
+- `date` is split into `startDate` and `endDate`
+- `details` populate both `summary` and `highlights`
+
+### `experience`
 
 ```toml
-skills:
-  categories:
-    - "Programming"
-    - "Research" 
-    - "Communication"
-  
-  skills:
-    - name: "Skill Name"
-      category: "Programming" # Must match one of the categories above
-      description: "Skill description or proficiency level"
+[experience.role_key]
+project = "..."
+role = "..."
+org = "..."
+location = "..."
+start = "..."
+end = "..."
+summary = "..."
+details = ["...", "..."]
 ```
 
-### Talks (Optional)
+Mapping rules:
 
-Conference talks, presentations, and lectures.
+- `position` prefers `project`, then `role`
+- `company` maps from `org`
+- `details` map to `highlights`
+
+### `publications`
 
 ```toml
-talks:
-  - title: "Talk Title"
-    event: "Conference/Event Name"
-    location: "City, Country" # Optional
-    date: "2024-03-15"
-    type: "Keynote" # Optional: "Keynote", "Invited", "Contributed"
-    description: "Talk description" # Optional
-    url: "https://example.com/talk" # Optional
+[publications.paper_key]
+type = "journal"
+title = "..."
+venue = "..."
+published = "2025"
+metadata = "JCR Q1; IF: 12.3"
+DOI = "10.xxxx/..."
+pdf = "https://..."
+authors = ["...", "..."]
+tldr = "..."
 ```
 
-## Localization Guidelines
+Mapping rules:
 
-### Date Formats
+- `type` is normalized to runtime values such as `Journal Article`
+- `published` maps to `year`
+- `DOI` maps to `doi`
+- `pdf` maps to `url`
+- `tldr` maps to `abstract`
+- `metadata` may derive:
+  - `impactFactor`
+  - `indexing` values like `JCR-Q1`
 
-- **English**: "Jan 2024", "Present"
-- **Chinese**: "2024年1月", "至今"  
-- **Japanese**: "2024年1月", "現在"
+Status derivation:
 
-### Status Terms
+- if DOI exists, status becomes `Published`
+- if `published` is a future year, status becomes `Under Review`
+- otherwise status defaults to `Published`
 
-Common status translations:
+### `news`
 
-| English | Chinese | Japanese |
-|---------|---------|----------|
-| Published | 已发表 | 発表済み |
-| Under Review | 审稿中 | 査読中 |
-| In Press | 印刷中 | 印刷中 |
-| Ongoing | 进行中 | 進行中 |
-| Present | 至今 | 現在 |
+```toml
+[news.some_item]
+title = "..."
+outlet = "..."
+date = "2025-10"
+summary = "Markdown-capable summary"
+url = "https://..."
+```
 
-### Field Names
+### `projects`
 
-Keep publication types and categories consistent:
+```toml
+[projects.some_project]
+name = "..."
+description = "..."
+year = "2025"
+status = "Active"
+preview_images = [
+  "/images/example.png",
+  { src = "/images/example-2.png", alt = "Preview" }
+]
+urls = [
+  "https://example.com",
+  { label = "GitHub", url = "https://github.com/...", icon = "mingcute:github-line" }
+]
+tech = [
+  "TypeScript",
+  { text = "Next.js", icon = "mingcute:planet-line", description = "..." }
+]
+```
 
-| English | Chinese | Japanese |
-|---------|---------|----------|
-| Journal Article | 期刊论文 | 学術論文 |
-| Conference Paper | 会议论文 | 会議論文 |
-| Patent | 专利 | 特許 |
-| Preprint | 预印本 | プレプリント |
+Rules:
 
-## Validation
+- string `urls` become `{ label = "Link", icon = "mingcute:arrow-right-up-fill" }`
+- string `tech` entries default to code-style badges
+- empty `name` values are ignored
 
-The data is validated against TypeScript types. Common validation errors:
+### `skills`
 
-1. **Missing required fields**: `name`, `avatar`, `location`, `age` in hero section
-2. **Invalid date formats**: Ensure consistent date formatting
-3. **Category mismatch**: Skills must reference existing categories
-4. **Type mismatches**: Arrays vs. strings, required vs. optional fields
+```toml
+[skills.languages]
+label = "Languages"
+items = [
+  "English",
+  { text = "Japanese", description = "Business reading" }
+]
+```
 
-## Best Practices
+Runtime output:
 
-1. **Consistency**: Maintain the same structure across all language versions
-2. **Completeness**: Include all relevant information, even if optional
-3. **Accuracy**: Double-check dates, names, and technical details
-4. **Localization**: Translate content appropriately for each language
-5. **Validation**: Test your changes by running the development server
+- `skills.categories` comes from each entry’s `label`
+- `skills.skills` is flattened from each `items` array with category backreferences
 
-## Examples
+Supported item fields:
 
-See the existing files for complete examples:
-- [English CV Data](../data/cv.en.toml)
-- [Chinese CV Data](../data/cv.zh.toml)
-- [Japanese CV Data](../data/cv.ja.toml) 
+- `text`
+- `name`
+- `icon`
+- `url`
+- `code`
+- `description`
+
+### `awards`
+
+```toml
+[awards.some_award]
+name = "..."
+date = "2024"
+from = "..."
+description = "..."
+```
+
+Maps directly to:
+
+- `name`
+- `date`
+- `institute`
+- `description`
+
+### `sectionConfig`
+
+Current supported field:
+
+```toml
+[sectionConfig.education]
+splitExpectedLine = true
+```
+
+## Merge Behavior
+
+Localized TOML files are parsed as partial `CVData` payloads and merged with these rules:
+
+- objects are merged shallowly and recursively
+- arrays are merged by index
+- omitted localized values keep the base value
+- reordered localized arrays will break parity and should be avoided
+
+## Fallback Behavior
+
+- Base load failure falls back to sample data
+- Missing locale override falls back to the configured fallback locale in `app-config`
+- If no override is found, the base `data/cv.toml` result is returned

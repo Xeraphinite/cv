@@ -1,327 +1,156 @@
-# Components Documentation
+# Components
 
-This document describes the component structure and APIs used in the minimal-cv project.
+This project is organized around three component groups:
 
-## Component Organization
-
-Components are organized into three main categories:
-
-```
+```text
 components/
-├── layout/           # Layout and navigation components
-├── sections/         # CV content section components  
-└── ui/              # Reusable UI components (shadcn/ui)
+  layout/    shell-level controls and footer
+  sections/  CV sections and page composition
+  ui/        reusable primitives and typography helpers
 ```
 
 ## Layout Components
 
-### CVHeader (`components/layout/cv-header.tsx`)
+### `components/layout/cv-footer.tsx`
 
-Main header component containing the locale switcher and site navigation.
+Shared footer used in two places:
 
-**Props**: None
+- mobile and tablet footer from `app/(cv)/[locale]/layout.tsx`
+- desktop footer inside the sticky left rail in `components/sections/cv.tsx`
 
-**Features**:
-- Responsive design
-- Print-friendly (hidden in print mode)
-- Locale switcher integration
+Responsibilities:
 
-### LocaleSwitcher (`components/layout/locale-switcher.tsx`)
+- locale-aware relative `lastUpdated` display
+- Umami visitor and active-user indicators
+- locale and theme controls
+- links to localized `llms.txt`, Accessibility, and Privacy pages
 
-Language switching component for internationalization.
+### `components/layout/locale-switcher.tsx`
 
-**Props**: None
+Standalone locale switcher helper. The main interactive locale control currently lives in `CVFooter`.
 
-**Features**:
-- Supports English, Chinese, and Japanese
-- Smooth transitions with loading states
-- Accessibility support
-- Development debug mode
-- Progressive enhancement (works without JavaScript)
+### `components/layout/umami-indicators.tsx`
 
-**State Management**:
-- Uses `useTransition` for smooth navigation
-- Automatic locale detection from URL
-- Fallback to default locale
+Client component that renders footer analytics data from `app/api/umami/visitors/route.ts`.
 
 ## Section Components
 
-### CV (`components/sections/cv.tsx`)
+### `components/sections/cv.tsx`
 
-Main CV container component that orchestrates all sections.
+Top-level page composition component.
 
-**Props**:
-```typescript
+Props:
+
+```ts
 interface CVProps {
-  data: CVData; // CV data object
-  locale?: string; // Current locale
+  data: CVData | null
+  locale?: string
+  lastUpdated?: string
 }
 ```
 
-**Features**:
-- Responsive layout
-- Print optimization
-- Staggered animations
-- Section conditional rendering
+Behavior:
 
-### HeroSection (`components/sections/hero-section.tsx`)
+- builds the two-column shell at `lg`
+- keeps the hero column sticky on large screens
+- renders sections in this order:
+  - `about`
+  - `news`
+  - `projects`
+  - `publications`
+  - `experience`
+  - `education`
+  - `skills`
+  - `awards`
+  - `misc`
+- splits `Misc` skills into the dedicated bottom section
 
-Personal information and contact details header.
+### `components/sections/hero-section.tsx`
 
-**Props**:
-```typescript
-interface HeroSectionProps {
-  data: Hero;
-  locale?: string;
+Left-column identity block with avatar, name, position, location, and contact links.
+
+Related components:
+
+- `hero-location.tsx`
+- `hero-location-map.tsx`
+
+### `components/sections/bio-section.tsx`
+
+Renders the About section from `hero.bio`.
+
+### `components/sections/news-section.tsx`
+
+Renders reverse-chronological news items. News row summaries support Markdown.
+
+### `components/sections/projects-section.tsx`
+
+Renders project items with optional preview images, external links, status badges, and tech chips.
+
+### `components/sections/publications-section.tsx`
+
+Renders publications in a compact year-first format and highlights owner-name variants based on hero aliases and normalized name forms.
+
+### `components/sections/experience-section.tsx`
+
+Renders time-first experience rows. The date column leads visually; organization metadata excludes location in the main meta line.
+
+### `components/sections/education-section.tsx`
+
+Renders compact education rows. `sectionConfig.education.splitExpectedLine` controls expected-line splitting behavior.
+
+### `components/sections/skills-section.tsx`
+
+Renders the main skills grid as a two-column category-and-badges layout.
+
+### `components/sections/skill-item-badge.tsx`
+
+Shared badge renderer for skills and project tech stacks.
+
+Badge data shape:
+
+```ts
+type SkillItemBadgeData = {
+  text: string
+  icon?: string
+  url?: string
+  code?: boolean
+  description?: string
 }
 ```
 
-**Features**:
-- Avatar display
-- Social media links
-- Responsive contact information
-- Animated entrance
+### `components/sections/awards-section.tsx`
 
-### EducationSection (`components/sections/education-section.tsx`)
+Compact two-column awards layout aligned with the education rhythm.
 
-Educational background display.
+### `components/sections/misc-section.tsx`
 
-**Props**:
-```typescript
-interface EducationSectionProps {
-  data: EducationItem[];
-}
-```
-
-**Features**:
-- Timeline layout
-- Supervisor information (for graduate degrees)
-- Highlight achievements
-- Responsive cards
-
-### ExperienceSection (`components/sections/experience-section.tsx`)
-
-Work experience and projects.
-
-**Props**:
-```typescript
-interface ExperienceSectionProps {
-  data: ExperienceItem[];
-}
-```
-
-**Features**:
-- Chronological ordering
-- Achievement highlights
-- Company/institution links
-- Responsive layout
-
-### PublicationsSection (`components/sections/publications-section.tsx`)
-
-Academic publications and papers.
-
-**Props**:
-```typescript
-interface PublicationsSectionProps {
-  data: PublicationItem[];
-}
-```
-
-**Features**:
-- Publication type badges
-- Impact factor display
-- DOI and URL links
-- Citation formatting
-- Status indicators
-
-### SkillsSection (`components/sections/skills-section.tsx`)
-
-Technical and soft skills organized by categories.
-
-**Props**:
-```typescript
-interface SkillsSectionProps {
-  data: Skills;
-}
-```
-
-**Features**:
-- Category-based organization
-- Skill proficiency indicators
-- Responsive grid layout
-- Interactive hover effects
-
-### AwardsSection (`components/sections/awards-section.tsx`)
-
-Academic and professional awards.
-
-**Props**:
-```typescript
-interface AwardsSectionProps {
-  data: AwardItem[];
-}
-```
-
-**Features**:
-- Chronological display
-- Institution information
-- Award descriptions
-- Responsive cards
-
-### TalksSection (`components/sections/talks-section.tsx`)
-
-Conference talks and presentations.
-
-**Props**:
-```typescript
-interface TalksSectionProps {
-  data: TalkItem[];
-}
-```
-
-**Features**:
-- Event information
-- Talk type indicators
-- External links
-- Date formatting
-
-### ProfileSection (`components/sections/profile-section.tsx`)
-
-Profile highlights and research interests.
-
-**Props**:
-```typescript
-interface ProfileSectionProps {
-  data: {
-    education?: any[];
-    publications?: any[];
-    awards?: any[];
-    projects?: any[];
-  };
-}
-```
-
-**Features**:
-- Key achievements summary
-- Research interests display
-- Quick overview stats
+Dedicated renderer for the `Misc` skill category.
 
 ## UI Components
 
-The project uses [shadcn/ui](https://ui.shadcn.com/) components located in `components/ui/`. These are pre-built, accessible components that can be customized with Tailwind CSS.
+### `components/ui/markdown-text.tsx`
 
-Key UI components used:
-- `Card` - Content containers
-- `Badge` - Status and category indicators
-- `Button` - Interactive elements
-- `Separator` - Visual dividers
-- `Avatar` - Profile images
+Markdown renderer used for TOML-backed rich text. Inline URLs preserve the project’s dashed-underline external-link treatment.
 
-## Styling Guidelines
+### `components/ui/typography.tsx`
 
-### Responsive Design
+Client-side typography helpers:
 
-All components follow mobile-first responsive design:
+- `Typography`
+- `Heading`
+- `Text`
+- `RubyText`
+- `VerticalText`
+- `Quote`
+- `List`
+- `ListItem`
 
-```css
-/* Mobile first */
-.component-class
+These components consume locale-aware helpers from `lib/utils`.
 
-/* Tablet */
-@media (min-width: 768px) {
-  .md:component-class
-}
+## Conventions
 
-/* Desktop */
-@media (min-width: 1024px) {
-  .lg:component-class
-}
-```
-
-### Print Styles
-
-Components include print-specific styles:
-
-```css
-.print:hidden     /* Hidden in print mode */
-.print:block      /* Visible only in print */
-.print:break-before-page  /* Page breaks */
-```
-
-### Animations
-
-Consistent animation patterns:
-
-- `animate-fade-in` - Fade in entrance
-- `animate-slide-up` - Slide up entrance
-- Staggered delays for section animations
-
-## Component Development
-
-### Creating New Components
-
-1. Choose appropriate directory (`layout/`, `sections/`, `ui/`)
-2. Follow TypeScript interface patterns
-3. Include proper prop types
-4. Add responsive design
-5. Consider print styles
-6. Update index exports
-
-### Component Conventions
-
-- Use functional components with TypeScript
-- Props interfaces should be exported
-- Include proper accessibility attributes
-- Follow Tailwind CSS utility patterns
-- Add loading states where appropriate
-
-### Testing Components
-
-```bash
-# Run development server
-pnpm dev
-
-# Type checking
-pnpm type-check
-
-# Build verification
-pnpm build
-```
-
-## Accessibility
-
-All components follow accessibility best practices:
-
-- Semantic HTML structure
-- ARIA labels and descriptions
-- Keyboard navigation support
-- Screen reader compatibility
-- Color contrast compliance
-
-## Performance
-
-Components are optimized for performance:
-
-- Lazy loading where appropriate
-- Minimal bundle size
-- Efficient re-renders
-- Image optimization
-- Code splitting
-
-## Customization
-
-### Adding New Sections
-
-1. Create component in `components/sections/`
-2. Define TypeScript interface
-3. Add to CV data structure
-4. Update CV component
-5. Add to section index exports
-
-### Modifying Existing Components
-
-1. Maintain existing prop interfaces
-2. Update TypeScript types if needed
-3. Test across all breakpoints
-4. Verify print compatibility
-5. Update documentation 
+- Prefer section components for CV rendering, not large monolithic page files.
+- Keep shell-level controls in layout components.
+- Reuse `SkillItemBadge` for compact chip UI.
+- Reuse `MarkdownText` for TOML fields that may contain Markdown.
+- Prefer helper classes in `app/globals.css` over Tailwind `!` modifiers in section code.
