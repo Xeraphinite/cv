@@ -5,6 +5,8 @@ import { SkillsSection } from "./skills-section";
 import { ProjectsSection } from "./projects-section";
 import { PublicationsSection } from "./publications-section";
 import { AwardsSection } from "./awards-section";
+import { PatentsSection } from "./patents-section";
+import { CopyrightsSection } from "./copyrights-section";
 import { NewsSection } from "./news-section";
 import { MiscSection } from "./misc-section";
 import { BioSection } from "./bio-section";
@@ -90,9 +92,11 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
 						</section>
 					)}
 
-					<section id="projects">
-						<ProjectsSection data={projectsData} />
-					</section>
+					{projectsData.length > 0 && (
+						<section id="projects">
+							<ProjectsSection data={projectsData} />
+						</section>
+					)}
 
 					{data.publications.length > 0 && (
 						<section id="publications">
@@ -129,6 +133,28 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
 					{data.awards.length > 0 && (
 						<section id="awards">
 							<AwardsSection data={data.awards} />
+						</section>
+					)}
+
+					{(data.patents ?? []).length > 0 && (
+						<section id="patents">
+							<PatentsSection
+								data={data.patents ?? []}
+								ownerName={data.hero.name}
+								ownerEnName={data.hero.enName}
+								ownerAliases={data.hero.aliases}
+							/>
+						</section>
+					)}
+
+					{(data.copyrights ?? []).length > 0 && (
+						<section id="copyrights">
+							<CopyrightsSection
+								data={data.copyrights ?? []}
+								ownerName={data.hero.name}
+								ownerEnName={data.hero.enName}
+								ownerAliases={data.hero.aliases}
+							/>
 						</section>
 					)}
 

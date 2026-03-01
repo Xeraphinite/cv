@@ -128,7 +128,15 @@ type TomlCVData = {
 		string,
 		{
 			name?: string;
+			title?: string;
 			description?: string;
+			summary?: string;
+			role?: string;
+			org?: string;
+			location?: string;
+			start?: string;
+			end?: string;
+			details?: string[];
 			year?: string | number;
 			status?: string;
 			preview_images?: Array<
@@ -183,6 +191,28 @@ type TomlCVData = {
 			date?: string;
 			from?: string;
 			description?: string;
+			details?: string;
+		}
+	>;
+	patents?: Record<
+		string,
+		{
+			number?: string;
+			title?: string;
+			filed?: string;
+			status?: string;
+			country?: string;
+			inventors?: string[];
+		}
+	>;
+	copyrights?: Record<
+		string,
+		{
+			title?: string;
+			year?: string;
+			status?: string;
+			country?: string;
+			holders?: string[];
 		}
 	>;
 };
@@ -310,6 +340,8 @@ function mergeCVData(base: CVData, override: DeepPartial<CVData>): CVData {
 		publications: mergeArrayByIndex(base.publications, override.publications),
 		experience: mergeArrayByIndex(base.experience, override.experience),
 		awards: mergeArrayByIndex(base.awards, override.awards),
+		patents: mergeArrayByIndex(base.patents ?? [], override.patents),
+		copyrights: mergeArrayByIndex(base.copyrights ?? [], override.copyrights),
 		skills: {
 			categories: override.skills?.categories ?? base.skills.categories,
 			skills: mergeArrayByIndex(base.skills.skills, override.skills?.skills),
@@ -346,6 +378,42 @@ function mapTomlToCVData(source: TomlCVData): CVData {
 	const newsEntries = Object.values(source.news ?? {});
 	const skillEntries = Object.values(source.skills ?? {});
 	const awardEntries = Object.values(source.awards ?? {});
+	const patentEntries = Object.values(source.patents ?? {});
+	const copyrightEntries = Object.values(source.copyrights ?? {});
+	const isProjectExperienceLike = (
+		item: NonNullable<TomlCVData["projects"]>[string],
+	) =>
+		Boolean(
+			item.start ||
+				item.end ||
+				item.role ||
+				item.org ||
+				item.location ||
+				item.summary ||
+				(item.details?.length ?? 0) > 0,
+		);
+	const projectExperienceEntries = projectEntries.flatMap((item) => {
+		if (!isProjectExperienceLike(item)) return [];
+
+		const position = cleanText(item.title ?? item.name ?? item.role ?? "");
+		if (!position) return [];
+
+		const startDate = cleanText(item.start ?? item.year ?? "");
+		const endDate = cleanText(item.end ?? "Present");
+		const highlights = (item.details ?? []).map(cleanText).filter(Boolean);
+
+		return [
+			{
+				position,
+				company: cleanText(item.org ?? "Project"),
+				location: cleanText(item.location ?? ""),
+				startDate,
+				endDate,
+				summary: cleanText(item.summary ?? item.description ?? ""),
+				highlights,
+			},
+		];
+	});
 
 	return {
 		hero: {
@@ -381,15 +449,18 @@ function mapTomlToCVData(source: TomlCVData): CVData {
 					source.sectionConfig?.education?.splitExpectedLine ?? true,
 			},
 		},
-		experience: experienceEntries.map((item) => ({
-			position: cleanText(item.project ?? item.role ?? ""),
-			company: cleanText(item.org ?? ""),
-			location: cleanText(item.location ?? ""),
-			startDate: cleanText(item.start ?? ""),
-			endDate: cleanText(item.end ?? "Present"),
-			summary: cleanText(item.summary ?? ""),
-			highlights: (item.details ?? []).map(cleanText).filter(Boolean),
-		})),
+		experience: [
+			...experienceEntries.map((item) => ({
+				position: cleanText(item.project ?? item.role ?? ""),
+				company: cleanText(item.org ?? ""),
+				location: cleanText(item.location ?? ""),
+				startDate: cleanText(item.start ?? ""),
+				endDate: cleanText(item.end ?? "Present"),
+				summary: cleanText(item.summary ?? ""),
+				highlights: (item.details ?? []).map(cleanText).filter(Boolean),
+			})),
+			...projectExperienceEntries,
+		],
 		publications: publicationEntries.map((item) => {
 			const metadata = cleanText(item.metadata ?? "");
 			const impactFactor = parseImpactFactor(metadata);
@@ -408,8 +479,21 @@ function mapTomlToCVData(source: TomlCVData): CVData {
 			};
 		}),
 		projects: projectEntries.flatMap((item) => {
-			const name = cleanText(item.name ?? "");
+			if (isProjectExperienceLike(item)) return [];
+
+			const name = cleanText(item.name ?? item.title ?? "");
 			if (!name) return [];
+
+			const start = cleanText(item.start ?? "");
+			const end = cleanText(item.end ?? "");
+			const period = start && end ? `${start} - ${end}` : start || end;
+
+			const description = cleanText(item.description ?? item.summary ?? "");
+			const details = (item.details ?? []).map(cleanText).filter(Boolean);
+			const mergedDescription =
+				description && details.length > 0
+					? `${description}\n\n${details.join("\n")}`
+					: description || details.join("\n");
 
 			const urls = (item.urls ?? [])
 				.map(mapProjectUrl)
@@ -428,9 +512,9 @@ function mapTomlToCVData(source: TomlCVData): CVData {
 			return [
 				{
 					name,
-					description: cleanText(item.description ?? ""),
-					year: item.year,
-					status: cleanText(item.status ?? ""),
+					description: mergedDescription,
+					year: item.year ?? period,
+					status: cleanText(item.status ?? item.role ?? ""),
 					tech,
 					urls,
 					previewImages,
@@ -441,7 +525,22 @@ function mapTomlToCVData(source: TomlCVData): CVData {
 			name: cleanText(item.name ?? ""),
 			institute: cleanText(item.from ?? ""),
 			date: cleanText(item.date ?? ""),
-			description: cleanText(item.description ?? ""),
+			description: cleanText(item.description ?? item.details ?? ""),
+		})),
+		patents: patentEntries.map((item) => ({
+			number: cleanText(item.number ?? ""),
+			title: cleanText(item.title ?? ""),
+			filed: cleanText(item.filed ?? ""),
+			status: cleanText(item.status ?? ""),
+			country: cleanText(item.country ?? ""),
+			inventors: (item.inventors ?? []).map(cleanText).filter(Boolean),
+		})),
+		copyrights: copyrightEntries.map((item) => ({
+			title: cleanText(item.title ?? ""),
+			year: cleanText(item.year ?? ""),
+			status: cleanText(item.status ?? ""),
+			country: cleanText(item.country ?? ""),
+			holders: (item.holders ?? []).map(cleanText).filter(Boolean),
 		})),
 		news: newsEntries.map((item) => ({
 			title: cleanText(item.title ?? ""),
@@ -725,6 +824,25 @@ function getSampleData(): CVData {
 				institute: "Sample Institute",
 				date: "2023",
 				description: "Sample award description.",
+			},
+		],
+		patents: [
+			{
+				number: "CN000000000000.0",
+				title: "Sample Patent",
+				filed: "2025-01-01",
+				status: "Disclosed",
+				country: "CN",
+				inventors: ["Sample Author"],
+			},
+		],
+		copyrights: [
+			{
+				title: "Sample Software Copyright",
+				year: "2025",
+				status: "Authorized",
+				country: "China",
+				holders: ["Sample Author"],
 			},
 		],
 		news: [

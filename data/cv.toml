@@ -8,55 +8,60 @@ en_name = "Keyou (Key) Zheng"
 aliases = ["Zheng K."]
 location_label = "Guangzhou, Guangdong"
 show_icons = false
-position = "Ph.D Applicant, Novice Researcher, Junior Design Engineer"
-summary = """
-Hi, I'm **Keyou (Key) Zheng**. 
-
-My research interests includes:
-
-Beyond the lab, I keep building through open-source projects, interface design practice, writing, and playing rhythm games.
-"""
+summary = "Self-motivated MEng graduate specializing in Large Language Models and AI-driven design automation. Research expertise in Code-CAD generation, agentic workflows, and human-in-the-loop systems for industrial applications. Proven track record in deep learning, full-stack development, and DevOps. Seeking PhD opportunities to advance AI-powered design and manufacturing technologies."
 contacts = [
-  { icon = "email", label = "keyouzheng0915@gmail.com", url = "mailto:keyouzheng0915@gmail.com" },
-  { icon = "website", label = "keyzh.pages.dev", url = "https://keyzh.pages.dev" },
-  { icon = "github", label = "Xeraphinite", url = "https://github.com/Xeraphinite" },
+  { icon = "email", label = "`keyouzheng0915@gmail.com`", url = "mailto:keyouzheng0915@gmail.com" },
+  { icon = "website", label = "`keyzh.pages.dev`", url = "https://keyzh.pages.dev" },
+  { icon = "github", label = "`Xeraphinite`", url = "https://github.com/Xeraphinite" },
 ]
 
 [sections]
 education = "Education"
-experience = "Selected Project"
+experience = "Research Experience"
 publications = "Publications"
 news = "News"
+patents = "Patents & Copyrights"
+patents_sub = "Patents"
+copyrights_sub = "Software Copyrights"
+projects = "Projects"
 skills = "Skills"
 awards = "Awards"
 
-[sectionConfig.education]
-splitExpectedLine = true
 
 [education.education-1]
 institution = "Guangdong University of Technology"
 degree = "Mechanical Engineering, MEng."
 date = "Sep 2023 - Jun 2026 (Expected)"
+details = [
+  "*GPA:* 3.62/4.0 (Top 2.5%), Supervised by Prof. #smallcaps(\"Jiewu Leng\");;",
+  "*Dissertation:* _Verifier-Driven Code-based Parametric CAD Generation with Large Language Models Agent_ (Ongoing).",
+]
 
+# Github: #link-with-icon(icon: github-line-icon, url:\"https://github.com/Xeraphinite/Mario-RL\", text:`Mario-RL`)
 [education.education-2]
 institution = "Guangdong University of Finance and Economics"
 degree = "Computer Science, BEng."
 date = "Sep 2019 - Jun 2023"
+details = [
+  "*GPA*: 3.5/4.0 (Top 5%);",
+  "*Thesis:* _Design and Implementation of a Mario Game Agent Based on Deep Reinforcement Learning_.",
+]
 
 
 [experience.exp-1]
 project = "Code-based CAD Assembly Generation"
-stack = "vLLM, OpenHands, Docker, Kubernetes, Laminar"
+# stack = "vLLM, OpenHands, Docker, Kubernetes, Laminar"
 role = "Leader"
 org = "State Key Lab of Manufacturing Technology & Equipment"
+location = "Guangzhou, Guangdong"
 start = "Aug 2025"
 end = "Present"
 summary = "Built a verifiable benchmark and an LLM agent for controllable code-based CAD generation under executable constraints."
 details = [
-  "*Agent Infra*: Built a _multi-language, containerized code execution sandbox_ with pinned toolchains and reproducible runs. Designed a _horizontally scalable_ backend which captures multiple agent trajectories and failure for large-scale experiment observability. Also built a _lightweight web playground_ for fast debugging and artifacts generating.",
-  "*Benchmark Construction*: Built an benchmark from a 200k human CAD code corpus collected from public repos and CAD communities. Filtered with _deterministic and heuristic rules_ (e.g., fuzzy deduplication), and an LLM-based pipeline to _reduce data contamination and control task difficulty_. Produced 10k single-part tasks and 1.7k assembly tasks with golden reference workspaces and executable tests.",
-  "*Agent Design*: Designed _architecture_ for LLMs to generate or edit CAD programs through self-testing and self-repairing. Different from prior method that only work in one-file, the agent could use specific tools (e.g., `spec` tool for extracting specification from natural language)  in multi-file workspaces for assemblies, which guiding fixes in a closed-loop.",
-  "*Evaluation and Results*: Used executable tests as the primary measure to calculate constraint satisfaction. On assembly tasks, our method achieved 54.2% pass rate, 41.9% all-tests success, and 2.4% invalid outputs with competitive geometry scores, outperforming prior LLM-only (e.g., GPT-5) and tool-based baselines on constraint satisfaction while keeping geometry fidelity.",
+  "*Agent Infra*: Built a _multi-language, containerized code execution sandbox_ with pinned toolchains and reproducible runs. Designed a _horizontally scalable_ backend which captures multiple agent trajectories and failures for large-scale experiment observability. Also built a _lightweight web playground_ for fast debugging and artifact generation.",
+  "*Benchmark Construction*: Built a large-scale benchmark from a 200k human CAD code corpus collected from public repos and CAD communities. Filtered with _deterministic and heuristic rules_ (e.g., fuzzy deduplication), and an LLM-based pipeline to _reduce data contamination_ and _control task difficulty_. Produced 10k single-part tasks and 1.7k assembly tasks with golden reference workspaces and executable tests.",
+  "*Agent Design*: Designed _architecture_ for LLMs to generate or edit CAD programs through self-testing and self-repairing. Different from prior methods that only work in a single file, the agent could use specific tools (e.g., `spec`, `inspect`, `verify`) in multi-file workspaces for assemblies, guiding fixes in a closed loop.",
+  "*Evaluation and Results*: Used executable tests as the primary measure to calculate constraint satisfaction. On assembly tasks, our method achieved 54.2% pass rate, 41.9% all-tests success, and 2.4% invalid outputs with competitive geometry scores, outperforming baselines on constraint satisfaction while keeping geometry fidelity.",
   "*Outcome*: One paper is under review at _43rd International Conference on Machine Learning_ (*ICML 2026*).",
 ]
 
@@ -64,43 +69,29 @@ details = [
 project = "Human-in-the-loop CAD Generation Workflow"
 role = "Leader"
 org = "State Key Lab of Manufacturing Technology & Equipment"
+location = "Guangzhou, Guangdong"
 start = "Dec 2024"
 end = "May 2025"
-summary = "Designed a HITL agentic workflow for Code-based CAD generation, and evaluated it with code validity and human preference."
+summary = "Designed a HITL agentic workflow for Code-based CAD generation maintaining code validity and human preference."
 details = [
-  "*Workflow design*: Used fine-tuned `Qwen2.5-VL-7B` as backbone, combined multiple workflow design patterns for code generation, with intent clarification, validity checks, iterative refinement, memory, and safety gating.",
-  "*Results*: Evaluated 100 real-world models using invalid rate and expert pairwise Elo; achieved best performance at 2% invalid rate and 1075.5 Elo, outperforming Claude, GPT-4o, and non-agent Qwen baselines.",
+  "*Workflow design*: Used fine-tuned `Qwen2.5-VL-7B` as a backbone, combining multiple workflow design patterns for code generation, with intent clarification, validity checks, iterative refinement, memory, and safety gating.",
+  "*Results*: Evaluated on 200 real-world models using invalid rate and expert pairwise Elo; achieved best performance at 2% invalid rate and 1075.5 Elo, outperforming Claude, GPT-4o, and non-agent Qwen baselines.",
   "*Outcome*: One paper was published at _Applied Soft Computing_.",
 ]
 
-[projects.project-1]
-year = "2025"
-name = "Code-based CAD Assembly Generation"
-status = "Under Review"
-description = "Built a verifiable benchmark and an LLM agent for controllable code-based CAD generation under executable constraints."
-urls = [
-  { label = "Paper (ICML 2026, under review)", url = "https://openreview.net/" },
-]
-tech = [
-  { text = "vLLM", url = "https://docs.vllm.ai/", code = true },
-  { text = "OpenHands", url = "https://docs.all-hands.dev/", code = true },
-  { text = "Docker", url = "https://www.docker.com/", code = true },
-  { text = "Kubernetes", url = "https://kubernetes.io/", code = true },
-  { text = "Laminar", url = "https://docs.lmnr.ai/", code = true },
-]
-
-[projects.project-2]
-year = "2025"
-name = "Human-in-the-loop CAD Generation Workflow"
-status = "Published"
-description = "Designed a HITL agentic workflow for code-based CAD generation, and evaluated it with code validity and human preference."
-urls = [
-  { label = "Applied Soft Computing", url = "https://www.sciencedirect.com/science/article/pii/S1568494625012335" },
-]
-tech = [
-  { text = "Qwen2.5-VL-7B", url = "https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct", code = true },
-  { text = "Python", url = "https://www.python.org/", code = true },
-  { text = "Agent Workflow", icon = "mingcute:light-fill", code = false },
+[projects.project1]
+title = "Automated Color Difference Control & Calibration"
+role = "Lead Developer"
+org = "Vograce"
+location = "Yiwu, Zhejiang"
+start = "Dec 2024"
+end = "Jul 2025"
+summary = "Built a machine-vision pipeline for closed-loop color consistency control in customized print production."
+details = [
+  "*Capture & Detection*: Designed the optical acquisition environment and built feature-matching alignment with ROI extraction to handle diverse print patterns under varying lighting and material reflectance, enabling robust $Delta E$ (CIEDE2000) computation.",
+  "*Algorithm*: Converted sRGB measurements to CMYK space and applied adaptive iterative step-size feedback to translate measured color differences into actionable ink-level adjustment recommendations for press operators.",
+  "*Results*: Rapidly prototyped with `Gradio` through extensive iteration cycles, optimized the full detect-and-recommend pipeline to ≤1 s/image—over 20× faster than manual color grading in pilot line runs. Productionized as a full-stack system built with `Next.js` and `FastAPI` for enterprise deployment.",
+  "*Outcome*: Received two authorized software copyrights.",
 ]
 
 
@@ -112,14 +103,7 @@ published = "2025"
 metadata = "JCR Q1, IF: 6.6"
 DOI = "10.1016/j.asoc.2025.113920"
 pdf = "https://www.sciencedirect.com/science/article/pii/S1568494625012335"
-authors = [
-  "Keyou Zheng",
-  "Yuanwei Zhong",
-  "Xuyang Su",
-  "Jiewu Leng",
-  "Qiang Liu",
-  "Xin Chen",
-]
+authors = ["Zheng K.", "Zhong Y.", "Su X.", "Leng J.*", "Liu Q.", "Chen X"]
 tldr = ""
 
 [publications.publication-2]
@@ -131,16 +115,17 @@ metadata = "JCR Q1, IF: 11.4"
 DOI = "10.1016/j.rcim.2025.103076"
 pdf = "https://www.sciencedirect.com/science/article/pii/S0736584525001309"
 authors = [
-  "Jiewu Leng",
-  "Keyou Zheng",
-  "Rongjie Li",
-  "Chong Chen",
-  "Baicun Wang",
-  "Qiang Liu",
-  "Xin Chen",
-  "Weiming Shen",
+  "Leng J.",
+  "Zheng K.",
+  "Li R.",
+  "Chen C.",
+  "Wang B.",
+  "Liu Q.*",
+  "Chen X.",
+  "Shen W",
 ]
 tldr = ""
+
 
 [news.news-1]
 title = "Applied Soft Computing paper published"
@@ -196,6 +181,7 @@ items = [
   { text = "CUDA", url = "https://developer.nvidia.com/cuda-toolkit", code = true, description = "GPU compute stack for accelerating training and inference." },
 ]
 
+
 [skills.web-dev-design]
 label = "Web Dev & Design"
 items = [
@@ -226,10 +212,11 @@ items = [
 name = "National Scholarship"
 date = "2025"
 from = "Ministry of Education, China"
+details = "Top 2%"
 
 [awards.award-2]
 name = "Scholarship in Academic Excellence"
-date = "2024-2025"
+date = "2024, 2025"
 from = "Guangdong University of Technology"
 
 [awards.award-4]
@@ -239,5 +226,61 @@ from = "Guangdong University of Technology"
 
 [awards.award-3]
 name = "Scholarship in Academic Excellence"
-date = "2020-2022"
+date = "2020, 2021, 2022"
 from = "Guangdong University of Finance & Economics"
+
+# status values typically: Disclosed, Granted.
+
+[patents.patent-1]
+number = "202410273298.7"
+title = "Flexible needle puncture path planning based on deep reinforcement learning"
+filed = "2024-03-11"
+status = "Disclosed"
+country = "CN"
+inventors = [
+  "Leng J.",
+  "Zheng K.",
+  "Zhong Y.",
+  "Xie J.",
+  "Li R.",
+  "Xu C.",
+  "Liu Q.",
+]
+
+[patents.patent-2]
+number = "202410950697.2"
+title = "Interaction extraction and demand-manufacturing matching from service interaction context"
+filed = "2024-07-16"
+status = "Disclosed"
+country = "CN"
+inventors = ["Leng J.", "Zheng K.", "Xie J.", "Li R.", "Xu C.", "Liu Q."]
+
+[patents.patent-3]
+number = "202410368790.2"
+title = "Unified value-chain middleware for manufacturing and its digital-twin system"
+filed = "2024-03-28"
+status = "Disclosed"
+country = "CN"
+inventors = ["Leng J.", "Zhong Y.", "Zheng K.", "Li R.", "Xu C.", "Liu Q."]
+
+[patents.patent-4]
+number = "18/662,981"
+title = "Defect prediction methods based on multi-feature parallel multi-stage neural network (MF-PMSNN)"
+filed = "2024-05-13"
+status = "Disclosed"
+country = "US"
+inventors = ["Leng J.", "Xie J.", "Zheng K.", "Li R.", "Xu C.", "Liu Q."]
+
+[copyrights.copyright-1]
+title = "Multi-feature fusion print color difference detection system"
+year = "2025"
+status = "Authorized"
+country = "China"
+holders = ["Zheng K.", "Zhong Y.", "Leng J."]
+
+[copyrights.copyright-2]
+title = "Vision intelligence-based personalized print color difference analysis system"
+year = "2025"
+status = "Authorized"
+country = "China"
+holders = ["Zheng K.", "Zhong Y.", "Leng J."]
