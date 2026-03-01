@@ -178,7 +178,7 @@ function parseDefaultTomlCVData(source: string): LlmsRelevantCVData {
 			name: cleanText(profile.original_name ?? profile.en_name ?? "Unknown"),
 			enName: cleanText(profile.en_name ?? profile.original_name ?? "Unknown"),
 			aliases: (profile.aliases ?? []).map(cleanText).filter(Boolean),
-			avatar: "/avatar-256.png",
+			avatar: "/images/avatar/avatar-256.png",
 			location: cleanText(profile.location_label),
 			age: "",
 			position: cleanText(profile.position),

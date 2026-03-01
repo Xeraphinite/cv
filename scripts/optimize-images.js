@@ -5,7 +5,8 @@ const { getPlaiceholder } = require("plaiceholder");
 
 async function optimizeImages() {
 	const publicDir = path.join(__dirname, "..", "public");
-	const avatarPath = path.join(publicDir, "avatar.png");
+	const avatarDir = path.join(publicDir, "images", "avatar");
+	const avatarPath = path.join(avatarDir, "avatar.png");
 
 	if (!fs.existsSync(avatarPath)) {
 		console.log("❌ avatar.png not found");
@@ -27,19 +28,19 @@ async function optimizeImages() {
 			await sharp(avatarPath)
 				.resize(width, width, { fit: "cover" })
 				.webp({ quality: 85, effort: 6 })
-				.toFile(path.join(publicDir, `avatar${suffix}.webp`));
+				.toFile(path.join(avatarDir, `avatar${suffix}.webp`));
 
 			// AVIF version (smaller but newer format)
 			await sharp(avatarPath)
 				.resize(width, width, { fit: "cover" })
 				.avif({ quality: 75, effort: 9 })
-				.toFile(path.join(publicDir, `avatar${suffix}.avif`));
+				.toFile(path.join(avatarDir, `avatar${suffix}.avif`));
 
 			// Optimized PNG fallback
 			await sharp(avatarPath)
 				.resize(width, width, { fit: "cover" })
 				.png({ quality: 85, compressionLevel: 9 })
-				.toFile(path.join(publicDir, `avatar${suffix}.png`));
+				.toFile(path.join(avatarDir, `avatar${suffix}.png`));
 
 			// Generate blur placeholder for this size
 			const buffer = await sharp(avatarPath)
@@ -64,7 +65,7 @@ async function optimizeImages() {
 		// Get file sizes for comparison
 		const originalSize = fs.statSync(avatarPath).size;
 		const optimizedSize = fs.statSync(
-			path.join(publicDir, "avatar-128.webp"),
+			path.join(avatarDir, "avatar-128.webp"),
 		).size;
 
 		console.log("\n📊 Size comparison for 128x128:");

@@ -43,5 +43,5 @@ yarn-error.log*
 next-env.d.ts
 
 # generated files (kept for reference, but blur data is now inlined)
-# public/blur-data.json
+# public/data/blur-data.json
 .env

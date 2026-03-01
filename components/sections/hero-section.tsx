@@ -127,7 +127,7 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 
 	const handleDownloadPDF = () => {
 		const link = document.createElement("a");
-		link.href = "/cv.pdf";
+		link.href = "/files/cv.pdf";
 		link.download = `${data.name.replace(/\s+/g, "_")}_CV.pdf`;
 		document.body.appendChild(link);
 		link.click();
@@ -296,13 +296,13 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 				<div className="grid grid-cols-1 gap-6">
 					<div className="paper-avatar relative h-28 w-28 sm:h-32 sm:w-32">
 						<Image
-							src={data.avatar || "/placeholder-user.jpg"}
+							src={data.avatar || "/images/placeholders/placeholder-user.jpg"}
 							alt={`${data.name} - ${data.enName ?? data.name}`}
 							fill
 							className="object-cover"
 							priority
 							{...getResponsiveImageProps(
-								data.avatar || "/placeholder-user.jpg",
+								data.avatar || "/images/placeholders/placeholder-user.jpg",
 								"(max-width: 768px) 112px, 128px",
 							)}
 						/>
