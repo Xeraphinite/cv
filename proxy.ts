@@ -9,7 +9,7 @@ export default createMiddleware({
 	// Used when no locale matches.
 	defaultLocale,
 
-	// Use no prefix for default locale (e.g. /, /about) and prefixes for others (e.g. /en/about).
+	// Use no prefix for default locale (e.g. /, /about) and prefixes for others (e.g. /zh/about).
 	localePrefix: "as-needed",
 
 	// Keep default locale on unprefixed routes instead of auto-redirecting to browser locale.

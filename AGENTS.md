@@ -93,7 +93,7 @@
 - `lib/config/app-config.ts` is the centralized source for locales, metadata labels, and CV data source settings.
 - Always pass `locale` to `NextIntlClientProvider` in locale layouts.
 - Active locales are `en`, `zh`, and `ja`; keep `yue` / `ko` files in the repo for future re-enable.
-- Locale routing uses `as-needed` prefixing: `en` is unprefixed, non-default locales are prefixed, and middleware auto-detection redirect is disabled.
+- Locale routing uses `as-needed` prefixing: `en` is unprefixed, non-default locales are prefixed, and proxy locale auto-detection redirect is disabled.
 - Do not use client-side locale auto-switch prompts or browser-language detection.
 
 ### App Router / Runtime
@@ -110,7 +110,7 @@
 - Keep Cloudflare Pages build/deploy scripts aligned with that adapter: `npx @cloudflare/next-on-pages@1` and `wrangler pages deploy .vercel/output/static`.
 - For Cloudflare Pages builds, keep `/[locale]/accessibility` on Edge runtime in `app/(a11y)/[locale]/layout.tsx`.
 - For Cloudflare Pages builds, non-static App Router route handlers, including `llms.txt`, must export `runtime = "edge"`.
-- For Cloudflare Pages builds, keep locale routing in root `middleware.ts`, not `proxy.ts`.
+- For Cloudflare Pages builds, keep locale routing in root `proxy.ts`.
 
 ### Markdown / TOML Loading
 - `components/ui/markdown-text.tsx` uses the MDX runtime (`@mdx-js/react` + `@mdx-js/mdx`); preserve current inline-link styling and paragraph spacing.
