@@ -2,8 +2,9 @@
 
 ## Devops
 - Always use `pnpm` for package management.
-- Run the local Next.js dev server with Turbopack via `pnpm dev` -> `next dev --turbopack`.
+- Run the local Next.js dev server via `pnpm dev` -> `next dev` on Next.js 16+.
 - Always update `AGENTS.md` for any reusable knowledge or user preferences that should be followed across the project.
+- Keep workspace-local VS Code MCP config in `.vscode/mcp.json` using `next-devtools-mcp@latest` when this project needs Next MCP discovery.
 - For Next.js work in this repo, initialize the `next-devtools` MCP server first and follow its `init` guidance before making changes when the server is available.
 - For browser inspection, layout debugging, console or network investigation, or visual verification work in this repo, prefer the `chrome-devtools` MCP server when it is available.
 - For UI/layout/style changes, always validate with Playwright before finalizing.
@@ -108,6 +109,11 @@
   - Theme tokens consumed by Tailwind (`--background`, `--foreground`, `--chart-1..5`, `--sidebar-*`, etc.) must be defined in `app/globals.css` for both light and dark modes.
   - Do not use CSS `@import` for Google Fonts in `app/globals.css`; load primary web fonts with `next/font` in locale root layouts (currently `app/(cv)/[locale]/layout.tsx` and `app/(a11y)/[locale]/layout.tsx`) and reference via CSS variables.
   - In section components, avoid Tailwind `!` utility modifiers in `className`; use semantic helper classes in `app/globals.css` (for example `paper-meta-*`, `paper-body-*`, `paper-badge-*`) to preserve visual overrides.
+- Turbopack markdown imports:
+  - When importing `.md` files as source strings in Next.js dev (`pnpm dev` with Turbopack), keep a Turbopack rule mapped to `raw-loader` with `as: "*.js"`; webpack-only `asset/source` is not sufficient for Turbopack.
+  - When importing `.toml` files as raw source strings in Next.js dev (`pnpm dev` with Turbopack), keep a matching Turbopack `raw-loader` rule with `as: "*.js"`; webpack-only `asset/source` is not sufficient for Turbopack.
+  - On Next.js `16.x` in this repo, keep those loader rules under top-level `turbopack.rules`; `experimental.turbo` and the Next config `eslint` key are no longer valid.
+  - While this repo still uses a custom webpack raw-source rule for `.md`/`.toml` build imports, keep `pnpm build` on `next build --webpack`; Next.js 16 default Turbopack builds will reject custom webpack config.
 - Code-like text:
   - Keep mono font for `code`/`pre` via `Maple Mono`.
 - Awards/Honors iconography:
@@ -191,6 +197,7 @@
   - `lastUpdated` should be computed from CV source file mtime via `getCVLastUpdated` in `lib/load-cv-data.ts`, not from browser page metadata.
   - Footer relative update text should be recalculated client-side from the visitor's current time after hydration and continue refreshing; do not anchor it to a static server render timestamp.
   - Do not show a textual prefix label before relative update time (render only the relative time text with icon).
+  - Footer body text should stay one step smaller than the default body copy (`text-sm` rather than `text-base`) unless explicitly requested otherwise.
   - Footer should include a full single-line copyright text in the form `© yyyy <owner>. All rights reserved.`.
   - Render footer in exactly 3 lines: (1) last update time + visitor numbers + locale/theme toggles, (2) `LLMs.txt` + Accessibility + Privacy, (3) copyright text.
   - In footer line 2, each item (`LLMs.txt`, Accessibility, Privacy) should use a clear leading icon (mingcute set), not text-only entries.

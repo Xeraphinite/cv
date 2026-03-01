@@ -10,13 +10,11 @@ location_label = "Guangzhou, Guangdong"
 show_icons = false
 position = "Ph.D Applicant, Novice Researcher, Junior Design Engineer"
 summary = """
-Hi, I'm **Keyou (Key) Zheng** - a graduate student, novice researcher, and junior design engineer. My current work sits at the intersection of large language models, parametric CAD, and HCI, with a focus on turning human design intent into reliable, machine-executable code.
+Hi, I'm **Keyou (Key) Zheng**. 
 
-In graduate research, I build agentic workflows that close the loop between generation and verification. The system interprets compiler and geometry feedback from CAD environments, then iteratively repairs code toward engineering-valid results rather than surface-level correctness.
+My research interests includes:
 
-My undergraduate training in computer science gave me strong technical fundamentals, while broad self-directed reading in design and human-centered computing shaped how I think about tools. I care about systems that are both technically rigorous and genuinely usable.
-
-Beyond the lab, I keep building through open-source projects, interface design practice, and writing. I value typography, clear interaction, and maintainable code, and I aim to grow into a crafter who can deliver thoughtful work across software, design, and research.
+Beyond the lab, I keep building through open-source projects, interface design practice, writing, and playing rhythm games.
 """
 contacts = [
   { icon = "email", label = "keyouzheng0915@gmail.com", url = "mailto:keyouzheng0915@gmail.com" },

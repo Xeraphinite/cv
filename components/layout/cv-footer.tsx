@@ -143,7 +143,7 @@ export function CVFooter({
 			<TooltipProvider delayDuration={120}>
 				<div
 					className={clsx(
-						"px-4 text-base text-foreground/80",
+						"px-4 text-foreground/80 text-sm",
 						compact ? "pt-0 pb-2" : "pt-7 pb-5 sm:pt-6 sm:pb-3",
 					)}
 				>

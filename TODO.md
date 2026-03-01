@@ -53,5 +53,5 @@
 
 ## misc
 
-- [ ] Remove `!` important flag in CSS.
+- [x] Remove `!` important flag in CSS.
 - [ ] Email disconfusion?
