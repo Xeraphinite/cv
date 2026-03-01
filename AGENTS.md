@@ -93,7 +93,7 @@
 - `lib/config/app-config.ts` is the centralized source for locales, metadata labels, and CV data source settings.
 - Always pass `locale` to `NextIntlClientProvider` in locale layouts.
 - Active locales are `en`, `zh`, and `ja`; keep `yue` / `ko` files in the repo for future re-enable.
-- Locale routing uses explicit default-locale routes: `en` is unprefixed via dedicated routes, and non-default locales are prefixed under `[locale]`.
+- Locale routing uses `as-needed` prefixing: `en` is unprefixed, non-default locales are prefixed, and proxy locale auto-detection redirect is disabled.
 - Do not use client-side locale auto-switch prompts or browser-language detection.
 
 ### App Router / Runtime
@@ -106,11 +106,11 @@
 - For SSR-rendered components, do not use render-time nondeterministic values such as `Math.random()` or `Date.now()`.
 
 ### Next.js / Cloudflare Constraints
-- Cloudflare deploys in this repo target Workers via `@opennextjs/cloudflare`, not Pages via `@cloudflare/next-on-pages`.
-- Keep Cloudflare build/deploy scripts aligned with OpenNext: `opennextjs-cloudflare build` and `opennextjs-cloudflare deploy`.
-- Keep Worker config in root `wrangler.jsonc` with `.open-next/worker.js` as the entrypoint and `.open-next/assets` as static assets.
-- Do not add `export const runtime = "edge"` for Cloudflare compatibility in this repo; OpenNext Cloudflare does not support Edge runtime route segments here.
-- Keep locale routing proxy-free; implement unprefixed English routes explicitly and localized routes under `app/**/[locale]`.
+- Cloudflare deploys in this repo target Cloudflare Pages via `@cloudflare/next-on-pages@1`.
+- Keep Cloudflare Pages build/deploy scripts aligned with that adapter: `npx @cloudflare/next-on-pages@1` and `wrangler pages deploy .vercel/output/static`.
+- For Cloudflare Pages builds, keep `/[locale]/accessibility` on Edge runtime in `app/(a11y)/[locale]/layout.tsx`.
+- For Cloudflare Pages builds, non-static App Router route handlers, including `llms.txt`, must export `runtime = "edge"`.
+- For Cloudflare Pages builds, keep locale routing in root `proxy.ts`.
 
 ### Markdown / TOML Loading
 - `components/ui/markdown-text.tsx` uses the MDX runtime (`@mdx-js/react` + `@mdx-js/mdx`); preserve current inline-link styling and paragraph spacing.

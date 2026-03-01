@@ -1,6 +1,6 @@
 # Minimal CV
 
-A modern, responsive, and multilingual CV/Resume website built with Next.js 16, TypeScript, and Tailwind CSS.
+A modern, responsive, and multilingual CV/Resume website built with Next.js 14, TypeScript, and Tailwind CSS.
 
 ## ✨ Features
 
@@ -8,7 +8,7 @@ A modern, responsive, and multilingual CV/Resume website built with Next.js 16, 
 - **📱 Responsive Design**: Optimized for all devices
 - **🎨 Modern UI**: Clean, professional layout with smooth animations
 - **📄 Print-Friendly**: Optimized for PDF generation and printing
-- **⚡ Performance**: Built with Next.js 16 App Router for optimal performance
+- **⚡ Performance**: Built with Next.js 14 App Router for optimal performance
 - **🔧 TypeScript**: Fully typed for better development experience
 - **🎯 SEO Optimized**: Meta tags, OpenGraph, and structured data
 
@@ -98,12 +98,19 @@ The project uses Tailwind CSS. Customize the styling by:
 pnpm build
 ```
 
+### Export Static Site
+
+```bash
+pnpm build && pnpm export
+```
+
 ### Deploy
 
 The site can be deployed to:
 
 - **Vercel** (recommended): Connect your GitHub repo
-- **Cloudflare Workers**: `pnpm deploy`
+- **Netlify**: Drag and drop the `out/` folder
+- **GitHub Pages**: Use the static export
 
 ## 📚 Documentation
 
@@ -114,7 +121,7 @@ The site can be deployed to:
 
 ## 🧰 Tech Stack
 
-- **Framework**: Next.js 16 (App Router)
+- **Framework**: Next.js 14 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **UI Components**: shadcn/ui
