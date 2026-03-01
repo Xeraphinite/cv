@@ -90,11 +90,11 @@
 - App Router metadata:
   - In `app/` routes, do not use `next/head`; use the Metadata API and/or native `<head>` in layout files.
   - Route groups are split for deployment/runtime constraints: keep CV pages under `app/(cv)/[locale]` and accessibility pages under `app/(a11y)/[locale]/accessibility`.
-  - Cloudflare deploys in this repo should use OpenNext on Workers via `@opennextjs/cloudflare`, not `@cloudflare/next-on-pages`.
-  - Keep Cloudflare build/deploy scripts aligned with OpenNext CLI: `opennextjs-cloudflare build`, `preview`, and `deploy`.
-  - Keep Wrangler config in `wrangler.jsonc` with `main = ".open-next/worker.js"` and assets from `.open-next/assets`.
-  - When changing the Cloudflare deployment target, keep `wrangler.jsonc` `name` aligned with the actual Worker name used for deploys.
-  - With OpenNext on Workers in this repo, keep locale routing in root `middleware.ts`; current `proxy.ts`/Node.js middleware output is rejected by the adapter (`Node.js middleware is not currently supported`), even though Next.js 16 warns that `middleware.ts` is deprecated.
+  - Cloudflare deploys in this repo currently target Cloudflare Pages via `@cloudflare/next-on-pages@1` to preserve the `pages.dev` domain workflow.
+  - Keep Cloudflare Pages build/deploy scripts aligned with the legacy Pages adapter: `npx @cloudflare/next-on-pages@1` and `wrangler pages deploy .vercel/output/static`.
+  - For Cloudflare Pages builds using `@cloudflare/next-on-pages@1`, keep `/[locale]/accessibility` on Edge runtime (`app/(a11y)/[locale]/layout.tsx`) and keep markdown as bundled imports (`.md` via webpack `asset/source` + `types/markdown.d.ts`) to avoid non-edge route failures.
+  - For Cloudflare Pages builds using `@cloudflare/next-on-pages@1`, App Router route handlers that are not fully static, including `llms.txt` handlers, must export `runtime = "edge"` or the build will fail during prerender config validation.
+  - For Cloudflare Pages builds using `@cloudflare/next-on-pages@1`, keep locale routing in root `middleware.ts` instead of `proxy.ts`; the adapter still validates `_middleware` and can fail on Next 16 `proxy.ts` setups even when local Next builds pass.
 - Typography policy:
   - Keep the configured font families (`Spectral`, `IBM Plex Sans`, locale-specific `Noto Serif` variants, `Maple Mono`) with locale-specific CJK fallbacks.
   - Keep English serif default on `Spectral`; keep non-English serif defaults on Noto Serif families.

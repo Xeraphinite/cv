@@ -29,7 +29,7 @@
 
 - [ ] Update README.md with new project name, description, and usage instructions;
 - [ ] Add documentation for contributing, customization, and deployment;
-- [x] Migrate Cloudflare deployment from `@cloudflare/next-on-pages` to OpenNext (`@opennextjs/cloudflare`) on Workers; use free `*.workers.dev` domain (or bind custom domain on Worker);
+- [ ] Migrate Cloudflare deployment from `@cloudflare/next-on-pages` to OpenNext (`@opennextjs/cloudflare`) on Workers; use free `*.workers.dev` domain (or bind custom domain on Worker);
 - [ ] Create a changelog to track updates and changes;
 
 ## content
