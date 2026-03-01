@@ -27,8 +27,6 @@ const ibmPlexSans = IBM_Plex_Sans({
 const notoSerifCjkStylesheet =
 	"https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&display=swap";
 
-export const runtime = "edge";
-
 export default async function AccessibilityLocaleLayout({
 	children,
 	params,

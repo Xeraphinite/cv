@@ -16,6 +16,7 @@ tmp-playwright-*.png
 # next.js
 /.next/
 /out/
+/.open-next/
 
 # production
 /build

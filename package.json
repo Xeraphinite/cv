@@ -7,13 +7,16 @@
 		"build": "next build",
 		"start": "next start",
 		"prepare": "husky",
-		"lint": "pnpm biome lint --only=nursery/useSortedClasses --only=source/noDuplicateClasses app components lib hooks data messages scripts i18n.ts proxy.ts next.config.mjs tailwind.config.ts postcss.config.mjs",
-		"lint:fix": "pnpm biome lint --write --unsafe --only=nursery/useSortedClasses --only=source/noDuplicateClasses app components lib hooks data messages scripts i18n.ts proxy.ts next.config.mjs tailwind.config.ts postcss.config.mjs",
+		"lint": "pnpm biome lint --only=nursery/useSortedClasses --only=source/noDuplicateClasses app components lib hooks data messages scripts i18n.ts next.config.mjs tailwind.config.ts postcss.config.mjs",
+		"lint:fix": "pnpm biome lint --write --unsafe --only=nursery/useSortedClasses --only=source/noDuplicateClasses app components lib hooks data messages scripts i18n.ts next.config.mjs tailwind.config.ts postcss.config.mjs",
 		"format": "pnpm biome format --write .",
 		"check": "pnpm lint && pnpm build",
 		"optimize-images": "node scripts/optimize-images.js",
-		"cf:build": "npx @cloudflare/next-on-pages@1",
-		"cf:deploy": "pnpm cf:build && wrangler pages deploy .vercel/output/static --project-name keyzh"
+		"preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+		"deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+		"cf:build": "opennextjs-cloudflare build",
+		"cf:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+		"cf:typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
 	},
 	"lint-staged": {
 		"*.{js,jsx,ts,tsx,css,json,jsonc,mjs,cjs}": [
@@ -87,6 +90,7 @@
 		"@iconify-json/academicons": "^1.2.2",
 		"@iconify-json/mingcute": "^1.2.3",
 		"@iconify-json/twemoji": "^1.2.2",
+		"@opennextjs/cloudflare": "^1.17.1",
 		"@types/node": "^22",
 		"@types/react": "^19.2.14",
 		"@types/react-dom": "^19.2.3",
