@@ -45,9 +45,6 @@
 - [ ] Split oversized `components/ui/map.tsx` (1497 LOC) into smaller modules (`map-root`, markers, clusters, controls) to reduce coupling and review risk.
 - [ ] Remove `react-hooks/exhaustive-deps` suppressions in `components/ui/map.tsx` (11 occurrences) by stabilizing dependencies with refs/callbacks where needed.
 - [ ] Replace unsafe cast in `components/ui/map.tsx` (`feature as unknown as GeoJSON.Feature<...>`) with type guards before invoking `onPointClick`.
-- [ ] Remove duplicated hook implementations and keep a single source of truth in `hooks/`:
-  - [ ] `hooks/use-mobile.tsx` vs `components/ui/use-mobile.tsx`
-  - [ ] `hooks/use-toast.ts` vs `components/ui/use-toast.ts`
 - [ ] Add a lightweight code-health check (script or lint rule) to prevent duplicate hook files and repeated lint suppressions from being reintroduced.
 
 ## misc

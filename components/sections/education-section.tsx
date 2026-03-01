@@ -1,10 +1,7 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import {
-	useSectionTranslations,
-	useLabelTranslations,
-} from "@/hooks/use-translations";
+import { useTranslations } from "next-intl";
 import { formatToYearMonth } from "@/lib/date-format";
 import type { EducationItem, EducationSectionConfig } from "@/lib/types/cv";
 
@@ -22,8 +19,8 @@ const EXPECTED_FALLBACK_TOKENS = [
 ] as const;
 
 export function EducationSection({ data, config }: EducationSectionProps) {
-	const tSection = useSectionTranslations();
-	const tLabel = useLabelTranslations();
+	const tSection = useTranslations("sections");
+	const tLabel = useTranslations("labels");
 	const splitExpectedLine = config?.splitExpectedLine ?? true;
 
 	const renderYearMonthWithSup = (value: string) => {
