@@ -99,8 +99,8 @@ export function ProfileSection({ data }: ProfileSectionProps) {
 	];
 
 	return (
-		<section className="paper-section">
-			<h2 className="paper-section-title">
+		<section className="cv-section">
+			<h2 className="cv-section-title">
 				<Icon
 					icon="mingcute:star-fill"
 					className="mr-3 inline-block size-[1em] align-[-0.12em] text-primary"
@@ -108,7 +108,7 @@ export function ProfileSection({ data }: ProfileSectionProps) {
 				Profile Highlights
 			</h2>
 
-			<div className="paper-card">
+			<div className="cv-card">
 				<div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
 					{highlightItems.map((item) => (
 						<div
@@ -122,7 +122,7 @@ export function ProfileSection({ data }: ProfileSectionProps) {
 								<div className="mb-1 font-bold text-2xl text-foreground">
 									{item.value}
 								</div>
-								<div className="paper-meta">{item.label}</div>
+								<div className="cv-meta">{item.label}</div>
 							</div>
 						</div>
 					))}
@@ -139,8 +139,8 @@ export function ResearchInterestsSection({
 		return null;
 
 	return (
-		<section className="paper-section">
-			<h2 className="paper-section-title">
+		<section className="cv-section">
+			<h2 className="cv-section-title">
 				<Icon
 					icon="mingcute:brain-line"
 					className="mr-3 inline-block size-[1em] align-[-0.12em] text-primary"
@@ -148,10 +148,10 @@ export function ResearchInterestsSection({
 				Research Interests
 			</h2>
 
-			<div className="paper-card">
+			<div className="cv-card">
 				<div className="flex flex-wrap gap-3">
 					{data.researchInterests.map((interest) => (
-						<span key={interest} className="paper-badge">
+						<span key={interest} className="cv-badge">
 							{interest}
 						</span>
 					))}

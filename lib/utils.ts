@@ -11,46 +11,45 @@ export function getTypographyClasses(locale?: string) {
 		case "zh":
 		case "zh-CN":
 			return {
-				title: "paper-title lang-zh font-zh-sans leading-tight tracking-zh",
-				subtitle: "paper-subtitle lang-zh font-zh-sans tracking-zh",
-				body: "paper-body lang-zh font-zh-serif leading-zh tracking-zh text-justify-zh cjk-text",
-				meta: "paper-meta lang-zh font-zh-sans tracking-zh",
+				title: "cv-title lang-zh font-zh-sans leading-tight tracking-zh",
+				subtitle: "cv-subtitle lang-zh font-zh-sans tracking-zh",
+				body: "cv-body lang-zh font-zh-serif leading-zh tracking-zh text-justify-zh cjk-text",
+				meta: "cv-meta lang-zh font-zh-sans tracking-zh",
 				emphasis: "emphasis-zh",
 			};
 		case "yue":
 		case "zh-HK":
 		case "zh-TW":
 			return {
-				title:
-					"paper-title lang-zh font-zh-hant-sans leading-tight tracking-zh",
-				subtitle: "paper-subtitle lang-zh font-zh-hant-sans tracking-zh",
-				body: "paper-body lang-zh font-zh-hant-serif leading-zh tracking-zh text-justify-zh cjk-text",
-				meta: "paper-meta lang-zh font-zh-hant-sans tracking-zh",
+				title: "cv-title lang-zh font-zh-hant-sans leading-tight tracking-zh",
+				subtitle: "cv-subtitle lang-zh font-zh-hant-sans tracking-zh",
+				body: "cv-body lang-zh font-zh-hant-serif leading-zh tracking-zh text-justify-zh cjk-text",
+				meta: "cv-meta lang-zh font-zh-hant-sans tracking-zh",
 				emphasis: "emphasis-zh",
 			};
 		case "ja":
 			return {
-				title: "paper-title lang-ja font-ja-sans leading-tight tracking-ja",
-				subtitle: "paper-subtitle lang-ja font-ja-sans tracking-ja",
-				body: "paper-body lang-ja font-ja-serif leading-ja tracking-ja text-justify-ja cjk-text",
-				meta: "paper-meta lang-ja font-ja-sans tracking-ja",
+				title: "cv-title lang-ja font-ja-sans leading-tight tracking-ja",
+				subtitle: "cv-subtitle lang-ja font-ja-sans tracking-ja",
+				body: "cv-body lang-ja font-ja-serif leading-ja tracking-ja text-justify-ja cjk-text",
+				meta: "cv-meta lang-ja font-ja-sans tracking-ja",
 				emphasis: "emphasis-ja",
 			};
 		case "ko":
 			return {
-				title: "paper-title lang-ko font-ko-sans leading-tight tracking-ko",
-				subtitle: "paper-subtitle lang-ko font-ko-sans tracking-ko",
-				body: "paper-body lang-ko font-ko-serif leading-ko tracking-ko text-justify-ko",
-				meta: "paper-meta lang-ko font-ko-sans tracking-ko",
+				title: "cv-title lang-ko font-ko-sans leading-tight tracking-ko",
+				subtitle: "cv-subtitle lang-ko font-ko-sans tracking-ko",
+				body: "cv-body lang-ko font-ko-serif leading-ko tracking-ko text-justify-ko",
+				meta: "cv-meta lang-ko font-ko-sans tracking-ko",
 				emphasis: "emphasis-ko",
 			};
 		case "en":
 		default:
 			return {
-				title: "paper-title font-en-sans leading-tight tracking-en",
-				subtitle: "paper-subtitle font-en-sans tracking-en",
-				body: "paper-body font-en-sans leading-en tracking-en",
-				meta: "paper-meta font-en-sans tracking-en",
+				title: "cv-title font-en-sans leading-tight tracking-en",
+				subtitle: "cv-subtitle font-en-sans tracking-en",
+				body: "cv-body font-en-sans leading-en tracking-en",
+				meta: "cv-meta font-en-sans tracking-en",
 				emphasis: "font-semibold",
 			};
 	}

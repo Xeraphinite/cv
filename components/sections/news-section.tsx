@@ -69,8 +69,8 @@ export function NewsSection({ data }: NewsSectionProps) {
 	};
 
 	return (
-		<section className="paper-section">
-			<h2 className="paper-section-title">
+		<section className="cv-section">
+			<h2 className="cv-section-title">
 				<Icon
 					icon="mingcute:news-fill"
 					className="mr-3 inline-block size-[1em] align-[-0.12em] text-primary"
@@ -82,7 +82,7 @@ export function NewsSection({ data }: NewsSectionProps) {
 				{sortedItems.map((item, index) => (
 					<div
 						key={`${item.title}-${index}`}
-						className="paper-body text-foreground leading-relaxed"
+						className="cv-body text-foreground leading-relaxed"
 					>
 						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-0.5 md:gap-y-0">
 							<span className="order-2 justify-self-end whitespace-nowrap text-right font-bold font-sans text-base text-foreground/80">

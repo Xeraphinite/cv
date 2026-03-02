@@ -14,8 +14,8 @@ export function BioSection({ bio }: BioSectionProps) {
 	if (!bio?.trim()) return null;
 
 	return (
-		<section className="paper-section">
-			<h2 className="paper-section-title">
+		<section className="cv-section">
+			<h2 className="cv-section-title">
 				<Icon
 					icon="mingcute:user-3-line"
 					className="mr-3 inline-block size-[1em] align-[-0.12em] text-primary"
@@ -23,7 +23,7 @@ export function BioSection({ bio }: BioSectionProps) {
 				{t("navigation.about")}
 			</h2>
 
-			<div className="paper-body text-foreground leading-relaxed">
+			<div className="cv-body text-foreground leading-relaxed">
 				<MarkdownText className="[&_p]:text-lg" content={bio} />
 			</div>
 		</section>

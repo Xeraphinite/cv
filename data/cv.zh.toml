@@ -66,6 +66,20 @@ highlights = [
   "产出：一篇论文发表于 Applied Soft Computing。",
 ]
 
+[[experience]]
+position = "自动化色差控制与校准"
+company = "Vograce"
+location = "浙江义乌"
+startDate = "2024年12月"
+endDate = "2025年7月"
+summary = "构建了用于定制化印刷生产的机器视觉闭环色彩一致性控制流程。"
+highlights = [
+  "采集与检测：设计光学采集环境，构建特征匹配对齐与 ROI 提取流程，以适配不同印刷图案、光照变化与材料反射差异，实现稳健的 Delta E（CIEDE2000）计算。",
+  "算法：将 sRGB 测量值转换到 CMYK 空间，并通过自适应迭代步长反馈，将测得色差转化为可执行的墨量调节建议，辅助机台操作员快速校正。",
+  "结果：通过高频迭代以 Gradio 快速原型验证，将整条检测与推荐流程优化至 <=1 秒/图；在试产线上较人工调色提速超过 20 倍。随后以 Next.js + FastAPI 完成全栈工程化并支持企业部署。",
+  "产出：获得两项软件著作权授权。",
+]
+
 [[projects]]
 year = "2025"
 name = "基于代码的 CAD 装配生成"

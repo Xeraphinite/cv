@@ -52,8 +52,8 @@ export function AwardsSection({ data }: AwardsSectionProps) {
 	if (!data || data.length === 0) return null;
 
 	return (
-		<section className="paper-section">
-			<h2 className="paper-section-title">
+		<section className="cv-section">
+			<h2 className="cv-section-title">
 				<Icon
 					icon="mingcute:medal-fill"
 					className="mr-3 inline-block size-[1em] align-[-0.12em] text-primary"
@@ -65,21 +65,21 @@ export function AwardsSection({ data }: AwardsSectionProps) {
 				{data.map((award, index) => (
 					<div
 						key={`${award.name}-${award.institute}-${index}`}
-						className="paper-card transition-all duration-300"
+						className="cv-card transition-all duration-300"
 					>
 						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-4 gap-y-1.5 md:gap-y-1">
-							<p className="paper-meta paper-meta-strong order-2 justify-self-end text-right font-sans text-foreground/80 leading-tight">
+							<p className="cv-meta cv-meta-strong order-2 justify-self-end text-right font-sans text-foreground/80 leading-tight">
 								{renderAwardDate(award.date)}
 							</p>
 							<div className="order-1 min-w-0 [&>*:not(:last-child)]:mb-1.5 md:[&>*:not(:last-child)]:mb-1">
-								<p className="paper-subtitle">
+								<p className="cv-subtitle">
 									<span className="font-medium text-lg">{award.name}</span>
 								</p>
 								<p className="font-serif text-base text-foreground/80 leading-[1.45]">
 									{award.institute}
 								</p>
 								{award.description ? (
-									<p className="paper-body text-base text-foreground/80">
+									<p className="cv-body text-base text-foreground/80">
 										<MarkdownText content={award.description} inline />
 									</p>
 								) : null}

@@ -42,7 +42,7 @@ Color tokens, paper styles, typography helpers, and link treatments live in `app
 Key areas:
 
 - light and dark CSS custom properties under `:root` and `.dark`
-- shared shell classes such as `.paper-container`, `.paper-card`, `.paper-section-title`
+- shared shell classes such as `.cv-container`, `.cv-card`, `.cv-section-title`
 - locale-aware font utility classes such as `.font-en-serif`, `.font-ja-sans`
 - inline URL styling through `.inline-url-link*`
 

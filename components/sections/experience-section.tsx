@@ -41,8 +41,8 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
 	}
 
 	return (
-		<section className="paper-section">
-			<h2 className="paper-section-title">
+		<section className="cv-section">
+			<h2 className="cv-section-title">
 				<Icon
 					icon="mingcute:telescope-fill"
 					className="mr-3 inline-block size-[1em] align-[-0.12em] text-primary"
@@ -54,16 +54,16 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
 				{data.map((experience, index) => (
 					<div
 						key={`${experience.company}-${experience.position}-${index}`}
-						className="paper-card transition-all duration-300"
+						className="cv-card transition-all duration-300"
 					>
 						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-4 gap-y-2">
-							<p className="paper-meta paper-meta-strong order-2 col-start-2 row-start-1 justify-self-end whitespace-nowrap text-right font-sans text-foreground/80 leading-tight">
+							<p className="cv-meta cv-meta-strong order-2 col-start-2 row-start-1 justify-self-end whitespace-nowrap text-right font-sans text-foreground/80 leading-tight">
 								{renderYearMonthWithSup(experience.startDate)} -{" "}
 								{renderYearMonthWithSup(experience.endDate || "Present")}
 							</p>
 							<div className="order-1 col-start-1 row-start-1 min-w-0">
-								<h3 className="paper-subtitle mb-1">{experience.position}</h3>
-								<div className="paper-body flex items-center gap-2">
+								<h3 className="cv-subtitle mb-1">{experience.position}</h3>
+								<div className="cv-body flex items-center gap-2">
 									<Icon
 										icon="mingcute:at-fill"
 										className="h-3 w-3 text-muted-foreground"
@@ -75,7 +75,7 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
 							{experience.summary && (
 								<MarkdownText
 									content={experience.summary}
-									className="paper-body col-span-2 text-base text-muted-foreground"
+									className="cv-body col-span-2 text-base text-muted-foreground"
 								/>
 							)}
 
@@ -90,7 +90,7 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
 												<div className="relative top-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/40" />
 												<MarkdownText
 													content={highlight}
-													className="paper-body text-base text-muted-foreground"
+													className="cv-body text-base text-muted-foreground"
 													inline
 												/>
 											</li>

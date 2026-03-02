@@ -48,8 +48,8 @@ export function SkillsSection({ data }: SkillsSectionProps) {
 	const [languageCategory] = Object.keys(data.skills);
 
 	return (
-		<section className="paper-section">
-			<h2 className="paper-section-title">
+		<section className="cv-section">
+			<h2 className="cv-section-title">
 				<Icon
 					icon="mingcute:flashlight-fill"
 					className="mr-3 inline-block align-[-0.12em] text-primary"
@@ -57,7 +57,7 @@ export function SkillsSection({ data }: SkillsSectionProps) {
 				{t("sections.skills")}
 			</h2>
 
-			<div className="paper-card">
+			<div className="cv-card">
 				<div className="flex flex-col gap-y-2">
 					{Object.entries(data.skills).map(([category, skills]) => (
 						<SkillsCategoryRow

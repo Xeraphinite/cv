@@ -84,8 +84,8 @@ export function CopyrightsSection({
 	};
 
 	return (
-		<section className="paper-section">
-			<h2 className="paper-section-title">
+		<section className="cv-section">
+			<h2 className="cv-section-title">
 				<Icon
 					icon="mingcute:book-6-fill"
 					className="mr-3 inline-block size-[1em] align-[-0.12em] text-primary"
@@ -97,7 +97,7 @@ export function CopyrightsSection({
 				{sortedItems.map((copyright, index) => (
 					<div
 						key={`${copyright.title}-${copyright.year}-${index}`}
-						className="paper-body text-foreground leading-relaxed"
+						className="cv-body text-foreground leading-relaxed"
 					>
 						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1.5">
 							<span className="order-2 justify-self-end whitespace-nowrap text-right font-bold font-sans text-base text-foreground/80">

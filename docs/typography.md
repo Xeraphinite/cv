@@ -60,22 +60,22 @@ Shared helper classes live in `app/globals.css`.
 
 ### Semantic text helpers
 
-- `.paper-title`
-- `.paper-subtitle`
-- `.paper-body`
-- `.paper-meta`
-- `.paper-body-emphasis`
+- `.cv-title`
+- `.cv-subtitle`
+- `.cv-body`
+- `.cv-meta`
+- `.cv-body-emphasis`
 
 Locale variants exist for several of these, for example:
 
-- `.paper-title.lang-ja`
-- `.paper-body.lang-zh`
-- `.paper-meta.lang-ko`
+- `.cv-title.lang-ja`
+- `.cv-body.lang-zh`
+- `.cv-meta.lang-ko`
 
 ### Special-purpose helpers
 
-- `.paper-ruby`
-- `.paper-ruby-group`
+- `.cv-ruby`
+- `.cv-ruby-group`
 - `.vertical-rl`
 - `.vertical-lr`
 - `.cjk-punctuation`
@@ -115,7 +115,7 @@ These components consume locale-aware helpers from `lib/utils`, including:
 
 ## Ruby And Vertical Text
 
-Japanese furigana support is implemented with real `<ruby>` and `<rt>` markup through `RubyText` and the `.paper-ruby` styles.
+Japanese furigana support is implemented with real `<ruby>` and `<rt>` markup through `RubyText` and the `.cv-ruby` styles.
 
 Vertical writing helpers exist, but they are utility-level support rather than the default CV layout mode.
 

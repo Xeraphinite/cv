@@ -136,7 +136,7 @@ interface RubyTextProps {
 
 export function RubyText({ children, ruby, className }: RubyTextProps) {
 	return (
-		<ruby className={cn("paper-ruby", className)}>
+		<ruby className={cn("cv-ruby", className)}>
 			{children}
 			<rt>{ruby}</rt>
 		</ruby>

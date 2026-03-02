@@ -42,7 +42,7 @@ export function HeroLocation({ location, locale }: HeroLocationProps) {
 	}, []);
 
 	const trigger = (
-		<div className="paper-contact-link group">
+		<div className="cv-contact-link group">
 			<div className="relative h-4 w-4">
 				<Icon
 					icon="mingcute:canton-tower-line"

@@ -45,8 +45,9 @@
 - Keep non-inline section links unchanged.
 - Keep badges/chips compact by default: small pill padding, small icons, and tight inter-chip spacing.
 - When a roomier badge layout is explicitly requested, increase chip-group gap and slightly widen chip padding.
-- Keep `.paper-card` top and bottom padding removed by default (`pt-0 pb-0`).
-- Keep `.paper-card` content unrounded unless explicitly requested otherwise.
+- Use `cv-*` semantic helper classes from `app/globals.css`; do not reintroduce legacy helper class prefixes.
+- Keep `.cv-card` top and bottom padding removed by default (`pt-0 pb-0`).
+- Keep `.cv-card` content unrounded unless explicitly requested otherwise.
 - In section components, avoid Tailwind `!` modifiers; prefer semantic helper classes in `app/globals.css`.
 
 ### Spacing and Layout Rhythm

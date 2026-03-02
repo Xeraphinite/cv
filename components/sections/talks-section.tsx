@@ -62,8 +62,8 @@ export function TalksSection({ data }: TalksSectionProps) {
 	};
 
 	return (
-		<section className="paper-section">
-			<h2 className="paper-section-title">
+		<section className="cv-section">
+			<h2 className="cv-section-title">
 				<Icon
 					icon="mingcute:mic-fill"
 					className="mr-3 inline-block size-[1em] align-[-0.12em] text-primary"
@@ -75,17 +75,17 @@ export function TalksSection({ data }: TalksSectionProps) {
 				{talks.map((talk, index) => (
 					<div
 						key={`${talk.title}-${index}`}
-						className="paper-card transition-shadow duration-300"
+						className="cv-card transition-shadow duration-300"
 					>
 						<div className="flex flex-col gap-y-2">
 							{/* Talk Header */}
 							<div className="mb-1.5 flex items-start justify-between sm:mb-2">
 								<div className="flex-1">
-									<h3 className="paper-subtitle mb-1.5 font-semibold text-foreground leading-tight sm:mb-2">
+									<h3 className="cv-subtitle mb-1.5 font-semibold text-foreground leading-tight sm:mb-2">
 										<MarkdownText content={talk.title} inline />
 									</h3>
 									<div className="flex items-center gap-2">
-										<span className="paper-badge paper-badge-primary text-xs">
+										<span className="cv-badge cv-badge-primary text-xs">
 											{talk.type ?? "Talk"}
 										</span>
 									</div>
@@ -130,7 +130,7 @@ export function TalksSection({ data }: TalksSectionProps) {
 									</div>
 								</div>
 
-								<div className="paper-meta flex flex-wrap items-center gap-x-3 gap-y-1 sm:gap-x-4">
+								<div className="cv-meta flex flex-wrap items-center gap-x-3 gap-y-1 sm:gap-x-4">
 									<div className="flex items-center gap-2">
 										<Icon icon="mingcute:calendar-line" className="h-4 w-4" />
 										<span className="font-bold font-sans text-foreground/80 text-sm">
@@ -148,7 +148,7 @@ export function TalksSection({ data }: TalksSectionProps) {
 							{talk.description && (
 								<MarkdownText
 									content={talk.description}
-									className="paper-body border-border/40 border-t text-muted-foreground text-sm"
+									className="cv-body border-border/40 border-t text-muted-foreground text-sm"
 								/>
 							)}
 						</div>

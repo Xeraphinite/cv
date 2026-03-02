@@ -69,8 +69,8 @@ export function EducationSection({ data, config }: EducationSectionProps) {
 	};
 
 	return (
-		<section className="paper-section">
-			<h2 className="paper-section-title">
+		<section className="cv-section">
+			<h2 className="cv-section-title">
 				<Icon
 					icon="mingcute:mortarboard-fill"
 					className="mr-3 inline-block size-[1em] align-[-0.12em] text-primary"
@@ -84,10 +84,10 @@ export function EducationSection({ data, config }: EducationSectionProps) {
 					return (
 						<div
 							key={`${education.institution}-${education.degree}-${index}`}
-							className="paper-card transition-all duration-300"
+							className="cv-card transition-all duration-300"
 						>
 							<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-4 gap-y-1.5 md:gap-y-1">
-								<p className="paper-meta paper-meta-strong order-2 justify-self-end text-right font-sans text-foreground/80 leading-tight">
+								<p className="cv-meta cv-meta-strong order-2 justify-self-end text-right font-sans text-foreground/80 leading-tight">
 									<span className="block whitespace-nowrap">
 										{renderYearMonthWithSup(education.startDate)}
 										<span className="mx-1">-</span>
@@ -102,16 +102,16 @@ export function EducationSection({ data, config }: EducationSectionProps) {
 								<div className="order-1 min-w-0 [&>*:not(:last-child)]:mb-1.5 md:[&>*:not(:last-child)]:mb-1">
 									{/* Institution and Degree */}
 									<div>
-										<h3 className="paper-subtitle mb-1">
+										<h3 className="cv-subtitle mb-1">
 											{education.institution}
 										</h3>
-										<p className="paper-body font-medium">
+										<p className="cv-body font-medium">
 											{education.degree} {tLabel("in")} {education.area}
 										</p>
 									</div>
 
 									{/* Duration and Supervisor */}
-									<div className="paper-meta flex flex-wrap gap-x-4 gap-y-1">
+									<div className="cv-meta flex flex-wrap gap-x-4 gap-y-1">
 										{education.supervisor && (
 											<div className="flex items-center gap-2">
 												<Icon icon="mingcute:user-3-line" className="h-4 w-4" />

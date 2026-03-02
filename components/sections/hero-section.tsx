@@ -171,9 +171,9 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 
 			if (hasSegmentedRuby) {
 				return (
-					<span aria-label={data.name} className="paper-ruby-group">
+					<span aria-label={data.name} className="cv-ruby-group">
 						{baseSegments.map((baseSegment, index) => (
-							<ruby key={`${baseSegment}-${index}`} className="paper-ruby">
+							<ruby key={`${baseSegment}-${index}`} className="cv-ruby">
 								{baseSegment}
 								<rt>{rubySegments[index]}</rt>
 							</ruby>
@@ -185,7 +185,7 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 			if (data.furigana) {
 				const fallbackBase = data.furiganaName || data.name;
 				return (
-					<ruby className="paper-ruby">
+					<ruby className="cv-ruby">
 						{fallbackBase}
 						<rt>{data.furigana}</rt>
 					</ruby>
@@ -228,14 +228,14 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 			return (
 				<MarkdownText
 					content={position}
-					className={`${typographyClasses.body} paper-body-emphasis text-foreground/85`}
+					className={`${typographyClasses.body} cv-body-emphasis text-foreground/85`}
 				/>
 			);
 		}
 
 		return (
 			<p
-				className={`${typographyClasses.body} paper-body-emphasis text-foreground/85`}
+				className={`${typographyClasses.body} cv-body-emphasis text-foreground/85`}
 			>
 				<span className="inline-flex flex-wrap gap-x-1">
 					{parts.map((part, index) => {
@@ -292,9 +292,9 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 
 	return (
 		<header className="mb-6 sm:mb-8">
-			<div className="paper-card">
+			<div className="cv-card">
 				<div className="grid grid-cols-1 gap-6">
-					<div className="paper-avatar relative h-28 w-28 sm:h-32 sm:w-32">
+					<div className="cv-avatar relative h-28 w-28 sm:h-32 sm:w-32">
 						<Image
 							src={data.avatar || "/images/placeholders/placeholder-user.jpg"}
 							alt={`${data.name} - ${data.enName ?? data.name}`}
@@ -362,7 +362,7 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 														href={href}
 														target={external ? "_blank" : undefined}
 														rel={external ? "noopener noreferrer" : undefined}
-														className="paper-contact-link group"
+														className="cv-contact-link group"
 													>
 														<div className="relative h-4 w-4">
 															<Icon
@@ -382,7 +382,7 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 
 										return (
 											<HoverTip key={key} tip={getSocialHoverTip(key)}>
-												<div className="paper-contact-link group">
+												<div className="cv-contact-link group">
 													<div className="relative h-4 w-4">
 														<Icon
 															icon={iconLine}
@@ -404,7 +404,7 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 									<button
 										type="button"
 										onClick={handleDownloadPDF}
-										className="paper-contact-link group"
+										className="cv-contact-link group"
 									>
 										<div className="relative h-4 w-4">
 											<Icon
@@ -423,7 +423,7 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 								{data.age && (
 									<HoverTip tip={t("content.yearsOld")}>
 										<span
-											className={`paper-contact-link inline-flex items-center gap-2 ${typographyClasses.meta}`}
+											className={`cv-contact-link inline-flex items-center gap-2 ${typographyClasses.meta}`}
 										>
 											<Icon
 												icon="mingcute:calendar-line"

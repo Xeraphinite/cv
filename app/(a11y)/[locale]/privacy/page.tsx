@@ -59,11 +59,11 @@ export default async function PrivacyStatementPage({
 
 	return (
 		<main className="min-h-screen bg-background">
-			<div className="paper-container py-4 sm:py-6 lg:py-8">
-				<article className="paper-card px-0">
+			<div className="cv-container py-4 sm:py-6 lg:py-8">
+				<article className="cv-card px-0">
 					<section id="privacy-statement" className="mb-5 sm:mb-6 lg:mb-8">
 						<div className="mb-3 sm:mb-4">
-							<h1 className="paper-section-title">{title}</h1>
+							<h1 className="cv-section-title">{title}</h1>
 							<nav
 								aria-label="Language"
 								className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 font-sans text-base text-foreground/80"

@@ -18,8 +18,8 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
 	if (projects.length === 0) return null;
 
 	return (
-		<section className="paper-section">
-			<h2 className="paper-section-title">
+		<section className="cv-section">
+			<h2 className="cv-section-title">
 				<Icon
 					icon="mingcute:light-fill"
 					className="mr-3 inline-block size-[1em] align-[-0.12em] text-primary"
@@ -31,7 +31,7 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
 				{projects.map((project) => (
 					<div
 						key={project.name}
-						className="paper-body text-foreground leading-relaxed"
+						className="cv-body text-foreground leading-relaxed"
 					>
 						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-2">
 							<span className="order-2 col-start-2 row-start-1 justify-self-end whitespace-nowrap text-right font-bold font-sans text-base text-foreground/80">
