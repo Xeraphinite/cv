@@ -1,0 +1,4 @@
+interface:
+  display_name: "Intl"
+  short_description: "Handle i18n/l10n in Next.js CV apps"
+  default_prompt: "Implement or update internationalization in this repository, including locale routing, messages, and content parity checks."
