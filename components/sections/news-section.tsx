@@ -78,7 +78,7 @@ export function NewsSection({ data }: NewsSectionProps) {
 				{t("sections.news")}
 			</h2>
 
-			<div className="[&>*:not(:last-child)]:mb-1.5">
+			<div className="cv-items-stack">
 				{sortedItems.map((item, index) => (
 					<div
 						key={`${item.title}-${index}`}

@@ -12,8 +12,10 @@ import type {
 } from "react";
 import { useMemo } from "react";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
+import rehypeKatex from "rehype-katex";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
 import { cn, getFontClass } from "@/lib/utils";
 
 interface MarkdownTextProps {
@@ -122,7 +124,8 @@ function compileMarkdown(
 			Fragment,
 			jsx,
 			jsxs,
-			remarkPlugins: [remarkGfm, remarkBreaks],
+			remarkPlugins: [remarkGfm, remarkBreaks, remarkMath],
+			rehypePlugins: [rehypeKatex],
 			useMDXComponents: () => components,
 		});
 

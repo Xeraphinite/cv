@@ -104,7 +104,7 @@ export function PatentsSection({
 				{t("sections.patents")}
 			</h2>
 
-			<div className="flex flex-col gap-y-2">
+			<div className="cv-items-stack">
 				{sortedItems.map((patent, index) => (
 					<div
 						key={`${patent.number}-${patent.title}-${index}`}

@@ -97,21 +97,19 @@ export function PublicationsSection({
 		});
 	};
 
-	const formatPublicationMeta = (publication: Publication) => {
-		const parts: string[] = [];
-		if (publication.journal || publication.publishedIn) {
-			parts.push(publication.journal || publication.publishedIn || "");
-		}
+	const getPublicationMeta = (publication: Publication) => {
+		const venue = publication.journal || publication.publishedIn || "";
+		const details: string[] = [];
 		if (publication.volume) {
-			parts.push(`Vol. ${publication.volume}`);
+			details.push(`Vol. ${publication.volume}`);
 		}
 		if (publication.issue) {
-			parts.push(`No. ${publication.issue}`);
+			details.push(`No. ${publication.issue}`);
 		}
 		if (publication.pages) {
-			parts.push(`pp. ${publication.pages}`);
+			details.push(`pp. ${publication.pages}`);
 		}
-		return parts.filter(Boolean).join(" · ");
+		return { venue, details };
 	};
 
 	return (
@@ -124,7 +122,7 @@ export function PublicationsSection({
 				{t("sections.publications")}
 			</h2>
 
-			<div className="flex flex-col gap-y-2">
+			<div className="cv-items-stack">
 				{sortedItems.map((publication, index) => (
 					<div
 						key={`${publication.title}-${index}`}
@@ -166,16 +164,32 @@ export function PublicationsSection({
 									</p>
 								) : null}
 
-								{formatPublicationMeta(publication) ? (
-									<p className="text-base text-foreground/80 italic">
-										{formatPublicationMeta(publication)}
-									</p>
-								) : null}
+								{(() => {
+									const { venue, details } = getPublicationMeta(publication);
+
+									if (!venue && details.length === 0) {
+										return null;
+									}
+
+									return (
+										<p className="text-base text-foreground/80">
+											{venue ? (
+												<span className="font-bold text-foreground italic">
+													{venue}
+												</span>
+											) : null}
+											{details.map((detail, detailIndex) => (
+												<span key={detail}>
+													{venue || detailIndex > 0 ? " · " : ""}
+													{detail}
+												</span>
+											))}
+										</p>
+									);
+								})()}
 
 								<div className="flex flex-wrap items-center gap-x-2 text-base text-foreground/80">
 									<span>{publication.type}</span>
-									<span>·</span>
-									<span>{publication.status}</span>
 									{publication.impactFactor ? (
 										<>
 											<span>·</span>

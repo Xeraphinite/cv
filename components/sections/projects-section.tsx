@@ -27,7 +27,7 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
 				{t("sections.selectedProjects")}
 			</h2>
 
-			<div className="flex flex-col gap-y-2">
+			<div className="cv-items-stack">
 				{projects.map((project) => (
 					<div
 						key={project.name}

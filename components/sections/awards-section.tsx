@@ -61,7 +61,7 @@ export function AwardsSection({ data }: AwardsSectionProps) {
 				{t("sections.awards")}
 			</h2>
 
-			<div className="flex flex-col gap-y-2">
+			<div className="cv-items-stack">
 				{data.map((award, index) => (
 					<div
 						key={`${award.name}-${award.institute}-${index}`}

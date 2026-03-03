@@ -50,7 +50,7 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
 				{t("sections.experience")}
 			</h2>
 
-			<div className="flex flex-col gap-y-2">
+			<div className="cv-items-stack">
 				{data.map((experience, index) => (
 					<div
 						key={`${experience.company}-${experience.position}-${index}`}

@@ -93,7 +93,7 @@ export function CopyrightsSection({
 				{t("sections.copyrights")}
 			</h2>
 
-			<div className="flex flex-col gap-y-2">
+			<div className="cv-items-stack">
 				{sortedItems.map((copyright, index) => (
 					<div
 						key={`${copyright.title}-${copyright.year}-${index}`}

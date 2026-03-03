@@ -58,7 +58,7 @@ export function SkillsSection({ data }: SkillsSectionProps) {
 			</h2>
 
 			<div className="cv-card">
-				<div className="flex flex-col gap-y-2">
+				<div className="cv-items-stack">
 					{Object.entries(data.skills).map(([category, skills]) => (
 						<SkillsCategoryRow
 							key={category}

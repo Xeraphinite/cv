@@ -78,7 +78,7 @@ export function EducationSection({ data, config }: EducationSectionProps) {
 				{tSection("education")}
 			</h2>
 
-			<div className="[&>*:not(:last-child)]:mb-2.5">
+			<div className="cv-items-stack">
 				{data.map((education, index) => {
 					const endDateParts = splitExpectedLabel(education.endDate);
 					return (

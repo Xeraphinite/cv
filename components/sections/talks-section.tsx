@@ -71,7 +71,7 @@ export function TalksSection({ data }: TalksSectionProps) {
 				Talks & Presentations
 			</h2>
 
-			<div className="flex flex-col gap-y-2">
+			<div className="cv-items-stack">
 				{talks.map((talk, index) => (
 					<div
 						key={`${talk.title}-${index}`}

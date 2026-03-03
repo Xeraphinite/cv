@@ -1,4 +1,6 @@
 import "../../globals.css";
+import "@fontsource/maple-mono/400.css";
+import "@fontsource/maple-mono/700.css";
 
 import { notFound } from "next/navigation";
 import { getMessages } from "next-intl/server";
@@ -13,6 +15,7 @@ import { getDirection } from "@/lib/i18n-utils";
 const spectral = Spectral({
 	subsets: ["latin"],
 	weight: ["400", "500", "600", "700", "800"],
+	style: ["normal", "italic"],
 	display: "swap",
 	variable: "--font-spectral",
 });

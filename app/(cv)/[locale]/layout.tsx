@@ -1,4 +1,6 @@
 import "../../globals.css";
+import "@fontsource/maple-mono/400.css";
+import "@fontsource/maple-mono/700.css";
 
 import { notFound } from "next/navigation";
 import { getMessages } from "next-intl/server";
@@ -15,6 +17,7 @@ import { getCVLastUpdated } from "@/lib/load-cv-data";
 const spectral = Spectral({
 	subsets: ["latin"],
 	weight: ["400", "500", "600", "700", "800"],
+	style: ["normal", "italic"],
 	display: "swap",
 	variable: "--font-spectral",
 });
