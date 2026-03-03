@@ -4,10 +4,14 @@ The typography system combines `next/font`, Tailwind theme extensions, and seman
 
 ## Primary Fonts
 
-Loaded in `app/(cv)/[locale]/layout.tsx`:
+Loaded in locale root layouts:
+
+- `app/(cv)/[locale]/layout.tsx`
+- `app/(a11y)/[locale]/layout.tsx`
 
 - `Spectral`
 - `IBM Plex Sans`
+- `Maple Mono` (via `@fontsource/maple-mono` imports)
 
 Additional CJK serif fonts are loaded through a Google Fonts stylesheet link for:
 

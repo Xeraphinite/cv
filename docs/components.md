@@ -130,7 +130,7 @@ Dedicated renderer for the `Misc` skill category.
 
 ### `components/ui/markdown-text.tsx`
 
-Markdown renderer used for TOML-backed rich text. Inline URLs preserve the project’s dashed-underline external-link treatment.
+Markdown renderer used for TOML-backed rich text. Inline URLs preserve the project’s dashed-underline external-link treatment. Supports LaTeX via `remark-math` + `rehype-katex` (`$...$` and `$$...$$`). KaTeX text size follows surrounding markdown text (`1em`).
 
 ### `components/ui/typography.tsx`
 
