@@ -47,10 +47,9 @@ UMAMI_API_BASE_URL=https://api.umami.is/v1
 ```
 
 ## Documentation
-
-- [Design System](./docs/design-system.md)
-- [Components](./docs/components.md)
-- [Customization](./docs/customization.md)
-- [Data Structure](./docs/data-structure.md)
-- [i18n](./docs/i18n.md)
-- [Typography](./docs/typography.md)
+- [Workflow](./docs/workflow.md)
+- [UI Conventions](./docs/ui-conventions.md)
+- [CV Data And Rendering](./docs/cv-data-and-rendering.md)
+- [App Architecture](./docs/app-architecture.md)
+- [Section And Component Rules](./docs/sections-and-components.md)
+- [Footer, Secondary Pages, And Integrations](./docs/footer-pages-integrations.md)

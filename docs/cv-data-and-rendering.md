@@ -9,6 +9,11 @@
 - `lib/load-cv-data.ts` maps TOML into `CVData`.
 - TOML text fields preserve Markdown and render through `components/ui/markdown-text.tsx`.
 
+## Minimal Runtime Shape
+- `CVData` core sections: `hero`, `education`, `publications`, `experience`, `skills`, `awards`.
+- Optional sections: `news`, `projects`, `patents`, `copyrights`, `talks`, `sectionConfig`.
+- Current top-level TOML tables in `data/cv.toml`: `profile`, `education`, `experience`, `publications`, `news`, `projects`, `skills`, `awards`, `patents`, `copyrights`, `sectionConfig`.
+
 ## Hero / Profile Data
 - Use `profile.position` or localized `hero.position` for the left-column hero role/title.
 - Use `profile.summary` / `hero.bio` for the right-column About content.
@@ -31,3 +36,4 @@
 - For project entries carrying experience-style fields (`start/end/role/org/location/summary/details`), render them in Experience and exclude them from Selected Projects.
 - Projects data lives under `[projects.*]` / `[[projects]]`; do not fall back to mock data.
 - Project fields support `year`, `name`, `status`, `description`, optional `preview_images`, optional `urls`, and optional `tech`.
+- `components/sections/talks-section.tsx` exists, but Talks is currently not mounted in the main CV page composition.
