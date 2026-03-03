@@ -81,6 +81,13 @@ type = "期刊論文"
 status = "已發表"
 
 [[news]]
+title = "榮獲國家獎學金"
+outlet = "中華人民共和國教育部"
+date = "2025.12"
+summary = "喺 2025 年 12 月榮獲國家獎學金。"
+url = ""
+
+[[news]]
 title = "Applied Soft Computing 論文發表"
 date = "2025.9"
 summary = "一篇論文發表於 Applied Soft Computing。"

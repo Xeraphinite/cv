@@ -81,6 +81,13 @@ type = "저널 논문"
 status = "게재"
 
 [[news]]
+title = "국가장학금 수상"
+outlet = "중화인민공화국 교육부"
+date = "2025.12"
+summary = "2025년 12월 국가장학금을 수상했습니다."
+url = ""
+
+[[news]]
 title = "Applied Soft Computing 논문 게재"
 date = "2025.9"
 summary = "Applied Soft Computing에 논문 1편이 게재되었습니다."

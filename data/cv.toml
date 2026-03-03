@@ -88,7 +88,7 @@ start = "Dec 2024"
 end = "Jul 2025"
 summary = "Built a machine-vision pipeline for closed-loop color consistency control in customized print production."
 details = [
-  "*Capture & Detection*: Designed the optical acquisition environment and built feature-matching alignment with ROI extraction to handle diverse print patterns under varying lighting and material reflectance, enabling robust $Delta E$ (CIEDE2000) computation.",
+  "*Capture & Detection*: Designed the optical acquisition environment and built feature-matching alignment with ROI extraction to handle diverse print patterns under varying lighting and material reflectance, enabling robust $\\delta E$ (CIEDE2000) computation.",
   "*Algorithm*: Converted sRGB measurements to CMYK space and applied adaptive iterative step-size feedback to translate measured color differences into actionable ink-level adjustment recommendations for press operators.",
   "*Results*: Rapidly prototyped with `Gradio` through extensive iteration cycles, optimized the full detect-and-recommend pipeline to ≤1 s/image—over 20× faster than manual color grading in pilot line runs. Productionized as a full-stack system built with `Next.js` and `FastAPI` for enterprise deployment.",
   "*Outcome*: Received two authorized software copyrights.",
@@ -128,13 +128,20 @@ tldr = ""
 
 
 [news.news-1]
+title = "Awarded National Scholarship"
+outlet = "Ministry of Education of the People's Republic of China"
+date = "2025.12"
+summary = "Awarded the National Scholarship in December 2025."
+url = ""
+
+[news.news-2]
 title = "Applied Soft Computing paper published"
 outlet = "Applied Soft Computing"
 date = "2025.9"
 summary = "One paper was published in [Applied Soft Computing](https://www.sciencedirect.com/science/article/pii/S1568494625012335)!"
 url = ""
 
-[news.news-2]
+[news.news-3]
 title = "RCIM paper accepted and indexed"
 outlet = "Robotics and Computer-Integrated Manufacturing"
 date = "2025.6"

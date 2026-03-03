@@ -135,6 +135,13 @@ doi = "10.1016/j.rcim.2025.103076"
 url = "https://www.sciencedirect.com/science/article/pii/S0736584525001309"
 
 [[news]]
+title = "获评国家奖学金"
+outlet = "中华人民共和国教育部"
+date = "2025.12"
+summary = "于 2025 年 12 月获评国家奖学金。"
+url = ""
+
+[[news]]
 title = "Applied Soft Computing 论文发表"
 outlet = "Applied Soft Computing"
 date = "2025.9"
