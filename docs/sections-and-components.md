@@ -26,7 +26,8 @@
 - If a skill item omits `icon` and has `url`, derive a favicon from the URL host.
 - When `code = true`, render the badge with `font-mono`; otherwise use `font-sans`.
 - Language-skill badges in the main Skills section should use `font-serif`.
-- If `description` exists, show concise hover content via shadcn `HoverCard`.
+- If `description` exists, show concise hover content via shadcn `Tooltip`.
+- Skills tooltip description text should be plain strings in `font-sans` (do not use `MarkdownText`).
 - Main Skills rows use a two-column layout with a fixed-width right-aligned category label and flexible badges.
 - Keep that two-column skills layout on both mobile and larger screens.
 - Category labels in main Skills rows use `font-sans text-lg`.
@@ -55,7 +56,7 @@
 - `section#about` should use the locale `navigation.about` label.
 - On `lg`, keep the first-column sticky panel near full viewport height with minimal outer margin and no extra gap between hero content and footer.
 - Hero card content stays vertically stacked: avatar, name, bio, contacts.
-- Remove extra top spacing above the avatar.
+- Use `pt-4` for first-column top spacing and `pb-4` for compact footer bottom spacing.
 - Hero contacts should be one item per line, wrap values instead of truncating, and use top-positioned shadcn tooltips.
 - Do not add extra left inset for contact rows.
 - Use margin-based spacing between hero contact rows.

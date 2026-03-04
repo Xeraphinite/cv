@@ -22,6 +22,9 @@
 - Keep readable contrast for muted UI text; avoid overly faint muted text on badges or dense metadata.
 - Tooltip text should default to `font-sans`.
 - Hover card and tooltip panels should use theme-aware popover surfaces.
+- Tooltip copy should add context beyond visible labels; avoid repeating button/link text.
+- Keep tooltip copy concise (typically one short phrase) and action-oriented.
+- Prefer sentence case for tooltip copy and omit trailing periods for short fragments.
 
 ## Links, Chips, and Cards
 - Inline URL links rendered in text/Markdown should use a dim dashed underline by default, switch to solid underline on hover/focus, and append trailing `mingcute:arrow-right-up-fill`.
