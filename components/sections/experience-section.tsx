@@ -3,6 +3,12 @@
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import { MarkdownText } from "@/components/ui/markdown-text";
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "@/components/ui/accordion";
 import { formatToYearMonth } from "@/lib/date-format";
 
 interface Experience {
@@ -72,31 +78,57 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
 								</div>
 							</div>
 
-							{experience.summary && (
-								<MarkdownText
-									content={experience.summary}
-									className="cv-body col-span-2 text-base text-muted-foreground"
-								/>
-							)}
-
-							{experience.highlights && experience.highlights.length > 0 && (
-								<div className="col-span-2">
-									<ul className="[&>*:not(:last-child)]:mb-1.5">
-										{experience.highlights.map((highlight, idx) => (
-											<li
-												key={`${experience.company}-highlight-${idx}`}
-												className="flex items-start gap-3"
-											>
-												<div className="relative top-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/40" />
+							{experience.highlights && experience.highlights.length > 0 ? (
+								<Accordion
+									type="single"
+									collapsible
+									className="col-span-2 border-0"
+								>
+									<AccordionItem
+										value={`experience-details-${index}`}
+										className="border-b-0"
+									>
+										<div className="flex items-start gap-4">
+											{experience.summary ? (
 												<MarkdownText
-													content={highlight}
-													className="cv-body text-base text-muted-foreground"
+													content={experience.summary}
+													className="min-w-0 flex-1 font-semibold text-base text-foreground [&_a]:font-semibold"
 													inline
 												/>
-											</li>
-										))}
-									</ul>
-								</div>
+											) : (
+												<div className="flex-1" />
+											)}
+											<AccordionTrigger
+												aria-label={t("actions.viewMore")}
+												className="cv-body flex-none py-0 text-base text-muted-foreground hover:no-underline"
+											/>
+										</div>
+										<AccordionContent className="pt-4">
+											<ul className="[&>*:not(:last-child)]:mb-1.5">
+												{experience.highlights.map((highlight, idx) => (
+													<li
+														key={`${experience.company}-highlight-${idx}`}
+														className="flex items-start gap-3"
+													>
+														<div className="relative top-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/40" />
+														<MarkdownText
+															content={highlight}
+															className="cv-body text-base text-muted-foreground"
+															inline
+														/>
+													</li>
+												))}
+											</ul>
+										</AccordionContent>
+									</AccordionItem>
+								</Accordion>
+							) : (
+								experience.summary && (
+									<MarkdownText
+										content={experience.summary}
+										className="col-span-2 font-semibold text-base text-foreground [&_a]:font-semibold [&_p]:font-semibold"
+									/>
+								)
 							)}
 						</div>
 					</div>
