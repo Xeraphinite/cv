@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import type { ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import { getResponsiveImageProps } from "@/lib/image-utils";
@@ -13,6 +13,11 @@ import {
 } from "@/components/ui/tooltip";
 import { HeroLocation } from "@/components/sections/hero-location";
 import { MarkdownText } from "@/components/ui/markdown-text";
+import {
+	decodeEmailFromClient,
+	encodeEmailForClient,
+	toObfuscatedMailtoHref,
+} from "@/lib/email-obfuscation";
 import { getFontClass, getTypographyClasses } from "@/lib/utils";
 
 interface HeroSectionProps {
@@ -49,7 +54,7 @@ const socialPlatforms = [
 		key: "email",
 		iconLine: "mingcute:mail-line",
 		iconFill: "mingcute:mail-fill",
-		getHref: (value: string) => `mailto:${value}`,
+		getHref: (value: string) => toObfuscatedMailtoHref(value),
 		getLabel: (value: string) => value,
 		external: false,
 	},
@@ -118,6 +123,17 @@ function HoverTip({ children, tip }: { children: ReactNode; tip: string }) {
 			</TooltipContent>
 		</Tooltip>
 	);
+}
+
+function ObfuscatedEmailLabel({ email }: { email: string }) {
+	const encoded = useMemo(() => encodeEmailForClient(email), [email]);
+	const [decoded, setDecoded] = useState("");
+
+	useEffect(() => {
+		setDecoded(decodeEmailFromClient(encoded));
+	}, [encoded]);
+
+	return <>{decoded || "\u00a0"}</>;
 }
 
 export function HeroSection({ data, locale }: HeroSectionProps) {
@@ -269,21 +285,21 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 	const getSocialHoverTip = (key: (typeof socialPlatforms)[number]["key"]) => {
 		switch (key) {
 			case "email":
-				return "Email";
+				return t("tooltips.hero.email");
 			case "github":
-				return "GitHub";
+				return t("tooltips.hero.github");
 			case "wechat":
-				return "WeChat";
+				return t("tooltips.hero.wechat");
 			case "website":
-				return "Website";
+				return t("tooltips.hero.website");
 			case "googleScholar":
-				return "Google Scholar";
+				return t("tooltips.hero.googleScholar");
 			case "orcid":
-				return "ORCID";
+				return t("tooltips.hero.orcid");
 			case "bluesky":
-				return "Bluesky";
+				return t("tooltips.hero.bluesky");
 			default:
-				return t("content.contact");
+				return t("tooltips.hero.contact");
 		}
 	};
 
@@ -354,6 +370,12 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 										const label = getLabel(value);
 										const isClickable = key !== "wechat";
 										const labelClass = "break-all";
+										const labelContent =
+											key === "email" ? (
+												<ObfuscatedEmailLabel email={value} />
+											) : (
+												label
+											);
 
 										if (isClickable) {
 											return (
@@ -374,7 +396,7 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 																className="absolute inset-0 h-4 w-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
 															/>
 														</div>
-														<span className={labelClass}>{label}</span>
+														<span className={labelClass}>{labelContent}</span>
 													</a>
 												</HoverTip>
 											);
@@ -393,14 +415,14 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 															className="absolute inset-0 h-4 w-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
 														/>
 													</div>
-													<span className={labelClass}>{label}</span>
+													<span className={labelClass}>{labelContent}</span>
 												</div>
 											</HoverTip>
 										);
 									},
 								)}
 
-								<HoverTip tip={t("actions.downloadPDF")}>
+								<HoverTip tip={t("tooltips.hero.downloadPdf")}>
 									<button
 										type="button"
 										onClick={handleDownloadPDF}
@@ -421,7 +443,7 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 								</HoverTip>
 
 								{data.age && (
-									<HoverTip tip={t("content.yearsOld")}>
+									<HoverTip tip={t("tooltips.hero.age")}>
 										<span
 											className={`cv-contact-link inline-flex items-center gap-2 ${typographyClasses.meta}`}
 										>

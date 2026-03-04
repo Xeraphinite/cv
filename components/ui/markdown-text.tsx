@@ -10,12 +10,18 @@ import type {
 	ComponentType,
 	HTMLAttributes,
 } from "react";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import rehypeKatex from "rehype-katex";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
+import {
+	decodeEmailFromClient,
+	encodeEmailForClient,
+	getEmailFromMailtoHref,
+	toObfuscatedMailtoHref,
+} from "@/lib/email-obfuscation";
 import { cn, getFontClass } from "@/lib/utils";
 
 interface MarkdownTextProps {
@@ -27,6 +33,17 @@ interface MarkdownTextProps {
 
 const LINK_CLASS_NAME = "inline-url-link";
 
+function ObfuscatedInlineEmail({ email }: { email: string }) {
+	const encoded = useMemo(() => encodeEmailForClient(email), [email]);
+	const [decoded, setDecoded] = useState("");
+
+	useEffect(() => {
+		setDecoded(decodeEmailFromClient(encoded));
+	}, [encoded]);
+
+	return <>{decoded || "\u00a0"}</>;
+}
+
 function MarkdownAnchor({
 	children,
 	className,
@@ -36,19 +53,30 @@ function MarkdownAnchor({
 	...props
 }: AnchorHTMLAttributes<HTMLAnchorElement> & { showLinkIcon: boolean }) {
 	const resolvedHref = href ?? "";
+	const mailtoEmail = getEmailFromMailtoHref(resolvedHref);
+	const effectiveHref = mailtoEmail
+		? toObfuscatedMailtoHref(mailtoEmail)
+		: resolvedHref;
 	const isExternal = /^https?:\/\//.test(resolvedHref);
+	const childrenText = typeof children === "string" ? children : "";
+	const linkContent =
+		mailtoEmail && childrenText ? (
+			<ObfuscatedInlineEmail email={mailtoEmail} />
+		) : (
+			children
+		);
 
 	return (
 		<a
 			{...props}
-			href={resolvedHref}
+			href={effectiveHref}
 			className={cn(LINK_CLASS_NAME, className)}
 			target={isExternal ? "_blank" : props.target}
 			rel={isExternal ? "noopener noreferrer" : props.rel}
 			title={title}
 		>
 			<span className="inline-flex items-center gap-1">
-				<span className="inline-url-link-text">{children}</span>
+				<span className="inline-url-link-text">{linkContent}</span>
 				{showLinkIcon ? (
 					<Icon
 						aria-hidden="true"
