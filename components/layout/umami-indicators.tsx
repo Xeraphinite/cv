@@ -114,8 +114,8 @@ export function UmamiIndicators({ locale, shareUrl }: UmamiIndicatorsProps) {
 				<TooltipContent side="top">
 					<span>
 						{visitorIndicatorUnavailable
-							? t("footer.visitorNumbersUnavailable")
-							: t("footer.visitorNumbers")}
+							? t("tooltips.footer.visitorNumbersUnavailable")
+							: t("tooltips.footer.visitorNumbers")}
 					</span>
 				</TooltipContent>
 			</Tooltip>
@@ -163,8 +163,8 @@ export function UmamiIndicators({ locale, shareUrl }: UmamiIndicatorsProps) {
 				<TooltipContent side="top">
 					<span>
 						{onlineUserCountUnavailable
-							? t("footer.onlineNowUnavailable")
-							: t("footer.onlineNow")}
+							? t("tooltips.footer.onlineNowUnavailable")
+							: t("tooltips.footer.onlineNow")}
 					</span>
 				</TooltipContent>
 			</Tooltip>

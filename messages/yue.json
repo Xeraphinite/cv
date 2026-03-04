@@ -15,6 +15,8 @@
 		"experience": "工作經驗",
 		"skills": "技能",
 		"awards": "獎項榮譽",
+		"patents": "專利",
+		"copyrights": "軟件著作權",
 		"publications": "學術發表",
 		"news": "新聞動態",
 		"misc": "雜項",
@@ -76,5 +78,36 @@
 		"visitorNumbers": "訪客數量",
 		"onlineNowUnavailable": "在線人數不可用",
 		"visitorNumbersUnavailable": "訪客數量不可用"
+	},
+	"tooltips": {
+		"hero": {
+			"contact": "打開聯絡方式",
+			"email": "發送電郵",
+			"github": "睇 GitHub 主頁",
+			"wechat": "用呢個 WeChat ID 聯絡",
+			"website": "打開個人網站",
+			"googleScholar": "睇 Google Scholar 主頁",
+			"orcid": "打開 ORCID 記錄",
+			"bluesky": "睇 Bluesky 主頁",
+			"downloadPdf": "下載 PDF 履歷",
+			"age": "按出生年月計算"
+		},
+		"footer": {
+			"lastUpdated": "按你本地時間顯示更新",
+			"language": "切換語言，而家：{language}",
+			"llmsTxt": "睇俾 AI 助手用嘅機器可讀檔案",
+			"accessibility": "睇無障礙支援詳情",
+			"privacy": "睇私隱同統計說明",
+			"visitorNumbers": "打開統計並睇總訪客",
+			"visitorNumbersUnavailable": "總訪客統計暫時不可用",
+			"onlineNow": "打開統計並睇目前在線人數",
+			"onlineNowUnavailable": "在線人數統計暫時不可用"
+		},
+		"links": {
+			"openEvent": "打開活動頁面",
+			"openSlides": "打開簡報",
+			"openLink": "打開連結：{label}",
+			"switchLanguage": "切換去 {language}"
+		}
 	}
 }

@@ -78,5 +78,36 @@
 		"awards": "Awards",
 		"projects": "Projects",
 		"gpa": "GPA"
+	},
+	"tooltips": {
+		"hero": {
+			"contact": "Open contact option",
+			"email": "Send an email",
+			"github": "View GitHub profile",
+			"wechat": "Use this WeChat ID to connect",
+			"website": "Open personal website",
+			"googleScholar": "View Google Scholar profile",
+			"orcid": "Open ORCID record",
+			"bluesky": "View Bluesky profile",
+			"downloadPdf": "Download CV as PDF",
+			"age": "Calculated from birth year and month"
+		},
+		"footer": {
+			"lastUpdated": "Updated relative to your local time",
+			"language": "Change language, current: {language}",
+			"llmsTxt": "Read machine-readable profile for AI assistants",
+			"accessibility": "Read accessibility support details",
+			"privacy": "Read privacy and analytics details",
+			"visitorNumbers": "Open analytics and view total visitors",
+			"visitorNumbersUnavailable": "Analytics unavailable for total visitors",
+			"onlineNow": "Open analytics and view visitors online now",
+			"onlineNowUnavailable": "Analytics unavailable for online visitors"
+		},
+		"links": {
+			"openEvent": "Open event page",
+			"openSlides": "Open slide deck",
+			"openLink": "Open link: {label}",
+			"switchLanguage": "Change language to {language}"
+		}
 	}
 }

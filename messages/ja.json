@@ -78,5 +78,36 @@
 		"visitorNumbers": "訪問者数",
 		"onlineNowUnavailable": "オンライン人数は利用できません",
 		"visitorNumbersUnavailable": "訪問者数は利用できません"
+	},
+	"tooltips": {
+		"hero": {
+			"contact": "連絡先を開く",
+			"email": "メールを送る",
+			"github": "GitHub プロフィールを見る",
+			"wechat": "この WeChat ID で連絡する",
+			"website": "個人サイトを開く",
+			"googleScholar": "Google Scholar プロフィールを見る",
+			"orcid": "ORCID レコードを開く",
+			"bluesky": "Bluesky プロフィールを見る",
+			"downloadPdf": "履歴書 PDF をダウンロード",
+			"age": "生年月から計算"
+		},
+		"footer": {
+			"lastUpdated": "あなたの現地時刻で更新を表示",
+			"language": "言語を変更 現在：{language}",
+			"llmsTxt": "AI アシスタント向けの機械可読プロフィールを見る",
+			"accessibility": "アクセシビリティ対応の詳細を見る",
+			"privacy": "プライバシーと解析の詳細を見る",
+			"visitorNumbers": "解析を開いて総訪問者数を見る",
+			"visitorNumbersUnavailable": "総訪問者数の解析は現在利用不可",
+			"onlineNow": "解析を開いて現在の訪問者を見る",
+			"onlineNowUnavailable": "現在の訪問者解析は利用不可"
+		},
+		"links": {
+			"openEvent": "イベントページを開く",
+			"openSlides": "スライドを開く",
+			"openLink": "リンクを開く：{label}",
+			"switchLanguage": "{language} に切り替える"
+		}
 	}
 }

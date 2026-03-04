@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { Icon } from "@iconify/react";
 import clsx from "clsx";
 import { useEffect, useMemo, useState } from "react";
-import { useTheme } from "next-themes";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,12 +30,6 @@ interface CVFooterProps {
 	lastUpdated?: string;
 }
 
-const themeOptions = [
-	{ value: "light", label: "Light", icon: "mingcute:sun-line" },
-	{ value: "dark", label: "Dark", icon: "mingcute:moon-line" },
-	{ value: "system", label: "System", icon: "mingcute:computer-line" },
-] as const;
-
 const languageFlags: Record<string, string> = {
 	en: "twemoji:flag-united-states",
 	zh: "twemoji:flag-china",
@@ -51,12 +44,9 @@ export function CVFooter({
 	showLocaleThemeControls = false,
 	lastUpdated,
 }: CVFooterProps) {
-	const { theme, setTheme } = useTheme();
 	const t = useTranslations();
 	const pathname = usePathname();
 	const currentLocale = getLocaleFromPathname(pathname);
-	const currentThemeOption =
-		themeOptions.find((option) => option.value === theme) || themeOptions[2];
 	const umamiShareUrl = process.env.NEXT_PUBLIC_UMAMI_SHARE_URL;
 	const [now, setNow] = useState(() => Date.now());
 
@@ -158,7 +148,7 @@ export function CVFooter({
 								</div>
 							</TooltipTrigger>
 							<TooltipContent side="top">
-								<span>Last updated</span>
+								<span>{t("tooltips.footer.lastUpdated")}</span>
 							</TooltipContent>
 						</Tooltip>
 
@@ -190,7 +180,11 @@ export function CVFooter({
 											</DropdownMenuTrigger>
 										</TooltipTrigger>
 										<TooltipContent side="top">
-											<span>{`${t("common.language")}: ${currentLocaleLabel}`}</span>
+											<span>
+												{t("tooltips.footer.language", {
+													language: currentLocaleLabel,
+												})}
+											</span>
 										</TooltipContent>
 									</Tooltip>
 									<DropdownMenuContent
@@ -224,57 +218,6 @@ export function CVFooter({
 										})}
 									</DropdownMenuContent>
 								</DropdownMenu>
-
-								<DropdownMenu modal={false}>
-									<Tooltip>
-										<TooltipTrigger asChild>
-											<DropdownMenuTrigger asChild>
-												<Button
-													variant="ghost"
-													size="sm"
-													className="h-7 flex-row gap-1.5 px-2 hover:bg-muted/50"
-													aria-label="Theme"
-												>
-													<Icon
-														icon={currentThemeOption.icon}
-														className="h-3.5 w-3.5"
-													/>
-													<span className="font-sans text-sm">
-														{currentThemeOption.label}
-													</span>
-												</Button>
-											</DropdownMenuTrigger>
-										</TooltipTrigger>
-										<TooltipContent side="top">
-											<span>{`${t("footer.theme")}: ${currentThemeOption.label}`}</span>
-										</TooltipContent>
-									</Tooltip>
-									<DropdownMenuContent
-										align="end"
-										className="w-32"
-										sideOffset={8}
-									>
-										{themeOptions.map((option) => {
-											const isActive = theme === option.value;
-
-											return (
-												<DropdownMenuItem
-													key={option.value}
-													onClick={() => setTheme(option.value)}
-													className={clsx(
-														"flex cursor-pointer items-center gap-2",
-														isActive
-															? "bg-primary/10 font-medium text-primary"
-															: "hover:bg-muted/50",
-													)}
-												>
-													<Icon icon={option.icon} className="h-4 w-4" />
-													{option.label}
-												</DropdownMenuItem>
-											);
-										})}
-									</DropdownMenuContent>
-								</DropdownMenu>
 							</>
 						)}
 					</div>
@@ -291,7 +234,7 @@ export function CVFooter({
 								</Link>
 							</TooltipTrigger>
 							<TooltipContent side="top">
-								<span>{t("footer.llmsTxt")}</span>
+								<span>{t("tooltips.footer.llmsTxt")}</span>
 							</TooltipContent>
 						</Tooltip>
 						<span>·</span>
@@ -306,7 +249,7 @@ export function CVFooter({
 								</Link>
 							</TooltipTrigger>
 							<TooltipContent side="top">
-								<span>{t("footer.accessibilityStatement")}</span>
+								<span>{t("tooltips.footer.accessibility")}</span>
 							</TooltipContent>
 						</Tooltip>
 						<span>·</span>
@@ -321,7 +264,7 @@ export function CVFooter({
 								</Link>
 							</TooltipTrigger>
 							<TooltipContent side="top">
-								<span>{t("footer.privacyStatement")}</span>
+								<span>{t("tooltips.footer.privacy")}</span>
 							</TooltipContent>
 						</Tooltip>
 					</div>

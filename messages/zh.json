@@ -78,5 +78,36 @@
 		"visitorNumbers": "访客数量",
 		"onlineNowUnavailable": "在线人数不可用",
 		"visitorNumbersUnavailable": "访客数量不可用"
+	},
+	"tooltips": {
+		"hero": {
+			"contact": "打开联系方式",
+			"email": "发送邮件",
+			"github": "查看 GitHub 主页",
+			"wechat": "使用此微信号联系",
+			"website": "打开个人网站",
+			"googleScholar": "查看 Google Scholar 主页",
+			"orcid": "打开 ORCID 记录",
+			"bluesky": "查看 Bluesky 主页",
+			"downloadPdf": "下载 PDF 简历",
+			"age": "按出生年月计算"
+		},
+		"footer": {
+			"lastUpdated": "按你的本地时间显示更新",
+			"language": "切换语言，当前：{language}",
+			"llmsTxt": "查看面向 AI 助手的机器可读档案",
+			"accessibility": "查看无障碍支持详情",
+			"privacy": "查看隐私与统计说明",
+			"visitorNumbers": "打开统计并查看总访客",
+			"visitorNumbersUnavailable": "总访客统计暂不可用",
+			"onlineNow": "打开统计并查看当前在线人数",
+			"onlineNowUnavailable": "在线人数统计暂不可用"
+		},
+		"links": {
+			"openEvent": "打开活动页面",
+			"openSlides": "打开演示文稿",
+			"openLink": "打开链接：{label}",
+			"switchLanguage": "切换到 {language}"
+		}
 	}
 }

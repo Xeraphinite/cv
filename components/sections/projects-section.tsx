@@ -97,7 +97,9 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
 											target="_blank"
 											rel="noopener noreferrer"
 											className="inline-flex items-center gap-1 text-primary no-underline visited:no-underline hover:no-underline focus-visible:no-underline"
-											title={link.label}
+											title={t("tooltips.links.openLink", {
+												label: link.label || t("actions.viewMore"),
+											})}
 										>
 											<Icon
 												icon={link.icon || "mingcute:arrow-right-up-fill"}

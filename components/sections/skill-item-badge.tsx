@@ -3,11 +3,10 @@
 import { Icon } from "@iconify/react";
 import { Badge } from "@/components/ui/badge";
 import {
-	HoverCard,
-	HoverCardContent,
-	HoverCardTrigger,
-} from "@/components/ui/hover-card";
-import { MarkdownText } from "@/components/ui/markdown-text";
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
 export interface SkillItemBadgeData {
@@ -86,14 +85,11 @@ export function SkillItemBadge({ item }: SkillItemBadgeProps) {
 	}
 
 	return (
-		<HoverCard openDelay={120} closeDelay={80}>
-			<HoverCardTrigger asChild>{trigger}</HoverCardTrigger>
-			<HoverCardContent
-				side="top"
-				className="w-72 p-3 font-sans text-base leading-relaxed"
-			>
-				<MarkdownText content={item.description} />
-			</HoverCardContent>
-		</HoverCard>
+		<Tooltip delayDuration={120}>
+			<TooltipTrigger asChild>{trigger}</TooltipTrigger>
+			<TooltipContent side="top" className="w-72 font-sans leading-relaxed">
+				<p className="font-sans">{item.description}</p>
+			</TooltipContent>
+		</Tooltip>
 	);
 }

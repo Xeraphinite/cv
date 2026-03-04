@@ -12,6 +12,7 @@ import { MiscSection } from "./misc-section";
 import { BioSection } from "./bio-section";
 import type { SkillItemBadgeData } from "./skill-item-badge";
 import { CVFooter } from "@/components/layout/cv-footer";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import type { CVData } from "@/lib/types/cv";
 
 interface CVProps {
@@ -59,112 +60,114 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
 	}));
 
 	return (
-		<div className="cv-container pt-4 pb-6 sm:pt-0 sm:pb-0 lg:pt-4 lg:pb-6">
-			<div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)] lg:gap-10">
-				<div className="lg:sticky lg:top-4 lg:bottom-4 lg:flex lg:h-[calc(100vh-2rem)] lg:flex-col">
-					<section
-						id="hero"
-						className="lg:min-h-0 lg:flex-1 lg:overflow-y-auto"
-					>
-						<HeroSection data={data.hero} locale={locale} />
-					</section>
+		<TooltipProvider delayDuration={120}>
+			<div className="cv-container pt-4 pb-6 sm:pt-0 sm:pb-0 lg:pt-4 lg:pb-6">
+				<div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)] lg:gap-10">
+					<div className="pt-4 lg:sticky lg:top-4 lg:bottom-4 lg:flex lg:h-[calc(100vh-2rem)] lg:flex-col">
+						<section
+							id="hero"
+							className="lg:min-h-0 lg:flex-1 lg:overflow-y-auto"
+						>
+							<HeroSection data={data.hero} locale={locale} />
+						</section>
 
-					<div className="hidden lg:block">
-						<CVFooter
-							compact
-							showLocaleThemeControls
-							className="block max-w-none border-t-0"
-							lastUpdated={lastUpdated}
-						/>
+						<div className="hidden lg:block">
+							<CVFooter
+								compact
+								showLocaleThemeControls
+								className="block max-w-none border-t-0"
+								lastUpdated={lastUpdated}
+							/>
+						</div>
+					</div>
+
+					<div className="cv-sections-stack py-4">
+						{data.hero.bio && (
+							<section id="about">
+								<BioSection bio={data.hero.bio} />
+							</section>
+						)}
+
+						{data.news && data.news.length > 0 && (
+							<section id="news">
+								<NewsSection data={data.news} />
+							</section>
+						)}
+
+						{projectsData.length > 0 && (
+							<section id="projects">
+								<ProjectsSection data={projectsData} />
+							</section>
+						)}
+
+						{data.publications.length > 0 && (
+							<section id="publications">
+								<PublicationsSection
+									data={publicationsData}
+									ownerName={data.hero.name}
+									ownerEnName={data.hero.enName}
+									ownerAliases={data.hero.aliases}
+								/>
+							</section>
+						)}
+
+						{data.experience.length > 0 && (
+							<section id="experience">
+								<ExperienceSection data={data.experience} />
+							</section>
+						)}
+
+						{data.education.length > 0 && (
+							<section id="education">
+								<EducationSection
+									data={data.education}
+									config={data.sectionConfig?.education}
+								/>
+							</section>
+						)}
+
+						{Object.keys(skillsOnly).length > 0 && (
+							<section id="skills">
+								<SkillsSection data={{ skills: skillsOnly }} />
+							</section>
+						)}
+
+						{data.awards.length > 0 && (
+							<section id="awards">
+								<AwardsSection data={data.awards} />
+							</section>
+						)}
+
+						{(data.patents ?? []).length > 0 && (
+							<section id="patents">
+								<PatentsSection
+									data={data.patents ?? []}
+									ownerName={data.hero.name}
+									ownerEnName={data.hero.enName}
+									ownerAliases={data.hero.aliases}
+								/>
+							</section>
+						)}
+
+						{(data.copyrights ?? []).length > 0 && (
+							<section id="copyrights">
+								<CopyrightsSection
+									data={data.copyrights ?? []}
+									ownerName={data.hero.name}
+									ownerEnName={data.hero.enName}
+									ownerAliases={data.hero.aliases}
+								/>
+							</section>
+						)}
+
+						{miscSkills.length > 0 && (
+							<section id="misc">
+								<MiscSection items={miscSkills} />
+							</section>
+						)}
 					</div>
 				</div>
-
-				<div className="cv-sections-stack sm:py-4 lg:py-6">
-					{data.hero.bio && (
-						<section id="about">
-							<BioSection bio={data.hero.bio} />
-						</section>
-					)}
-
-					{data.news && data.news.length > 0 && (
-						<section id="news">
-							<NewsSection data={data.news} />
-						</section>
-					)}
-
-					{projectsData.length > 0 && (
-						<section id="projects">
-							<ProjectsSection data={projectsData} />
-						</section>
-					)}
-
-					{data.publications.length > 0 && (
-						<section id="publications">
-							<PublicationsSection
-								data={publicationsData}
-								ownerName={data.hero.name}
-								ownerEnName={data.hero.enName}
-								ownerAliases={data.hero.aliases}
-							/>
-						</section>
-					)}
-
-					{data.experience.length > 0 && (
-						<section id="experience">
-							<ExperienceSection data={data.experience} />
-						</section>
-					)}
-
-					{data.education.length > 0 && (
-						<section id="education">
-							<EducationSection
-								data={data.education}
-								config={data.sectionConfig?.education}
-							/>
-						</section>
-					)}
-
-					{Object.keys(skillsOnly).length > 0 && (
-						<section id="skills">
-							<SkillsSection data={{ skills: skillsOnly }} />
-						</section>
-					)}
-
-					{data.awards.length > 0 && (
-						<section id="awards">
-							<AwardsSection data={data.awards} />
-						</section>
-					)}
-
-					{(data.patents ?? []).length > 0 && (
-						<section id="patents">
-							<PatentsSection
-								data={data.patents ?? []}
-								ownerName={data.hero.name}
-								ownerEnName={data.hero.enName}
-								ownerAliases={data.hero.aliases}
-							/>
-						</section>
-					)}
-
-					{(data.copyrights ?? []).length > 0 && (
-						<section id="copyrights">
-							<CopyrightsSection
-								data={data.copyrights ?? []}
-								ownerName={data.hero.name}
-								ownerEnName={data.hero.enName}
-								ownerAliases={data.hero.aliases}
-							/>
-						</section>
-					)}
-
-					{miscSkills.length > 0 && (
-						<section id="misc">
-							<MiscSection items={miscSkills} />
-						</section>
-					)}
-				</div>
 			</div>
-		</div>
+		</TooltipProvider>
 	);
 }

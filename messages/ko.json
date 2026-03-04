@@ -15,6 +15,8 @@
 		"experience": "경력",
 		"skills": "기술",
 		"awards": "수상 및 영예",
+		"patents": "특허",
+		"copyrights": "소프트웨어 저작권",
 		"publications": "논문 발표",
 		"news": "뉴스",
 		"misc": "기타",
@@ -76,5 +78,36 @@
 		"visitorNumbers": "방문자 수",
 		"onlineNowUnavailable": "현재 접속 인원을 사용할 수 없음",
 		"visitorNumbersUnavailable": "방문자 수를 사용할 수 없음"
+	},
+	"tooltips": {
+		"hero": {
+			"contact": "연락 방법 열기",
+			"email": "이메일 보내기",
+			"github": "GitHub 프로필 보기",
+			"wechat": "이 WeChat ID로 연락하기",
+			"website": "개인 웹사이트 열기",
+			"googleScholar": "Google Scholar 프로필 보기",
+			"orcid": "ORCID 레코드 열기",
+			"bluesky": "Bluesky 프로필 보기",
+			"downloadPdf": "PDF 이력서 다운로드",
+			"age": "출생 연월 기준 계산"
+		},
+		"footer": {
+			"lastUpdated": "내 로컬 시간 기준 업데이트 표시",
+			"language": "언어 변경 현재: {language}",
+			"llmsTxt": "AI 도우미용 기계 판독 프로필 보기",
+			"accessibility": "접근성 지원 세부 정보 보기",
+			"privacy": "개인정보 및 분석 정보 보기",
+			"visitorNumbers": "분석 열고 총 방문자 보기",
+			"visitorNumbersUnavailable": "총 방문자 분석을 사용할 수 없음",
+			"onlineNow": "분석 열고 현재 방문자 보기",
+			"onlineNowUnavailable": "현재 방문자 분석을 사용할 수 없음"
+		},
+		"links": {
+			"openEvent": "이벤트 페이지 열기",
+			"openSlides": "슬라이드 열기",
+			"openLink": "링크 열기: {label}",
+			"switchLanguage": "{language}(으)로 변경"
+		}
 	}
 }

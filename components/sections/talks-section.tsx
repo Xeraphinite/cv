@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import { useTranslations } from "next-intl";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { formatToYearMonth } from "@/lib/date-format";
 
@@ -18,6 +19,7 @@ interface TalksSectionProps {
 }
 
 export function TalksSection({ data }: TalksSectionProps) {
+	const t = useTranslations();
 	// Default placeholder talks if none provided
 	const defaultTalks = [
 		{
@@ -97,7 +99,7 @@ export function TalksSection({ data }: TalksSectionProps) {
 											target="_blank"
 											rel="noopener noreferrer"
 											className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-											title="View Event"
+											title={t("tooltips.links.openEvent")}
 										>
 											<Icon
 												icon="mingcute:arrow-right-up-fill"
@@ -111,7 +113,7 @@ export function TalksSection({ data }: TalksSectionProps) {
 											target="_blank"
 											rel="noopener noreferrer"
 											className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-											title="View Slides"
+											title={t("tooltips.links.openSlides")}
 										>
 											<Icon
 												icon="mingcute:arrow-right-up-fill"
