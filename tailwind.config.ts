@@ -40,7 +40,7 @@ const config = {
 
 				// Chinese typography - following W3C CLREQ guidelines
 				"zh-sans": [
-					"IBM Plex Sans",
+					"MiSans",
 					"-apple-system",
 					"BlinkMacSystemFont",
 					"Noto Sans SC",
@@ -66,7 +66,7 @@ const config = {
 
 				// Traditional Chinese
 				"zh-hant-sans": [
-					"IBM Plex Sans",
+					"MiSansTC",
 					"-apple-system",
 					"BlinkMacSystemFont",
 					"Noto Sans TC",
@@ -96,7 +96,7 @@ const config = {
 
 				// Japanese typography - following W3C JLREQ guidelines
 				"ja-sans": [
-					"IBM Plex Sans",
+					"MiSans",
 					"-apple-system",
 					"BlinkMacSystemFont",
 					"Noto Sans JP",
@@ -126,7 +126,7 @@ const config = {
 
 				// Korean typography - following W3C KLREQ guidelines
 				"ko-sans": [
-					"IBM Plex Sans",
+					"MiSans",
 					"-apple-system",
 					"BlinkMacSystemFont",
 					"Noto Sans KR",

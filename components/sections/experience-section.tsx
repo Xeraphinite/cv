@@ -63,7 +63,7 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
 						className="cv-card transition-all duration-300"
 					>
 						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-4 gap-y-2">
-							<p className="cv-meta cv-meta-strong order-2 col-start-2 row-start-1 justify-self-end whitespace-nowrap text-right font-sans text-foreground/80 leading-tight">
+							<p className="cv-meta cv-meta-strong cv-locale-sans order-2 col-start-2 row-start-1 justify-self-end whitespace-nowrap text-right text-foreground/80 leading-tight">
 								{renderYearMonthWithSup(experience.startDate)} -{" "}
 								{renderYearMonthWithSup(experience.endDate || "Present")}
 							</p>

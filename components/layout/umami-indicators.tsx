@@ -97,7 +97,7 @@ export function UmamiIndicators({ locale, shareUrl }: UmamiIndicatorsProps) {
 							className="inline-flex items-center gap-1 transition-colors hover:text-foreground"
 						>
 							<Icon icon="mingcute:user-3-line" className="h-3 w-3" />
-							<span className="font-sans tabular-nums">
+							<span className="cv-locale-sans tabular-nums">
 								{visitorCountDisplay}
 							</span>
 							<Icon icon="mingcute:arrow-right-up-fill" className="h-3 w-3" />
@@ -105,7 +105,7 @@ export function UmamiIndicators({ locale, shareUrl }: UmamiIndicatorsProps) {
 					) : (
 						<span className="inline-flex items-center gap-1 text-foreground/70">
 							<Icon icon="mingcute:user-3-line" className="h-3 w-3" />
-							<span className="font-sans tabular-nums">
+							<span className="cv-locale-sans tabular-nums">
 								{visitorCountDisplay}
 							</span>
 						</span>
@@ -138,7 +138,7 @@ export function UmamiIndicators({ locale, shareUrl }: UmamiIndicatorsProps) {
 										: "text-emerald-600 dark:text-emerald-400",
 								)}
 							/>
-							<span className="font-sans tabular-nums">
+							<span className="cv-locale-sans tabular-nums">
 								{activeVisitorCountDisplay}
 							</span>
 							<Icon icon="mingcute:arrow-right-up-fill" className="h-3 w-3" />
@@ -154,7 +154,7 @@ export function UmamiIndicators({ locale, shareUrl }: UmamiIndicatorsProps) {
 										: "text-emerald-600 dark:text-emerald-400",
 								)}
 							/>
-							<span className="font-sans tabular-nums">
+							<span className="cv-locale-sans tabular-nums">
 								{activeVisitorCountDisplay}
 							</span>
 						</span>

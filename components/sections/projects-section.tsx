@@ -34,17 +34,17 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
 						className="cv-body text-foreground leading-relaxed"
 					>
 						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-2">
-							<span className="order-2 col-start-2 row-start-1 justify-self-end whitespace-nowrap text-right font-bold font-sans text-base text-foreground/80">
+							<span className="cv-locale-sans order-2 col-start-2 row-start-1 justify-self-end whitespace-nowrap text-right font-bold text-base text-foreground/80">
 								{formatToYearMonth(project.year)}
 							</span>
 							<div className="order-1 col-start-1 row-start-1 flex min-w-0 flex-wrap items-center gap-2">
-								<h3 className="font-sans font-semibold text-lg">
+								<h3 className="cv-locale-sans font-semibold text-lg">
 									{project.name}
 								</h3>
 								{project.status ? (
 									<Badge
 										variant="secondary"
-										className="rounded-full border border-border/60 bg-muted/80 px-2 py-0 font-medium font-sans text-foreground/85 text-sm hover:bg-secondary/80"
+										className="cv-locale-sans rounded-full border border-border/60 bg-muted/80 px-2 py-0 font-medium text-foreground/85 text-sm hover:bg-secondary/80"
 									>
 										{project.status}
 									</Badge>
@@ -52,7 +52,7 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
 							</div>
 
 							{project.description ? (
-								<div className="col-span-2 font-serif text-base text-foreground/90">
+								<div className="cv-locale-serif col-span-2 text-base text-foreground/90">
 									<MarkdownText content={project.description} />
 								</div>
 							) : null}
@@ -105,7 +105,7 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
 												icon={link.icon || "mingcute:arrow-right-up-fill"}
 												className="h-4 w-4"
 											/>
-											<span className="font-sans text-base">
+											<span className="cv-locale-sans text-base">
 												{link.label || t("actions.viewMore")}
 											</span>
 										</a>

@@ -111,19 +111,19 @@ export function PatentsSection({
 						className="cv-body text-foreground leading-relaxed"
 					>
 						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1.5">
-							<span className="order-2 justify-self-end whitespace-nowrap text-right font-bold font-sans text-base text-foreground/80">
+							<span className="cv-locale-sans order-2 justify-self-end whitespace-nowrap text-right font-bold text-base text-foreground/80">
 								{renderYearMonthWithSup(patent.filed)}
 							</span>
 							<div className="order-1 min-w-0 [&>*:not(:last-child)]:mb-0.5">
-								<h3 className="font-sans font-semibold text-lg">
+								<h3 className="cv-locale-sans font-semibold text-lg">
 									{patent.title}
 								</h3>
 								{patent.inventors?.length ? (
-									<p className="font-serif text-base text-foreground/80">
+									<p className="cv-locale-serif text-base text-foreground/80">
 										{formatAuthors(patent.inventors)}
 									</p>
 								) : null}
-								<p className="font-serif text-base text-foreground/80">
+								<p className="cv-locale-serif text-base text-foreground/80">
 									{patent.status}
 									{formatPatentNumber(patent.country, patent.number)
 										? ` · ${formatPatentNumber(patent.country, patent.number)}`

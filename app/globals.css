@@ -182,8 +182,8 @@
 
 .font-zh-sans {
 	font-family:
-		var(--font-ibm-plex-sans), "Noto Sans SC", "Source Han Sans SC",
-		"PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+		"MiSans", "Noto Sans SC", "Source Han Sans SC", "PingFang SC",
+		"Microsoft YaHei", system-ui, sans-serif;
 	font-feature-settings:
 		"liga" 1,
 		"calt" 1,
@@ -194,8 +194,8 @@
 
 .font-zh-hant-sans {
 	font-family:
-		var(--font-ibm-plex-sans), "Noto Sans TC", "Source Han Sans TC",
-		"PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+		"MiSansTC", "Noto Sans TC", "Source Han Sans TC", "PingFang TC",
+		"Microsoft JhengHei", system-ui, sans-serif;
 	font-feature-settings:
 		"liga" 1,
 		"calt" 1,
@@ -206,8 +206,8 @@
 
 .font-ja-sans {
 	font-family:
-		var(--font-ibm-plex-sans), "Noto Sans JP", "Source Han Sans JP",
-		"Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+		"MiSans", "Noto Sans JP", "Source Han Sans JP", "Hiragino Kaku Gothic ProN",
+		"Yu Gothic", "Meiryo", system-ui, sans-serif;
 	font-feature-settings:
 		"liga" 1,
 		"calt" 1,
@@ -218,9 +218,8 @@
 
 .font-ko-sans {
 	font-family:
-		var(--font-ibm-plex-sans), "Noto Sans KR", "Source Han Sans KR",
-		"Apple SD Gothic Neo", "Malgun Gothic", "Nanum Gothic", system-ui,
-		sans-serif;
+		"MiSans", "Noto Sans KR", "Source Han Sans KR", "Apple SD Gothic Neo",
+		"Malgun Gothic", "Nanum Gothic", system-ui, sans-serif;
 	font-feature-settings:
 		"liga" 1,
 		"calt" 1,
@@ -306,6 +305,38 @@
 
 .text-en {
 	@apply font-en-serif;
+}
+
+.cv-locale-sans {
+	@apply font-en-sans;
+}
+
+html[lang|="zh"] .cv-locale-sans {
+	@apply font-zh-sans;
+}
+
+html[lang|="ja"] .cv-locale-sans {
+	@apply font-ja-sans;
+}
+
+html[lang|="ko"] .cv-locale-sans {
+	@apply font-ko-sans;
+}
+
+.cv-locale-serif {
+	@apply font-en-serif;
+}
+
+html[lang|="zh"] .cv-locale-serif {
+	@apply font-zh-serif;
+}
+
+html[lang|="ja"] .cv-locale-serif {
+	@apply font-ja-serif;
+}
+
+html[lang|="ko"] .cv-locale-serif {
+	@apply font-ko-serif;
 }
 
 /* Magazine-inspired container with better spacing */

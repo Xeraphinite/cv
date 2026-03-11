@@ -23,7 +23,7 @@ function SkillsCategoryRow({ category, skills }: SkillsCategoryRowProps) {
 			key={category}
 			className="grid grid-cols-[10rem_minmax(0,1fr)] items-start gap-x-4 gap-y-1"
 		>
-			<h3 className="shrink-0 whitespace-nowrap text-left font-sans font-semibold text-foreground text-lg">
+			<h3 className="cv-locale-sans shrink-0 whitespace-nowrap text-left font-semibold text-foreground text-lg">
 				{category}
 			</h3>
 			<div className="flex min-w-0 flex-wrap items-center gap-2">

@@ -129,7 +129,7 @@ export function PublicationsSection({
 						className="cv-body text-foreground leading-relaxed"
 					>
 						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-3 md:gap-y-1">
-							<span className="order-2 justify-self-end whitespace-nowrap text-right font-bold font-sans text-base text-foreground/80">
+							<span className="cv-locale-sans order-2 justify-self-end whitespace-nowrap text-right font-bold text-base text-foreground/80">
 								{formatToYearMonth(publication.year)}
 							</span>
 
@@ -145,7 +145,7 @@ export function PublicationsSection({
 										>
 											<MarkdownText
 												content={publication.title}
-												className="inline font-sans font-semibold"
+												className="cv-locale-sans inline font-semibold"
 												inline
 											/>
 											<Icon

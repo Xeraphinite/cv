@@ -68,14 +68,14 @@ export function AwardsSection({ data }: AwardsSectionProps) {
 						className="cv-card transition-all duration-300"
 					>
 						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-4 gap-y-1.5 md:gap-y-1">
-							<p className="cv-meta cv-meta-strong order-2 justify-self-end text-right font-sans text-foreground/80 leading-tight">
+							<p className="cv-meta cv-meta-strong cv-locale-sans order-2 justify-self-end text-right text-foreground/80 leading-tight">
 								{renderAwardDate(award.date)}
 							</p>
 							<div className="order-1 min-w-0 [&>*:not(:last-child)]:mb-1.5 md:[&>*:not(:last-child)]:mb-1">
 								<p className="cv-subtitle">
 									<span className="font-medium text-lg">{award.name}</span>
 								</p>
-								<p className="font-serif text-base text-foreground/80 leading-[1.45]">
+								<p className="cv-locale-serif text-base text-foreground/80 leading-[1.45]">
 									{award.institute}
 								</p>
 								{award.description ? (

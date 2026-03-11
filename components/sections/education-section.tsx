@@ -87,7 +87,7 @@ export function EducationSection({ data, config }: EducationSectionProps) {
 							className="cv-card transition-all duration-300"
 						>
 							<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-4 gap-y-1.5 md:gap-y-1">
-								<p className="cv-meta cv-meta-strong order-2 justify-self-end text-right font-sans text-foreground/80 leading-tight">
+								<p className="cv-meta cv-meta-strong cv-locale-sans order-2 justify-self-end text-right text-foreground/80 leading-tight">
 									<span className="block whitespace-nowrap">
 										{renderYearMonthWithSup(education.startDate)}
 										<span className="mx-1">-</span>

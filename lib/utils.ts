@@ -11,7 +11,7 @@ export function getTypographyClasses(locale?: string) {
 		case "zh":
 		case "zh-CN":
 			return {
-				title: "cv-title lang-zh font-zh-sans leading-tight tracking-zh",
+				title: "cv-title lang-zh font-zh-serif leading-tight tracking-zh",
 				subtitle: "cv-subtitle lang-zh font-zh-sans tracking-zh",
 				body: "cv-body lang-zh font-zh-serif leading-zh tracking-zh text-justify-zh cjk-text",
 				meta: "cv-meta lang-zh font-zh-sans tracking-zh",
@@ -21,7 +21,7 @@ export function getTypographyClasses(locale?: string) {
 		case "zh-HK":
 		case "zh-TW":
 			return {
-				title: "cv-title lang-zh font-zh-hant-sans leading-tight tracking-zh",
+				title: "cv-title lang-zh font-zh-hant-serif leading-tight tracking-zh",
 				subtitle: "cv-subtitle lang-zh font-zh-hant-sans tracking-zh",
 				body: "cv-body lang-zh font-zh-hant-serif leading-zh tracking-zh text-justify-zh cjk-text",
 				meta: "cv-meta lang-zh font-zh-hant-sans tracking-zh",
@@ -29,7 +29,7 @@ export function getTypographyClasses(locale?: string) {
 			};
 		case "ja":
 			return {
-				title: "cv-title lang-ja font-ja-sans leading-tight tracking-ja",
+				title: "cv-title lang-ja font-ja-serif leading-tight tracking-ja",
 				subtitle: "cv-subtitle lang-ja font-ja-sans tracking-ja",
 				body: "cv-body lang-ja font-ja-serif leading-ja tracking-ja text-justify-ja cjk-text",
 				meta: "cv-meta lang-ja font-ja-sans tracking-ja",
@@ -37,7 +37,7 @@ export function getTypographyClasses(locale?: string) {
 			};
 		case "ko":
 			return {
-				title: "cv-title lang-ko font-ko-sans leading-tight tracking-ko",
+				title: "cv-title lang-ko font-ko-serif leading-tight tracking-ko",
 				subtitle: "cv-subtitle lang-ko font-ko-sans tracking-ko",
 				body: "cv-body lang-ko font-ko-serif leading-ko tracking-ko text-justify-ko",
 				meta: "cv-meta lang-ko font-ko-sans tracking-ko",
@@ -46,7 +46,7 @@ export function getTypographyClasses(locale?: string) {
 		case "en":
 		default:
 			return {
-				title: "cv-title font-en-sans leading-tight tracking-en",
+				title: "cv-title font-en-serif leading-tight tracking-en",
 				subtitle: "cv-subtitle font-en-sans tracking-en",
 				body: "cv-body font-en-sans leading-en tracking-en",
 				meta: "cv-meta font-en-sans tracking-en",

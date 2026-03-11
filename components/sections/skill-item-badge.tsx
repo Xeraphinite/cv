@@ -42,8 +42,8 @@ function SkillBadgeContent({ item }: SkillItemBadgeProps) {
 				item.code
 					? "font-mono"
 					: item.fontFamily === "serif"
-						? "font-serif"
-						: "font-sans",
+						? "cv-locale-serif"
+						: "cv-locale-sans",
 			)}
 		>
 			{item.icon ? (
@@ -87,8 +87,11 @@ export function SkillItemBadge({ item }: SkillItemBadgeProps) {
 	return (
 		<Tooltip delayDuration={120}>
 			<TooltipTrigger asChild>{trigger}</TooltipTrigger>
-			<TooltipContent side="top" className="w-72 font-sans leading-relaxed">
-				<p className="font-sans">{item.description}</p>
+			<TooltipContent
+				side="top"
+				className="cv-locale-sans w-72 leading-relaxed"
+			>
+				<p className="cv-locale-sans">{item.description}</p>
 			</TooltipContent>
 		</Tooltip>
 	);

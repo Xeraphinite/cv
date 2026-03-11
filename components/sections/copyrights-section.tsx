@@ -100,19 +100,19 @@ export function CopyrightsSection({
 						className="cv-body text-foreground leading-relaxed"
 					>
 						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1.5">
-							<span className="order-2 justify-self-end whitespace-nowrap text-right font-bold font-sans text-base text-foreground/80">
+							<span className="cv-locale-sans order-2 justify-self-end whitespace-nowrap text-right font-bold text-base text-foreground/80">
 								{renderYearMonthWithSup(copyright.year)}
 							</span>
 							<div className="order-1 min-w-0 [&>*:not(:last-child)]:mb-0.5">
-								<h3 className="font-sans font-semibold text-lg">
+								<h3 className="cv-locale-sans font-semibold text-lg">
 									{copyright.title}
 								</h3>
 								{copyright.holders?.length ? (
-									<p className="font-serif text-base text-foreground/80">
+									<p className="cv-locale-serif text-base text-foreground/80">
 										{formatAuthors(copyright.holders)}
 									</p>
 								) : null}
-								<p className="font-serif text-base text-foreground/80">
+								<p className="cv-locale-serif text-base text-foreground/80">
 									{copyright.status} · {copyright.country}
 								</p>
 							</div>

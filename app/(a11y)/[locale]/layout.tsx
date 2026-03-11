@@ -29,6 +29,16 @@ const ibmPlexSans = IBM_Plex_Sans({
 
 const notoSerifCjkStylesheet =
 	"https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&display=swap";
+const miSansStylesheets = [
+	"https://font.emtech.cc/css/MiSans/400",
+	"https://font.emtech.cc/css/MiSans/500",
+	"https://font.emtech.cc/css/MiSans/600",
+	"https://font.emtech.cc/css/MiSans/700",
+	"https://font.emtech.cc/css/MiSansTC/400",
+	"https://font.emtech.cc/css/MiSansTC/500",
+	"https://font.emtech.cc/css/MiSansTC/600",
+	"https://font.emtech.cc/css/MiSansTC/700",
+];
 
 export const runtime = "edge";
 
@@ -64,7 +74,11 @@ export default async function AccessibilityLocaleLayout({
 					href="https://fonts.gstatic.com"
 					rel="preconnect"
 				/>
+				<link href="https://font.emtech.cc" rel="preconnect" />
 				<link href={notoSerifCjkStylesheet} rel="stylesheet" />
+				{miSansStylesheets.map((href) => (
+					<link href={href} key={href} rel="stylesheet" />
+				))}
 			</head>
 			<body className={`${spectral.variable} ${ibmPlexSans.variable}`}>
 				{umamiWebsiteId ? (

@@ -85,7 +85,7 @@ export function NewsSection({ data }: NewsSectionProps) {
 						className="cv-body text-foreground leading-relaxed"
 					>
 						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-0.5 md:gap-y-0">
-							<span className="order-2 justify-self-end whitespace-nowrap text-right font-bold font-sans text-base text-foreground/80">
+							<span className="cv-locale-sans order-2 justify-self-end whitespace-nowrap text-right font-bold text-base text-foreground/80">
 								{renderYearMonthWithSup(item.date)}
 							</span>
 							{item.url &&

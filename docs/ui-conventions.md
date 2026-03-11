@@ -14,6 +14,8 @@
 ## Typography
 - Use `Spectral` as the default serif family and `IBM Plex Sans` as the default sans family for English (`en`) content.
 - For non-English serif text (`zh`, `zh-hant`, `ja`, `ko`), use locale-appropriate `Noto Serif` variants as the primary serif stack.
+- In localized UI copy, prefer `.cv-locale-sans` / `.cv-locale-serif` over raw Tailwind `font-sans` / `font-serif` so `en` stays IBM Plex while CJK locales switch to MiSans or locale-specific serif stacks consistently.
+- Personal names written in Chinese characters should render in a locale-appropriate serif stack; on the English hero, the secondary Chinese name under the English name should use Chinese serif styling instead of English sans.
 - Do not use `Noto Serif SC` as a cross-locale serif fallback; map locale-specific serif variants (`CJK SC` / `TC` / `JP` / `KR`) per language.
 - Use `Maple Mono` for code-like text.
 - Keep section titles at `text-2xl`.

@@ -20,6 +20,8 @@ import {
 } from "@/lib/email-obfuscation";
 import { getFontClass, getTypographyClasses } from "@/lib/utils";
 
+const containsHanCharacters = (value: string) => /\p{Script=Han}/u.test(value);
+
 interface HeroSectionProps {
 	data: {
 		name: string;
@@ -305,6 +307,11 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 
 	const primaryName = getPrimaryName();
 	const secondaryName = getSecondaryName();
+	const secondaryNameClass = secondaryName
+		? locale === "en" && containsHanCharacters(secondaryName)
+			? "cv-subtitle font-zh-serif tracking-zh text-muted-foreground/80"
+			: `${typographyClasses.subtitle} text-muted-foreground/80`
+		: "";
 
 	return (
 		<header className="mb-6 sm:mb-8">
@@ -331,11 +338,7 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 							</h1>
 
 							{secondaryName && (
-								<h2
-									className={`${typographyClasses.subtitle} text-muted-foreground/80`}
-								>
-									{secondaryName}
-								</h2>
+								<h2 className={secondaryNameClass}>{secondaryName}</h2>
 							)}
 						</div>
 

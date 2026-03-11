@@ -173,7 +173,7 @@ export function CVFooter({
 														icon={languageFlags[currentLocale || "en"]}
 														className="h-3.5 w-3.5"
 													/>
-													<span className="font-sans text-sm">
+													<span className="cv-locale-sans text-sm">
 														{currentLocale?.toUpperCase() || "EN"}
 													</span>
 												</Button>

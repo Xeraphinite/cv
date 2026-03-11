@@ -135,7 +135,7 @@ export function TalksSection({ data }: TalksSectionProps) {
 								<div className="cv-meta flex flex-wrap items-center gap-x-3 gap-y-1 sm:gap-x-4">
 									<div className="flex items-center gap-2">
 										<Icon icon="mingcute:calendar-line" className="h-4 w-4" />
-										<span className="font-bold font-sans text-foreground/80 text-sm">
+										<span className="cv-locale-sans font-bold text-foreground/80 text-sm">
 											{formatDate(talk.date)}
 										</span>
 									</div>
