@@ -13,15 +13,16 @@ import { BioSection } from "./bio-section";
 import type { SkillItemBadgeData } from "./skill-item-badge";
 import { CVFooter } from "@/components/layout/cv-footer";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import type { CVData } from "@/lib/types/cv";
+import type { CVData, SocialProfileData } from "@/lib/types/cv";
 
 interface CVProps {
 	data: CVData | null;
 	locale?: string;
 	lastUpdated?: string;
+	socialProfiles?: SocialProfileData;
 }
 
-export function CV({ data, locale, lastUpdated }: CVProps) {
+export function CV({ data, locale, lastUpdated, socialProfiles }: CVProps) {
 	if (!data) return null;
 
 	const mappedSkills: Record<string, SkillItemBadgeData[]> = {};
@@ -68,7 +69,11 @@ export function CV({ data, locale, lastUpdated }: CVProps) {
 							id="hero"
 							className="lg:min-h-0 lg:flex-1 lg:overflow-y-auto"
 						>
-							<HeroSection data={data.hero} locale={locale} />
+							<HeroSection
+								data={data.hero}
+								locale={locale}
+								socialProfiles={socialProfiles}
+							/>
 						</section>
 
 						<div className="hidden lg:block">

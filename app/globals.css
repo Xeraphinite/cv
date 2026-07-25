@@ -523,6 +523,592 @@ html[lang|="ko"] .cv-locale-serif {
 	transform: translateY(-1px);
 }
 
+.cv-contact-card.cv-contact-card {
+	width: 16rem;
+	overflow: hidden;
+	border: 1px solid hsl(var(--border));
+	border-radius: 2px;
+	background: hsl(var(--popover));
+	padding: 0;
+	color: hsl(var(--popover-foreground));
+	box-shadow:
+		0 4px 8px rgb(0 0 0 / 4%),
+		0 8px 30px rgb(0 0 0 / 12%);
+	font-family: var(--font-en-sans), ui-sans-serif, sans-serif;
+	user-select: none;
+}
+
+.cv-contact-card.cv-contact-card-email {
+	--cv-paper: #f9f8f5;
+	--cv-paper-ink: #6b6961;
+	--cv-mail-red: #b75b55;
+	--cv-mail-blue: #3b719c;
+	width: 18rem;
+	border-color: rgb(107 105 97 / 30%);
+	border-radius: 5px;
+	background: var(--cv-paper);
+	color: var(--cv-paper-ink);
+}
+
+.cv-email-envelope {
+	position: relative;
+	display: block;
+	height: 9.25rem;
+	overflow: hidden;
+	background:
+		radial-gradient(
+			circle at 18% 24%,
+			rgb(107 105 97 / 5%) 0 0.5px,
+			transparent 0.75px
+		),
+		var(--cv-paper);
+	background-size:
+		13px 11px,
+		auto;
+	color: var(--cv-paper-ink);
+}
+
+.cv-email-envelope::before {
+	position: absolute;
+	z-index: 4;
+	inset: 0;
+	background:
+		repeating-linear-gradient(
+			135deg,
+			var(--cv-mail-red) 0 7px,
+			transparent 7px 14px,
+			var(--cv-mail-blue) 14px 21px,
+			transparent 21px 28px
+		)
+		top / 100% 3px no-repeat,
+		repeating-linear-gradient(
+			135deg,
+			var(--cv-mail-red) 0 7px,
+			transparent 7px 14px,
+			var(--cv-mail-blue) 14px 21px,
+			transparent 21px 28px
+		)
+		bottom / 100% 3px no-repeat,
+		repeating-linear-gradient(
+			45deg,
+			var(--cv-mail-red) 0 7px,
+			transparent 7px 14px,
+			var(--cv-mail-blue) 14px 21px,
+			transparent 21px 28px
+		)
+		left / 3px 100% no-repeat,
+		repeating-linear-gradient(
+			45deg,
+			var(--cv-mail-red) 0 7px,
+			transparent 7px 14px,
+			var(--cv-mail-blue) 14px 21px,
+			transparent 21px 28px
+		)
+		right / 3px 100% no-repeat;
+	content: "";
+	opacity: 0.62;
+	pointer-events: none;
+}
+
+.cv-email-envelope-flap {
+	position: absolute;
+	inset: auto 0 0;
+	height: 66%;
+	background: rgb(107 105 97 / 4%);
+	clip-path: polygon(0 100%, 0 75%, 50% 25%, 100% 75%, 100% 100%);
+	filter: drop-shadow(0 -1px 0 rgb(107 105 97 / 34%));
+}
+
+.cv-email-envelope-return {
+	position: absolute;
+	z-index: 1;
+	top: 1.05rem;
+	left: 1.05rem;
+	color: rgb(107 105 97 / 78%);
+	font-family: var(--font-maple-mono), ui-monospace, monospace;
+	font-size: 7px;
+	letter-spacing: 0.08em;
+	line-height: 1.45;
+}
+
+.cv-email-envelope-return > span {
+	display: block;
+	margin-bottom: 1px;
+	font-size: 6px;
+	letter-spacing: 0.16em;
+	opacity: 0.72;
+}
+
+.cv-email-envelope-stamps {
+	position: absolute;
+	z-index: 2;
+	top: 0.7rem;
+	right: 0.8rem;
+	display: flex;
+	align-items: flex-start;
+	gap: 0.2rem;
+}
+
+.cv-email-envelope-stamp {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border: 3px dotted var(--cv-paper);
+	color: rgb(107 105 97 / 90%);
+	box-shadow: 0 0 0 1px rgb(107 105 97 / 36%);
+	font-family: var(--font-maple-mono), ui-monospace, monospace;
+	line-height: 1;
+}
+
+.cv-email-envelope-stamp-portrait {
+	width: 3rem;
+	height: 3.65rem;
+	rotate: 2deg;
+	background: color-mix(in oklab, var(--cv-mail-red) 11%, var(--cv-paper));
+}
+
+.cv-email-envelope-stamp-portrait img {
+	display: block;
+	width: 2rem;
+	height: 2rem;
+	object-fit: cover;
+	filter: grayscale(1) contrast(1.08);
+}
+
+.cv-email-envelope-stamp-portrait span,
+.cv-email-envelope-stamp-mark > span:last-child {
+	margin-top: 0.2rem;
+	font-size: 5px;
+	letter-spacing: 0.06em;
+}
+
+.cv-email-envelope-stamp-mark {
+	width: 2.25rem;
+	height: 2.85rem;
+	margin-top: 0.25rem;
+	rotate: -3deg;
+	background: color-mix(in oklab, var(--cv-mail-blue) 10%, var(--cv-paper));
+}
+
+.cv-email-envelope-stamp-star {
+	color: color-mix(in oklab, var(--cv-mail-blue) 66%, var(--cv-paper-ink));
+	font-size: 1rem;
+}
+
+.cv-email-envelope-postmark {
+	position: absolute;
+	z-index: 3;
+	top: 1.35rem;
+	right: 4.2rem;
+	width: 2.1rem;
+	height: 2.1rem;
+	rotate: -8deg;
+	border: 1px solid rgb(107 105 97 / 58%);
+	border-radius: 999px;
+	opacity: 0.72;
+}
+
+.cv-email-envelope-postmark::before {
+	position: absolute;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	content: "CV";
+	font-family: var(--font-maple-mono), ui-monospace, monospace;
+	font-size: 6px;
+	letter-spacing: 0.08em;
+}
+
+.cv-email-envelope-postmark::after {
+	position: absolute;
+	top: 0.5rem;
+	left: 1.65rem;
+	width: 2.8rem;
+	height: 1rem;
+	background: repeating-linear-gradient(
+		to bottom,
+		rgb(107 105 97 / 58%) 0 1px,
+		transparent 1px 5px
+	);
+	content: "";
+}
+
+.cv-email-envelope-address {
+	position: absolute;
+	z-index: 2;
+	top: 5.4rem;
+	left: 2.75rem;
+	display: flex;
+	flex-direction: column;
+	max-width: calc(100% - 4rem);
+	color: rgb(107 105 97 / 92%);
+	font-family: var(--font-maple-mono), ui-monospace, monospace;
+	font-size: 11px;
+	letter-spacing: 0.02em;
+	line-height: 1.35;
+	white-space: nowrap;
+}
+
+.cv-email-envelope-address > span:first-child {
+	margin-bottom: 0.25rem;
+	font-size: 6px;
+	letter-spacing: 0.18em;
+	opacity: 0.68;
+}
+
+.cv-contact-card.cv-contact-card-github {
+	padding: 0.625rem 0.75rem;
+}
+
+.cv-github-card-heading {
+	display: flex;
+	min-width: 0;
+	align-items: baseline;
+	gap: 0.5rem;
+	margin-bottom: 0.625rem;
+	font-family: var(--font-maple-mono), ui-monospace, monospace;
+	line-height: 1.3;
+}
+
+.cv-github-card-heading strong {
+	flex-shrink: 0;
+	color: hsl(var(--foreground));
+	font-size: 0.6875rem;
+	font-weight: 500;
+}
+
+.cv-github-card-heading span {
+	overflow: hidden;
+	color: hsl(var(--muted-foreground));
+	font-size: 0.625rem;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.cv-github-contributions {
+	display: flex;
+	gap: 2px;
+}
+
+.cv-github-contributions > span {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.cv-github-contributions i {
+	width: 6px;
+	height: 6px;
+	border-radius: 1.5px;
+	background: hsl(var(--foreground) / 7%);
+}
+
+.cv-github-contributions i[data-level="1"] {
+	background: hsl(var(--foreground) / 30%);
+}
+
+.cv-github-contributions i[data-level="2"] {
+	background: hsl(var(--foreground) / 52%);
+}
+
+.cv-github-contributions i[data-level="3"] {
+	background: hsl(var(--foreground) / 74%);
+}
+
+.cv-github-contributions i[data-level="4"] {
+	background: hsl(var(--foreground));
+}
+
+.cv-github-card-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 0.625rem;
+	border-top: 1px solid hsl(var(--border));
+	padding-top: 0.5rem;
+	color: hsl(var(--muted-foreground));
+	font-family: var(--font-maple-mono), ui-monospace, monospace;
+	font-size: 0.6875rem;
+	letter-spacing: 0.02em;
+}
+
+.cv-github-card-footer > span {
+	display: flex;
+	align-items: baseline;
+	gap: 0.22rem;
+}
+
+.cv-github-card-footer strong {
+	color: hsl(var(--foreground));
+	font-weight: 500;
+}
+
+.cv-contact-card.cv-contact-card-social {
+	padding: 0.75rem;
+}
+
+.cv-social-card-header {
+	display: flex;
+	align-items: center;
+	gap: 0.625rem;
+}
+
+.cv-social-card-header > svg {
+	flex-shrink: 0;
+	align-self: flex-start;
+	margin-left: auto;
+	color: hsl(var(--muted-foreground));
+}
+
+.cv-social-card-avatar {
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 999px;
+	box-shadow: inset 0 0 0 1px hsl(var(--border));
+	object-fit: cover;
+}
+
+.cv-social-card-names {
+	display: flex;
+	min-width: 0;
+	flex-direction: column;
+	line-height: 1.3;
+}
+
+.cv-social-card-names strong {
+	color: hsl(var(--foreground));
+	font-size: 0.875rem;
+	font-weight: 500;
+}
+
+.cv-social-card-names span {
+	overflow: hidden;
+	color: hsl(var(--muted-foreground));
+	font-family: var(--font-maple-mono), ui-monospace, monospace;
+	font-size: 0.75rem;
+	letter-spacing: 0.02em;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.cv-social-card-body > p {
+	margin-top: 0.75rem;
+	color: hsl(var(--foreground));
+	font-size: 0.875rem;
+	line-height: 1.5;
+}
+
+.cv-social-card-footer,
+.cv-scholar-card-footer,
+.cv-link-preview-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 0.625rem;
+	border-top: 1px solid hsl(var(--border));
+	padding-top: 0.5rem;
+	color: hsl(var(--muted-foreground));
+	font-family: var(--font-maple-mono), ui-monospace, monospace;
+	font-size: 0.6875rem;
+	letter-spacing: 0.02em;
+}
+
+.cv-social-card-footer strong {
+	color: hsl(var(--foreground));
+	font-weight: 500;
+}
+
+.cv-contact-card.cv-contact-card-scholar {
+	width: 18rem;
+	background: hsl(var(--popover));
+}
+
+.cv-scholar-card-body {
+	position: relative;
+	padding: 0.75rem;
+}
+
+.cv-scholar-card-accent {
+	position: absolute;
+	inset: 0 auto 0 0;
+	width: 3px;
+	background: #4285f4;
+}
+
+.cv-scholar-card-header {
+	display: flex;
+	align-items: center;
+	gap: 0.625rem;
+	padding-left: 0.35rem;
+}
+
+.cv-scholar-card-icon {
+	display: grid;
+	width: 2.5rem;
+	height: 2.5rem;
+	flex-shrink: 0;
+	place-items: center;
+	border: 1px solid hsl(var(--border));
+	border-radius: 2px;
+	background: hsl(var(--background) / 72%);
+	color: #4285f4;
+}
+
+.cv-scholar-card-header > div:last-child {
+	display: flex;
+	min-width: 0;
+	flex-direction: column;
+	line-height: 1.3;
+}
+
+.cv-scholar-card-header strong {
+	overflow: hidden;
+	color: hsl(var(--foreground));
+	font-size: 0.875rem;
+	font-weight: 500;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.cv-scholar-card-header span {
+	color: hsl(var(--muted-foreground));
+	font-family: var(--font-maple-mono), ui-monospace, monospace;
+	font-size: 0.6875rem;
+	letter-spacing: 0.02em;
+}
+
+.cv-scholar-card-profile {
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+	margin: 0.75rem 0 0 0.35rem;
+	border: 1px solid hsl(var(--border));
+	border-radius: 2px;
+	padding: 0.5rem;
+	background: hsl(var(--background) / 45%);
+}
+
+.cv-scholar-card-profile span {
+	color: hsl(var(--foreground));
+	font-size: 0.75rem;
+	font-weight: 500;
+	line-height: 1.35;
+}
+
+.cv-scholar-card-profile small {
+	color: hsl(var(--muted-foreground));
+	font-family: var(--font-maple-mono), ui-monospace, monospace;
+	font-size: 0.625rem;
+	letter-spacing: 0.01em;
+	line-height: 1.4;
+}
+
+.cv-scholar-card-metrics {
+	display: grid;
+	grid-template-columns: 4.5rem minmax(0, 1fr);
+	gap: 0.75rem;
+	margin: 0.75rem 0 0 0.35rem;
+}
+
+.cv-scholar-citation-chart {
+	display: flex;
+	height: 3.25rem;
+	align-items: end;
+	justify-content: center;
+	gap: 0.55rem;
+	border-bottom: 1px solid hsl(var(--border));
+	padding: 0 0.2rem 0.9rem;
+}
+
+.cv-scholar-citation-chart > span {
+	position: relative;
+	display: flex;
+	width: 0.65rem;
+	height: 100%;
+	align-items: end;
+	justify-content: center;
+}
+
+.cv-scholar-citation-chart i {
+	display: block;
+	width: 0.45rem;
+	border-radius: 1px 1px 0 0;
+	background: #4285f4;
+	opacity: 0.75;
+}
+
+.cv-scholar-citation-chart small {
+	position: absolute;
+	top: calc(100% + 0.2rem);
+	left: 50%;
+	color: hsl(var(--muted-foreground));
+	font-family: var(--font-maple-mono), ui-monospace, monospace;
+	font-size: 0.45rem;
+	line-height: 1;
+	translate: -50% 0;
+}
+
+.cv-scholar-card-metrics > div:last-child {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 0.2rem;
+	color: hsl(var(--muted-foreground));
+	font-family: var(--font-maple-mono), ui-monospace, monospace;
+	font-size: 0.625rem;
+	letter-spacing: 0.02em;
+}
+
+.cv-scholar-card-metrics span {
+	display: flex;
+	justify-content: space-between;
+	gap: 0.5rem;
+}
+
+.cv-scholar-card-metrics strong {
+	color: hsl(var(--foreground));
+	font-weight: 500;
+}
+
+.cv-scholar-card-footer {
+	margin-left: 0.35rem;
+}
+
+.cv-contact-card.cv-contact-card-link {
+	padding: 0.625rem 0.75rem;
+}
+
+.cv-link-preview-site {
+	display: flex;
+	align-items: center;
+	gap: 0.375rem;
+	color: hsl(var(--muted-foreground));
+	font-family: var(--font-maple-mono), ui-monospace, monospace;
+	font-size: 0.75rem;
+	letter-spacing: 0.02em;
+}
+
+.cv-link-preview-card > strong {
+	display: block;
+	margin-top: 0.375rem;
+	color: hsl(var(--foreground));
+	font-size: 0.875rem;
+	font-weight: 500;
+	line-height: 1.4;
+}
+
+.cv-link-preview-card > p {
+	display: -webkit-box;
+	margin-top: 0.25rem;
+	overflow: hidden;
+	color: hsl(var(--muted-foreground));
+	font-size: 0.875rem;
+	line-height: 1.5;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+}
+
 /* Refined badges with Apple aesthetics */
 .cv-badge {
 	@apply inline-flex items-center px-2 py-1 bg-muted/60 text-muted-foreground text-sm rounded-full font-medium;
@@ -563,7 +1149,7 @@ html[lang|="ko"] .cv-locale-serif {
 }
 
 .cv-ruby rt {
-	@apply text-muted-foreground leading-none font-medium;
+	@apply text-foreground/90 leading-none font-medium;
 	font-size: 0.32em;
 	letter-spacing: 0.02em;
 	font-weight: 500;

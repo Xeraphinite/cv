@@ -23,6 +23,9 @@
 - In English locale hero, show the original-script name first and the English name beneath when both exist.
 
 ## Structured Content Rules
+- Education entries support an optional `supervisor` field, rendered with the localized supervisor label.
+- Publication entries support `image` / `image_alt` and comma-separated `metadata`; from the `sm` breakpoint, render publication highlights as large rounded thumbnails at the left, sized to roughly match the item height. Hide them on smaller screens and keep locale-specific `imageAlt` text in localized overrides.
+- Publication metadata keeps quartile and impact factor values structured while preserving other labels such as conference rank, presentation type, and acceptance rate.
 - Skills `items` support string form or object form with `text`/`name`, optional `icon`, `url`, `code`, and `description`.
 - Main Skills category order is `Languages` -> `Programming Languages` -> `DevOps` -> `AI Engineering` -> `Web Dev & Design` -> `Backend Development`; `Misc` renders as a separate bottom section.
 - News data lives under `[news.*]` with `title`, `outlet`, `date`, `summary`, and `url`, mapped to `CVData.news`.

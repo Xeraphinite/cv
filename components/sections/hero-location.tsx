@@ -1,7 +1,7 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { Icon } from "@iconify/react";
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import {
 	HoverCard,
@@ -15,8 +15,13 @@ interface HeroLocationProps {
 	locale?: string;
 }
 
-const WORKPLACE_LABEL_TEXT =
-	"State Key Lab of Manufacturing Technology & Equipment";
+const MAP_ENABLED_LOCATIONS = new Set([
+	"guangzhou, guangdong",
+	"広州・広東",
+	"광둥성 광저우",
+	"广东广州",
+	"廣州，廣東",
+]);
 const HeroLocationMap = dynamic(
 	() =>
 		import("@/components/sections/hero-location-map").then(
@@ -28,9 +33,8 @@ const HeroLocationMap = dynamic(
 export function HeroLocation({ location, locale }: HeroLocationProps) {
 	const serifFontClass = getFontClass(locale, "serif");
 	const displayLocation = location;
-	const displayWorkplaceLabelText = WORKPLACE_LABEL_TEXT;
 	const normalizedLocation = location.trim().toLowerCase();
-	const shouldShowMap = normalizedLocation === "guangzhou, guangdong";
+	const shouldShowMap = MAP_ENABLED_LOCATIONS.has(normalizedLocation);
 	const [canRenderMap, setCanRenderMap] = useState(false);
 	const [hoverOpen, setHoverOpen] = useState(false);
 
@@ -59,7 +63,9 @@ export function HeroLocation({ location, locale }: HeroLocationProps) {
 		</div>
 	);
 
-	if (!shouldShowMap) return trigger;
+	if (!shouldShowMap) {
+		return trigger;
+	}
 
 	return (
 		<HoverCard
@@ -72,28 +78,28 @@ export function HeroLocation({ location, locale }: HeroLocationProps) {
 			<HoverCardContent
 				align="start"
 				side="top"
-				className="w-[22rem] overflow-hidden rounded-2xl p-0"
+				sideOffset={10}
+				collisionPadding={16}
+				className="w-72 overflow-hidden rounded-[2px] p-0"
 			>
 				{canRenderMap && hoverOpen ? (
-					<HeroLocationMap workplaceLabel={displayWorkplaceLabelText} />
+					<HeroLocationMap locationLabel={displayLocation} />
 				) : (
-					<div className="rounded-md border border-border/60 bg-popover p-3">
-						<div className="flex items-center gap-4">
-							<div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#9f7a63]">
-								<Icon
-									icon="mingcute:mortarboard-fill"
-									className="h-6 w-6 text-white"
-								/>
-							</div>
-							<div>
-								<p className="mb-1 text-foreground text-xl leading-none">
-									学校
-								</p>
-								<p className="text-base text-muted-foreground leading-none">
-									Guangdong
-								</p>
-							</div>
+					<div className="flex h-20 items-center gap-3 bg-popover px-3 py-2">
+						<div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#9f7a63]">
+							<Icon
+								icon="mingcute:canton-tower-fill"
+								className="h-4 w-4 text-white"
+							/>
 						</div>
+						<p
+							className={cn(
+								serifFontClass,
+								"min-w-0 break-words text-foreground text-sm leading-snug",
+							)}
+						>
+							{displayLocation}
+						</p>
 					</div>
 				)}
 			</HoverCardContent>

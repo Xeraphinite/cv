@@ -8,11 +8,14 @@ en_name = "Keyou (Key) Zheng"
 aliases = ["Zheng K."]
 location_label = "Guangzhou, Guangdong"
 show_icons = false
-summary = "Self-motivated MEng graduate specializing in Large Language Models and AI-driven design automation. Research expertise in Code-CAD generation, agentic workflows, and human-in-the-loop systems for industrial applications. Proven track record in deep learning, full-stack development, and DevOps. Seeking PhD opportunities to advance AI-powered design and manufacturing technologies."
+position = "PhD Candidate"
+summary = "Hi! I am Keyou Zheng (郑恪悠). I am a novice researcher, a CJK language drifter, and junior design engineer. Outside of doing research and hacking, I am a rhythm game maniac. Maybe I have become a Ph.D. Candidate in Hokkaido University. I am currently working on data-efficient learning and other interesting topics."
 contacts = [
   { icon = "email", label = "`keyouzheng0915@gmail.com`", url = "mailto:keyouzheng0915@gmail.com" },
   { icon = "website", label = "`keyzh.pages.dev`", url = "https://keyzh.pages.dev" },
   { icon = "github", label = "`Xeraphinite`", url = "https://github.com/Xeraphinite" },
+  { icon = "google-scholar", label = "`Keyou Zheng`", url = "https://scholar.google.com/citations?user=agkWz8MAAAAJ" },
+  { icon = "bluesky", label = "`@lonelylight.bsky.social`", url = "https://bsky.app/profile/lonelylight.bsky.social" },
 ]
 
 [sections]
@@ -29,16 +32,24 @@ awards = "Awards"
 
 
 [education.education-1]
+institution = "Hokkaido University · Laboratory of Media Dynamics (LMD)"
+degree = "Information Science, PhD"
+date = "Apr 2027 - Apr 2030 (Expected)"
+details = [
+  "Incoming doctoral student researching data-efficient learning and AI-driven design automation.",
+]
+
+[education.education-2]
 institution = "Guangdong University of Technology"
 degree = "Mechanical Engineering, MEng."
-date = "Sep 2023 - Jun 2026 (Expected)"
+date = "Sep 2023 - Jun 2026"
 details = [
-  "*GPA:* 3.62/4.0 (Top 2.5%), Supervised by Prof. #smallcaps(\"Jiewu Leng\");;",
-  "*Dissertation:* _Verifier-Driven Code-based Parametric CAD Generation with Large Language Models Agent_ (Ongoing).",
+  "*GPA:* 3.62/4.0 (Top 2.5%), supervised by Prof. #smallcaps(\"Jiewu Leng\");",
+  "*Dissertation:* _A Verifier-Driven LLM Agent for Code-based Parametric CAD Generation_.",
 ]
 
 # Github: #link-with-icon(icon: github-line-icon, url:\"https://github.com/Xeraphinite/Mario-RL\", text:`Mario-RL`)
-[education.education-2]
+[education.education-3]
 institution = "Guangdong University of Finance and Economics"
 degree = "Computer Science, BEng."
 date = "Sep 2019 - Jun 2023"
@@ -55,14 +66,14 @@ role = "Leader"
 org = "State Key Lab of Manufacturing Technology & Equipment"
 location = "Guangzhou, Guangdong"
 start = "Aug 2025"
-end = "Present"
+end = "May 2026"
 summary = "Built a verifiable benchmark and an LLM agent for controllable code-based CAD generation under executable constraints."
 details = [
   "*Agent Infra*: Built a _multi-language, containerized code execution sandbox_ with pinned toolchains and reproducible runs. Designed a _horizontally scalable_ backend which captures multiple agent trajectories and failures for large-scale experiment observability. Also built a _lightweight web playground_ for fast debugging and artifact generation.",
   "*Benchmark Construction*: Built a large-scale benchmark from a 200k human CAD code corpus collected from public repos and CAD communities. Filtered with _deterministic and heuristic rules_ (e.g., fuzzy deduplication), and an LLM-based pipeline to _reduce data contamination_ and _control task difficulty_. Produced 10k single-part tasks and 1.7k assembly tasks with golden reference workspaces and executable tests.",
   "*Agent Design*: Designed _architecture_ for LLMs to generate or edit CAD programs through self-testing and self-repairing. Different from prior methods that only work in a single file, the agent could use specific tools (e.g., `spec`, `inspect`, `verify`) in multi-file workspaces for assemblies, guiding fixes in a closed loop.",
   "*Evaluation and Results*: Used executable tests as the primary measure to calculate constraint satisfaction. On assembly tasks, our method achieved 54.2% pass rate, 41.9% all-tests success, and 2.4% invalid outputs with competitive geometry scores, outperforming baselines on constraint satisfaction while keeping geometry fidelity.",
-  "*Outcome*: One paper is under review at _43rd International Conference on Machine Learning_ (*ICML 2026*).",
+  "*Outcome*: First-author paper _SPADA_ was accepted as a poster at the _43rd International Conference on Machine Learning_ (*ICML 2026*).",
 ]
 
 [experience.exp-2]
@@ -96,6 +107,18 @@ details = [
 
 
 [publications.publication-1]
+type = "conference"
+title = "SPADA: A Verifiable Test-Driven Agent for Controllable Parametric CAD Assembly Generation"
+venue = "The Forty-Third International Conference on Machine Learning (ICML 2026)"
+published = "2026"
+metadata = "CCF-A, Poster, Acceptance Rate: 26.6%"
+pdf = "https://openreview.net/forum?id=hnV1ku7cd0"
+image = "/images/publications/spada-highlight.webp"
+image_alt = "SPADA's verifiable compile-test-repair workflow for parametric CAD assembly generation"
+authors = ["Zheng K.", "Su X.", "Leng J.*"]
+tldr = ""
+
+[publications.publication-2]
 type = "journal"
 title = "Towards Agentic Smart Design: An Industrial Large Model-driven Human-in-the-loop Agentic Workflow for Geometric Modelling"
 venue = "Applied Soft Computing"
@@ -103,10 +126,12 @@ published = "2025"
 metadata = "JCR Q1, IF: 6.6"
 DOI = "10.1016/j.asoc.2025.113920"
 pdf = "https://www.sciencedirect.com/science/article/pii/S1568494625012335"
+image = "/images/publications/agentic-smart-design-highlight.webp"
+image_alt = "Human-in-the-loop agentic workflow for geometric modelling"
 authors = ["Zheng K.", "Zhong Y.", "Su X.", "Leng J.*", "Liu Q.", "Chen X"]
 tldr = ""
 
-[publications.publication-2]
+[publications.publication-3]
 type = "journal"
 title = "AIGC-empowered Smart Manufacturing: Prospects and Challenges"
 venue = "Robotics and Computer-Integrated Manufacturing"
@@ -114,6 +139,8 @@ published = "2026"
 metadata = "JCR Q1, IF: 11.4"
 DOI = "10.1016/j.rcim.2025.103076"
 pdf = "https://www.sciencedirect.com/science/article/pii/S0736584525001309"
+image = "/images/publications/aigc-smart-manufacturing-highlight.webp"
+image_alt = "Search and review workflow for AIGC research in smart manufacturing"
 authors = [
   "Leng J.",
   "Zheng K.",
@@ -128,20 +155,34 @@ tldr = ""
 
 
 [news.news-1]
+title = "Graduated from Guangdong University of Technology"
+outlet = "Guangdong University of Technology"
+date = "2026.6"
+summary = "I have graduated with an MEng and will pursue a PhD in Hokkaido University! See you in Sapporo!"
+url = "https://www-lmd.ist.hokudai.ac.jp/"
+
+[news.news-2]
+title = "SPADA accepted at ICML 2026"
+outlet = "The Forty-Third International Conference on Machine Learning"
+date = "2026.5"
+summary = "Our paper [SPADA](https://openreview.net/forum?id=hnV1ku7cd0) was accepted as a poster at ICML 2026 (Acceptance Rate: 26.6%)!"
+url = "https://openreview.net/forum?id=hnV1ku7cd0"
+
+[news.news-3]
 title = "Awarded National Scholarship"
 outlet = "Ministry of Education of the People's Republic of China"
 date = "2025.12"
 summary = "I was delighted to receive the National Scholarship (~Top 1.5%)!"
 url = ""
 
-[news.news-2]
+[news.news-4]
 title = "Applied Soft Computing paper published"
 outlet = "Applied Soft Computing"
 date = "2025.9"
 summary = "One paper was published in [Applied Soft Computing](https://www.sciencedirect.com/science/article/pii/S1568494625012335)!"
 url = ""
 
-[news.news-3]
+[news.news-5]
 title = "RCIM paper accepted and indexed"
 outlet = "Robotics and Computer-Integrated Manufacturing"
 date = "2025.6"

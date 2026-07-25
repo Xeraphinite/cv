@@ -11,6 +11,11 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+	HoverCard,
+	HoverCardContent,
+	HoverCardTrigger,
+} from "@/components/ui/hover-card";
 import { HeroLocation } from "@/components/sections/hero-location";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import {
@@ -19,6 +24,7 @@ import {
 	toObfuscatedMailtoHref,
 } from "@/lib/email-obfuscation";
 import { getFontClass, getTypographyClasses } from "@/lib/utils";
+import type { SocialProfileData } from "@/lib/types/cv";
 
 const containsHanCharacters = (value: string) => /\p{Script=Han}/u.test(value);
 
@@ -49,6 +55,7 @@ interface HeroSectionProps {
 		};
 	};
 	locale?: string;
+	socialProfiles?: SocialProfileData;
 }
 
 const socialPlatforms = [
@@ -58,6 +65,7 @@ const socialPlatforms = [
 		iconFill: "mingcute:mail-fill",
 		getHref: (value: string) => toObfuscatedMailtoHref(value),
 		getLabel: (value: string) => value,
+		title: "Email",
 		external: false,
 	},
 	{
@@ -66,6 +74,7 @@ const socialPlatforms = [
 		iconFill: "mingcute:github-fill",
 		getHref: (value: string) => value,
 		getLabel: (value: string) => value.split("/").pop() || "GitHub",
+		title: "GitHub",
 		external: true,
 	},
 	{
@@ -74,6 +83,7 @@ const socialPlatforms = [
 		iconFill: "mingcute:wechat-fill",
 		getHref: (_value: string) => "#",
 		getLabel: (value: string) => value,
+		title: "WeChat",
 		external: false,
 	},
 	{
@@ -88,6 +98,7 @@ const socialPlatforms = [
 				return value.replace(/^https?:\/\/(www\.)?/, "");
 			}
 		},
+		title: "Website",
 		external: true,
 	},
 	{
@@ -95,7 +106,8 @@ const socialPlatforms = [
 		iconLine: "academicons:google-scholar",
 		iconFill: "academicons:google-scholar",
 		getHref: (value: string) => value,
-		getLabel: (_value: string) => "Scholar",
+		getLabel: (_value: string) => "Google Scholar",
+		title: "Google Scholar",
 		external: true,
 	},
 	{
@@ -104,6 +116,7 @@ const socialPlatforms = [
 		iconFill: "academicons:orcid",
 		getHref: (value: string) => value,
 		getLabel: (_value: string) => "ORCID",
+		title: "ORCID",
 		external: true,
 	},
 	{
@@ -111,10 +124,13 @@ const socialPlatforms = [
 		iconLine: "mingcute:bluesky-social-line",
 		iconFill: "mingcute:bluesky-social-fill",
 		getHref: (value: string) => value,
-		getLabel: (_value: string) => "Bsky",
+		getLabel: (_value: string) => "Bluesky",
+		title: "Bluesky",
 		external: true,
 	},
 ] as const;
+
+type SocialPlatformKey = (typeof socialPlatforms)[number]["key"];
 
 function HoverTip({ children, tip }: { children: ReactNode; tip: string }) {
 	return (
@@ -138,10 +154,308 @@ function ObfuscatedEmailLabel({ email }: { email: string }) {
 	return <>{decoded || "\u00a0"}</>;
 }
 
-export function HeroSection({ data, locale }: HeroSectionProps) {
+interface ContactHoverCardProps {
+	children: ReactNode;
+	platform: SocialPlatformKey;
+	icon: string;
+	title: string;
+	label: string;
+	rawValue: string;
+	action: string;
+	external: boolean;
+	avatar: string;
+	profileName: string;
+	position?: string;
+	socialProfiles?: SocialProfileData;
+}
+
+function ContactCardArrow({ external }: { external: boolean }) {
+	return (
+		<Icon
+			icon={
+				external ? "mingcute:arrow-right-up-fill" : "mingcute:arrow-right-line"
+			}
+			className="h-4 w-4 shrink-0"
+			aria-hidden="true"
+		/>
+	);
+}
+
+function ContactCardContent({
+	platform,
+	icon,
+	title,
+	label,
+	rawValue,
+	action,
+	external,
+	avatar,
+	profileName,
+	position,
+	socialProfiles,
+}: Omit<ContactHoverCardProps, "children">) {
+	if (platform === "email") {
+		return (
+			<div className="cv-email-envelope">
+				<div className="cv-email-envelope-flap" aria-hidden="true" />
+				<div className="cv-email-envelope-return">
+					<span>FROM</span>
+					{profileName}
+					<br />
+					CURRICULUM VITAE
+				</div>
+				<div className="cv-email-envelope-stamps" aria-hidden="true">
+					<div className="cv-email-envelope-stamp cv-email-envelope-stamp-portrait">
+						<Image src={avatar} alt="" width={32} height={32} />
+						<span>CV · MAIL</span>
+					</div>
+					<div className="cv-email-envelope-stamp cv-email-envelope-stamp-mark">
+						<span className="cv-email-envelope-stamp-star">✦</span>
+						<span>POST</span>
+					</div>
+				</div>
+				<div className="cv-email-envelope-postmark" aria-hidden="true" />
+				<div className="cv-email-envelope-address">
+					<span>TO</span>
+					<ObfuscatedEmailLabel email={rawValue} />
+				</div>
+			</div>
+		);
+	}
+
+	if (platform === "github") {
+		const github = socialProfiles?.github;
+		const contributionLevels = github?.contributionLevels ?? [];
+
+		return (
+			<div className="cv-github-card-body">
+				<div className="cv-github-card-heading">
+					<strong>@{github?.login || label}</strong>
+					{github?.bio ? <span>{github.bio}</span> : null}
+				</div>
+				<div className="cv-github-contributions" aria-hidden="true">
+					{Array.from({ length: 25 }, (_, columnIndex) => (
+						<span key={`github-column-${columnIndex}`}>
+							{contributionLevels
+								.slice(columnIndex * 7, columnIndex * 7 + 7)
+								.map((level, rowIndex) => (
+									<i
+										key={`github-cell-${columnIndex}-${rowIndex}`}
+										data-level={level}
+									/>
+								))}
+						</span>
+					))}
+				</div>
+				<div className="cv-github-card-footer">
+					<span>
+						<strong>{github?.contributions.toLocaleString() || "—"}</strong>
+						<span>contributions</span>
+						<span aria-hidden="true">·</span>
+						<strong>{github?.followers.toLocaleString() || "—"}</strong>
+						<span>followers</span>
+					</span>
+					<Icon icon={icon} className="h-4 w-4" aria-hidden="true" />
+				</div>
+			</div>
+		);
+	}
+
+	if (platform === "googleScholar") {
+		const scholar = socialProfiles?.googleScholar;
+		const maxYearlyCitations = Math.max(
+			1,
+			...(scholar?.citationsByYear.map(({ citations }) => citations) ?? []),
+		);
+
+		return (
+			<div className="cv-scholar-card-body">
+				<div className="cv-scholar-card-accent" aria-hidden="true" />
+				<div className="cv-scholar-card-header">
+					<div className="cv-scholar-card-icon">
+						<Icon icon={icon} className="h-5 w-5" aria-hidden="true" />
+					</div>
+					<div>
+						<strong>{scholar?.name || profileName}</strong>
+						<span>{title}</span>
+					</div>
+				</div>
+				<div className="cv-scholar-card-profile">
+					<span>{scholar?.affiliation || "Google Scholar"}</span>
+					{scholar?.interests.length ? (
+						<small>{scholar.interests.join(" · ")}</small>
+					) : null}
+				</div>
+				<div className="cv-scholar-card-metrics">
+					<div
+						className="cv-scholar-citation-chart"
+						role="img"
+						aria-label={
+							scholar?.citationsByYear
+								.map(({ year, citations }) => `${year}: ${citations} citations`)
+								.join(", ") || "Citations by year"
+						}
+					>
+						{scholar?.citationsByYear.map(({ year, citations }) => (
+							<span
+								key={year}
+								title={`${year}: ${citations} citations`}
+								aria-hidden="true"
+							>
+								<i
+									style={{
+										height: `${Math.max(8, (citations / maxYearlyCitations) * 100)}%`,
+									}}
+								/>
+								<small>{year}</small>
+							</span>
+						))}
+					</div>
+					<div>
+						<span>
+							<strong>{scholar?.citations.toLocaleString() || "—"}</strong>{" "}
+							citations
+						</span>
+						<span>
+							<strong>{scholar?.hIndex.toLocaleString() || "—"}</strong> h-index
+						</span>
+						<span>
+							<strong>{scholar?.i10Index.toLocaleString() || "—"}</strong>{" "}
+							i10-index
+						</span>
+					</div>
+				</div>
+				<div className="cv-scholar-card-footer">
+					<span>{action}</span>
+					<ContactCardArrow external={external} />
+				</div>
+			</div>
+		);
+	}
+
+	if (platform === "bluesky" || platform === "wechat") {
+		const bluesky =
+			platform === "bluesky" ? socialProfiles?.bluesky : undefined;
+		const handle =
+			platform === "bluesky"
+				? `@${bluesky?.handle || rawValue.split("/").filter(Boolean).pop() || label}`
+				: label;
+		return (
+			<div className="cv-social-card-body">
+				<div className="cv-social-card-header">
+					<Image
+						src={bluesky?.avatarUrl || avatar}
+						alt=""
+						width={40}
+						height={40}
+						unoptimized={Boolean(bluesky?.avatarUrl)}
+						onError={(event) => {
+							if (event.currentTarget.dataset.fallbackApplied) return;
+							event.currentTarget.dataset.fallbackApplied = "true";
+							event.currentTarget.srcset = "";
+							event.currentTarget.src = avatar;
+						}}
+						className="cv-social-card-avatar"
+					/>
+					<div className="cv-social-card-names">
+						<strong>{bluesky?.displayName || profileName}</strong>
+						<span>{handle}</span>
+					</div>
+					<Icon icon={icon} className="h-4 w-4" aria-hidden="true" />
+				</div>
+				{bluesky?.description ? <p>{bluesky.description}</p> : null}
+				<div className="cv-social-card-footer">
+					{typeof bluesky?.followersCount === "number" ? (
+						<span>
+							<strong>{bluesky.followersCount.toLocaleString()}</strong>{" "}
+							followers
+							{typeof bluesky.postsCount === "number"
+								? ` · ${bluesky.postsCount.toLocaleString()} posts`
+								: ""}
+						</span>
+					) : (
+						<span>{action}</span>
+					)}
+					<ContactCardArrow external={external} />
+				</div>
+			</div>
+		);
+	}
+
+	return (
+		<div className="cv-link-preview-card">
+			<div className="cv-link-preview-site">
+				<Icon icon={icon} className="h-3.5 w-3.5" aria-hidden="true" />
+				<span>{label}</span>
+			</div>
+			<strong>{profileName}</strong>
+			<p>{position || title}</p>
+			<div className="cv-link-preview-footer">
+				<span>{action}</span>
+				<ContactCardArrow external={external} />
+			</div>
+		</div>
+	);
+}
+
+function ContactHoverCard({
+	children,
+	platform,
+	...contentProps
+}: ContactHoverCardProps) {
+	const variantClass =
+		platform === "email"
+			? "cv-contact-card-email"
+			: platform === "github"
+				? "cv-contact-card-github"
+				: platform === "googleScholar"
+					? "cv-contact-card-scholar"
+					: platform === "bluesky" || platform === "wechat"
+						? "cv-contact-card-social"
+						: "cv-contact-card-link";
+
+	return (
+		<HoverCard openDelay={140} closeDelay={100}>
+			<HoverCardTrigger asChild>{children}</HoverCardTrigger>
+			<HoverCardContent
+				side="top"
+				align="start"
+				sideOffset={10}
+				collisionPadding={16}
+				className={`cv-contact-card ${variantClass}`}
+			>
+				<ContactCardContent platform={platform} {...contentProps} />
+			</HoverCardContent>
+		</HoverCard>
+	);
+}
+
+export function HeroSection({
+	data,
+	locale,
+	socialProfiles,
+}: HeroSectionProps) {
 	const t = useTranslations();
 	const typographyClasses = getTypographyClasses(locale);
 	const fontClass = getFontClass(locale);
+	const [resolvedSocialProfiles, setResolvedSocialProfiles] =
+		useState(socialProfiles);
+
+	useEffect(() => {
+		const controller = new AbortController();
+
+		fetch("/api/social-profiles", { signal: controller.signal })
+			.then((response) => {
+				if (!response.ok) throw new Error("Profile refresh failed");
+				return response.json() as Promise<SocialProfileData>;
+			})
+			.then(setResolvedSocialProfiles)
+			.catch(() => {
+				// The verified server-rendered snapshot remains visible.
+			});
+
+		return () => controller.abort();
+	}, []);
 
 	const handleDownloadPDF = () => {
 		const link = document.createElement("a");
@@ -364,6 +678,7 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 										iconFill,
 										getHref,
 										getLabel,
+										title,
 										external,
 									}) => {
 										const value = data.social[key as keyof typeof data.social];
@@ -379,10 +694,25 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 											) : (
 												label
 											);
+										const hoverCard = {
+											platform: key,
+											icon: iconFill,
+											title,
+											label,
+											rawValue: value,
+											action: getSocialHoverTip(key),
+											external,
+											avatar:
+												data.avatar ||
+												"/images/placeholders/placeholder-user.jpg",
+											profileName: data.enName || data.name,
+											position: data.position,
+											socialProfiles: resolvedSocialProfiles,
+										};
 
 										if (isClickable) {
 											return (
-												<HoverTip key={key} tip={getSocialHoverTip(key)}>
+												<ContactHoverCard key={key} {...hoverCard}>
 													<a
 														href={href}
 														target={external ? "_blank" : undefined}
@@ -401,13 +731,17 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 														</div>
 														<span className={labelClass}>{labelContent}</span>
 													</a>
-												</HoverTip>
+												</ContactHoverCard>
 											);
 										}
 
 										return (
-											<HoverTip key={key} tip={getSocialHoverTip(key)}>
-												<div className="cv-contact-link group">
+											<ContactHoverCard key={key} {...hoverCard}>
+												<span
+													className="cv-contact-link group"
+													tabIndex={0}
+													role="note"
+												>
 													<div className="relative h-4 w-4">
 														<Icon
 															icon={iconLine}
@@ -419,8 +753,8 @@ export function HeroSection({ data, locale }: HeroSectionProps) {
 														/>
 													</div>
 													<span className={labelClass}>{labelContent}</span>
-												</div>
-											</HoverTip>
+												</span>
+											</ContactHoverCard>
 										);
 									},
 								)}

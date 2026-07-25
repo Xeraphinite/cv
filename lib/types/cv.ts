@@ -15,6 +15,52 @@ export interface SocialLinks {
 	twitter?: string;
 }
 
+export interface GitHubProfileData {
+	login: string;
+	name: string;
+	bio?: string;
+	avatarUrl?: string;
+	followers: number;
+	following: number;
+	publicRepos: number;
+	contributions: number;
+	contributionLevels: number[];
+	contributionStart?: string;
+	contributionEnd?: string;
+	verifiedAt: string;
+}
+
+export interface GoogleScholarProfileData {
+	name: string;
+	affiliation: string;
+	interests: string[];
+	citations: number;
+	hIndex: number;
+	i10Index: number;
+	citationsByYear: Array<{
+		year: number;
+		citations: number;
+	}>;
+	verifiedAt: string;
+}
+
+export interface BlueskyProfileData {
+	handle: string;
+	displayName?: string;
+	description?: string;
+	avatarUrl?: string;
+	followersCount?: number;
+	followsCount?: number;
+	postsCount?: number;
+	verifiedAt: string;
+}
+
+export interface SocialProfileData {
+	github: GitHubProfileData;
+	googleScholar: GoogleScholarProfileData;
+	bluesky: BlueskyProfileData;
+}
+
 export interface Hero {
 	name: string;
 	enName?: string;
@@ -56,11 +102,14 @@ export interface PublicationItem {
 	type: string;
 	status: string;
 	indexing?: string[];
+	metadata?: string[];
 	impactFactor?: number;
 	publishedIn: string;
 	abstract?: string;
 	doi?: string;
 	url?: string;
+	image?: string;
+	imageAlt?: string;
 	highlight?: boolean;
 	involved?: boolean;
 	journal?: string;

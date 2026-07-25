@@ -27,6 +27,7 @@ type DefaultTomlCVData = {
 			institution?: string;
 			degree?: string;
 			date?: string;
+			supervisor?: string;
 			details?: string[];
 		}
 	>;
@@ -53,6 +54,8 @@ type DefaultTomlCVData = {
 			metadata?: string;
 			DOI?: string;
 			pdf?: string;
+			image?: string;
+			image_alt?: string;
 			authors?: string[];
 			tldr?: string;
 		}
@@ -128,6 +131,15 @@ function mapContactsToSocial(contacts: DefaultTomlProfile["contacts"] = []) {
 		if (icon === "wechat" && label) {
 			social.wechat = label;
 		}
+		if ((icon === "google-scholar" || icon === "scholar") && url) {
+			social.googleScholar = url;
+		}
+		if (icon === "orcid" && url) {
+			social.orcid = url;
+		}
+		if (icon === "bluesky" && url) {
+			social.bluesky = url;
+		}
 	}
 
 	return social;
@@ -169,6 +181,20 @@ function parseImpactFactor(metadata?: string): number | undefined {
 	return match ? Number.parseFloat(match[1]) : undefined;
 }
 
+function parsePublicationMetadata(metadata?: string): string[] | undefined {
+	const values = cleanText(metadata)
+		.split(",")
+		.map((value) => value.trim())
+		.filter(
+			(value) =>
+				value &&
+				!/^JCR\s*Q[1-4]$/i.test(value) &&
+				!/^IF:\s*[0-9]+(?:\.[0-9]+)?$/i.test(value),
+		);
+
+	return values.length > 0 ? values : undefined;
+}
+
 function parseDefaultTomlCVData(source: string): LlmsRelevantCVData {
 	const parsed = parseToml(source) as DefaultTomlCVData;
 	const profile = parsed.profile ?? {};
@@ -196,6 +222,7 @@ function parseDefaultTomlCVData(source: string): LlmsRelevantCVData {
 				degree,
 				startDate,
 				endDate,
+				supervisor: cleanText(item.supervisor),
 				summary: highlights.join(" "),
 				highlights,
 			};
@@ -218,11 +245,14 @@ function parseDefaultTomlCVData(source: string): LlmsRelevantCVData {
 				type: mapPublicationType(item.type),
 				status: mapPublicationStatus(item.published, item.DOI),
 				indexing: parseIndexing(metadata),
+				metadata: parsePublicationMetadata(metadata),
 				impactFactor: parseImpactFactor(metadata),
 				publishedIn: cleanText(item.venue),
 				abstract: cleanText(item.tldr),
 				doi: cleanText(item.DOI),
 				url: cleanText(item.pdf),
+				image: cleanText(item.image),
+				imageAlt: cleanText(item.image_alt),
 			};
 		}),
 	};

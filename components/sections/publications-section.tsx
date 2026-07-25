@@ -1,6 +1,7 @@
 "use client";
 
 import { Icon } from "@iconify/react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { formatToYearMonth } from "@/lib/date-format";
@@ -20,11 +21,14 @@ interface Publication {
 	doi?: string;
 	url?: string;
 	indexing?: string[];
+	metadata?: string[];
 	impactFactor?: number;
 	abstract?: string;
 	pages?: string;
 	volume?: string;
 	issue?: string;
+	image?: string;
+	imageAlt?: string;
 }
 
 interface PublicationsSectionProps {
@@ -128,89 +132,123 @@ export function PublicationsSection({
 						key={`${publication.title}-${index}`}
 						className="cv-body text-foreground leading-relaxed"
 					>
-						<div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-3 md:gap-y-1">
-							<span className="cv-locale-sans order-2 justify-self-end whitespace-nowrap text-right font-bold text-base text-foreground/80">
-								{formatToYearMonth(publication.year)}
-							</span>
+						<div
+							className={
+								publication.image
+									? "sm:grid sm:grid-cols-[12rem_minmax(0,1fr)] sm:items-stretch sm:gap-4"
+									: ""
+							}
+						>
+							{publication.image ? (
+								<div className="relative hidden h-[calc(100%-0.5rem)] self-center overflow-hidden rounded-lg border border-border/70 bg-white sm:block">
+									<Image
+										src={publication.image}
+										alt={publication.imageAlt || publication.title}
+										fill
+										sizes="192px"
+										className="object-cover"
+									/>
+								</div>
+							) : null}
 
-							<div className="order-1 min-w-0 [&>*:not(:last-child)]:mb-0.5">
-								<h3 className="text-lg leading-tight">
-									{publication.url &&
-									!containsMarkdownLink(publication.title) ? (
-										<a
-											href={publication.url}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="group no-underline hover:no-underline"
-										>
-											<MarkdownText
-												content={publication.title}
-												className="cv-locale-sans inline font-semibold"
-												inline
-											/>
-											<Icon
-												icon="mingcute:arrow-right-up-fill"
-												className="ml-1 inline h-3.5 w-3.5 align-[-0.08em] text-foreground/70 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-foreground"
-											/>
-										</a>
-									) : (
-										<MarkdownText content={publication.title} inline />
-									)}
-								</h3>
+							<div className="grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-3 md:gap-y-1">
+								<span className="cv-locale-sans order-2 justify-self-end whitespace-nowrap text-right font-bold text-base text-foreground/80">
+									{formatToYearMonth(publication.year)}
+								</span>
 
-								{publication.authors?.length ? (
-									<p className="text-base text-foreground/80">
-										{formatAuthors(publication.authors)}
-									</p>
-								) : null}
-
-								{(() => {
-									const { venue, details } = getPublicationMeta(publication);
-
-									if (!venue && details.length === 0) {
-										return null;
-									}
-
-									return (
-										<p className="text-base text-foreground/80">
-											{venue ? (
-												<span className="font-bold text-foreground italic">
-													{venue}
-												</span>
-											) : null}
-											{details.map((detail, detailIndex) => (
-												<span key={detail}>
-													{venue || detailIndex > 0 ? " · " : ""}
-													{detail}
-												</span>
-											))}
-										</p>
-									);
-								})()}
-
-								<div className="flex flex-wrap items-center gap-x-2 text-base text-foreground/80">
-									<span>{publication.type}</span>
-									{publication.impactFactor ? (
-										<>
-											<span>·</span>
-											<span className="font-mono">
-												IF {publication.impactFactor}
-											</span>
-										</>
-									) : null}
-									{publication.doi ? (
-										<>
-											<span>·</span>
+								<div className="order-1 min-w-0 [&>*:not(:last-child)]:mb-0.5">
+									<h3 className="text-lg leading-tight">
+										{publication.url &&
+										!containsMarkdownLink(publication.title) ? (
 											<a
-												href={`https://doi.org/${publication.doi}`}
+												href={publication.url}
 												target="_blank"
 												rel="noopener noreferrer"
-												className="font-mono no-underline hover:no-underline"
+												className="group no-underline hover:no-underline"
 											>
-												DOI
+												<MarkdownText
+													content={publication.title}
+													className="cv-locale-sans inline font-semibold"
+													inline
+												/>
+												<Icon
+													icon="mingcute:arrow-right-up-fill"
+													className="ml-1 inline h-3.5 w-3.5 align-[-0.08em] text-foreground/70 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-foreground"
+												/>
 											</a>
-										</>
+										) : (
+											<MarkdownText content={publication.title} inline />
+										)}
+									</h3>
+
+									{publication.authors?.length ? (
+										<p className="text-base text-foreground/80">
+											{formatAuthors(publication.authors)}
+										</p>
 									) : null}
+
+									{(() => {
+										const { venue, details } = getPublicationMeta(publication);
+
+										if (!venue && details.length === 0) {
+											return null;
+										}
+
+										return (
+											<p className="text-base text-foreground/80">
+												{venue ? (
+													<span className="font-bold text-foreground italic">
+														{venue}
+													</span>
+												) : null}
+												{details.map((detail, detailIndex) => (
+													<span key={detail}>
+														{venue || detailIndex > 0 ? " · " : ""}
+														{detail}
+													</span>
+												))}
+											</p>
+										);
+									})()}
+
+									<div className="flex flex-wrap items-center gap-x-2 text-base text-foreground/80">
+										<span>{publication.type}</span>
+										{publication.indexing?.map((indexing) => (
+											<span key={indexing} className="contents">
+												<span>·</span>
+												<span className="font-mono">
+													{indexing.replace("-", " ")}
+												</span>
+											</span>
+										))}
+										{publication.metadata?.map((metadata) => (
+											<span key={metadata} className="contents">
+												<span>·</span>
+												<span className="font-mono">{metadata}</span>
+											</span>
+										))}
+										{publication.impactFactor ? (
+											<>
+												<span>·</span>
+												<span className="font-mono">
+													IF {publication.impactFactor}
+												</span>
+											</>
+										) : null}
+										{publication.doi ? (
+											<>
+												<span>·</span>
+												<a
+													href={`https://doi.org/${publication.doi}`}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="font-mono no-underline hover:no-underline"
+												>
+													DOI
+												</a>
+											</>
+										) : null}
+									</div>
 								</div>
 							</div>
 						</div>

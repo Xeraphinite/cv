@@ -3,11 +3,11 @@ name = "鄭恪悠"
 enName = "Keyou (Key) Zheng"
 location = "広州・広東"
 age = ""
-position = "博士課程志願者、若手研究者、ジュニア設計エンジニア"
+position = "博士課程進学予定、AI 研究者、デザインエンジニア"
 bio = """
-こんにちは、**Keyou (Key) Zheng** です。私は大学院生であり、若手研究者であり、ジュニア設計エンジニアでもあります。現在の研究は大規模言語モデル、パラメトリック CAD、HCI の交差領域にあり、人間の設計意図を信頼可能で機械実行可能なコードへ変換することに取り組んでいます。
+こんにちは、**Keyou (Key) Zheng** です。2026 年 6 月に広東工業大学で機械工学修士号を取得しました。2027 年 4 月より北海道大学の情報科学博士課程に進学し、メディアダイナミクス研究室（LMD）で Guang Li 助教の指導を受ける予定です。
 
-大学院では、生成と検証を閉ループでつなぐエージェント型ワークフローを構築しています。CAD 環境から得られるコンパイラおよび幾何フィードバックを解釈し、表面的な正しさではなく工学的に妥当な結果へ向けてコードを反復的に修復します。
+研究は大規模言語モデル、パラメトリック CAD、HCI の交差領域にあり、人間の設計意図を信頼可能で機械実行可能なコードへ変換することに取り組んでいます。修士課程では、生成と検証を閉ループでつなぐエージェント型ワークフローを構築しました。関連する筆頭著者論文 **SPADA** は ICML 2026 のポスター論文として採択されました。
 
 学部での計算機科学の訓練により強固な技術基盤を得る一方、デザインと人間中心コンピューティングの継続的な独学を通じてツールへの考え方を磨いてきました。技術的厳密性と実用性を両立するシステムを重視しています。
 
@@ -15,15 +15,24 @@ bio = """
 """
 
 [[education]]
+institution = "北海道大学・メディアダイナミクス研究室（LMD）"
+area = "情報科学"
+degree = "博士課程"
+startDate = "2027年4月"
+endDate = "2030年4月（予定）"
+summary = "データ効率学習と AI 駆動設計自動化の研究に取り組む予定。"
+highlights = ["データ効率学習と AI 駆動設計自動化の研究に取り組む予定。"]
+
+[[education]]
 institution = "広東工業大学"
 area = "機械工学"
 degree = "工学修士"
 startDate = "2023年9月"
-endDate = "2026年6月（予定）"
-summary = "GPA: 3.62/4.0（上位2.5%）、指導教員：Jiewu Leng 教授；論文：Verifier-Driven Code-based Parametric CAD Generation with Large Language Models Agent（進行中）。"
+endDate = "2026年6月"
+summary = "GPA: 3.62/4.0（上位2.5%）、指導教員：Jiewu Leng 教授；修士論文：A Verifier-Driven LLM Agent for Code-based Parametric CAD Generation。"
 highlights = [
   "GPA: 3.62/4.0（上位2.5%）、指導教員：Jiewu Leng 教授；",
-  "論文：Verifier-Driven Code-based Parametric CAD Generation with Large Language Models Agent（進行中）。",
+  "修士論文：A Verifier-Driven LLM Agent for Code-based Parametric CAD Generation。",
 ]
 
 [[education]]
@@ -50,7 +59,7 @@ highlights = [
   "ベンチマーク構築：公開リポジトリと CAD コミュニティ由来の 20 万件 CAD コードを基に、決定論・ヒューリスティック（例：あいまい重複除去）と LLM パイプラインで汚染低減と難易度制御を実施。単体 1 万タスク、アセンブリ 1700 タスクを、golden 参照ワークスペースと実行テスト付きで整備。",
   "エージェント設計：自己テストと自己修復で CAD プログラムを生成・編集する LLM アーキテクチャを設計。単一ファイル前提の手法と異なり、アセンブリの複数ファイル環境で特定ツール（自然言語から仕様抽出する spec など）を利用し、閉ループ修正を実現。",
   "評価結果：制約満足度の主要指標として実行テストを採用。アセンブリタスクで pass rate 54.2%、all-tests success 41.9%、invalid outputs 2.4% を達成し、幾何品質を維持しつつ GPT-5 などの LLM-only/ツール系ベースラインを上回る結果。",
-  "成果：1 本を ICML 2026（43rd International Conference on Machine Learning）に投稿中。",
+  "成果：筆頭著者論文 SPADA が ICML 2026（第 43 回国際機械学習会議）のポスター論文として採択。",
 ]
 
 [[experience]]
@@ -83,10 +92,10 @@ highlights = [
 [[projects]]
 year = "2025"
 name = "コードベース CAD アセンブリ生成"
-status = "査読中"
+status = "採択"
 description = "実行可能制約下での制御可能なコードベース CAD 生成に向け、検証可能ベンチマークと LLM エージェントを構築。"
 urls = [
-  { label = "論文（ICML 2026、査読中）", url = "https://openreview.net/" },
+  { label = "論文（ICML 2026、ポスター）", url = "https://openreview.net/forum?id=hnV1ku7cd0" },
 ]
 tech = [
   { text = "vLLM", url = "https://docs.vllm.ai/", code = true },
@@ -111,6 +120,16 @@ tech = [
 ]
 
 [[publications]]
+title = "SPADA: A Verifiable Test-Driven Agent for Controllable Parametric CAD Assembly Generation"
+authors = ["Keyou Zheng", "Xuyang Su", "Jiewu Leng"]
+year = "2026"
+type = "国際会議論文"
+status = "採択"
+publishedIn = "第 43 回国際機械学習会議（ICML 2026）"
+url = "https://openreview.net/forum?id=hnV1ku7cd0"
+imageAlt = "SPADA によるパラメトリック CAD アセンブリ生成の検証可能なコンパイル・テスト・修復フロー"
+
+[[publications]]
 title = "Towards Agentic Smart Design: An Industrial Large Model-driven Human-in-the-loop Agentic Workflow for Geometric Modelling"
 authors = ["Keyou Zheng", "Yuanwei Zhong", "Xuyang Su", "Jiewu Leng", "Qiang Liu", "Xin Chen"]
 year = "2025"
@@ -121,6 +140,7 @@ impactFactor = 6.6
 publishedIn = "Applied Soft Computing"
 doi = "10.1016/j.asoc.2025.113920"
 url = "https://www.sciencedirect.com/science/article/pii/S1568494625012335"
+imageAlt = "幾何モデリングのための人間参加型エージェントワークフロー"
 
 [[publications]]
 title = "AIGC-empowered Smart Manufacturing: Prospects and Challenges"
@@ -133,6 +153,21 @@ impactFactor = 11.4
 publishedIn = "Robotics and Computer-Integrated Manufacturing"
 doi = "10.1016/j.rcim.2025.103076"
 url = "https://www.sciencedirect.com/science/article/pii/S0736584525001309"
+imageAlt = "スマート製造における AIGC 研究の検索・レビュー手順"
+
+[[news]]
+title = "広東工業大学を修了"
+outlet = "広東工業大学"
+date = "2026.6"
+summary = "機械工学修士号を取得し、2027 年 4 月より Guang Li 助教の指導のもと、北海道大学メディアダイナミクス研究室で博士課程を開始します。"
+url = "https://www-lmd.ist.hokudai.ac.jp/"
+
+[[news]]
+title = "SPADA が ICML 2026 に採択"
+outlet = "第 43 回国際機械学習会議"
+date = "2026.5"
+summary = "筆頭著者論文 [SPADA](https://openreview.net/forum?id=hnV1ku7cd0) が ICML 2026 のポスター論文として採択されました。"
+url = "https://openreview.net/forum?id=hnV1ku7cd0"
 
 [[news]]
 title = "国家奨学金を受賞"

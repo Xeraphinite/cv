@@ -57,7 +57,10 @@
 - On `lg`, keep the first-column sticky panel near full viewport height with minimal outer margin and no extra gap between hero content and footer.
 - Hero card content stays vertically stacked: avatar, name, bio, contacts.
 - Use `pt-4` for first-column top spacing and `pb-4` for compact footer bottom spacing.
-- Hero contacts should be one item per line, wrap values instead of truncating, and use top-positioned shadcn tooltips.
+- Hero contacts should be one item per line and wrap values instead of truncating.
+- Hero contact hover cards should use service-specific presentations instead of one shared card style: an airmail envelope for email, a contribution grid for GitHub, a profile summary for social accounts, a metadata preview for personal websites, and an independent academic profile card for Google Scholar. Keep non-contact metadata tooltips top-positioned.
+- Anchor contact cards above and start-aligned with their trigger so they remain inside the sidebar footprint instead of covering the adjacent content column. Preserve viewport collision padding so the card can flip when space is constrained.
+- Service profile cards must render data returned by the real public profile or a dated, verified snapshot of that profile. Never generate placeholder activity, citation trends, follower counts, biographies, or other profile facts.
 - Do not add extra left inset for contact rows.
 - Use margin-based spacing between hero contact rows.
 - Contact hover backgrounds should wrap only the actual content.
@@ -65,7 +68,7 @@
 - Hero location uses a dedicated `HeroLocation` component.
 - In `HeroLocation`, prefer generic identifier names for map constants and labels.
 - Do not transform hero location display strings by prefix replacement; render source text directly.
-- For the hero location hover map, keep the marker high-contrast, keep wheel zoom enabled, hide attribution text, and position the marker near the top-right-center by tuning camera settings.
+- For the hero location hover map, keep the card within the sidebar footprint and show the map as the sole preview instead of repeating place or region labels in overlays. Keep the marker high-contrast, keep wheel zoom enabled, hide attribution text, and position the marker near the top-right-center by tuning camera settings.
 - Build TOC items from rendered `main section[id]` headings instead of hardcoding them.
 - TOC trigger should show text and chevron only.
 - Do not render a sticky/mobile TOC header in locale layouts.

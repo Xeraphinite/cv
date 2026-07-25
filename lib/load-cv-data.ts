@@ -84,6 +84,7 @@ type TomlCVData = {
 			institution?: string;
 			degree?: string;
 			date?: string;
+			supervisor?: string;
 			details?: string[];
 		}
 	>;
@@ -110,6 +111,8 @@ type TomlCVData = {
 			metadata?: string;
 			DOI?: string;
 			pdf?: string;
+			image?: string;
+			image_alt?: string;
 			authors?: string[];
 			tldr?: string;
 		}
@@ -439,6 +442,7 @@ function mapTomlToCVData(source: TomlCVData): CVData {
 				degree,
 				startDate,
 				endDate,
+				supervisor: cleanText(item.supervisor ?? ""),
 				summary: details.join(" "),
 				highlights: details,
 			};
@@ -471,11 +475,14 @@ function mapTomlToCVData(source: TomlCVData): CVData {
 				type: mapPublicationType(item.type),
 				status: mapPublicationStatus(item.published, item.DOI),
 				indexing: parseIndexing(metadata),
+				metadata: parsePublicationMetadata(metadata),
 				impactFactor,
 				publishedIn: cleanText(item.venue ?? ""),
 				abstract: cleanText(item.tldr ?? ""),
 				doi: cleanText(item.DOI ?? ""),
 				url: cleanText(item.pdf ?? ""),
+				image: cleanText(item.image ?? ""),
+				imageAlt: cleanText(item.image_alt ?? ""),
 			};
 		}),
 		projects: projectEntries.flatMap((item) => {
@@ -715,6 +722,15 @@ function mapContactsToSocial(
 		if (icon === "wechat" && label) {
 			social.wechat = label;
 		}
+		if ((icon === "google-scholar" || icon === "scholar") && url) {
+			social.googleScholar = url;
+		}
+		if (icon === "orcid" && url) {
+			social.orcid = url;
+		}
+		if (icon === "bluesky" && url) {
+			social.bluesky = url;
+		}
 	}
 	return social;
 }
@@ -749,6 +765,20 @@ function parseIndexing(metadata: string): string[] | undefined {
 	if (/JCR\s*Q2/i.test(metadata)) values.push("JCR-Q2");
 	if (/JCR\s*Q3/i.test(metadata)) values.push("JCR-Q3");
 	if (/JCR\s*Q4/i.test(metadata)) values.push("JCR-Q4");
+	return values.length > 0 ? values : undefined;
+}
+
+function parsePublicationMetadata(metadata: string): string[] | undefined {
+	const values = metadata
+		.split(",")
+		.map((value) => value.trim())
+		.filter(
+			(value) =>
+				value &&
+				!/^JCR\s*Q[1-4]$/i.test(value) &&
+				!/^IF:\s*[0-9]+(?:\.[0-9]+)?$/i.test(value),
+		);
+
 	return values.length > 0 ? values : undefined;
 }
 
