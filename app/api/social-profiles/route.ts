@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getSocialProfileData } from "@/lib/social-profile-data";
 
+export const runtime = "edge";
 export const dynamic = "force-dynamic";
 
 export async function GET() {

@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
-		"build": "next build",
+		"build": "next build --webpack",
 		"start": "next start",
 		"prepare": "husky",
 		"lint": "pnpm biome lint --only=nursery/useSortedClasses --only=source/noDuplicateClasses app components lib data messages scripts i18n.ts middleware.ts next.config.mjs tailwind.config.ts postcss.config.mjs",
