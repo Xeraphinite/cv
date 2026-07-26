@@ -8,7 +8,7 @@
 - Footer body text should stay at `text-sm` unless explicitly requested otherwise.
 - Footer should include `© yyyy <owner>. All rights reserved.` on a single line.
 - Render the footer in exactly three lines:
-- Line 1: last update time + visitor numbers + locale/theme toggles
+- Line 1: last update time + locale/theme toggles
 - Line 2: `LLMs.txt` + Accessibility + Privacy
 - Line 3: copyright
 - In footer line 2, each item should have a leading mingcute icon.
@@ -28,9 +28,9 @@
 - Privacy content must explicitly state that Umami is used for visitor analytics.
 
 ## Umami / Artifacts
-- Footer visitor counts must use real Umami aggregated stats from `app/api/umami/visitors/route.ts`.
-- Footer online-now counts should come from the same route via the website `active` API.
-- Keep Umami count-fetching/rendering centralized in `components/layout/umami-indicators.tsx`.
+- Do not render visitor or online-now counters in the footer while Umami Cloud API access requires a paid plan.
+- Keep the reusable counter UI in `components/layout/umami-indicators.tsx` and its data route in `app/api/umami/visitors/route.ts` for a future analytics provider.
+- If counters are restored, keep count-fetching/rendering centralized in `components/layout/umami-indicators.tsx`.
 - Treat total visitors and online-now availability independently in footer UI.
 - Use `UMAMI_API_KEY` and `UMAMI_WEBSITE_ID` server env vars; `UMAMI_API_BASE_URL` is optional and defaults to `https://api.umami.is/v1`.
 - Save Playwright screenshots and artifacts under `output/playwright/`.

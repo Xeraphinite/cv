@@ -21,7 +21,6 @@ import {
 } from "@/components/ui/tooltip";
 import { locales, localeLabels } from "@/i18n";
 import { createLocalizedPath, getLocaleFromPathname } from "@/lib/i18n-utils";
-import { UmamiIndicators } from "./umami-indicators";
 
 interface CVFooterProps {
 	className?: string;
@@ -47,7 +46,6 @@ export function CVFooter({
 	const t = useTranslations();
 	const pathname = usePathname();
 	const currentLocale = getLocaleFromPathname(pathname);
-	const umamiShareUrl = process.env.NEXT_PUBLIC_UMAMI_SHARE_URL;
 	const [now, setNow] = useState(() => Date.now());
 
 	const { relativeUpdated, updateToneClass } = useMemo(() => {
@@ -151,11 +149,6 @@ export function CVFooter({
 								<span>{t("tooltips.footer.lastUpdated")}</span>
 							</TooltipContent>
 						</Tooltip>
-
-						<UmamiIndicators
-							locale={currentLocale || "en"}
-							shareUrl={umamiShareUrl}
-						/>
 
 						{showLocaleThemeControls && (
 							<>
