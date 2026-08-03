@@ -22,7 +22,7 @@ const config = {
 		extend: {
 			fontFamily: {
 				// Base typography defaults
-				sans: ["IBM Plex Sans", "system-ui", "sans-serif"],
+				sans: ["var(--font-ibm-plex-sans)", "system-ui", "sans-serif"],
 				serif: ["Spectral", "Noto Serif SC", "serif"],
 				mono: [
 					"Maple Mono",
@@ -40,7 +40,8 @@ const config = {
 
 				// Chinese typography - following W3C CLREQ guidelines
 				"zh-sans": [
-					"MiSans",
+					"var(--font-ibm-plex-sans)",
+					"var(--font-frex-sans-gb)",
 					"-apple-system",
 					"BlinkMacSystemFont",
 					"Noto Sans SC",
@@ -66,7 +67,8 @@ const config = {
 
 				// Traditional Chinese
 				"zh-hant-sans": [
-					"MiSansTC",
+					"var(--font-ibm-plex-sans)",
+					"IBM Plex Sans TC",
 					"-apple-system",
 					"BlinkMacSystemFont",
 					"Noto Sans TC",
@@ -96,7 +98,8 @@ const config = {
 
 				// Japanese typography - following W3C JLREQ guidelines
 				"ja-sans": [
-					"MiSans",
+					"var(--font-ibm-plex-sans)",
+					"var(--font-ibm-plex-sans-jp)",
 					"-apple-system",
 					"BlinkMacSystemFont",
 					"Noto Sans JP",
@@ -126,7 +129,8 @@ const config = {
 
 				// Korean typography - following W3C KLREQ guidelines
 				"ko-sans": [
-					"MiSans",
+					"var(--font-ibm-plex-sans)",
+					"IBM Plex Sans KR",
 					"-apple-system",
 					"BlinkMacSystemFont",
 					"Noto Sans KR",

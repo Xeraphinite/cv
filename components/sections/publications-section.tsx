@@ -1,9 +1,9 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { MarkdownText } from "@/components/ui/markdown-text";
+import { PaperTextureImage } from "@/components/ui/paper-texture-image";
 import { formatToYearMonth } from "@/lib/date-format";
 import { createOwnerNameMatcher } from "./author-name-utils";
 
@@ -140,15 +140,12 @@ export function PublicationsSection({
 							}
 						>
 							{publication.image ? (
-								<div className="relative hidden h-[calc(100%-0.5rem)] self-center overflow-hidden rounded-lg border border-border/70 bg-white sm:block">
-									<Image
-										src={publication.image}
-										alt={publication.imageAlt || publication.title}
-										fill
-										sizes="192px"
-										className="object-cover"
-									/>
-								</div>
+								<PaperTextureImage
+									src={publication.image}
+									alt={publication.imageAlt || publication.title}
+									sizes="192px"
+									className="relative hidden h-[calc(100%-0.5rem)] self-center rounded-lg border border-border/70 sm:block"
+								/>
 							) : null}
 
 							<div className="grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-3 md:gap-y-1">

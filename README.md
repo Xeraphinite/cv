@@ -31,21 +31,6 @@ pnpm cf:build
 pnpm cf:deploy
 ```
 
-## Umami Env Vars
-
-Required:
-
-```bash
-UMAMI_API_KEY=...
-UMAMI_WEBSITE_ID=...
-```
-
-Optional:
-
-```bash
-UMAMI_API_BASE_URL=https://api.umami.is/v1
-```
-
 ## Documentation
 - [Workflow](./docs/workflow.md)
 - [UI Conventions](./docs/ui-conventions.md)

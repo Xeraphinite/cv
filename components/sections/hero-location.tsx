@@ -80,7 +80,7 @@ export function HeroLocation({ location, locale }: HeroLocationProps) {
 				side="top"
 				sideOffset={10}
 				collisionPadding={16}
-				className="w-72 overflow-hidden rounded-[2px] p-0"
+				className="w-72 overflow-hidden rounded-xl p-0"
 			>
 				{canRenderMap && hoverOpen ? (
 					<HeroLocationMap locationLabel={displayLocation} />

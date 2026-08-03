@@ -106,7 +106,7 @@
 	}
 	.hero-location-map .maplibregl-canvas-container,
 	.hero-location-map .maplibregl-canvas {
-		border-radius: 1rem;
+		border-radius: 0.75rem;
 	}
 }
 
@@ -139,6 +139,24 @@
 	}
 }
 
+.cv-paper-background {
+	position: fixed;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	background: #f4f2ec;
+}
+
+.dark .cv-paper-background {
+	background: #191817;
+}
+
+@media print {
+	.cv-paper-background {
+		display: none;
+	}
+}
+
 .inline-url-link {
 	text-decoration: none;
 }
@@ -158,11 +176,287 @@
 }
 
 .inline-url-link-icon {
+	display: inline-block;
 	color: hsl(var(--muted-foreground) / 0.8);
+}
+
+.markdown-text-root {
+	overflow-wrap: break-word;
+	word-break: normal;
+	text-wrap: pretty;
+}
+
+html[lang|="zh"] .markdown-text-root,
+html[lang|="ja"] .markdown-text-root,
+html[lang|="ko"] .markdown-text-root {
+	line-break: strict;
 }
 
 .markdown-text-root .katex {
 	font-size: 1em;
+}
+
+.cv-bio-mark {
+	display: inline;
+	touch-action: manipulation;
+}
+
+.cv-bio-mark-text {
+	background-image: linear-gradient(
+		100deg,
+		#d65564,
+		#c58b24,
+		#2d9369,
+		#3e7fbd,
+		#835dbd
+	);
+	background-clip: text;
+	-webkit-background-clip: text;
+}
+
+.cv-bio-mark-icon {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	margin-left: 0.16em;
+	color: hsl(var(--foreground) / 0.8);
+	transform-origin: center;
+	vertical-align: -0.14em;
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.cv-bio-mark:hover .cv-bio-mark-text {
+		color: transparent;
+		-webkit-text-fill-color: transparent;
+	}
+}
+
+.cv-bio-mark[data-active="true"] .cv-bio-mark-text {
+	color: transparent;
+	-webkit-text-fill-color: transparent;
+}
+
+.cv-bio-mark--research:is(:hover, [data-active="true"]) .cv-bio-mark-icon {
+	animation: cv-bio-mark-research 620ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cv-bio-mark--drift:is(:hover, [data-active="true"]) .cv-bio-mark-icon {
+	animation: cv-bio-mark-drift 700ms ease-in-out;
+}
+
+.cv-bio-mark--craft:is(:hover, [data-active="true"]) .cv-bio-mark-icon {
+	animation: cv-bio-mark-craft 580ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cv-bio-mark--beat:is(:hover, [data-active="true"]) .cv-bio-mark-icon {
+	animation: cv-bio-mark-beat 640ms ease-out;
+}
+
+.cv-bio-mark--graduate:is(:hover, [data-active="true"]) .cv-bio-mark-icon {
+	animation: cv-bio-mark-graduate 660ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes cv-bio-mark-research {
+	0%,
+	100% {
+		transform: translateY(0) rotate(0deg) scale(1);
+	}
+	38% {
+		transform: translateY(-0.2em) rotate(-9deg) scale(1.1);
+	}
+}
+
+@keyframes cv-bio-mark-drift {
+	0%,
+	100% {
+		transform: translateX(0) rotate(0deg);
+	}
+	30% {
+		transform: translateX(-0.16em) rotate(-8deg);
+	}
+	68% {
+		transform: translateX(0.16em) rotate(7deg);
+	}
+}
+
+@keyframes cv-bio-mark-craft {
+	0%,
+	100% {
+		transform: rotate(0deg) scale(1);
+	}
+	32% {
+		transform: rotate(-13deg) scale(1.08);
+	}
+	65% {
+		transform: rotate(9deg) scale(1.04);
+	}
+}
+
+@keyframes cv-bio-mark-beat {
+	0%,
+	100% {
+		transform: translateY(0) scale(1);
+	}
+	22% {
+		transform: translateY(-0.12em) scale(1.16);
+	}
+	48% {
+		transform: translateY(0) scale(0.96);
+	}
+	72% {
+		transform: translateY(-0.08em) scale(1.1);
+	}
+}
+
+@keyframes cv-bio-mark-graduate {
+	0%,
+	100% {
+		transform: translateY(0) rotate(0deg);
+	}
+	40% {
+		transform: translateY(-0.28em) rotate(-10deg);
+	}
+	72% {
+		transform: translateY(-0.05em) rotate(6deg);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cv-bio-mark:is(:hover, [data-active="true"]) .cv-bio-mark-icon {
+		animation: none;
+		transform: none;
+	}
+}
+
+.cv-hanzi-signature {
+	display: block;
+	width: 10.5rem;
+	margin-left: -0.486rem;
+	color: hsl(var(--foreground) / 0.88);
+}
+
+.cv-hanzi-signature[data-name-form="traditional"] {
+	margin-left: -0.2225rem;
+}
+
+.cv-hanzi-signature svg {
+	display: block;
+	width: 100%;
+	height: auto;
+	overflow: visible;
+}
+
+.cv-hanzi-signature-reading {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin-bottom: -0.15rem;
+	fill: hsl(var(--muted-foreground));
+}
+
+.cv-hero-english-name {
+	line-height: 1;
+}
+
+.cv-laura-title {
+	display: block;
+	width: 9.25rem;
+	aspect-ratio: 8072 / 1000;
+	background: currentColor;
+	-webkit-mask:
+		url("/images/laura-english-title.svg") center / contain no-repeat;
+	mask: url("/images/laura-english-title.svg") center / contain no-repeat;
+}
+
+.cv-hero-english-name-fallback {
+	font-family:
+		var(--font-ibm-plex-sans), -apple-system, BlinkMacSystemFont, "Segoe UI",
+		sans-serif;
+	font-size: 1.05rem;
+	font-weight: 600;
+	line-height: 1;
+}
+
+.cv-hanzi-signature-mask-shape {
+	fill: white;
+}
+
+.cv-hanzi-signature-stroke-region-mask {
+	mask-type: luminance;
+}
+
+.cv-hanzi-signature-stroke {
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 260;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-dasharray: 1;
+	stroke-dashoffset: 1;
+	opacity: 0;
+	animation: none;
+}
+
+.cv-hanzi-signature[data-writing="true"] .cv-hanzi-signature-stroke {
+	opacity: 1;
+	animation:
+		cv-hanzi-signature-write var(--cv-signature-duration) linear
+		var(--cv-signature-delay) forwards,
+		cv-hanzi-signature-stroke-settle 280ms ease-out
+		var(--cv-signature-stroke-settle-delay) forwards;
+}
+
+.cv-hanzi-signature-final {
+	fill: currentColor;
+	opacity: 1;
+	animation: none;
+}
+
+.cv-hanzi-signature[data-writing="true"] .cv-hanzi-signature-final {
+	opacity: 0;
+	animation: cv-hanzi-signature-settle 280ms ease-out
+		var(--cv-signature-final-delay) forwards;
+}
+
+@keyframes cv-hanzi-signature-write {
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+@keyframes cv-hanzi-signature-settle {
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes cv-hanzi-signature-stroke-settle {
+	to {
+		opacity: 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cv-hanzi-signature[data-writing="true"] .cv-hanzi-signature-stroke {
+		animation: none;
+		opacity: 0;
+	}
+
+	.cv-hanzi-signature[data-writing="true"] .cv-hanzi-signature-final {
+		animation: none;
+		opacity: 1;
+	}
+}
+
+@media print {
+	.cv-hanzi-signature-stroke {
+		display: none;
+	}
+
+	.cv-hanzi-signature-final {
+		animation: none;
+		opacity: 1;
+	}
 }
 
 /* Enhanced multilingual typography following W3C guidelines */
@@ -182,8 +476,9 @@
 
 .font-zh-sans {
 	font-family:
-		"MiSans", "Noto Sans SC", "Source Han Sans SC", "PingFang SC",
-		"Microsoft YaHei", system-ui, sans-serif;
+		var(--font-ibm-plex-sans), var(--font-frex-sans-gb), "Noto Sans SC",
+		"Source Han Sans SC", "PingFang SC", "Microsoft YaHei", system-ui,
+		sans-serif;
 	font-feature-settings:
 		"liga" 1,
 		"calt" 1,
@@ -194,8 +489,9 @@
 
 .font-zh-hant-sans {
 	font-family:
-		"MiSansTC", "Noto Sans TC", "Source Han Sans TC", "PingFang TC",
-		"Microsoft JhengHei", system-ui, sans-serif;
+		var(--font-ibm-plex-sans), "IBM Plex Sans TC", "Noto Sans TC",
+		"Source Han Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui,
+		sans-serif;
 	font-feature-settings:
 		"liga" 1,
 		"calt" 1,
@@ -206,8 +502,9 @@
 
 .font-ja-sans {
 	font-family:
-		"MiSans", "Noto Sans JP", "Source Han Sans JP", "Hiragino Kaku Gothic ProN",
-		"Yu Gothic", "Meiryo", system-ui, sans-serif;
+		var(--font-ibm-plex-sans), var(--font-ibm-plex-sans-jp), "Noto Sans JP",
+		"Source Han Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo",
+		system-ui, sans-serif;
 	font-feature-settings:
 		"liga" 1,
 		"calt" 1,
@@ -218,8 +515,9 @@
 
 .font-ko-sans {
 	font-family:
-		"MiSans", "Noto Sans KR", "Source Han Sans KR", "Apple SD Gothic Neo",
-		"Malgun Gothic", "Nanum Gothic", system-ui, sans-serif;
+		var(--font-ibm-plex-sans), "IBM Plex Sans KR", "Noto Sans KR",
+		"Source Han Sans KR", "Apple SD Gothic Neo", "Malgun Gothic",
+		"Nanum Gothic", system-ui, sans-serif;
 	font-feature-settings:
 		"liga" 1,
 		"calt" 1,
@@ -382,10 +680,11 @@ html[lang|="ko"] .cv-locale-serif {
 	content: none;
 }
 
-/* Apple-inspired glass card with magazine layout */
+/* Content cards preserve structure without covering the paper surface. */
 .cv-card {
-	@apply bg-card/90 mb-0;
-	backdrop-filter: blur(20px);
+	@apply mb-0;
+	background: transparent;
+	backdrop-filter: none;
 	box-shadow: none;
 	position: relative;
 	overflow: hidden;
@@ -527,7 +826,7 @@ html[lang|="ko"] .cv-locale-serif {
 	width: 16rem;
 	overflow: hidden;
 	border: 1px solid hsl(var(--border));
-	border-radius: 2px;
+	border-radius: 0.75rem;
 	background: hsl(var(--popover));
 	padding: 0;
 	color: hsl(var(--popover-foreground));
@@ -545,7 +844,6 @@ html[lang|="ko"] .cv-locale-serif {
 	--cv-mail-blue: #3b719c;
 	width: 18rem;
 	border-color: rgb(107 105 97 / 30%);
-	border-radius: 5px;
 	background: var(--cv-paper);
 	color: var(--cv-paper-ink);
 }
@@ -1110,21 +1408,51 @@ html[lang|="ko"] .cv-locale-serif {
 }
 
 /* Refined badges with Apple aesthetics */
+.cv-skill-sticker {
+	border: 2px solid rgb(255 255 255 / 96%);
+	background: #fff;
+	box-shadow:
+		0 1px 1px rgb(0 0 0 / 12%),
+		0 4px 9px rgb(0 0 0 / 14%);
+}
+
+.cv-skill-sticker:hover {
+	background: #fff;
+	box-shadow:
+		0 2px 2px rgb(0 0 0 / 12%),
+		0 6px 12px rgb(0 0 0 / 18%);
+}
+
+.dark .cv-skill-sticker {
+	border-color: rgb(255 255 255 / 92%);
+	background: #000;
+	box-shadow:
+		0 1px 1px rgb(255 255 255 / 12%),
+		0 4px 10px rgb(0 0 0 / 62%);
+}
+
+.dark .cv-skill-sticker:hover {
+	background: #000;
+	box-shadow:
+		0 1px 2px rgb(255 255 255 / 16%),
+		0 6px 13px rgb(0 0 0 / 72%);
+}
+
 .cv-badge {
-	@apply inline-flex items-center px-2 py-1 bg-muted/60 text-muted-foreground text-sm rounded-full font-medium;
-	backdrop-filter: blur(10px);
+	@apply inline-flex items-center rounded-full border border-border/60 bg-transparent px-2 py-1 font-medium text-muted-foreground text-sm;
+	backdrop-filter: none;
 	font-weight: 500;
 	letter-spacing: -0.005em;
 	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .cv-badge:hover {
-	background: hsl(var(--muted) / 0.8);
+	background: transparent;
 	transform: translateY(-1px);
 }
 
 .cv-badge-primary {
-	@apply bg-primary/10 text-primary;
+	@apply bg-transparent text-primary;
 }
 
 .cv-body-emphasis {

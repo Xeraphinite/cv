@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { MarkdownText } from "@/components/ui/markdown-text";
+import { PaperTextureImage } from "@/components/ui/paper-texture-image";
 import { formatToYearMonth } from "@/lib/date-format";
 import type { ProjectItem } from "@/lib/types/cv";
 import { SkillItemBadge } from "./skill-item-badge";
@@ -44,7 +45,7 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
 								{project.status ? (
 									<Badge
 										variant="secondary"
-										className="cv-locale-sans rounded-full border border-border/60 bg-muted/80 px-2 py-0 font-medium text-foreground/85 text-sm hover:bg-secondary/80"
+										className="cv-locale-sans rounded-full border border-border/60 bg-transparent px-2 py-0 font-medium text-foreground/85 text-sm hover:bg-transparent"
 									>
 										{project.status}
 									</Badge>
@@ -71,19 +72,13 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
 							{project.previewImages && project.previewImages.length > 0 ? (
 								<div className="col-span-2 mt-1 grid grid-cols-1 gap-2 sm:grid-cols-2">
 									{project.previewImages.map((image, index) => (
-										<div
+										<PaperTextureImage
 											key={`${project.name}-preview-${image.src}-${index}`}
-											className="overflow-hidden rounded-lg border border-border/60 bg-card/80"
-										>
-											<img
-												src={image.src}
-												alt={
-													image.alt || `${project.name} preview ${index + 1}`
-												}
-												className="h-36 w-full object-cover"
-												loading="lazy"
-											/>
-										</div>
+											src={image.src}
+											alt={image.alt || `${project.name} preview ${index + 1}`}
+											sizes="(max-width: 639px) 100vw, 50vw"
+											className="h-36 rounded-lg border border-border/60"
+										/>
 									))}
 								</div>
 							) : null}

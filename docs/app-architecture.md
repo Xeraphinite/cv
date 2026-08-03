@@ -10,7 +10,7 @@
 ## App Router / Runtime
 - In `app/` routes, do not use `next/head`; use the Metadata API and/or native `<head>` in layouts.
 - Keep CV pages under `app/(cv)/[locale]`.
-- Keep accessibility pages under `app/(a11y)/[locale]/accessibility`.
+- Keep the combined About This Website page under `app/(a11y)/[locale]/about`; do not add separate accessibility or privacy routes.
 - `app/globals.css` is the runtime global stylesheet source of truth; do not reintroduce `styles/globals.css`.
 - Theme tokens consumed by Tailwind must be defined in `app/globals.css` for both light and dark modes.
 - Load primary fonts with `next/font` in locale root layouts; do not use CSS `@import` for Google Fonts in `app/globals.css`.
@@ -19,7 +19,7 @@
 ## Next.js / Cloudflare Constraints
 - Cloudflare deploys in this repo target Cloudflare Pages via `@cloudflare/next-on-pages@1`.
 - Keep Cloudflare Pages build/deploy scripts aligned with that adapter: `npx @cloudflare/next-on-pages@1` and `wrangler pages deploy .vercel/output/static`.
-- For Cloudflare Pages builds, keep `/[locale]/accessibility` on Edge runtime in `app/(a11y)/[locale]/layout.tsx`.
+- For Cloudflare Pages builds, keep `/[locale]/about` on Edge runtime in `app/(a11y)/[locale]/layout.tsx`.
 - For Cloudflare Pages builds, non-static App Router route handlers, including `llms.txt`, must export `runtime = "edge"`.
 - For Cloudflare Pages builds with `next-on-pages`, keep locale routing in root `middleware.ts`.
 

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
@@ -17,7 +16,10 @@ import {
 	HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { HeroLocation } from "@/components/sections/hero-location";
+import { AnimatedHanziSignature } from "@/components/sections/animated-hanzi-signature";
+import { LauraTitle } from "@/components/sections/laura-title";
 import { MarkdownText } from "@/components/ui/markdown-text";
+import { PaperTextureImage } from "@/components/ui/paper-texture-image";
 import {
 	decodeEmailFromClient,
 	encodeEmailForClient,
@@ -25,8 +27,6 @@ import {
 } from "@/lib/email-obfuscation";
 import { getFontClass, getTypographyClasses } from "@/lib/utils";
 import type { SocialProfileData } from "@/lib/types/cv";
-
-const containsHanCharacters = (value: string) => /\p{Script=Han}/u.test(value);
 
 interface HeroSectionProps {
 	data: {
@@ -206,7 +206,12 @@ function ContactCardContent({
 				</div>
 				<div className="cv-email-envelope-stamps" aria-hidden="true">
 					<div className="cv-email-envelope-stamp cv-email-envelope-stamp-portrait">
-						<Image src={avatar} alt="" width={32} height={32} />
+						<PaperTextureImage
+							src={avatar}
+							alt=""
+							sizes="32px"
+							className="h-8 w-8"
+						/>
 						<span>CV · MAIL</span>
 					</div>
 					<div className="cv-email-envelope-stamp cv-email-envelope-stamp-mark">
@@ -343,18 +348,12 @@ function ContactCardContent({
 		return (
 			<div className="cv-social-card-body">
 				<div className="cv-social-card-header">
-					<Image
+					<PaperTextureImage
 						src={bluesky?.avatarUrl || avatar}
 						alt=""
-						width={40}
-						height={40}
+						sizes="40px"
 						unoptimized={Boolean(bluesky?.avatarUrl)}
-						onError={(event) => {
-							if (event.currentTarget.dataset.fallbackApplied) return;
-							event.currentTarget.dataset.fallbackApplied = "true";
-							event.currentTarget.srcset = "";
-							event.currentTarget.src = avatar;
-						}}
+						fallbackSrc={avatar}
 						className="cv-social-card-avatar"
 					/>
 					<div className="cv-social-card-names">
@@ -466,124 +465,6 @@ export function HeroSection({
 		document.body.removeChild(link);
 	};
 
-	const formatNameWithRuby = () => {
-		if (locale === "ja") {
-			const segmentationTemplate = data.furiganaName || data.name;
-			const templateSegments = segmentationTemplate
-				.split("|")
-				.map((segment) => segment.trim())
-				.filter(Boolean);
-			const rubySegments = (data.furigana || "")
-				.split("|")
-				.map((segment) => segment.trim())
-				.filter(Boolean);
-			const localizedNameChars = Array.from(data.name);
-			const templateSegmentLengths = templateSegments.map(
-				(segment) => Array.from(segment).length,
-			);
-			const canMapTemplateToLocalizedName =
-				templateSegments.length > 1 &&
-				templateSegmentLengths.reduce((sum, length) => sum + length, 0) ===
-					localizedNameChars.length;
-
-			const baseSegments = canMapTemplateToLocalizedName
-				? templateSegmentLengths.reduce<string[]>((segments, length, index) => {
-						const start = templateSegmentLengths
-							.slice(0, index)
-							.reduce((sum, part) => sum + part, 0);
-						segments.push(
-							localizedNameChars.slice(start, start + length).join(""),
-						);
-						return segments;
-					}, [])
-				: templateSegments;
-
-			const hasSegmentedRuby =
-				rubySegments.length > 0 && rubySegments.length === baseSegments.length;
-
-			if (hasSegmentedRuby) {
-				return (
-					<span aria-label={data.name} className="cv-ruby-group">
-						{baseSegments.map((baseSegment, index) => (
-							<ruby key={`${baseSegment}-${index}`} className="cv-ruby">
-								{baseSegment}
-								<rt>{rubySegments[index]}</rt>
-							</ruby>
-						))}
-					</span>
-				);
-			}
-
-			if (data.furigana) {
-				const fallbackBase = data.furiganaName || data.name;
-				return (
-					<ruby className="cv-ruby">
-						{fallbackBase}
-						<rt>{data.furigana}</rt>
-					</ruby>
-				);
-			}
-
-			return data.name;
-		}
-
-		return data.name;
-	};
-
-	const getPrimaryName = () => {
-		if (locale === "en") {
-			return data.enName || data.name;
-		}
-		return formatNameWithRuby();
-	};
-
-	const getSecondaryName = () => {
-		if (locale === "en") {
-			if (data.enName && data.name && data.enName !== data.name) {
-				return data.name;
-			}
-			return undefined;
-		}
-		if (data.enName && data.enName !== data.name) {
-			return data.enName;
-		}
-		return undefined;
-	};
-
-	const renderWrappedPosition = (position: string) => {
-		const parts = position
-			.split(",")
-			.map((part) => part.trim())
-			.filter(Boolean);
-
-		if (parts.length <= 1) {
-			return (
-				<MarkdownText
-					content={position}
-					className={`${typographyClasses.body} cv-body-emphasis text-foreground/85`}
-				/>
-			);
-		}
-
-		return (
-			<p
-				className={`${typographyClasses.body} cv-body-emphasis text-foreground/85`}
-			>
-				<span className="inline-flex flex-wrap gap-x-1">
-					{parts.map((part, index) => {
-						const suffix = index < parts.length - 1 ? "," : "";
-						return (
-							<span key={`${part}-${index}`} className="whitespace-nowrap">
-								{part}
-								{suffix}
-							</span>
-						);
-					})}
-				</span>
-			</p>
-		);
-	};
-
 	const formatAge = (ageString: string | number) => {
 		if (typeof ageString === "string" && ageString.includes("-")) {
 			const [year, month] = ageString.split("-");
@@ -619,24 +500,18 @@ export function HeroSection({
 		}
 	};
 
-	const primaryName = getPrimaryName();
-	const secondaryName = getSecondaryName();
-	const secondaryNameClass = secondaryName
-		? locale === "en" && containsHanCharacters(secondaryName)
-			? "cv-subtitle font-zh-serif tracking-zh text-muted-foreground/80"
-			: `${typographyClasses.subtitle} text-muted-foreground/80`
-		: "";
+	const signatureText = (data.furiganaName || data.name).replaceAll("|", "");
+	const englishName = data.enName || data.name;
 
 	return (
 		<header className="mb-6 sm:mb-8">
 			<div className="cv-card">
 				<div className="grid grid-cols-1 gap-6">
 					<div className="cv-avatar relative h-28 w-28 sm:h-32 sm:w-32">
-						<Image
+						<PaperTextureImage
 							src={data.avatar || "/images/placeholders/placeholder-user.jpg"}
 							alt={`${data.name} - ${data.enName ?? data.name}`}
-							fill
-							className="object-cover"
+							className="h-full w-full"
 							priority
 							{...getResponsiveImageProps(
 								data.avatar || "/images/placeholders/placeholder-user.jpg",
@@ -647,13 +522,16 @@ export function HeroSection({
 
 					<div className="min-w-0 [&>*:not(:last-child)]:mb-4">
 						<div>
-							<h1 className={`${typographyClasses.title} mb-2`}>
-								{primaryName}
+							<h1 className="mb-2">
+								<AnimatedHanziSignature
+									text={signatureText}
+									reading={locale === "ja" ? data.furigana : undefined}
+								/>
 							</h1>
 
-							{secondaryName && (
-								<h2 className={secondaryNameClass}>{secondaryName}</h2>
-							)}
+							<h2 className="cv-hero-english-name text-muted-foreground/85">
+								<LauraTitle text={englishName} />
+							</h2>
 						</div>
 
 						{data.description && (
@@ -662,8 +540,6 @@ export function HeroSection({
 								className={`${typographyClasses.body} text-primary/90`}
 							/>
 						)}
-
-						{data.position && renderWrappedPosition(data.position)}
 
 						<TooltipProvider delayDuration={120}>
 							<div className="flex flex-col [&>*:not(:last-child)]:mb-3">
@@ -706,7 +582,6 @@ export function HeroSection({
 												data.avatar ||
 												"/images/placeholders/placeholder-user.jpg",
 											profileName: data.enName || data.name,
-											position: data.position,
 											socialProfiles: resolvedSocialProfiles,
 										};
 

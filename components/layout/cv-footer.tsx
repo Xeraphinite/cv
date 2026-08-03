@@ -1,26 +1,21 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { usePathname } from "next/navigation";
 import { Icon } from "@iconify/react";
 import clsx from "clsx";
-import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { usePathname, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useEffect, useMemo, useState } from "react";
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { locales, localeLabels } from "@/i18n";
+import { type Locale, localeLabels, locales } from "@/i18n";
 import { createLocalizedPath, getLocaleFromPathname } from "@/lib/i18n-utils";
+import { FooterSwitcher } from "./footer-switcher";
+import { FooterThemeControl } from "./footer-theme-control";
 
 interface CVFooterProps {
 	className?: string;
@@ -45,6 +40,7 @@ export function CVFooter({
 }: CVFooterProps) {
 	const t = useTranslations();
 	const pathname = usePathname();
+	const router = useRouter();
 	const currentLocale = getLocaleFromPathname(pathname);
 	const [now, setNow] = useState(() => Date.now());
 
@@ -92,15 +88,13 @@ export function CVFooter({
 
 		return { relativeUpdated: text, updateToneClass: toneClass };
 	}, [currentLocale, lastUpdated, now]);
-	const accessibilityHref = createLocalizedPath(
-		"/accessibility",
-		currentLocale || "en",
-	);
+	const aboutWebsiteHref = createLocalizedPath("/about", currentLocale || "en");
 	const llmsHref = createLocalizedPath("/llms.txt", currentLocale || "en");
-	const privacyHref = createLocalizedPath("/privacy", currentLocale || "en");
 	const copyrightYear = useMemo(() => {
 		const currentDate = new Date(now);
-		if (!Number.isNaN(currentDate.getTime())) return currentDate.getFullYear();
+		if (!Number.isNaN(currentDate.getTime())) {
+			return currentDate.getFullYear();
+		}
 		const parsedUpdatedAt = lastUpdated ? new Date(lastUpdated) : null;
 		if (parsedUpdatedAt && !Number.isNaN(parsedUpdatedAt.getTime())) {
 			return parsedUpdatedAt.getFullYear();
@@ -109,6 +103,16 @@ export function CVFooter({
 	}, [lastUpdated, now]);
 	const copyrightText = `© ${copyrightYear} Xeraphinite. All rights reserved.`;
 	const currentLocaleLabel = localeLabels[currentLocale || "en"];
+	const localeOptions = locales.map((locale) => ({
+		value: locale,
+		label: localeLabels[locale],
+		icon: languageFlags[locale],
+	}));
+	const handleLocaleChange = (locale: string) => {
+		if (locale !== currentLocale) {
+			router.push(createLocalizedPath(pathname, locale as Locale));
+		}
+	};
 
 	useEffect(() => {
 		setNow(Date.now());
@@ -124,7 +128,7 @@ export function CVFooter({
 	return (
 		<footer
 			className={clsx(
-				"mx-auto mt-14 max-w-2xl border-border/30 border-t bg-background/60 backdrop-blur-sm sm:mt-12",
+				"mx-auto mt-14 max-w-2xl border-border/30 border-t bg-transparent sm:mt-12",
 				className,
 			)}
 		>
@@ -135,7 +139,7 @@ export function CVFooter({
 						compact ? "pt-0 pb-2" : "pt-7 pb-5 sm:pt-6 sm:pb-3",
 					)}
 				>
-					<div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+					<div className="flex flex-nowrap items-center justify-center gap-x-1 whitespace-nowrap">
 						<Tooltip>
 							<TooltipTrigger asChild>
 								<div className="flex items-center gap-1.5">
@@ -152,65 +156,18 @@ export function CVFooter({
 
 						{showLocaleThemeControls && (
 							<>
-								<DropdownMenu modal={false}>
-									<Tooltip>
-										<TooltipTrigger asChild>
-											<DropdownMenuTrigger asChild>
-												<Button
-													variant="ghost"
-													size="sm"
-													className="h-7 flex-row gap-1.5 px-2 hover:bg-muted/50"
-													aria-label={t("common.language")}
-												>
-													<Icon
-														icon={languageFlags[currentLocale || "en"]}
-														className="h-3.5 w-3.5"
-													/>
-													<span className="cv-locale-sans text-sm">
-														{currentLocale?.toUpperCase() || "EN"}
-													</span>
-												</Button>
-											</DropdownMenuTrigger>
-										</TooltipTrigger>
-										<TooltipContent side="top">
-											<span>
-												{t("tooltips.footer.language", {
-													language: currentLocaleLabel,
-												})}
-											</span>
-										</TooltipContent>
-									</Tooltip>
-									<DropdownMenuContent
-										align="end"
-										className="w-40"
-										sideOffset={8}
-									>
-										{locales.map((locale) => {
-											const href = createLocalizedPath(pathname, locale);
-											const isActive = currentLocale === locale;
+								<FooterSwitcher
+									value={currentLocale || "en"}
+									triggerLabel={currentLocale?.toUpperCase() || "EN"}
+									ariaLabel={t("common.language")}
+									tooltip={t("tooltips.footer.language", {
+										language: currentLocaleLabel,
+									})}
+									options={localeOptions}
+									onValueChange={handleLocaleChange}
+								/>
 
-											return (
-												<DropdownMenuItem key={locale} asChild>
-													<Link
-														href={href}
-														className={clsx(
-															"flex w-full cursor-pointer items-center gap-2",
-															isActive
-																? "bg-primary/10 font-medium text-primary"
-																: "hover:bg-muted/50",
-														)}
-													>
-														<Icon
-															icon={languageFlags[locale]}
-															className="h-4 w-4"
-														/>
-														{localeLabels[locale]}
-													</Link>
-												</DropdownMenuItem>
-											);
-										})}
-									</DropdownMenuContent>
-								</DropdownMenu>
+								<FooterThemeControl />
 							</>
 						)}
 					</div>
@@ -234,30 +191,15 @@ export function CVFooter({
 						<Tooltip>
 							<TooltipTrigger asChild>
 								<Link
-									href={accessibilityHref}
+									href={aboutWebsiteHref}
 									className="inline-flex items-center gap-1 transition-colors hover:text-foreground"
 								>
-									<Icon icon="mingcute:wheelchair-line" className="h-3 w-3" />
-									{t("footer.accessibilityStatement")}
+									<Icon icon="mingcute:information-line" className="h-3 w-3" />
+									{t("footer.aboutWebsite")}
 								</Link>
 							</TooltipTrigger>
 							<TooltipContent side="top">
-								<span>{t("tooltips.footer.accessibility")}</span>
-							</TooltipContent>
-						</Tooltip>
-						<span>·</span>
-						<Tooltip>
-							<TooltipTrigger asChild>
-								<Link
-									href={privacyHref}
-									className="inline-flex items-center gap-1 transition-colors hover:text-foreground"
-								>
-									<Icon icon="mingcute:safe-alert-line" className="h-3 w-3" />
-									{t("footer.privacyStatement")}
-								</Link>
-							</TooltipTrigger>
-							<TooltipContent side="top">
-								<span>{t("tooltips.footer.privacy")}</span>
+								<span>{t("tooltips.footer.aboutWebsite")}</span>
 							</TooltipContent>
 						</Tooltip>
 					</div>

@@ -99,6 +99,15 @@ export function CV({ data, locale, lastUpdated, socialProfiles }: CVProps) {
 							</section>
 						)}
 
+						{data.education.length > 0 && (
+							<section id="education">
+								<EducationSection
+									data={data.education}
+									config={data.sectionConfig?.education}
+								/>
+							</section>
+						)}
+
 						{projectsData.length > 0 && (
 							<section id="projects">
 								<ProjectsSection data={projectsData} />
@@ -119,15 +128,6 @@ export function CV({ data, locale, lastUpdated, socialProfiles }: CVProps) {
 						{data.experience.length > 0 && (
 							<section id="experience">
 								<ExperienceSection data={data.experience} />
-							</section>
-						)}
-
-						{data.education.length > 0 && (
-							<section id="education">
-								<EducationSection
-									data={data.education}
-									config={data.sectionConfig?.education}
-								/>
 							</section>
 						)}
 

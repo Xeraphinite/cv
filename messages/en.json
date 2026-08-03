@@ -7,9 +7,13 @@
 	},
 	"footer": {
 		"llmsTxt": "LLMs.txt",
-		"accessibilityStatement": "Accessibility",
-		"privacyStatement": "Privacy",
+		"aboutWebsite": "About this website",
 		"theme": "Theme",
+		"themeOptions": {
+			"light": "Light",
+			"dark": "Dark",
+			"system": "System"
+		},
 		"onlineNow": "Online now",
 		"visitorNumbers": "Visitor numbers",
 		"onlineNowUnavailable": "Online indicator unavailable",
@@ -95,9 +99,9 @@
 		"footer": {
 			"lastUpdated": "Updated relative to your local time",
 			"language": "Change language, current: {language}",
+			"theme": "Change theme, current: {theme}",
 			"llmsTxt": "Read machine-readable profile for AI assistants",
-			"accessibility": "Read accessibility support details",
-			"privacy": "Read privacy and analytics details",
+			"aboutWebsite": "Read accessibility, privacy, and analytics details",
 			"visitorNumbers": "Open analytics and view total visitors",
 			"visitorNumbersUnavailable": "Analytics unavailable for total visitors",
 			"onlineNow": "Open analytics and view visitors online now",

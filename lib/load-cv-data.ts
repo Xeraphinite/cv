@@ -401,7 +401,7 @@ function mapTomlToCVData(source: TomlCVData): CVData {
 		const position = cleanText(item.title ?? item.name ?? item.role ?? "");
 		if (!position) return [];
 
-		const startDate = cleanText(item.start ?? item.year ?? "");
+		const startDate = cleanText(String(item.start ?? item.year ?? ""));
 		const endDate = cleanText(item.end ?? "Present");
 		const highlights = (item.details ?? []).map(cleanText).filter(Boolean);
 

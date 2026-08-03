@@ -2,11 +2,17 @@
 
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
+import type { MDXComponents } from "mdx/types.js";
 import { MarkdownText } from "@/components/ui/markdown-text";
+import { BioMark } from "./bio-mark";
 
 interface BioSectionProps {
 	bio?: string;
 }
+
+const BIO_MDX_COMPONENTS: MDXComponents = {
+	BioMark,
+};
 
 export function BioSection({ bio }: BioSectionProps) {
 	const t = useTranslations();
@@ -24,7 +30,11 @@ export function BioSection({ bio }: BioSectionProps) {
 			</h2>
 
 			<div className="cv-body text-foreground leading-relaxed">
-				<MarkdownText className="[&_p]:text-lg" content={bio} />
+				<MarkdownText
+					className="[&_p]:text-lg"
+					content={bio}
+					mdxComponents={BIO_MDX_COMPONENTS}
+				/>
 			</div>
 		</section>
 	);

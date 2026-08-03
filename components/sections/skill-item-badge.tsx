@@ -38,7 +38,7 @@ function SkillBadgeContent({ item }: SkillItemBadgeProps) {
 		<Badge
 			variant="secondary"
 			className={cn(
-				"h-auto shrink-0 gap-2 whitespace-nowrap rounded-full border border-transparent bg-muted/80 px-3 py-1.5 font-medium text-base text-foreground/90 transition-all duration-200 hover:-translate-y-0.5 hover:border-border/60 hover:bg-muted hover:text-foreground hover:shadow-sm",
+				"cv-skill-sticker h-auto shrink-0 gap-2 whitespace-nowrap rounded-full px-3 py-1.5 font-medium text-base text-foreground/90 transition-all duration-200 hover:-translate-y-0.5 hover:text-foreground",
 				item.code
 					? "font-mono"
 					: item.fontFamily === "serif"

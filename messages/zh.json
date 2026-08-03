@@ -71,9 +71,13 @@
 	},
 	"footer": {
 		"llmsTxt": "LLMs.txt",
-		"accessibilityStatement": "无障碍声明",
-		"privacyStatement": "隐私说明",
+		"aboutWebsite": "关于本网站",
 		"theme": "主题",
+		"themeOptions": {
+			"light": "浅色",
+			"dark": "深色",
+			"system": "跟随系统"
+		},
 		"onlineNow": "在线人数",
 		"visitorNumbers": "访客数量",
 		"onlineNowUnavailable": "在线人数不可用",
@@ -95,9 +99,9 @@
 		"footer": {
 			"lastUpdated": "按你的本地时间显示更新",
 			"language": "切换语言，当前：{language}",
+			"theme": "切换主题，当前：{theme}",
 			"llmsTxt": "查看面向 AI 助手的机器可读档案",
-			"accessibility": "查看无障碍支持详情",
-			"privacy": "查看隐私与统计说明",
+			"aboutWebsite": "查看无障碍、隐私与访问统计说明",
 			"visitorNumbers": "打开统计并查看总访客",
 			"visitorNumbersUnavailable": "总访客统计暂不可用",
 			"onlineNow": "打开统计并查看当前在线人数",

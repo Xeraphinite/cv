@@ -49,7 +49,7 @@ pnpm dev
 - Treat `en`, `zh`, and `ja` as active locales.
 - Keep `yue` and `ko` files for future re-enable unless explicitly asked to activate them.
 - Keep CV pages under `app/(cv)/[locale]`.
-- Keep accessibility pages under `app/(a11y)/[locale]/accessibility`.
+- Keep the combined accessibility and privacy page under `app/(a11y)/[locale]/about`.
 - Keep locale `llms.txt` routes aligned with localized CV data.
 
 ## References

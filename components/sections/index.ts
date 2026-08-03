@@ -13,3 +13,5 @@ export { TalksSection } from "./talks-section";
 export { NewsSection } from "./news-section";
 export { MiscSection } from "./misc-section";
 export { BioSection } from "./bio-section";
+export { BioMark } from "./bio-mark";
+export type { BioMarkEffect } from "./bio-mark";

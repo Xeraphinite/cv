@@ -17,7 +17,7 @@ export default async function Home({
 	const socialProfiles = getVerifiedSocialProfileData();
 
 	return (
-		<main className="min-h-screen bg-background">
+		<main className="min-h-screen bg-transparent">
 			<div className="flex justify-center p-0">
 				<CV
 					data={cvData}

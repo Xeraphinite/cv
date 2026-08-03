@@ -71,9 +71,13 @@
 	},
 	"footer": {
 		"llmsTxt": "LLMs.txt",
-		"accessibilityStatement": "접근성 성명서",
-		"privacyStatement": "개인정보 안내",
+		"aboutWebsite": "이 웹사이트 소개",
 		"theme": "테마",
+		"themeOptions": {
+			"light": "라이트",
+			"dark": "다크",
+			"system": "시스템"
+		},
 		"onlineNow": "현재 접속 중",
 		"visitorNumbers": "방문자 수",
 		"onlineNowUnavailable": "현재 접속 인원을 사용할 수 없음",
@@ -95,9 +99,9 @@
 		"footer": {
 			"lastUpdated": "내 로컬 시간 기준 업데이트 표시",
 			"language": "언어 변경 현재: {language}",
+			"theme": "테마 변경 현재: {theme}",
 			"llmsTxt": "AI 도우미용 기계 판독 프로필 보기",
-			"accessibility": "접근성 지원 세부 정보 보기",
-			"privacy": "개인정보 및 분석 정보 보기",
+			"aboutWebsite": "접근성, 개인정보 및 분석 정보 보기",
 			"visitorNumbers": "분석 열고 총 방문자 보기",
 			"visitorNumbersUnavailable": "총 방문자 분석을 사용할 수 없음",
 			"onlineNow": "분석 열고 현재 방문자 보기",

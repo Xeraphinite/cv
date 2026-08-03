@@ -71,9 +71,13 @@
 	},
 	"footer": {
 		"llmsTxt": "LLMs.txt",
-		"accessibilityStatement": "アクセシビリティ",
-		"privacyStatement": "プライバシー",
+		"aboutWebsite": "このサイトについて",
 		"theme": "テーマ",
+		"themeOptions": {
+			"light": "ライト",
+			"dark": "ダーク",
+			"system": "システム"
+		},
 		"onlineNow": "現在オンライン",
 		"visitorNumbers": "訪問者数",
 		"onlineNowUnavailable": "オンライン人数は利用できません",
@@ -95,9 +99,9 @@
 		"footer": {
 			"lastUpdated": "あなたの現地時刻で更新を表示",
 			"language": "言語を変更 現在：{language}",
+			"theme": "テーマを変更 現在：{theme}",
 			"llmsTxt": "AI アシスタント向けの機械可読プロフィールを見る",
-			"accessibility": "アクセシビリティ対応の詳細を見る",
-			"privacy": "プライバシーと解析の詳細を見る",
+			"aboutWebsite": "アクセシビリティ、プライバシー、解析情報を見る",
 			"visitorNumbers": "解析を開いて総訪問者数を見る",
 			"visitorNumbersUnavailable": "総訪問者数の解析は現在利用不可",
 			"onlineNow": "解析を開いて現在の訪問者を見る",

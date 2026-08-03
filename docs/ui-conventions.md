@@ -13,14 +13,17 @@
 
 ## Typography
 - Use `Spectral` as the default serif family and `IBM Plex Sans` as the default sans family for English (`en`) content.
+- Keep localized sans typography within the IBM Plex family: use self-hosted `Frex Sans GB` for Simplified Chinese glyphs and `IBM Plex Sans JP` for Japanese glyphs, with Latin glyphs resolving to `IBM Plex Sans` first.
 - For non-English serif text (`zh`, `zh-hant`, `ja`, `ko`), use locale-appropriate `Noto Serif` variants as the primary serif stack.
-- In localized UI copy, prefer `.cv-locale-sans` / `.cv-locale-serif` over raw Tailwind `font-sans` / `font-serif` so `en` stays IBM Plex while CJK locales switch to MiSans or locale-specific serif stacks consistently.
+- In localized UI copy, prefer `.cv-locale-sans` / `.cv-locale-serif` over raw Tailwind `font-sans` / `font-serif` so `en` stays IBM Plex while CJK locales use the matching Plex sans or locale-specific serif stack consistently.
 - Personal names written in Chinese characters should render in a locale-appropriate serif stack; on the English hero, the secondary Chinese name under the English name should use Chinese serif styling instead of English sans.
 - Do not use `Noto Serif SC` as a cross-locale serif fallback; map locale-specific serif variants (`CJK SC` / `TC` / `JP` / `KR`) per language.
 - Use `Maple Mono` for code-like text.
 - Keep section titles at `text-2xl`.
 - Default body and description/detail copy to `text-base`; keep `text-sm` as the minimum size.
 - In rendered Markdown, keep clear paragraph-to-paragraph spacing.
+- Keep prose and inline Markdown links in the normal inline formatting context so Unicode punctuation cannot be stranded at the start or end of a line; attach decorative trailing icons with a word joiner instead of an atomic flex wrapper.
+- Use strict locale-aware line breaking for CJK prose and `text-wrap: pretty` for rendered Markdown.
 - Keep readable contrast for muted UI text; avoid overly faint muted text on badges or dense metadata.
 - Tooltip text should default to `font-sans`.
 - Hover card and tooltip panels should use theme-aware popover surfaces.
@@ -37,6 +40,7 @@
 - Keep `.cv-card` top and bottom padding removed by default (`pt-0 pb-0`).
 - Keep `.cv-card` content unrounded unless explicitly requested otherwise.
 - In section components, avoid Tailwind `!` modifiers; prefer semantic helper classes in `app/globals.css`.
+- Keep footer metadata and switchers on one row. Keep locale and theme controls content-sized on the shared `FooterSwitcher` shell with the card-standard `rounded-xl` radius so trigger height, menu width, typography, and selected states stay aligned without trailing label space.
 
 ## Spacing and Layout Rhythm
 - Keep section spacing compact by default and use margin-based vertical rhythm.
@@ -49,3 +53,10 @@
 - If overall CV top/bottom spacing needs to change, adjust the top-level shell in `components/sections/cv.tsx`.
 - If mobile spacing changes involve the sticky header or footer, adjust `components/layout/cv-header.tsx` and `components/layout/cv-footer.tsx` directly.
 - For timeline-style rows, stack on mobile and switch to two-column alignment from `md` upward.
+
+## Page Surface
+- Use the shared `PaperBackground` shader as the full-page surface on CV and secondary pages.
+- Keep the shader static, decorative, pointer-transparent, theme-aware, and resolution-capped; page content must render above it on transparent main surfaces.
+- Keep all page-content surfaces, cards, media frames, and footers transparent so the paper texture remains continuous across the site; reserve filled surfaces for temporary interactive overlays.
+- Render content imagery through the shared `PaperTextureImage` filter while preserving a real image fallback and alt text; exclude tiny favicon-style UI iconography.
+- Preserve a solid theme-matched fallback and omit the shader when printing.

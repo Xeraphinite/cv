@@ -3,15 +3,14 @@ name = "郑恪悠"
 enName = "Keyou (Key) Zheng"
 location = "广东广州"
 age = ""
-position = "准博士生，人工智能研究者，设计工程师"
 bio = """
-你好，我是 **Keyou (Key) Zheng**。我于 2026 年 6 月获得广东工业大学机械工程硕士学位，并将于 2027 年 4 月进入北海道大学信息科学博士课程，在媒体动力学实验室（LMD）师从 Guang Li（李广）助理教授。
+你好，我是 **Keyou (Key) Zheng**。我是一名 <BioMark icon="mingcute:microscope-line" effect="research">初涉研究的探索者</BioMark>、<BioMark icon="mingcute:translate-line" effect="drift">CJK 语言漂流者</BioMark>，也是一名 <BioMark icon="mingcute:palette-line" effect="craft">初级设计工程师</BioMark>。我于 2026 年 6 月获得广东工业大学机械工程硕士学位，并将于 2027 年 4 月进入北海道大学<BioMark icon="mingcute:mortarboard-line" effect="graduate">信息科学博士课程</BioMark>，在媒体动力学实验室（LMD）师从 Guang Li（李广）助理教授。
 
 我的研究位于大语言模型、参数化 CAD 与人机交互的交叉点，重点是把人类设计意图转化为可靠、可由机器执行的代码。硕士阶段，我构建了连接“生成-验证”的智能体工作流闭环；系统会解析 CAD 环境中的编译与几何反馈，并迭代修复代码，使结果达到工程可用标准，而不仅是表面正确。相关第一作者论文 **SPADA** 已被 ICML 2026 接收为海报论文。
 
 本科计算机科学训练为我提供了扎实的技术基础，而在设计与人本计算方向持续的自学，塑造了我对工具系统的理解。我关注技术严谨性与真实可用性的统一。
 
-在实验室之外，我持续通过开源项目、界面设计实践与写作进行构建。我重视排版、清晰交互和可维护代码，并希望成长为能够在软件、设计与研究之间交付高质量成果的实践者。
+在实验室之外，我还是一名 <BioMark icon="mingcute:game-2-line" effect="beat">节奏游戏爱好者</BioMark>，并持续通过开源项目、界面设计实践与写作进行构建。我重视排版、清晰交互和可维护代码，并希望成长为能够在软件、设计与研究之间交付高质量成果的实践者。
 """
 
 [[education]]

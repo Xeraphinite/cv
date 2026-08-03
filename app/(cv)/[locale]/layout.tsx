@@ -5,43 +5,18 @@ import "@fontsource/maple-mono/700.css";
 import { notFound } from "next/navigation";
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
-import { IBM_Plex_Sans, Spectral } from "next/font/google";
 import Script from "next/script";
+import { fontVariables } from "@/app/fonts";
 import { getDirection } from "@/lib/i18n-utils";
 import { type Locale, locales } from "@/i18n";
 import { appConfig } from "@/lib/config/app-config";
 import { CVFooter } from "@/components/layout/cv-footer";
+import { PaperBackground } from "@/components/layout/paper-background";
 import { ThemeProvider } from "@/components/theme-provider";
 import { getCVLastUpdated } from "@/lib/load-cv-data";
 
-const spectral = Spectral({
-	subsets: ["latin"],
-	weight: ["400", "500", "600", "700", "800"],
-	style: ["normal", "italic"],
-	display: "swap",
-	variable: "--font-spectral",
-});
-
-const ibmPlexSans = IBM_Plex_Sans({
-	subsets: ["latin"],
-	weight: ["400", "500", "600", "700"],
-	display: "swap",
-	variable: "--font-ibm-plex-sans",
-});
-
 const notoSerifCjkStylesheet =
 	"https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&display=swap";
-const miSansStylesheets = [
-	"https://font.emtech.cc/css/MiSans/400",
-	"https://font.emtech.cc/css/MiSans/500",
-	"https://font.emtech.cc/css/MiSans/600",
-	"https://font.emtech.cc/css/MiSans/700",
-	"https://font.emtech.cc/css/MiSansTC/400",
-	"https://font.emtech.cc/css/MiSansTC/500",
-	"https://font.emtech.cc/css/MiSansTC/600",
-	"https://font.emtech.cc/css/MiSansTC/700",
-];
-
 export async function generateMetadata({
 	params,
 }: {
@@ -148,13 +123,9 @@ export default async function LocaleLayout({
 					href="https://fonts.gstatic.com"
 					rel="preconnect"
 				/>
-				<link href="https://font.emtech.cc" rel="preconnect" />
 				<link href={notoSerifCjkStylesheet} rel="stylesheet" />
-				{miSansStylesheets.map((href) => (
-					<link href={href} key={href} rel="stylesheet" />
-				))}
 			</head>
-			<body className={`${spectral.variable} ${ibmPlexSans.variable}`}>
+			<body className={fontVariables}>
 				{umamiWebsiteId ? (
 					<Script
 						src={umamiScriptUrl}
@@ -164,12 +135,15 @@ export default async function LocaleLayout({
 				) : null}
 				<NextIntlClientProvider locale={localeTyped} messages={messages}>
 					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-						{children}
-						<CVFooter
-							className="lg:hidden"
-							lastUpdated={lastUpdated}
-							showLocaleThemeControls
-						/>
+						<PaperBackground />
+						<div className="relative z-10">
+							{children}
+							<CVFooter
+								className="lg:hidden"
+								lastUpdated={lastUpdated}
+								showLocaleThemeControls
+							/>
+						</div>
 					</ThemeProvider>
 				</NextIntlClientProvider>
 			</body>

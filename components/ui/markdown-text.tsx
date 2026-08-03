@@ -29,9 +29,11 @@ interface MarkdownTextProps {
 	className?: string;
 	inline?: boolean;
 	showLinkIcon?: boolean;
+	mdxComponents?: MDXComponents;
 }
 
 const LINK_CLASS_NAME = "inline-url-link";
+const EMPTY_MDX_COMPONENTS: MDXComponents = {};
 
 function ObfuscatedInlineEmail({ email }: { email: string }) {
 	const encoded = useMemo(() => encodeEmailForClient(email), [email]);
@@ -75,16 +77,17 @@ function MarkdownAnchor({
 			rel={isExternal ? "noopener noreferrer" : props.rel}
 			title={title}
 		>
-			<span className="inline-flex items-center gap-1">
-				<span className="inline-url-link-text">{linkContent}</span>
-				{showLinkIcon ? (
+			<span className="inline-url-link-text">{linkContent}</span>
+			{showLinkIcon ? (
+				<>
+					{"\u2060"}
 					<Icon
 						aria-hidden="true"
 						icon="mingcute:arrow-right-up-fill"
-						className="inline-url-link-icon h-3 w-3 shrink-0"
+						className="inline-url-link-icon ml-1 inline-block h-3 w-3 align-[-0.08em]"
 					/>
-				) : null}
-			</span>
+				</>
+			) : null}
 		</a>
 	);
 }
@@ -93,6 +96,7 @@ function createMarkdownComponents(
 	inline: boolean,
 	showLinkIcon: boolean,
 	serifFontClass: string,
+	mdxComponents: MDXComponents,
 ): MDXComponents {
 	const Paragraph = ({
 		children,
@@ -111,6 +115,7 @@ function createMarkdownComponents(
 		);
 
 	return {
+		...mdxComponents,
 		a: (props) => <MarkdownAnchor {...props} showLinkIcon={showLinkIcon} />,
 		p: Paragraph,
 		ul: ({ className, ...props }) => (
@@ -168,6 +173,7 @@ export function MarkdownText({
 	content,
 	className,
 	inline = false,
+	mdxComponents = EMPTY_MDX_COMPONENTS,
 	showLinkIcon = true,
 }: MarkdownTextProps) {
 	const locale = useLocale();
@@ -175,8 +181,14 @@ export function MarkdownText({
 	const serifFontClass = getFontClass(locale, "serif");
 	const components = useMDXComponents(
 		useMemo(
-			() => createMarkdownComponents(inline, showLinkIcon, serifFontClass),
-			[inline, serifFontClass, showLinkIcon],
+			() =>
+				createMarkdownComponents(
+					inline,
+					showLinkIcon,
+					serifFontClass,
+					mdxComponents,
+				),
+			[inline, mdxComponents, serifFontClass, showLinkIcon],
 		),
 	);
 	const Content = useMemo(

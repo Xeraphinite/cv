@@ -15,12 +15,12 @@
 - Current top-level TOML tables in `data/cv.toml`: `profile`, `education`, `experience`, `publications`, `news`, `projects`, `skills`, `awards`, `patents`, `copyrights`, `sectionConfig`.
 
 ## Hero / Profile Data
-- Use `profile.position` or localized `hero.position` for the left-column hero role/title.
+- Do not render a standalone hero role/title; keep identity and research context in the About copy.
 - Use `profile.summary` / `hero.bio` for the right-column About content.
-- In Japanese hero content, use `profile.furigana_name` and `profile.furigana`; when values are `|`-separated, render segmented ruby aligned to each base chunk.
-- Keep furigana in normal ruby layout; do not fake it with absolutely positioned `rt`.
-- In Japanese locale hero, show the English name beneath the Japanese display name.
-- In English locale hero, show the original-script name first and the English name beneath when both exist.
+- About copy may use the registered `<BioMark icon="mingcute:…" effect="…">phrase</BioMark>` MDX component for small inline identity icons. Supported effects are `research`, `drift`, `craft`, `beat`, and `graduate`.
+- Use simplified `profile.furigana_name` as the animated original-script name in English and Chinese. Set the localized Japanese hero override `furiganaName = "鄭|恪|悠"` so it renders the Japanese/traditional `鄭` form.
+- In Japanese, split `profile.furigana` on `|` and center each reading over its corresponding signature character.
+- Show the smaller English name beneath the original-script signature in every active locale.
 
 ## Structured Content Rules
 - Education entries support an optional `supervisor` field, rendered with the localized supervisor label.

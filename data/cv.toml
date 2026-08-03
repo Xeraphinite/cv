@@ -8,8 +8,9 @@ en_name = "Keyou (Key) Zheng"
 aliases = ["Zheng K."]
 location_label = "Guangzhou, Guangdong"
 show_icons = false
-position = "PhD Candidate"
-summary = "Hi! I am Keyou Zheng (郑恪悠). I am a novice researcher, a CJK language drifter, and junior design engineer. Outside of doing research and hacking, I am a rhythm game maniac. Maybe I have become a Ph.D. Candidate in Hokkaido University. I am currently working on data-efficient learning and other interesting topics."
+summary = """
+Hi! I am Keyou Zheng (郑恪悠). I am a <BioMark icon="mingcute:microscope-line" effect="research">novice researcher</BioMark>, a <BioMark icon="mingcute:translate-line" effect="drift">CJK language drifter</BioMark>, and <BioMark icon="mingcute:palette-line" effect="craft">junior design engineer</BioMark>. Outside of doing research and hacking, I am a <BioMark icon="mingcute:game-2-line" effect="beat">rhythm game maniac</BioMark>. I am currently working on data-efficient learning and other interesting topics.
+"""
 contacts = [
   { icon = "email", label = "`keyouzheng0915@gmail.com`", url = "mailto:keyouzheng0915@gmail.com" },
   { icon = "website", label = "`keyzh.pages.dev`", url = "https://keyzh.pages.dev" },

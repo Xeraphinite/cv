@@ -52,7 +52,3 @@
 
 - [x] Remove `!` important flag in CSS.
 - [ ] Email disconfusion?
-
-## Agents
-
-- [ ] Tools: Setup Next DevTools, Chrome DevTools, Playwright, etc.
