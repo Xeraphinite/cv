@@ -10,6 +10,7 @@ import { fontVariables } from "@/app/fonts";
 import { CVFooter } from "@/components/layout/cv-footer";
 import { PaperBackground } from "@/components/layout/paper-background";
 import { ThemeProvider } from "@/components/theme-provider";
+import { InteractionSoundProvider } from "@/components/sound-provider";
 import { type Locale, locales } from "@/i18n";
 import { getDirection } from "@/lib/i18n-utils";
 
@@ -62,11 +63,13 @@ export default async function SecondaryPageLocaleLayout({
 				) : null}
 				<NextIntlClientProvider locale={localeTyped} messages={messages}>
 					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-						<PaperBackground />
-						<div className="relative z-10">
-							{children}
-							<CVFooter className="lg:hidden" showLocaleThemeControls />
-						</div>
+						<InteractionSoundProvider>
+							<PaperBackground />
+							<div className="relative z-10">
+								{children}
+								<CVFooter className="lg:hidden" showPreferences />
+							</div>
+						</InteractionSoundProvider>
 					</ThemeProvider>
 				</NextIntlClientProvider>
 			</body>

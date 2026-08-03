@@ -67,16 +67,24 @@
 		"publications": "發表",
 		"awards": "獎項",
 		"projects": "項目",
-		"gpa": "平均績點"
+		"gpa": "平均績點",
+		"writing": "寫作"
 	},
 	"footer": {
-		"llmsTxt": "LLMs.txt",
+		"forRobots": "俾機械人",
 		"aboutWebsite": "關於本網站",
+		"preferences": "偏好設定",
+		"appearance": "外觀",
+		"sound": "音效",
 		"theme": "主題",
 		"themeOptions": {
 			"light": "淺色",
 			"dark": "深色",
 			"system": "跟隨系統"
+		},
+		"soundOptions": {
+			"on": "開",
+			"off": "關"
 		},
 		"onlineNow": "在線人數",
 		"visitorNumbers": "訪客數量",
@@ -85,11 +93,14 @@
 	},
 	"tooltips": {
 		"hero": {
+			"avatarShowPhoto": "預覽原本相片",
+			"avatarCardCaption": "真實嘅我",
 			"contact": "打開聯絡方式",
 			"email": "發送電郵",
 			"github": "睇 GitHub 主頁",
 			"wechat": "用呢個 WeChat ID 聯絡",
 			"website": "打開個人網站",
+			"writing": "睇我嘅寫作",
 			"googleScholar": "睇 Google Scholar 主頁",
 			"orcid": "打開 ORCID 記錄",
 			"bluesky": "睇 Bluesky 主頁",
@@ -98,9 +109,10 @@
 		},
 		"footer": {
 			"lastUpdated": "按你本地時間顯示更新",
+			"preferences": "打開語言、外觀同音效偏好設定",
 			"language": "切換語言，而家：{language}",
 			"theme": "切換主題，而家：{theme}",
-			"llmsTxt": "睇俾 AI 助手用嘅機器可讀檔案",
+			"forRobots": "睇機器可讀檔案同網站文件",
 			"aboutWebsite": "睇無障礙、私隱同統計說明",
 			"visitorNumbers": "打開統計並睇總訪客",
 			"visitorNumbersUnavailable": "總訪客統計暫時不可用",

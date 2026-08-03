@@ -6,13 +6,20 @@
 		"lastUpdated": "Updated"
 	},
 	"footer": {
-		"llmsTxt": "LLMs.txt",
+		"forRobots": "For Robots",
 		"aboutWebsite": "About this website",
+		"preferences": "Preferences",
+		"appearance": "Appearance",
+		"sound": "Sound",
 		"theme": "Theme",
 		"themeOptions": {
 			"light": "Light",
 			"dark": "Dark",
 			"system": "System"
+		},
+		"soundOptions": {
+			"on": "On",
+			"off": "Off"
 		},
 		"onlineNow": "Online now",
 		"visitorNumbers": "Visitor numbers",
@@ -81,15 +88,19 @@
 		"publications": "Publications",
 		"awards": "Awards",
 		"projects": "Projects",
-		"gpa": "GPA"
+		"gpa": "GPA",
+		"writing": "Writing"
 	},
 	"tooltips": {
 		"hero": {
+			"avatarShowPhoto": "Preview original photograph",
+			"avatarCardCaption": "The real me",
 			"contact": "Open contact option",
 			"email": "Send an email",
 			"github": "View GitHub profile",
 			"wechat": "Use this WeChat ID to connect",
 			"website": "Open personal website",
+			"writing": "Read my writing",
 			"googleScholar": "View Google Scholar profile",
 			"orcid": "Open ORCID record",
 			"bluesky": "View Bluesky profile",
@@ -98,9 +109,10 @@
 		},
 		"footer": {
 			"lastUpdated": "Updated relative to your local time",
+			"preferences": "Open language, appearance, and sound preferences",
 			"language": "Change language, current: {language}",
 			"theme": "Change theme, current: {theme}",
-			"llmsTxt": "Read machine-readable profile for AI assistants",
+			"forRobots": "Read machine-friendly profile and website files",
 			"aboutWebsite": "Read accessibility, privacy, and analytics details",
 			"visitorNumbers": "Open analytics and view total visitors",
 			"visitorNumbersUnavailable": "Analytics unavailable for total visitors",

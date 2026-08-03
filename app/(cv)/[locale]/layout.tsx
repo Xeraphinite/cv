@@ -13,6 +13,7 @@ import { appConfig } from "@/lib/config/app-config";
 import { CVFooter } from "@/components/layout/cv-footer";
 import { PaperBackground } from "@/components/layout/paper-background";
 import { ThemeProvider } from "@/components/theme-provider";
+import { InteractionSoundProvider } from "@/components/sound-provider";
 import { getCVLastUpdated } from "@/lib/load-cv-data";
 
 const notoSerifCjkStylesheet =
@@ -135,15 +136,17 @@ export default async function LocaleLayout({
 				) : null}
 				<NextIntlClientProvider locale={localeTyped} messages={messages}>
 					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-						<PaperBackground />
-						<div className="relative z-10">
-							{children}
-							<CVFooter
-								className="lg:hidden"
-								lastUpdated={lastUpdated}
-								showLocaleThemeControls
-							/>
-						</div>
+						<InteractionSoundProvider>
+							<PaperBackground />
+							<div className="relative z-10">
+								{children}
+								<CVFooter
+									className="lg:hidden"
+									lastUpdated={lastUpdated}
+									showPreferences
+								/>
+							</div>
+						</InteractionSoundProvider>
 					</ThemeProvider>
 				</NextIntlClientProvider>
 			</body>

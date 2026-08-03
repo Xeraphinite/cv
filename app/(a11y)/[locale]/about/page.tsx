@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import accessibilityDefault from "@/data/accessibility/statement.md";
-import accessibilityJa from "@/data/accessibility/statement.ja.md";
-import accessibilityZh from "@/data/accessibility/statement.zh.md";
-import privacyDefault from "@/data/privacy/statement.md";
-import privacyJa from "@/data/privacy/statement.ja.md";
-import privacyZh from "@/data/privacy/statement.zh.md";
 import { type Locale, localeLabels, locales } from "@/i18n";
 import { appConfig } from "@/lib/config/app-config";
 import { createLocalizedPath } from "@/lib/i18n-utils";
+import { getSiteStatementSections } from "@/lib/site-statement";
 import { getFontClass } from "@/lib/utils";
 import { AboutMarkdown } from "./about-markdown";
 
@@ -17,8 +12,6 @@ const pageCopy: Record<
 	{
 		title: string;
 		description: string;
-		accessibilityTitle: string;
-		privacyTitle: string;
 		backToCv: string;
 	}
 > = {
@@ -26,42 +19,20 @@ const pageCopy: Record<
 		title: "About This Website",
 		description:
 			"Accessibility, privacy, and analytics information for this CV website.",
-		accessibilityTitle: "Accessibility",
-		privacyTitle: "Privacy",
 		backToCv: "Back to CV",
 	},
 	zh: {
 		title: "关于本网站",
 		description: "本简历网站的无障碍、隐私与访问统计说明。",
-		accessibilityTitle: "无障碍",
-		privacyTitle: "隐私",
 		backToCv: "返回简历",
 	},
 	ja: {
 		title: "このウェブサイトについて",
 		description:
 			"この履歴書サイトのアクセシビリティ、プライバシー、アクセス解析に関する情報です。",
-		accessibilityTitle: "アクセシビリティ",
-		privacyTitle: "プライバシー",
 		backToCv: "履歴書に戻る",
 	},
 };
-
-const accessibilityStatements: Record<Locale, string> = {
-	en: accessibilityDefault,
-	zh: accessibilityZh,
-	ja: accessibilityJa,
-};
-
-const privacyStatements: Record<Locale, string> = {
-	en: privacyDefault,
-	zh: privacyZh,
-	ja: privacyJa,
-};
-
-function demoteSectionHeadings(markdown: string): string {
-	return markdown.replace(/^## /gm, "### ");
-}
 
 export async function generateMetadata({
 	params,
@@ -88,6 +59,7 @@ export default async function AboutWebsitePage({
 	const copy = pageCopy[localeTyped] ?? pageCopy.en;
 	const homePath = createLocalizedPath("/", localeTyped);
 	const serifFontClass = getFontClass(localeTyped, "serif");
+	const statementSections = getSiteStatementSections(localeTyped);
 	const markdownClassName =
 		"[&_h3]:cv-locale-sans [&_h3:first-child]:mt-0 [&_h3]:mt-4 [&_h3]:font-semibold [&_h3]:text-foreground [&_h3]:text-lg [&_li+li]:mt-1 [&_ul]:mt-2";
 
@@ -130,38 +102,24 @@ export default async function AboutWebsitePage({
 					</header>
 
 					<div className="cv-sections-stack">
-						<section id="accessibility">
-							<h2 className="cv-section-title mb-3 sm:mb-4">
-								{copy.accessibilityTitle}
-							</h2>
-							<div
-								className={`space-y-4 text-base text-foreground/85 leading-relaxed ${serifFontClass}`}
+						{statementSections.map((section, index) => (
+							<section
+								id={index === 0 ? "accessibility" : "privacy"}
+								key={section.title}
 							>
-								<AboutMarkdown
-									content={demoteSectionHeadings(
-										accessibilityStatements[localeTyped] ??
-											accessibilityDefault,
-									)}
-									className={markdownClassName}
-								/>
-							</div>
-						</section>
-
-						<section id="privacy">
-							<h2 className="cv-section-title mb-3 sm:mb-4">
-								{copy.privacyTitle}
-							</h2>
-							<div
-								className={`space-y-4 text-base text-foreground/85 leading-relaxed ${serifFontClass}`}
-							>
-								<AboutMarkdown
-									content={demoteSectionHeadings(
-										privacyStatements[localeTyped] ?? privacyDefault,
-									)}
-									className={markdownClassName}
-								/>
-							</div>
-						</section>
+								<h2 className="cv-section-title mb-3 sm:mb-4">
+									{section.title}
+								</h2>
+								<div
+									className={`space-y-4 text-base text-foreground/85 leading-relaxed ${serifFontClass}`}
+								>
+									<AboutMarkdown
+										content={section.content}
+										className={markdownClassName}
+									/>
+								</div>
+							</section>
+						))}
 					</div>
 				</article>
 

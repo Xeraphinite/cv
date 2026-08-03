@@ -79,7 +79,7 @@ export function CV({ data, locale, lastUpdated, socialProfiles }: CVProps) {
 						<div className="hidden lg:block">
 							<CVFooter
 								compact
-								showLocaleThemeControls
+								showPreferences
 								className="block max-w-none border-t-0"
 								lastUpdated={lastUpdated}
 							/>

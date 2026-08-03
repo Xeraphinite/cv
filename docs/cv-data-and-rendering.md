@@ -16,6 +16,7 @@
 
 ## Hero / Profile Data
 - Do not render a standalone hero role/title; keep identity and research context in the About copy.
+- Hero portrait sources live in `profile.avatar` (the default illustrated portrait) and optional `profile.portrait` (the original photograph shown in a hover/focus preview card).
 - Use `profile.summary` / `hero.bio` for the right-column About content.
 - About copy may use the registered `<BioMark icon="mingcute:…" effect="…">phrase</BioMark>` MDX component for small inline identity icons. Supported effects are `research`, `drift`, `craft`, `beat`, and `graduate`.
 - Use simplified `profile.furigana_name` as the animated original-script name in English and Chinese. Set the localized Japanese hero override `furiganaName = "鄭|恪|悠"` so it renders the Japanese/traditional `鄭` form.
@@ -24,7 +25,7 @@
 
 ## Structured Content Rules
 - Education entries support an optional `supervisor` field, rendered with the localized supervisor label.
-- Publication entries support `image` / `image_alt` and comma-separated `metadata`; from the `sm` breakpoint, render publication highlights as large rounded thumbnails at the left, sized to roughly match the item height. Hide them on smaller screens and keep locale-specific `imageAlt` text in localized overrides.
+- Publication entries support `image` / `image_alt` and comma-separated `metadata`; from the `sm` breakpoint, render publication highlights as large rounded thumbnails at the left, sized to roughly match the item height. Below `sm`, replace those thumbnails with paper-specific decorative MingCute icons, and keep locale-specific `imageAlt` text in localized overrides.
 - Publication metadata keeps quartile and impact factor values structured while preserving other labels such as conference rank, presentation type, and acceptance rate.
 - Skills `items` support string form or object form with `text`/`name`, optional `icon`, `url`, `code`, and `description`.
 - Main Skills category order is `Languages` -> `Programming Languages` -> `DevOps` -> `AI Engineering` -> `Web Dev & Design` -> `Backend Development`; `Misc` renders as a separate bottom section.

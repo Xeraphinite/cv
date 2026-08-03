@@ -20,7 +20,7 @@
 - Cloudflare deploys in this repo target Cloudflare Pages via `@cloudflare/next-on-pages@1`.
 - Keep Cloudflare Pages build/deploy scripts aligned with that adapter: `npx @cloudflare/next-on-pages@1` and `wrangler pages deploy .vercel/output/static`.
 - For Cloudflare Pages builds, keep `/[locale]/about` on Edge runtime in `app/(a11y)/[locale]/layout.tsx`.
-- For Cloudflare Pages builds, non-static App Router route handlers, including `llms.txt`, must export `runtime = "edge"`.
+- For Cloudflare Pages builds, non-static App Router route handlers, including `llms.txt` and `about.md`, must export `runtime = "edge"`.
 - For Cloudflare Pages builds with `next-on-pages`, keep locale routing in root `middleware.ts`.
 
 ## Markdown / TOML Loading

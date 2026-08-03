@@ -6,6 +6,12 @@ const llmsLabels = {
 	en: {
 		titleSuffix: "LLM Profile",
 		summary: "This file provides a concise public profile for language models.",
+		files: "Files",
+		cvPage: "CV website",
+		cvPageDescription: "The complete human-readable CV.",
+		websiteStatement: "Website statement",
+		websiteStatementDescription:
+			"Accessibility, privacy, analytics, and local-preference details in Markdown.",
 		identity: "Identity",
 		contact: "Contact",
 		education: "Education",
@@ -18,6 +24,12 @@ const llmsLabels = {
 	zh: {
 		titleSuffix: "LLM 档案",
 		summary: "该文件为语言模型提供简明的公开个人档案。",
+		files: "文件",
+		cvPage: "简历网站",
+		cvPageDescription: "完整的可读简历。",
+		websiteStatement: "网站声明",
+		websiteStatementDescription:
+			"Markdown 格式的无障碍、隐私、访问统计与本地偏好设置说明。",
 		identity: "身份",
 		contact: "联系方式",
 		education: "教育经历",
@@ -30,6 +42,12 @@ const llmsLabels = {
 	ja: {
 		titleSuffix: "LLM プロフィール",
 		summary: "このファイルは、言語モデル向けの簡潔な公開プロフィールです。",
+		files: "ファイル",
+		cvPage: "履歴書サイト",
+		cvPageDescription: "人が読むための完全な履歴書です。",
+		websiteStatement: "ウェブサイト声明",
+		websiteStatementDescription:
+			"アクセシビリティ、プライバシー、アクセス解析、ローカル設定の Markdown 文書です。",
 		identity: "プロフィール",
 		contact: "連絡先",
 		education: "学歴",
@@ -44,6 +62,11 @@ const llmsLabels = {
 	{
 		titleSuffix: string;
 		summary: string;
+		files: string;
+		cvPage: string;
+		cvPageDescription: string;
+		websiteStatement: string;
+		websiteStatementDescription: string;
 		identity: string;
 		contact: string;
 		education: string;
@@ -114,6 +137,10 @@ export async function buildLlmsText(inputLocale?: string) {
 	const website = compact(
 		cv.hero.social.website || appConfig.site.metadataBase,
 	);
+	const siteBase = appConfig.site.metadataBase.replace(/\/$/, "");
+	const localePath = locale === defaultLocale ? "" : `/${locale}`;
+	const cvPageUrl = `${siteBase}${localePath || "/"}`;
+	const websiteStatementUrl = `${siteBase}${localePath}/about.md`;
 	const education = cv.education
 		.map(formatEducationLine)
 		.filter(Boolean)
@@ -133,6 +160,10 @@ export async function buildLlmsText(inputLocale?: string) {
 		`# ${displayName} - ${labels.titleSuffix}`,
 		"",
 		labels.summary,
+		"",
+		`## ${labels.files}`,
+		`- [${labels.cvPage}](${cvPageUrl}): ${labels.cvPageDescription}`,
+		`- [${labels.websiteStatement}](${websiteStatementUrl}): ${labels.websiteStatementDescription}`,
 		"",
 		`## ${labels.identity}`,
 		`- Name: ${compact(cv.hero.name)}`,

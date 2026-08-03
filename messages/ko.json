@@ -67,16 +67,24 @@
 		"publications": "발표",
 		"awards": "수상",
 		"projects": "프로젝트",
-		"gpa": "평점"
+		"gpa": "평점",
+		"writing": "글"
 	},
 	"footer": {
-		"llmsTxt": "LLMs.txt",
+		"forRobots": "로봇용",
 		"aboutWebsite": "이 웹사이트 소개",
+		"preferences": "환경 설정",
+		"appearance": "화면",
+		"sound": "효과음",
 		"theme": "테마",
 		"themeOptions": {
 			"light": "라이트",
 			"dark": "다크",
 			"system": "시스템"
+		},
+		"soundOptions": {
+			"on": "켜기",
+			"off": "끄기"
 		},
 		"onlineNow": "현재 접속 중",
 		"visitorNumbers": "방문자 수",
@@ -85,11 +93,14 @@
 	},
 	"tooltips": {
 		"hero": {
+			"avatarShowPhoto": "원본 사진 미리보기",
+			"avatarCardCaption": "진짜 나",
 			"contact": "연락 방법 열기",
 			"email": "이메일 보내기",
 			"github": "GitHub 프로필 보기",
 			"wechat": "이 WeChat ID로 연락하기",
 			"website": "개인 웹사이트 열기",
+			"writing": "내 글 읽기",
 			"googleScholar": "Google Scholar 프로필 보기",
 			"orcid": "ORCID 레코드 열기",
 			"bluesky": "Bluesky 프로필 보기",
@@ -98,9 +109,10 @@
 		},
 		"footer": {
 			"lastUpdated": "내 로컬 시간 기준 업데이트 표시",
+			"preferences": "언어, 화면 및 효과음 설정 열기",
 			"language": "언어 변경 현재: {language}",
 			"theme": "테마 변경 현재: {theme}",
-			"llmsTxt": "AI 도우미용 기계 판독 프로필 보기",
+			"forRobots": "기계 판독 프로필과 사이트 문서 보기",
 			"aboutWebsite": "접근성, 개인정보 및 분석 정보 보기",
 			"visitorNumbers": "분석 열고 총 방문자 보기",
 			"visitorNumbersUnavailable": "총 방문자 분석을 사용할 수 없음",

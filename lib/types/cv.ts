@@ -5,6 +5,7 @@ export interface SocialLinks {
 	github?: string;
 	wechat?: string;
 	website?: string;
+	writing?: string;
 	googleScholar?: string;
 	orcid?: string;
 	bluesky?: string;
@@ -68,6 +69,7 @@ export interface Hero {
 	furiganaName?: string;
 	furigana?: string;
 	avatar: string;
+	portrait?: string;
 	location: string;
 	age: string;
 	position?: string;

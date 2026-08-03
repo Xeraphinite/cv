@@ -6,6 +6,8 @@ furigana_name = "郑|恪|悠"
 furigana = "チェン|コッ|ヤオ"
 en_name = "Keyou (Key) Zheng"
 aliases = ["Zheng K."]
+avatar = "/images/avatar/avatar-illustrated.png"
+portrait = "/images/avatar/portrait-original.jpg"
 location_label = "Guangzhou, Guangdong"
 show_icons = false
 summary = """
@@ -13,7 +15,7 @@ Hi! I am Keyou Zheng (郑恪悠). I am a <BioMark icon="mingcute:microscope-line
 """
 contacts = [
   { icon = "email", label = "`keyouzheng0915@gmail.com`", url = "mailto:keyouzheng0915@gmail.com" },
-  { icon = "website", label = "`keyzh.pages.dev`", url = "https://keyzh.pages.dev" },
+  { icon = "writing", label = "`Writing`", url = "https://wickedfrontiers.notion.site/" },
   { icon = "github", label = "`Xeraphinite`", url = "https://github.com/Xeraphinite" },
   { icon = "google-scholar", label = "`Keyou Zheng`", url = "https://scholar.google.com/citations?user=agkWz8MAAAAJ" },
   { icon = "bluesky", label = "`@lonelylight.bsky.social`", url = "https://bsky.app/profile/lonelylight.bsky.social" },

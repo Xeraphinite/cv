@@ -38,6 +38,19 @@ interface PublicationsSectionProps {
 	ownerAliases?: string[];
 }
 
+const publicationIcons: Record<string, string> = {
+	"SPADA: A Verifiable Test-Driven Agent for Controllable Parametric CAD Assembly Generation":
+		"mingcute:cube-3d-fill",
+	"Towards Agentic Smart Design: An Industrial Large Model-driven Human-in-the-loop Agentic Workflow for Geometric Modelling":
+		"mingcute:git-branch-fill",
+	"AIGC-empowered Smart Manufacturing: Prospects and Challenges":
+		"mingcute:factory-fill",
+};
+
+function getPublicationIcon(title: string): string {
+	return publicationIcons[title] ?? "mingcute:document-2-fill";
+}
+
 function containsMarkdownLink(content: string): boolean {
 	return (
 		/\[[^\]]+\]\((?:https?:\/\/|\/)[^)]+\)/.test(content) ||
@@ -135,17 +148,28 @@ export function PublicationsSection({
 						<div
 							className={
 								publication.image
-									? "sm:grid sm:grid-cols-[12rem_minmax(0,1fr)] sm:items-stretch sm:gap-4"
+									? "grid grid-cols-[2.5rem_minmax(0,1fr)] items-start gap-3 sm:grid-cols-[12rem_minmax(0,1fr)] sm:items-stretch sm:gap-4"
 									: ""
 							}
 						>
 							{publication.image ? (
-								<PaperTextureImage
-									src={publication.image}
-									alt={publication.imageAlt || publication.title}
-									sizes="192px"
-									className="relative hidden h-[calc(100%-0.5rem)] self-center rounded-lg border border-border/70 sm:block"
-								/>
+								<>
+									<div
+										className="flex size-10 items-center justify-center rounded-lg border border-border/70 text-primary sm:hidden"
+										aria-hidden="true"
+									>
+										<Icon
+											icon={getPublicationIcon(publication.title)}
+											className="size-6"
+										/>
+									</div>
+									<PaperTextureImage
+										src={publication.image}
+										alt={publication.imageAlt || publication.title}
+										sizes="192px"
+										className="relative hidden h-[calc(100%-0.5rem)] self-center rounded-lg border border-border/70 sm:block"
+									/>
+								</>
 							) : null}
 
 							<div className="grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-3 md:gap-y-1">

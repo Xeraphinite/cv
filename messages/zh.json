@@ -67,16 +67,24 @@
 		"publications": "发表论文",
 		"awards": "获奖情况",
 		"projects": "项目数量",
-		"gpa": "GPA"
+		"gpa": "GPA",
+		"writing": "写作"
 	},
 	"footer": {
-		"llmsTxt": "LLMs.txt",
+		"forRobots": "面向机器人",
 		"aboutWebsite": "关于本网站",
+		"preferences": "偏好设置",
+		"appearance": "外观",
+		"sound": "音效",
 		"theme": "主题",
 		"themeOptions": {
 			"light": "浅色",
 			"dark": "深色",
 			"system": "跟随系统"
+		},
+		"soundOptions": {
+			"on": "开",
+			"off": "关"
 		},
 		"onlineNow": "在线人数",
 		"visitorNumbers": "访客数量",
@@ -85,11 +93,14 @@
 	},
 	"tooltips": {
 		"hero": {
+			"avatarShowPhoto": "预览原始照片",
+			"avatarCardCaption": "真实的我",
 			"contact": "打开联系方式",
 			"email": "发送邮件",
 			"github": "查看 GitHub 主页",
 			"wechat": "使用此微信号联系",
 			"website": "打开个人网站",
+			"writing": "阅读我的写作",
 			"googleScholar": "查看 Google Scholar 主页",
 			"orcid": "打开 ORCID 记录",
 			"bluesky": "查看 Bluesky 主页",
@@ -98,9 +109,10 @@
 		},
 		"footer": {
 			"lastUpdated": "按你的本地时间显示更新",
+			"preferences": "打开语言、外观与音效偏好设置",
 			"language": "切换语言，当前：{language}",
 			"theme": "切换主题，当前：{theme}",
-			"llmsTxt": "查看面向 AI 助手的机器可读档案",
+			"forRobots": "查看机器可读档案与网站文件",
 			"aboutWebsite": "查看无障碍、隐私与访问统计说明",
 			"visitorNumbers": "打开统计并查看总访客",
 			"visitorNumbersUnavailable": "总访客统计暂不可用",

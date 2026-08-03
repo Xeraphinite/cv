@@ -1373,6 +1373,90 @@ html[lang|="ko"] .cv-locale-serif {
 	margin-left: 0.35rem;
 }
 
+.cv-contact-card.cv-contact-card-writing {
+	--cv-writing-accent: #9b5f3f;
+	background:
+		linear-gradient(
+			90deg,
+			transparent 0 1.55rem,
+			color-mix(in oklab, var(--cv-writing-accent) 32%, transparent) 1.55rem
+				1.6rem,
+			transparent 1.6rem
+		),
+		hsl(var(--popover));
+}
+
+.cv-writing-card {
+	position: relative;
+	padding: 0.75rem 0.75rem 0.625rem 2rem;
+}
+
+.cv-writing-card::before {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0.7rem;
+	width: 0.28rem;
+	background: repeating-linear-gradient(
+		to bottom,
+		transparent 0 0.35rem,
+		hsl(var(--border)) 0.35rem 0.47rem
+	);
+	content: "";
+}
+
+.cv-writing-card-header {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: hsl(var(--muted-foreground));
+	font-family: var(--font-maple-mono), ui-monospace, monospace;
+	font-size: 0.6875rem;
+	letter-spacing: 0.02em;
+}
+
+.cv-writing-card-icon {
+	display: grid;
+	width: 2rem;
+	height: 2rem;
+	flex-shrink: 0;
+	place-items: center;
+	border: 1px solid
+		color-mix(in oklab, var(--cv-writing-accent) 42%, transparent);
+	border-radius: 999px;
+	background: color-mix(in oklab, var(--cv-writing-accent) 10%, transparent);
+	color: var(--cv-writing-accent);
+}
+
+.cv-writing-card > strong {
+	display: block;
+	margin-top: 0.625rem;
+	color: hsl(var(--foreground));
+	font-family: var(--font-en-serif), ui-serif, serif;
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.35;
+}
+
+.cv-writing-card > p {
+	margin-top: 0.15rem;
+	color: hsl(var(--muted-foreground));
+	font-size: 0.75rem;
+}
+
+.cv-writing-card-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 0.625rem;
+	border-top: 1px solid hsl(var(--border));
+	padding-top: 0.5rem;
+	color: hsl(var(--muted-foreground));
+	font-family: var(--font-maple-mono), ui-monospace, monospace;
+	font-size: 0.6875rem;
+	letter-spacing: 0.02em;
+}
+
 .cv-contact-card.cv-contact-card-link {
 	padding: 0.625rem 0.75rem;
 }
@@ -1460,13 +1544,44 @@ html[lang|="ko"] .cv-locale-serif {
 }
 
 .cv-avatar {
-	@apply rounded-3xl overflow-hidden;
+	@apply relative block overflow-hidden rounded-3xl border-0 bg-transparent p-0;
 	box-shadow: none;
-	transition: none;
+	cursor: zoom-in;
+	isolation: isolate;
+	-webkit-tap-highlight-color: transparent;
 }
 
-.cv-avatar:hover {
-	transform: none;
+.cv-avatar:focus-visible {
+	outline: 2px solid hsl(var(--ring));
+	outline-offset: 4px;
+}
+
+.cv-avatar-card {
+	width: min(26rem, calc(100vw - 2rem));
+	overflow: hidden;
+	border: 1px solid hsl(var(--border));
+	border-radius: 0.75rem;
+	background: hsl(var(--popover));
+	padding: 0.5rem;
+	box-shadow: 0 18px 50px rgb(0 0 0 / 18%);
+}
+
+.dark .cv-avatar-card {
+	box-shadow: 0 20px 56px rgb(0 0 0 / 54%);
+}
+
+.cv-avatar-card-photo {
+	object-position: 50% 47%;
+}
+
+.cv-avatar-card-caption {
+	margin-top: 0.5rem;
+	margin-bottom: 0.125rem;
+	color: hsl(var(--foreground));
+	font-family: var(--font-en-serif), ui-serif, serif;
+	font-size: 0.875rem;
+	font-style: italic;
+	text-align: center;
 }
 
 /* Enhanced Ruby text for Japanese (JLREQ) */

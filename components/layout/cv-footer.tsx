@@ -3,7 +3,7 @@
 import { Icon } from "@iconify/react";
 import clsx from "clsx";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -12,35 +12,24 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { type Locale, localeLabels, locales } from "@/i18n";
 import { createLocalizedPath, getLocaleFromPathname } from "@/lib/i18n-utils";
-import { FooterSwitcher } from "./footer-switcher";
-import { FooterThemeControl } from "./footer-theme-control";
+import { PreferencesControl } from "./preferences-control";
 
 interface CVFooterProps {
 	className?: string;
 	compact?: boolean;
-	showLocaleThemeControls?: boolean;
+	showPreferences?: boolean;
 	lastUpdated?: string;
 }
-
-const languageFlags: Record<string, string> = {
-	en: "twemoji:flag-united-states",
-	zh: "twemoji:flag-china",
-	yue: "twemoji:flag-hong-kong-sar-china",
-	ja: "twemoji:flag-japan",
-	ko: "twemoji:flag-south-korea",
-};
 
 export function CVFooter({
 	className,
 	compact = false,
-	showLocaleThemeControls = false,
+	showPreferences = false,
 	lastUpdated,
 }: CVFooterProps) {
 	const t = useTranslations();
 	const pathname = usePathname();
-	const router = useRouter();
 	const currentLocale = getLocaleFromPathname(pathname);
 	const [now, setNow] = useState(() => Date.now());
 
@@ -89,7 +78,7 @@ export function CVFooter({
 		return { relativeUpdated: text, updateToneClass: toneClass };
 	}, [currentLocale, lastUpdated, now]);
 	const aboutWebsiteHref = createLocalizedPath("/about", currentLocale || "en");
-	const llmsHref = createLocalizedPath("/llms.txt", currentLocale || "en");
+	const forRobotsHref = createLocalizedPath("/llms.txt", currentLocale || "en");
 	const copyrightYear = useMemo(() => {
 		const currentDate = new Date(now);
 		if (!Number.isNaN(currentDate.getTime())) {
@@ -102,18 +91,6 @@ export function CVFooter({
 		return 2026;
 	}, [lastUpdated, now]);
 	const copyrightText = `© ${copyrightYear} Xeraphinite. All rights reserved.`;
-	const currentLocaleLabel = localeLabels[currentLocale || "en"];
-	const localeOptions = locales.map((locale) => ({
-		value: locale,
-		label: localeLabels[locale],
-		icon: languageFlags[locale],
-	}));
-	const handleLocaleChange = (locale: string) => {
-		if (locale !== currentLocale) {
-			router.push(createLocalizedPath(pathname, locale as Locale));
-		}
-	};
-
 	useEffect(() => {
 		setNow(Date.now());
 		const interval = window.setInterval(() => {
@@ -154,37 +131,22 @@ export function CVFooter({
 							</TooltipContent>
 						</Tooltip>
 
-						{showLocaleThemeControls && (
-							<>
-								<FooterSwitcher
-									value={currentLocale || "en"}
-									triggerLabel={currentLocale?.toUpperCase() || "EN"}
-									ariaLabel={t("common.language")}
-									tooltip={t("tooltips.footer.language", {
-										language: currentLocaleLabel,
-									})}
-									options={localeOptions}
-									onValueChange={handleLocaleChange}
-								/>
-
-								<FooterThemeControl />
-							</>
-						)}
+						{showPreferences ? <PreferencesControl /> : null}
 					</div>
 
 					<div className="mt-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-foreground/75">
 						<Tooltip>
 							<TooltipTrigger asChild>
 								<Link
-									href={llmsHref}
+									href={forRobotsHref}
 									className="inline-flex items-center gap-1 transition-colors hover:text-foreground"
 								>
-									<Icon icon="mingcute:ai-line" className="h-3 w-3" />
-									<span>{t("footer.llmsTxt")}</span>
+									<Icon icon="mingcute:robot-line" className="h-3 w-3" />
+									<span>{t("footer.forRobots")}</span>
 								</Link>
 							</TooltipTrigger>
 							<TooltipContent side="top">
-								<span>{t("tooltips.footer.llmsTxt")}</span>
+								<span>{t("tooltips.footer.forRobots")}</span>
 							</TooltipContent>
 						</Tooltip>
 						<span>·</span>

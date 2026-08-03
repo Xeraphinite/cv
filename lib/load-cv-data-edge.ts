@@ -9,6 +9,8 @@ type DefaultTomlProfile = {
 	original_name?: string;
 	en_name?: string;
 	aliases?: string[];
+	avatar?: string;
+	portrait?: string;
 	location_label?: string;
 	position?: string;
 	summary?: string;
@@ -125,6 +127,9 @@ function mapContactsToSocial(contacts: DefaultTomlProfile["contacts"] = []) {
 		if (icon === "website" && url) {
 			social.website = url;
 		}
+		if (icon === "writing" && url) {
+			social.writing = url;
+		}
 		if (icon === "github" && url) {
 			social.github = url;
 		}
@@ -204,7 +209,10 @@ function parseDefaultTomlCVData(source: string): LlmsRelevantCVData {
 			name: cleanText(profile.original_name ?? profile.en_name ?? "Unknown"),
 			enName: cleanText(profile.en_name ?? profile.original_name ?? "Unknown"),
 			aliases: (profile.aliases ?? []).map(cleanText).filter(Boolean),
-			avatar: "/images/avatar/avatar-256.png",
+			avatar: cleanText(
+				profile.avatar ?? "/images/avatar/avatar-illustrated.png",
+			),
+			portrait: cleanText(profile.portrait),
 			location: cleanText(profile.location_label),
 			age: "",
 			position: cleanText(profile.position),

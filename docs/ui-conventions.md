@@ -40,7 +40,12 @@
 - Keep `.cv-card` top and bottom padding removed by default (`pt-0 pb-0`).
 - Keep `.cv-card` content unrounded unless explicitly requested otherwise.
 - In section components, avoid Tailwind `!` modifiers; prefer semantic helper classes in `app/globals.css`.
-- Keep footer metadata and switchers on one row. Keep locale and theme controls content-sized on the shared `FooterSwitcher` shell with the card-standard `rounded-xl` radius so trigger height, menu width, typography, and selected states stay aligned without trailing label space.
+- Keep footer metadata and the preference trigger on one row. Consolidate language, appearance, and sound controls in one compact, theme-aware popover with visible labels, grouped pressed states, and the card-standard `rounded-xl` radius.
+
+## Interaction Sound
+- Use quiet, synthesized interaction cues with no audio-file downloads.
+- Play cues only after a visitor interacts with a link or control; never autoplay sound on page load.
+- Keep a clearly labeled sound on/off choice in the preference popover and persist that choice locally.
 
 ## Spacing and Layout Rhythm
 - Keep section spacing compact by default and use margin-based vertical rhythm.

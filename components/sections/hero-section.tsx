@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { Icon } from "@iconify/react";
+import { Icon, type IconifyIcon } from "@iconify/react";
 import { useTranslations } from "next-intl";
 import { getResponsiveImageProps } from "@/lib/image-utils";
 import {
@@ -28,6 +28,18 @@ import {
 import { getFontClass, getTypographyClasses } from "@/lib/utils";
 import type { SocialProfileData } from "@/lib/types/cv";
 
+const quillPenLineIcon: IconifyIcon = {
+	body: '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5.93 16.865s6.189.174 9.899-3.536c.988-.988 1.7-2.152 2.214-3.328c.294-.673.523-1.35.7-2l.181-.702M5.93 16.865s.533-5.483 4.243-9.193c3.668-3.668 9.069-4.23 9.19-4.242q.004 0 .005.004c.066.095 1.091 1.63-.187 3.567a2 2 0 0 1-.256.298M5.93 16.865S5.5 20 5.5 21M14 10c1.349-.45 3.965-1.767 4.924-2.702"/>',
+	width: 24,
+	height: 24,
+};
+
+const quillPenFillIcon: IconifyIcon = {
+	body: '<path fill="currentColor" d="M19.262 2.435a1.01 1.01 0 0 1 .944.454c.94 1.412.768 3.478-.285 4.795l-.002-.001c-.264.342-.647.657-1.012.919c-.439.316-.962.636-1.499.933c-.443.246-.91.484-1.363.699c.916.043 1.972.018 3.039-.137q-.06.151-.125.304c-.552 1.263-1.328 2.54-2.424 3.635c-2.05 2.05-4.74 2.992-6.843 3.431c-1.175.246-2.199.34-2.882.377l-.102.831c-.11.927-.17 1.898-.208 2.325c-.047.54-.448 1-1 1a1 1 0 0 1-1-1c0-.571.117-1.669.222-2.56c.204-1.731.445-3.426.986-5.09c.625-1.92 1.75-4.379 3.757-6.385c3.933-3.933 9.649-4.515 9.797-4.53"/>',
+	width: 24,
+	height: 24,
+};
+
 interface HeroSectionProps {
 	data: {
 		name: string;
@@ -35,6 +47,7 @@ interface HeroSectionProps {
 		furiganaName?: string;
 		furigana?: string;
 		avatar: string;
+		portrait?: string;
 		location: string;
 		age: string | number;
 		position?: string;
@@ -45,6 +58,7 @@ interface HeroSectionProps {
 			github?: string;
 			wechat?: string;
 			website?: string;
+			writing?: string;
 			googleScholar?: string;
 			orcid?: string;
 			bluesky?: string;
@@ -99,6 +113,15 @@ const socialPlatforms = [
 			}
 		},
 		title: "Website",
+		external: true,
+	},
+	{
+		key: "writing",
+		iconLine: quillPenLineIcon,
+		iconFill: quillPenFillIcon,
+		getHref: (value: string) => value,
+		getLabel: (_value: string) => "Writing",
+		title: "Writing",
 		external: true,
 	},
 	{
@@ -157,7 +180,7 @@ function ObfuscatedEmailLabel({ email }: { email: string }) {
 interface ContactHoverCardProps {
 	children: ReactNode;
 	platform: SocialPlatformKey;
-	icon: string;
+	icon: string | IconifyIcon;
 	title: string;
 	label: string;
 	rawValue: string;
@@ -381,6 +404,32 @@ function ContactCardContent({
 		);
 	}
 
+	if (platform === "writing") {
+		let hostname = rawValue.replace(/^https?:\/\//, "").replace(/\/$/, "");
+		try {
+			hostname = new URL(rawValue).hostname.replace(/^www\./, "");
+		} catch {
+			// Keep the readable fallback derived from the supplied URL.
+		}
+
+		return (
+			<div className="cv-writing-card">
+				<div className="cv-writing-card-header">
+					<span className="cv-writing-card-icon">
+						<Icon icon={icon} className="h-5 w-5" aria-hidden="true" />
+					</span>
+					<span>{hostname}</span>
+				</div>
+				<strong>{label}</strong>
+				<p>{profileName}</p>
+				<div className="cv-writing-card-footer">
+					<span>{action}</span>
+					<ContactCardArrow external={external} />
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<div className="cv-link-preview-card">
 			<div className="cv-link-preview-site">
@@ -409,9 +458,11 @@ function ContactHoverCard({
 				? "cv-contact-card-github"
 				: platform === "googleScholar"
 					? "cv-contact-card-scholar"
-					: platform === "bluesky" || platform === "wechat"
-						? "cv-contact-card-social"
-						: "cv-contact-card-link";
+					: platform === "writing"
+						? "cv-contact-card-writing"
+						: platform === "bluesky" || platform === "wechat"
+							? "cv-contact-card-social"
+							: "cv-contact-card-link";
 
 	return (
 		<HoverCard openDelay={140} closeDelay={100}>
@@ -439,6 +490,7 @@ export function HeroSection({
 	const fontClass = getFontClass(locale);
 	const [resolvedSocialProfiles, setResolvedSocialProfiles] =
 		useState(socialProfiles);
+	const [portraitCardOpen, setPortraitCardOpen] = useState(false);
 
 	useEffect(() => {
 		const controller = new AbortController();
@@ -489,6 +541,8 @@ export function HeroSection({
 				return t("tooltips.hero.wechat");
 			case "website":
 				return t("tooltips.hero.website");
+			case "writing":
+				return t("tooltips.hero.writing");
 			case "googleScholar":
 				return t("tooltips.hero.googleScholar");
 			case "orcid":
@@ -502,23 +556,68 @@ export function HeroSection({
 
 	const signatureText = (data.furiganaName || data.name).replaceAll("|", "");
 	const englishName = data.enName || data.name;
+	const avatarSource =
+		data.avatar || "/images/placeholders/placeholder-user.jpg";
+	const portraitSource = data.portrait || avatarSource;
 
 	return (
 		<header className="mb-6 sm:mb-8">
 			<div className="cv-card">
 				<div className="grid grid-cols-1 gap-6">
-					<div className="cv-avatar relative h-28 w-28 sm:h-32 sm:w-32">
-						<PaperTextureImage
-							src={data.avatar || "/images/placeholders/placeholder-user.jpg"}
-							alt={`${data.name} - ${data.enName ?? data.name}`}
-							className="h-full w-full"
-							priority
-							{...getResponsiveImageProps(
-								data.avatar || "/images/placeholders/placeholder-user.jpg",
-								"(max-width: 768px) 112px, 128px",
-							)}
-						/>
-					</div>
+					<HoverCard
+						open={portraitCardOpen}
+						onOpenChange={setPortraitCardOpen}
+						openDelay={140}
+						closeDelay={120}
+					>
+						<HoverCardTrigger asChild>
+							<button
+								type="button"
+								className="cv-avatar aspect-square w-full max-w-80 sm:max-w-72 lg:max-w-none"
+								aria-label={t("tooltips.hero.avatarShowPhoto")}
+								aria-controls="hero-portrait-preview"
+								aria-expanded={portraitCardOpen}
+								onFocus={() => setPortraitCardOpen(true)}
+								onBlur={() => setPortraitCardOpen(false)}
+								onClick={() => setPortraitCardOpen(true)}
+							>
+								<PaperTextureImage
+									src={avatarSource}
+									alt={`${data.name} - ${data.enName ?? data.name}`}
+									className="h-full w-full"
+									priority
+									{...getResponsiveImageProps(
+										avatarSource,
+										"(max-width: 639px) 320px, (max-width: 1023px) 288px, 320px",
+									)}
+								/>
+							</button>
+						</HoverCardTrigger>
+						<HoverCardContent
+							id="hero-portrait-preview"
+							role="region"
+							aria-label={t("tooltips.hero.avatarCardCaption")}
+							side="bottom"
+							align="start"
+							sideOffset={12}
+							collisionPadding={16}
+							className="cv-avatar-card"
+						>
+							<PaperTextureImage
+								src={portraitSource}
+								alt={`${t("tooltips.hero.avatarCardCaption")} - ${data.name}`}
+								className="aspect-[7/5] w-full rounded-lg"
+								imageClassName="cv-avatar-card-photo"
+								{...getResponsiveImageProps(
+									portraitSource,
+									"(max-width: 639px) calc(100vw - 48px), 416px",
+								)}
+							/>
+							<p className="cv-avatar-card-caption">
+								{t("tooltips.hero.avatarCardCaption")}
+							</p>
+						</HoverCardContent>
+					</HoverCard>
 
 					<div className="min-w-0 [&>*:not(:last-child)]:mb-4">
 						<div>
@@ -554,14 +653,19 @@ export function HeroSection({
 										iconFill,
 										getHref,
 										getLabel,
-										title,
+										title: defaultTitle,
 										external,
 									}) => {
 										const value = data.social[key as keyof typeof data.social];
 										if (!value) return null;
 
 										const href = getHref(value);
-										const label = getLabel(value);
+										const title =
+											key === "writing" ? t("content.writing") : defaultTitle;
+										const label =
+											key === "writing"
+												? t("content.writing")
+												: getLabel(value);
 										const isClickable = key !== "wechat";
 										const labelClass = "break-all";
 										const labelContent =
